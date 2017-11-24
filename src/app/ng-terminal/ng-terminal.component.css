@@ -1,0 +1,19 @@
+.terminal-canvas{
+    color: white;
+    text-align: left;
+}
+
+.terminal-view-port{
+    background-color: black;
+    height: 300px;
+    width: 300px;
+    overflow-y: auto;
+}
+
+.typing-unit{
+    margin: 1em 0px;
+}
+
+pre{
+    margin: 0px;
+}
