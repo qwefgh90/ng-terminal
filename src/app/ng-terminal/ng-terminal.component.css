@@ -12,10 +12,15 @@
 }
 
 .typing-unit{
-    margin: 1em 0px;
+    margin: 1em 0em 0px 0em;
     font-family: monospace; 
 }
 
-pre{
-    margin: 0px;
+/*
+ * break lines: https://stackoverflow.com/questions/248011/how-do-i-wrap-text-in-a-pre-tag
+ */
+.typing-unit > pre{
+    display: inline;
+    white-space: pre-wrap;
+    word-break: break-all;
 }
