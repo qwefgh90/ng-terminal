@@ -8,10 +8,12 @@
     height: 300px;
     width: 300px;
     overflow-y: auto;
+    overflow-wrap: break-word;
 }
 
 .typing-unit{
     margin: 1em 0px;
+    font-family: monospace; 
 }
 
 pre{

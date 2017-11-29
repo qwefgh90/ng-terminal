@@ -1,25 +1,29 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgTerminalComponent } from './ng-terminal.component';
 
 describe('NgTerminalComponent', () => {
-  let component: NgTerminalComponent;
-  let fixture: ComponentFixture<NgTerminalComponent>;
+    let component: NgTerminalComponent;
+    let fixture: ComponentFixture<NgTerminalComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ NgTerminalComponent ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [NgTerminalComponent],
+            imports: [
+                BrowserAnimationsModule
+            ]
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(NgTerminalComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+        })
+            .compileComponents();
+    }));
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(NgTerminalComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
+
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

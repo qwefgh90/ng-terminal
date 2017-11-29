@@ -1,22 +1,23 @@
-<div (window:keydown)="onKeyDown($event)" class="terminal-view-port" (mouseenter)="setViewPortFocus(true)" (mouseleave)="setViewPortFocus(false)">
+<div #terminalViewPort (window:keydown)="keyDownHandler($event)" class="terminal-view-port" (focus)="setViewPortFocus('focus')" tabindex="-1">
   <div #terminalCanvas class="terminal-canvas">
-    <pre>Welcome to JShell!</pre>
+    <div class="typing-unit">Welcome to JShell!</div>
     <div class="typing-unit">
-      <pre>jshell> new FileInputStream("")</pre>
-      <pre>$2 ==> java.io.FileInputStream@13805618</pre>
+      <span>jshell> new FileInputStream("")</span>
+      <span>$2 ==> java.io.FileInputStream@13805618</span>
     </div>
     <div class="typing-unit">
-      <pre>jshell> new InputStream("")</pre>
+      <span>jshell> new InputStream("")</span>
+      
     </div>
 
     <div class="typing-unit">
-      <pre>jshell> new InputStream("")</pre>
+      <span>jshell> new InputStream("")</span>
+         </div>
+    <div class="typing-unit">
+      <span>jshell> new InputStream("")</span>
     </div>
     <div class="typing-unit">
-      <pre>jshell> new InputStream("")</pre>
-    </div>
-    <div class="typing-unit">
-      <pre>jshell> <span [innerHTML]="userInput"></span><span [@cursorState]="cursorState" (@cursorState.done)="onDone($event)">_</span></pre>
+      jshell> <span [innerHTML]="userInput"></span><span [@cursorState]="cursorState" (@cursorState.done)="onDone($event)">_</span>
     </div>
   </div>
 </div>
