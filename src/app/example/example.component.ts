@@ -15,14 +15,15 @@ export class ExampleComponent implements OnInit {
 
 
     onInit(disposible: Disposible) {
-        disposible.println('https://github.com/qwefgh90/ng-terminal').println('Welcome to JShell!!').nextWithPrompt('jshell>');
+        disposible.println('https://github.com/qwefgh90/ng-terminal').println('Welcome to NgTerminal!!').prompt('ng>');
     }
 
     onDefault(disposible: Disposible) {
-        if (disposible.event.keyCode == 13)
-            disposible.println('').print('[start] ').println(' you finished typing.').print('keep all').print(' keep all2').nextWithPrompt('jshell>');
-        else
-            disposible.next();
+        if (disposible.event.key == 'Enter') {
+            let newDisposible = disposible.println('').println('something is on progress...')
+            setTimeout(() => { newDisposible.println('').print('').print('complete!').prompt('ng>'); }, 2000);
+        } else
+            disposible.handle();
     }
 
 }

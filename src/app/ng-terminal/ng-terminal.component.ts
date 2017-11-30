@@ -51,10 +51,10 @@ export class NgTerminalComponent implements OnInit {
         this.onInit.emit(disposible);
     }
 
-    private keyDownHandler($event) {
+    private onKeyDown($event) {
         if (this.isViewPortInFocus()) {
-            console.log($event);
             this.keyEventQueue.push($event);
+            console.log($event);
             $event.preventDefault();
             if (!this.isProgress()) {
                 this.setProgress(true);
@@ -79,6 +79,10 @@ export class NgTerminalComponent implements OnInit {
         return this.progress;
     }
 
+    private clearBuffer() {
+        this.keyEventQueue = new Array<any>();
+    }
+
     private onViewPortFocus() {
         this.debounceSubject.next();
     }
@@ -88,23 +92,14 @@ export class NgTerminalComponent implements OnInit {
     }
 
     private scrollDown() {
-        setTimeout(() => { this.terminalViewPort.nativeElement.scrollTop = this.terminalViewPort.nativeElement.scrollHeight; }, 300);
-    }
-
-    private defaultStrategy(event) {
-        if (event.key == 'Backspace')
-            this.userInput = this.userInput.substring(0, this.userInput.length - 1)
-        else if (event.key == ' ')
-            this.userInput = this.userInput + ' ';
-        else if (event.key.length == 1)
-            this.userInput = this.userInput + event.key;
+        setTimeout(() => { this.terminalViewPort.nativeElement.scrollTop = this.terminalViewPort.nativeElement.scrollHeight; }, 200);
     }
 
     registerDisposibleMessageStream() {
         this.messageSubject.subscribe({
             next: (message: Message) => {
                 if (message instanceof Forward) {
-                    this.defaultStrategy(message.event);
+                    this.userInput = message.strategy(message.event, this.userInput);
                     this.scrollDown();
                 } else if (message instanceof Print) {
                     this.userInput = this.userInput + message.text;
@@ -120,9 +115,12 @@ export class NgTerminalComponent implements OnInit {
                     this.prompt = message.prompt;
                     this.userInput = '';
                     this.scrollDown();
-                } else if (message instanceof EmitKey) {
+                } else if (message instanceof StartToEmitKey) {
                     this.emitNextKey();
                     this.setProgress(false);
+                    this.debounceSubject.next();
+                } else if (message instanceof ClearBuffer) {
+                    this.clearBuffer();
                 }
             }
         });
@@ -136,7 +134,9 @@ export class NgTerminalComponent implements OnInit {
             debounceTime(400)
         ).subscribe({
             next: () => {
-                if (this.isViewPortInFocus())
+                if (this.isProgress())
+                    this.cursorState = 'inactive';
+                else if (this.isViewPortInFocus())
                     this.toggleCursorState();
                 else
                     this.cursorState = 'active';
@@ -162,36 +162,60 @@ export class Disposible {
 
     constructor(readonly event, private subject: Subject<Message>) {
     }
-    public print(html: string): Disposible {
-        if (html == undefined)
-            html = '';
-        this.subject.next(new Print(html));
+    private isUsed() {
+        return this.used;
+    }
+    public print(text: string): Disposible {
+        if (!this.isUsed()) {
+            if (text == undefined)
+                text = '';
+            this.subject.next(new Print(text));
+        }
         return this;
     }
-    public println(html: string): Disposible {
-        if (html == undefined)
-            html = '';
-        this.subject.next(new Println(html));
+    public println(text: string): Disposible {
+        if (!this.isUsed()) {
+            if (text == undefined)
+                text = '';
+            this.subject.next(new Println(text));
+        }
         return this;
     }
-    public next() {
-        this.subject.next(new Forward(event));
-        this.subject.next(new EmitKey());
-        this.used = true;
+    public clearEventBuffer(): Disposible {
+        if (!this.isUsed()) {
+            this.subject.next(new ClearBuffer());
+        }
+        return this;
     }
-    public nextWithPrompt(prompt: string): void {
-        if (prompt == undefined)
-            prompt = '';
-        this.subject.next(new Prompt(prompt));
-        this.subject.next(new EmitKey());
-        this.used = true;
+    public skip(): void {
+        if (!this.isUsed()) {
+            this.subject.next(new StartToEmitKey());
+            this.used = true;
+        }
+    }
+    public handle(strategy: ($event: any, input: string) => string): void {
+        if (!this.isUsed()) {
+            this.subject.next(new Forward(this.event, strategy != undefined ? strategy : defaultStrategy));
+            this.subject.next(new StartToEmitKey());
+            this.used = true;
+        }
+    }
+    public prompt(prompt: string): void {
+        if (!this.isUsed()) {
+            if (prompt == undefined)
+                prompt = '';
+            this.subject.next(new Prompt(prompt));
+            this.subject.next(new ClearBuffer());
+            this.subject.next(new StartToEmitKey());
+            this.used = true;
+        }
     }
 }
 
 interface Message {
 }
 class Forward implements Message {
-    constructor(readonly event) { }
+    constructor(readonly event, readonly strategy: ($event: any, input: string) => string) { }
 }
 class Print implements Message {
     constructor(readonly text: string) { }
@@ -202,10 +226,26 @@ class Println implements Message {
 class Prompt implements Message {
     constructor(readonly prompt: string) { }
 }
-class EmitKey implements Message {
+class ClearBuffer implements Message {
+    constructor() { }
+}
+class StartToEmitKey implements Message {
     constructor() { }
 }
 
 class Block {
     constructor(readonly prompt: string, readonly text: string) { }
 }
+
+export function defaultStrategy(event: any, input: string): string {
+    if (event.key == 'Backspace')
+        input = input.substring(0, input.length - 1)
+    else if (event.key == ' ')
+        input = input + ' ';
+    else if (event.key == ' ')
+        input = input + ' ';
+    else if (event.key.length == 1)
+        input = input + event.key;
+    return input;
+}
+

@@ -1,10 +1,11 @@
-<div #terminalViewPort (window:keydown)="keyDownHandler($event)" class="terminal-view-port" (focus)="onViewPortFocus('focus')" tabindex="-1">
+<div #terminalViewPort (window:keydown)="onKeyDown($event)" class="terminal-view-port" (focus)="onViewPortFocus('focus')" tabindex="-1">
   <div #terminalCanvas class="terminal-canvas">
-    <div class="typing-unit" [style.margin-top]="(block.prompt != '') ? '1em' : '0em'" *ngFor="let block of blockList">
-      <pre class="prompt" *ngIf="block.prompt != ''">{{block.prompt}} </pre><pre *ngIf="block.text != ''">{{block.text}}</pre>
+    <div class="typing-unit" *ngFor="let block of blockList">
+      <br *ngIf="block.prompt == '' && block.text == ''"/>
+      <pre class="prompt" *ngIf="block.prompt != ''">{{block.prompt}} </pre><pre class="text" *ngIf="block.text != ''">{{block.text}}</pre>
     </div>
     <div class="typing-unit">
-      <pre class="prompt" *ngIf="prompt != ''">{{prompt}} </pre><pre *ngIf="userInput != ''">{{userInput}}</pre><span [@cursorState]="cursorState" (@cursorState.done)="onDone($event)">_</span>
+      <pre class="prompt" *ngIf="prompt != ''">{{prompt}} </pre><pre class="text" *ngIf="userInput != ''">{{userInput}}</pre><span [@cursorState]="cursorState" (@cursorState.done)="onDone($event)">_</span>
     </div>
   </div>
 </div>
