@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Disposible } from '../ng-terminal/ng-terminal.component';
+import { Disposible } from '../modules/ng-terminal/ng-terminal.component';
 
 @Component({
     selector: 'app-example',
@@ -13,17 +13,15 @@ export class ExampleComponent implements OnInit {
     ngOnInit() {
     }
 
-
     onInit(disposible: Disposible) {
         disposible.println('https://github.com/qwefgh90/ng-terminal').println('Welcome to NgTerminal!!').prompt('ng>');
     }
 
-    onDefault(disposible: Disposible) {
+    onNext(disposible: Disposible) {
         if (disposible.event.key == 'Enter') {
-            let newDisposible = disposible.println('').println('something is on progress...')
+            let newDisposible = disposible.println('').println('something is in progress...')
             setTimeout(() => { newDisposible.println('').print('').print('complete!').prompt('ng>'); }, 2000);
         } else
             disposible.handle();
     }
-
 }

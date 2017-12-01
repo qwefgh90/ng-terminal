@@ -4,26 +4,18 @@ import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
-import { NgTerminalComponent } from './ng-terminal/ng-terminal.component';
+import { NgTerminalModule } from './modules/ng-terminal/ng-terminal.module';
 import { ExampleComponent } from './example/example.component';
-
-const appRoutes: Routes = [
-    { path: '', component: ExampleComponent }
-];
 
 @NgModule({
     declarations: [
         AppComponent,
-        NgTerminalComponent,
         ExampleComponent
     ],
     imports: [
+        NgTerminalModule,
         BrowserModule,
         BrowserAnimationsModule,
-        RouterModule.forRoot(
-            appRoutes,
-            { enableTracing: true } // <-- debugging purposes only
-        )
     ],
     providers: [],
     bootstrap: [AppComponent]

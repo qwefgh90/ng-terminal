@@ -1,27 +1,65 @@
 # NgTerminal
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.4.
+NgTerminal is a interactive terminal component on Angular. Simply `NgTerminal` component is controlled by `Disposible` object.
 
-## Development server
+This project contains a example and a core library.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Running example
 
-## Code scaffolding
+You can run this project in local.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- git clone https://github.com/qwefgh90/ng-terminal.git
+- ng serve
 
-## Build
+## API
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Here is `<ng-terminal>` tag that you can use in your templates. 
 
-## Running unit tests
+```html
+    <ng-terminal
+      (onInit)="onInit($event)" 
+      (onNext)="onNext($event)">
+    </ng-terminal>
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+**Here are descriptions about a part of component.**
 
-## Running end-to-end tests
+### NgTerminal
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+`<ng-terminal>` is a angular component that inserted into your applications.
 
-## Further help
+#### onInit(disposible: Disposible)
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+*Must register it!*
+
+After `NgTerminal` component is initialized, `onInit()` is called only **once** like ngInit().
+
+#### onNext(disposible: Disposible)
+
+*Must register it!*
+
+Whenever user enter a charactor, `onNext()` is called.
+
+### Disposible 
+
+Disposible is a disposible object **for interacion with terminal.** You must call **one of stopping methods** to continue to use a terminal.
+
+**here are continuing methods**
+
+#### print(text: string): Disposible
+#### println(text: string): Disposible
+
+**here are stopping methods** You must call **one of these methods** to continue to use a terminal.
+
+#### skip()
+#### handle(strategy: ($event: any, input: string) => string = defaultStrategy)
+#### prompt()
+
+## Contribution
+
+NgTerminal is devleoped with Angular CLI.
+When you find bugs or want to improve, you can write issue and PR to "develop" branch.
+
+## Reference
+
+- ng-packagr: https://medium.com/@ngl817/building-an-angular-4-component-library-with-the-angular-cli-and-ng-packagr-53b2ade0701e

@@ -5,7 +5,7 @@
       <pre class="prompt" *ngIf="block.prompt != ''">{{block.prompt}} </pre><pre class="text" *ngIf="block.text != ''">{{block.text}}</pre>
     </div>
     <div class="typing-unit">
-      <pre class="prompt" *ngIf="prompt != ''">{{prompt}} </pre><pre class="text" *ngIf="userInput != ''">{{userInput}}</pre><span [@cursorState]="cursorState" (@cursorState.done)="onDone($event)">_</span>
+      <pre class="prompt" *ngIf="prompt != ''">{{prompt}} </pre><pre class="text" *ngIf="userInput != ''">{{userInput}}</pre><span [@cursorState]="cursorState" (@cursorState.done)="onCursorDone($event)">_</span>
     </div>
   </div>
 </div>

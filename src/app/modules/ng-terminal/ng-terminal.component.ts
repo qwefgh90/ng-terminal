@@ -12,7 +12,7 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { ElementRef, Renderer2 } from '@angular/core';
 
 @Component({
-    selector: 'app-ng-terminal',
+    selector: 'ng-terminal',
     templateUrl: './ng-terminal.component.html',
     styleUrls: ['./ng-terminal.component.css'],
     animations: [
@@ -28,19 +28,21 @@ import { ElementRef, Renderer2 } from '@angular/core';
     ]
 })
 export class NgTerminalComponent implements OnInit {
-    private cursorState: string = 'active';
+    private cursorState: string = 'active'; //active or inactive(visible or invisable)
     private prompt: string = "";
     private userInput: string = "";
     private progress: boolean = false;
     private blockList: Array<Block> = [];
+    private keyEventQueue = new Array<any>();
+
     @ViewChild('terminalViewPort') terminalViewPort: ElementRef;
     @ViewChild('terminalCanvas') terminalCanvas: ElementRef;
     @Output() onNext = new EventEmitter<Disposible>();
     @Output() onInit = new EventEmitter<Disposible>();
 
-    private debounceSubject = new Subject<number>();
+    private cursorSubject = new Subject<number>();
     private messageSubject = new Subject<Message>();
-    private keyEventQueue = new Array<any>();
+
     constructor() {
         this.registerToggleChangeStream();
         this.registerDisposibleMessageStream();
@@ -83,10 +85,6 @@ export class NgTerminalComponent implements OnInit {
         this.keyEventQueue = new Array<any>();
     }
 
-    private onViewPortFocus() {
-        this.debounceSubject.next();
-    }
-
     private isViewPortInFocus() {
         return this.terminalViewPort.nativeElement == document.activeElement;
     }
@@ -95,7 +93,15 @@ export class NgTerminalComponent implements OnInit {
         setTimeout(() => { this.terminalViewPort.nativeElement.scrollTop = this.terminalViewPort.nativeElement.scrollHeight; }, 200);
     }
 
-    registerDisposibleMessageStream() {
+    //It must be called at regular intervals (for example, > 1ms).
+    private toggleCursorState() {
+        if (this.cursorState === 'active')
+            this.cursorState = 'inactive';
+        else
+            this.cursorState = 'active';
+    }
+
+    private registerDisposibleMessageStream() {
         this.messageSubject.subscribe({
             next: (message: Message) => {
                 if (message instanceof Forward) {
@@ -118,7 +124,7 @@ export class NgTerminalComponent implements OnInit {
                 } else if (message instanceof StartToEmitKey) {
                     this.emitNextKey();
                     this.setProgress(false);
-                    this.debounceSubject.next();
+                    this.cursorSubject.next();
                 } else if (message instanceof ClearBuffer) {
                     this.clearBuffer();
                 }
@@ -130,7 +136,7 @@ export class NgTerminalComponent implements OnInit {
     //So, cursurState must be handled in debounce observable.
     //It centralizes all events.
     private registerToggleChangeStream() {
-        this.debounceSubject.pipe(
+        this.cursorSubject.pipe(
             debounceTime(400)
         ).subscribe({
             next: () => {
@@ -144,16 +150,12 @@ export class NgTerminalComponent implements OnInit {
         });
     }
 
-    //It must be called at regular intervals (for example, > 1ms).
-    private toggleCursorState() {
-        if (this.cursorState === 'active')
-            this.cursorState = 'inactive';
-        else
-            this.cursorState = 'active';
+    private onViewPortFocus() {
+        this.cursorSubject.next();
     }
 
-    private onDone($event) {
-        this.debounceSubject.next();
+    private onCursorDone($event) {
+        this.cursorSubject.next();
     }
 }
 
@@ -193,9 +195,9 @@ export class Disposible {
             this.used = true;
         }
     }
-    public handle(strategy: ($event: any, input: string) => string): void {
+    public handle(strategy: ($event: any, input: string) => string = defaultStrategy): void {
         if (!this.isUsed()) {
-            this.subject.next(new Forward(this.event, strategy != undefined ? strategy : defaultStrategy));
+            this.subject.next(new Forward(this.event, strategy));
             this.subject.next(new StartToEmitKey());
             this.used = true;
         }
@@ -212,36 +214,9 @@ export class Disposible {
     }
 }
 
-interface Message {
-}
-class Forward implements Message {
-    constructor(readonly event, readonly strategy: ($event: any, input: string) => string) { }
-}
-class Print implements Message {
-    constructor(readonly text: string) { }
-}
-class Println implements Message {
-    constructor(readonly text: string) { }
-}
-class Prompt implements Message {
-    constructor(readonly prompt: string) { }
-}
-class ClearBuffer implements Message {
-    constructor() { }
-}
-class StartToEmitKey implements Message {
-    constructor() { }
-}
-
-class Block {
-    constructor(readonly prompt: string, readonly text: string) { }
-}
-
 export function defaultStrategy(event: any, input: string): string {
     if (event.key == 'Backspace')
         input = input.substring(0, input.length - 1)
-    else if (event.key == ' ')
-        input = input + ' ';
     else if (event.key == ' ')
         input = input + ' ';
     else if (event.key.length == 1)
@@ -249,3 +224,33 @@ export function defaultStrategy(event: any, input: string): string {
     return input;
 }
 
+export interface Message {
+}
+
+export class Forward implements Message {
+    constructor(readonly event, readonly strategy: ($event: any, input: string) => string) { }
+}
+
+export class Print implements Message {
+    constructor(readonly text: string) { }
+}
+
+export class Println implements Message {
+    constructor(readonly text: string) { }
+}
+
+export class Prompt implements Message {
+    constructor(readonly prompt: string) { }
+}
+
+export class ClearBuffer implements Message {
+    constructor() { }
+}
+
+export class StartToEmitKey implements Message {
+    constructor() { }
+}
+
+export class Block {
+    constructor(readonly prompt: string, readonly text: string) { }
+}
