@@ -1,5 +1,5 @@
 <div #terminalViewPort (window:keydown)="onKeyDown($event)" class="terminal-view-port" (focus)="onViewPortFocus('focus')" tabindex="-1">
-  <div #terminalCanvas class="terminal-canvas">
+  <div #terminalCanvas class="terminal-canvas" >
     <div class="typing-unit" *ngFor="let block of blockList">
       <br *ngIf="block.prompt == '' && block.text == ''"/>
       <pre class="prompt" *ngIf="block.prompt != ''">{{block.prompt}} </pre><pre class="text" *ngIf="block.text != ''">{{block.text}}</pre>

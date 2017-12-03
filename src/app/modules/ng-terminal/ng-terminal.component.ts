@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import {
     trigger,
     state,
@@ -27,7 +27,7 @@ import { ElementRef, Renderer2 } from '@angular/core';
         ])
     ]
 })
-export class NgTerminalComponent implements OnInit {
+export class NgTerminalComponent implements OnInit, OnChanges {
     private cursorState: string = 'active'; //active or inactive(visible or invisable)
     private prompt: string = "";
     private userInput: string = "";
@@ -51,6 +51,9 @@ export class NgTerminalComponent implements OnInit {
     ngOnInit() {
         let disposible = new Disposible(undefined, this.messageSubject);
         this.onInit.emit(disposible);
+    }
+
+    ngOnChanges() {
     }
 
     private onKeyDown($event) {
