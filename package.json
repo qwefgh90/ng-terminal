@@ -1,7 +1,26 @@
 {
   "name": "ng-terminal",
-  "version": "0.1.0",
+  "version": "0.1.1",
+  "description": "angular2 component for designing terminal program",
   "license": "Apache-2.0",
+  "author": {
+    "name": "Choe Changwon",
+    "email": "qwefgh90@naver.com"
+  },
+  "homepage": "https://github.com/qwefgh90/ng-terminal",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:qwefgh90/ng-terminal.git"
+  },
+  "bugs": {"url": "https://github.com/qwefgh90/ng-terminal/issues"},
+  "keywords": [
+    "ng2",
+    "angular2",
+    "terminal",
+    "console",
+    "shell",
+    "bash"
+  ],
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -11,7 +30,7 @@
     "e2e": "ng e2e",
     "packagr": "ng-packagr -p ng-package.json"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@angular/animations": "^5.0.0",
     "@angular/common": "^5.0.0",
