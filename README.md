@@ -4,6 +4,8 @@ NgTerminal is a interactive terminal component on Angular. `NgTerminal` componen
 
 This project contains a example and a core library.
 
+![play](play.gif)
+
 ## Install
 
 ```
