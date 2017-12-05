@@ -37,20 +37,20 @@ export class NgTerminalComponent implements OnInit, OnChanges {
 
     @ViewChild('terminalViewPort') terminalViewPort: ElementRef;
     @ViewChild('terminalCanvas') terminalCanvas: ElementRef;
-    @Output() onNext = new EventEmitter<Disposible>();
-    @Output() onInit = new EventEmitter<Disposible>();
+    @Output() onNext = new EventEmitter<Disposable>();
+    @Output() onInit = new EventEmitter<Disposable>();
 
     private cursorSubject = new Subject<number>();
     private messageSubject = new Subject<Message>();
 
     constructor() {
         this.registerToggleChangeStream();
-        this.registerDisposibleMessageStream();
+        this.registerDisposableMessageStream();
     }
 
     ngOnInit() {
-        let disposible = new Disposible(undefined, this.messageSubject);
-        this.onInit.emit(disposible);
+        let disposable = new Disposable(undefined, this.messageSubject);
+        this.onInit.emit(disposable);
     }
 
     ngOnChanges() {
@@ -71,8 +71,8 @@ export class NgTerminalComponent implements OnInit, OnChanges {
     private emitNextKey() {
         if (this.keyEventQueue.length > 0) {
             let first = this.keyEventQueue.splice(0, 1)[0];
-            let disposible = new Disposible(first, this.messageSubject);
-            this.onNext.emit(disposible);
+            let disposable = new Disposable(first, this.messageSubject);
+            this.onNext.emit(disposable);
         }
     }
 
@@ -104,7 +104,7 @@ export class NgTerminalComponent implements OnInit, OnChanges {
             this.cursorState = 'active';
     }
 
-    private registerDisposibleMessageStream() {
+    private registerDisposableMessageStream() {
         this.messageSubject.subscribe({
             next: (message: Message) => {
                 if (message instanceof Forward) {
@@ -162,15 +162,15 @@ export class NgTerminalComponent implements OnInit, OnChanges {
     }
 }
 
-export class Disposible {
+export class Disposable {
     private used: boolean = false;
 
     constructor(readonly event, private subject: Subject<Message>) {
     }
-    private isUsed() {
+    public isUsed() {
         return this.used;
     }
-    public print(text: string): Disposible {
+    public print(text: string): Disposable {
         if (!this.isUsed()) {
             if (text == undefined)
                 text = '';
@@ -178,7 +178,7 @@ export class Disposible {
         }
         return this;
     }
-    public println(text: string): Disposible {
+    public println(text: string): Disposable {
         if (!this.isUsed()) {
             if (text == undefined)
                 text = '';
@@ -186,7 +186,7 @@ export class Disposible {
         }
         return this;
     }
-    public clearEventBuffer(): Disposible {
+    public clearEventBuffer(): Disposable {
         if (!this.isUsed()) {
             this.subject.next(new ClearBuffer());
         }

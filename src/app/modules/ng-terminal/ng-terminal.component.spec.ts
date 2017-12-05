@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgTerminalComponent, Disposible } from './ng-terminal.component';
+import { NgTerminalComponent, Disposable } from './ng-terminal.component';
 
 describe('NgTerminalComponent', () => {
     let component: NgTerminalComponent;
@@ -29,9 +29,9 @@ describe('NgTerminalComponent', () => {
     });
     it('should display userInput with handle()', () => {
         let terminalViewPort = fixture.debugElement.query(By.css('.terminal-view-port'));
-        component.onNext.subscribe((disposible: Disposible) => {
-            disposible.handle();
-            if (disposible.event.key == '!') {
+        component.onNext.subscribe((disposable: Disposable) => {
+            disposable.handle();
+            if (disposable.event.key == '!') {
                 fixture.detectChanges();
                 let text = fixture.debugElement.query(By.css('.typing-unit > .text'));
                 expect(text.nativeElement.innerHTML).toEqual('Hello!');
@@ -49,15 +49,15 @@ describe('NgTerminalComponent', () => {
     });
     it('should display new prompt with prompt()', () => {
         let terminalViewPort = fixture.debugElement.query(By.css('.terminal-view-port'));
-        component.onNext.subscribe((disposible: Disposible) => {
-            if (disposible.event.key == 'Enter') {
-                disposible.prompt('ng>');
+        component.onNext.subscribe((disposable: Disposable) => {
+            if (disposable.event.key == 'Enter') {
+                disposable.prompt('ng>');
                 fixture.detectChanges();
                 let prompt = fixture.debugElement.query(By.css('.typing-unit:last-child > .prompt'));
                 expect(prompt.nativeElement.innerHTML).toEqual('ng&gt; ');
                 component.onNext.complete();
             } else {
-                disposible.handle();
+                disposable.handle();
             }
 
         });
@@ -74,9 +74,9 @@ describe('NgTerminalComponent', () => {
 
     it('should display text with print()', () => {
         let terminalViewPort = fixture.debugElement.query(By.css('.terminal-view-port'));
-        component.onNext.subscribe((disposible: Disposible) => {
-            if (disposible.event.key == '>') {
-                disposible.print('test print()');
+        component.onNext.subscribe((disposable: Disposable) => {
+            if (disposable.event.key == '>') {
+                disposable.print('test print()');
                 fixture.detectChanges();
                 let prompt = fixture.debugElement.query(By.css('.typing-unit:last-child > .text'));
                 expect(prompt.nativeElement.innerHTML).toEqual('test print()');
@@ -90,9 +90,9 @@ describe('NgTerminalComponent', () => {
 
     it('should display text with println()', () => {
         let terminalViewPort = fixture.debugElement.query(By.css('.terminal-view-port'));
-        component.onNext.subscribe((disposible: Disposible) => {
-            if (disposible.event.key == '>') {
-                disposible.println('test println()');
+        component.onNext.subscribe((disposable: Disposable) => {
+            if (disposable.event.key == '>') {
+                disposable.println('test println()');
                 fixture.detectChanges();
                 let prompt = fixture.debugElement.query(By.css('.typing-unit:first-child > .text'));
                 expect(prompt.nativeElement.innerHTML).toEqual('test println()');
@@ -109,18 +109,18 @@ describe('NgTerminalComponent', () => {
         terminalViewPort.nativeElement.focus();
         fixture.detectChanges();
 
-        component.onNext.subscribe((disposible: Disposible) => {
-            if (disposible.event.key == '>') {
+        component.onNext.subscribe((disposable: Disposable) => {
+            if (disposable.event.key == '>') {
                 setTimeout(() => {
-                    disposible.skip();
+                    disposable.skip();
                 }, 1000);
-            } else if (disposible.event.key == 'c') {
-                disposible.print('test clearBuffer()').clearEventBuffer().skip();
+            } else if (disposable.event.key == 'c') {
+                disposable.print('test clearBuffer()').clearEventBuffer().skip();
                 window.dispatchEvent(new KeyboardEvent('keydown', { key: ';' }));
             } else {
-                disposible.handle();
+                disposable.handle();
                 fixture.detectChanges();
-                if (disposible.event.key == ';') {
+                if (disposable.event.key == ';') {
                     let prompt = fixture.debugElement.query(By.css('.typing-unit:first-child > .text'));
                     expect(prompt.nativeElement.innerHTML).toEqual('test clearBuffer();');
                     component.onNext.complete();

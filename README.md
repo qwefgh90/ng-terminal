@@ -1,8 +1,10 @@
 # NgTerminal
 
-NgTerminal is a interactive terminal component on Angular. `NgTerminal` component is simply controlled by `Disposible` object.
+NgTerminal is a interactive terminal component on Angular. `NgTerminal` component is simply controlled by `Disposable` object.
 
 This project contains a example and a core library.
+
+![play.gif](play.gif)
 
 ## Install
 
@@ -20,26 +22,42 @@ You can run a sample project in your local environment.
 
 #### Descriptions
 
+Modules should be imported in `app.module.ts`.
+
+```typescript
+import { NgTerminalModule } from 'ng-terminal';
+//your codes
+@NgModule({
+    imports: [
+        NgTerminalModule
+    //your codes
+```
+
 Implements your callback functions to your `app.component.ts`.
 
 ```typescript
-    onInit(disposible: Disposible) {
-      disposible.println('https://github.com/qwefgh90/ng-terminal').println('Welcome to NgTerminal!!').prompt('ng>');
+import { Disposible } from 'ng-terminal';
+    //your codes
+    onInit(disposable: Disposable) {
+      disposable.println('https://github.com/qwefgh90/ng-terminal')
+        .println('Welcome to NgTerminal!!').prompt('ng>');
     }
 
-    onNext(disposible: Disposible) {
-      if (disposible.event.key == 'Enter') {
-        let newDisposible = disposible.println('').println('something is in progress...')
-        setTimeout(() => { newDisposible.println('').print('').print('complete!').prompt('ng>'); }, 2000);
+    onNext(disposable: Disposable) {
+      if (disposable.event.key == 'Enter') {
+        let newDisposable = disposable.println('').println('something is in progress...')
+        setTimeout(() => { newDisposable.println('').print('').print('complete!').prompt('ng>'); }, 2000);
       } else
-        disposible.handle();
+        disposable.handle();
 }
 ```
 
-And, add `<ng-terminal>` to your `app.component.html`.
+And, add `<ng-terminal>` to your `app.component.html` with your callback functions.
 
 ```html
-  <ng-terminal (onInit)="onInit($event)" (onNext)="onNext($event)">
+  <ng-terminal 
+    (onInit)="onInit($event)" 
+    (onNext)="onNext($event)">
   </ng-terminal>
 ```
 
@@ -54,44 +72,60 @@ Here is `<ng-terminal>` tag that you can use in your templates.
     </ng-terminal>
 ```
 
-**Here are descriptions about a part of component.**
 
 #### NgTerminal
 
-`<ng-terminal>` is a angular component that put into your applications.
+`<ng-terminal>` is a angular component which is put into your applications.
 
 ```typescript
 class ngTerminalComponent {
-  onInit(disposible: Disposible)
-  onNext(disposible: Disposible)
+  @Output() onNext = new EventEmitter<Disposable>();
+  @Output() onInit = new EventEmitter<Disposable>();
 }
 ```
 
-*You must register two callback functions.* After `NgTerminal` component is initialized, `onInit()` is called only **once** like ngInit(). Whenever user enter a charactor, `onNext()` is called.
+*You must register two callback functions.* After `NgTerminal` component is initialized, `onInit()` is called only **once** like ngInit(). Whenever users enter a charactor, `onNext()` is called with `Disposable`.
 
-#### Disposible 
+#### Disposable 
 
-Disposible is a disposible object **for interacion with terminal.**
+Disposable is a object emitted with `KeyboardEvent` for interaction with terminal.
 
 ```typescript
-class Disposible {
+class Disposable {
+  event: KeyboardEvent
+  isUsed(): boolean
   /* print methods */
-  print(text: string): Disposible
-  println(text: string): Disposible
-  /* stopping methods which need to be called for continuing to accept a next command.*/
-  skip()
-  handle(strategy: ($event: any, input: string) => string = defaultStrategy)
-  prompt()
+  print(text: string): Disposable
+  println(text: string): Disposable
+  /* consume methods which need to be called for continuing to accept a next command.*/
+  skip(): void
+  handle(strategy: ($event: KeyboardEvent, input: string) => string = defaultStrategy): void
+  prompt(prompt: string): void
 }
 ```
 
-*You must call one of stopping methods to continue to accept a next command.*
+*You must call one of consume methods to continue to accept a next command in terminal.*
 
+##### skip(): void
+
+This consume method does nothing. It closes disposable object.
+
+##### handle(strategy: ($event: KeyboardEvent, input: string) => string = defaultStrategy): void
+  
+This consume method manipulates current input buffer which is displayed with a strategy. It closes disposable object.
+
+##### prompt(prompt: string): void
+
+This consume method displays prompt on a new line. It closes disposable object.
+
+#### KeyboardEvent
+
+You can see [KeyboardEvent](https://developer.mozilla.org/ko/docs/Web/API/KeyboardEvent) in developer.mozilla.org.
 
 ## Contribution
 
 NgTerminal is devleoped with Angular CLI.
-When you find bugs or want to improve, you can write issue and PR to "develop" branch.
+When you find bugs or want to improve, you can write issue and PR to **master** branch.
 
 ## Reference
 
