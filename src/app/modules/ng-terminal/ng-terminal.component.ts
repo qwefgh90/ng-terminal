@@ -39,6 +39,7 @@ export class NgTerminalComponent implements OnInit, OnChanges {
     @ViewChild('terminalCanvas') terminalCanvas: ElementRef;
     @Output() onNext = new EventEmitter<Disposable>();
     @Output() onInit = new EventEmitter<Disposable>();
+    @Input() consumeBreak: boolean = true;
 
     private cursorSubject = new Subject<number>();
     private messageSubject = new Subject<Message>();
@@ -61,7 +62,9 @@ export class NgTerminalComponent implements OnInit, OnChanges {
             this.keyEventQueue.push($event);
             console.log($event);
             $event.preventDefault();
-            if (!this.isProgress()) {
+            if (!this.consumeBreak)
+                this.emitNextKey();
+            else if (!this.isProgress()) {
                 this.setProgress(true);
                 this.emitNextKey();
             }
@@ -165,10 +168,13 @@ export class NgTerminalComponent implements OnInit, OnChanges {
 export class Disposable {
     private used: boolean = false;
 
-    constructor(readonly event, private subject: Subject<Message>) {
+    constructor(readonly event, private subject: Subject<Message>, private consumeBreak: boolean = true) {
     }
     public isUsed() {
-        return this.used;
+        if (!this.consumeBreak)
+            return false
+        else
+            return this.used;
     }
     public print(text: string): Disposable {
         if (!this.isUsed()) {
@@ -210,7 +216,6 @@ export class Disposable {
             if (prompt == undefined)
                 prompt = '';
             this.subject.next(new Prompt(prompt));
-            this.subject.next(new ClearBuffer());
             this.subject.next(new StartToEmitKey());
             this.used = true;
         }
