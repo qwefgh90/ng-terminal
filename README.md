@@ -69,7 +69,7 @@ Here is `<ng-terminal>` tag that you can use in your templates.
     <ng-terminal
       (onInit)="onInit($event)" 
       (onNext)="onNext($event)"
-      [consumeBreak]="true">
+      [consumeMode]="true">
     </ng-terminal>
 ```
 
@@ -82,11 +82,11 @@ Here is `<ng-terminal>` tag that you can use in your templates.
 class ngTerminalComponent {
   @Output() onNext = new EventEmitter<Disposable>();
   @Output() onInit = new EventEmitter<Disposable>();
-  @Input() consumeBreak = true;
+  @Input() consumeMode = true;
 }
 ```
 
-*You must register two callback functions.* After `NgTerminal` component is initialized, `onInit()` is called only **once**. If `consumeBreak` is true, `onNext()` is called with `Disposable` when previous disposible object is consumed. If not, whenever users enter a charactor, `onNext()` is called.
+*You must register two callback functions.* After `NgTerminal` component is initialized, `onInit()` is called only **once**. If `consumeMode` is true, `onNext()` is called with `Disposable` when previous disposible object is consumed. If not, whenever users enter a charactor, `onNext()` is called.
 
 #### Disposable 
 

@@ -1,6 +1,6 @@
 {
   "name": "ng-terminal",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "angular2 component for designing terminal program",
   "license": "Apache-2.0",
   "author": {
@@ -12,7 +12,9 @@
     "type": "git",
     "url": "git@github.com:qwefgh90/ng-terminal.git"
   },
-  "bugs": {"url": "https://github.com/qwefgh90/ng-terminal/issues"},
+  "bugs": {
+    "url": "https://github.com/qwefgh90/ng-terminal/issues"
+  },
   "keywords": [
     "ng2",
     "angular2",

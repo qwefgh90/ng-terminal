@@ -50,7 +50,7 @@ export class NgTerminalComponent implements OnInit, OnChanges {
     }
 
     ngOnInit() {
-        let disposable = new Disposable(undefined, this.messageSubject);
+        let disposable = new Disposable(undefined, this.messageSubject, this.consumeBreak);
         this.onInit.emit(disposable);
     }
 
@@ -74,7 +74,7 @@ export class NgTerminalComponent implements OnInit, OnChanges {
     private emitNextKey() {
         if (this.keyEventQueue.length > 0) {
             let first = this.keyEventQueue.splice(0, 1)[0];
-            let disposable = new Disposable(first, this.messageSubject);
+            let disposable = new Disposable(first, this.messageSubject, this.consumeBreak);
             this.onNext.emit(disposable);
         }
     }
@@ -171,10 +171,7 @@ export class Disposable {
     constructor(readonly event, private subject: Subject<Message>, private consumeBreak: boolean = true) {
     }
     public isUsed() {
-        if (!this.consumeBreak)
-            return false
-        else
-            return this.used;
+        return this.used;
     }
     public print(text: string): Disposable {
         if (!this.isUsed()) {
@@ -201,14 +198,14 @@ export class Disposable {
     public skip(): void {
         if (!this.isUsed()) {
             this.subject.next(new StartToEmitKey());
-            this.used = true;
+            if (this.consumeBreak) this.used = true;
         }
     }
     public handle(strategy: ($event: any, input: string) => string = defaultStrategy): void {
         if (!this.isUsed()) {
             this.subject.next(new Forward(this.event, strategy));
             this.subject.next(new StartToEmitKey());
-            this.used = true;
+            if (this.consumeBreak) this.used = true;
         }
     }
     public prompt(prompt: string): void {
@@ -217,7 +214,7 @@ export class Disposable {
                 prompt = '';
             this.subject.next(new Prompt(prompt));
             this.subject.next(new StartToEmitKey());
-            this.used = true;
+            if (this.consumeBreak) this.used = true;
         }
     }
 }
