@@ -28,18 +28,18 @@ import { ElementRef, Renderer2 } from '@angular/core';
     ]
 })
 export class NgTerminalComponent implements OnInit, OnChanges {
-    private cursorState: string = 'active'; //active or inactive(visible or invisable)
-    private prompt: string = "";
-    private userInput: string = "";
+    cursorState: string = 'active'; //active or inactive(visible or invisable)
+    prompt: string = "";
+    userInput: string = "";
     private progress: boolean = false;
-    private blockList: Array<Block> = [];
+    blockList: Array<Block> = [];
     private keyEventQueue = new Array<any>();
 
     @ViewChild('terminalViewPort') terminalViewPort: ElementRef;
     @ViewChild('terminalCanvas') terminalCanvas: ElementRef;
     @Output() onNext = new EventEmitter<Disposable>();
     @Output() onInit = new EventEmitter<Disposable>();
-    @Input() consumeBreak: boolean = true;
+    @Input() consumeMode: boolean = true;
 
     private cursorSubject = new Subject<number>();
     private messageSubject = new Subject<Message>();
@@ -50,19 +50,19 @@ export class NgTerminalComponent implements OnInit, OnChanges {
     }
 
     ngOnInit() {
-        let disposable = new Disposable(undefined, this.messageSubject, this.consumeBreak);
+        let disposable = new Disposable(undefined, this.messageSubject, this.consumeMode);
         this.onInit.emit(disposable);
     }
 
     ngOnChanges() {
     }
 
-    private onKeyDown($event) {
+    onKeyDown($event) {
         if (this.isViewPortInFocus()) {
             this.keyEventQueue.push($event);
             console.log($event);
             $event.preventDefault();
-            if (!this.consumeBreak)
+            if (!this.consumeMode)
                 this.emitNextKey();
             else if (!this.isProgress()) {
                 this.setProgress(true);
@@ -74,7 +74,7 @@ export class NgTerminalComponent implements OnInit, OnChanges {
     private emitNextKey() {
         if (this.keyEventQueue.length > 0) {
             let first = this.keyEventQueue.splice(0, 1)[0];
-            let disposable = new Disposable(first, this.messageSubject, this.consumeBreak);
+            let disposable = new Disposable(first, this.messageSubject, this.consumeMode);
             this.onNext.emit(disposable);
         }
     }
@@ -156,11 +156,11 @@ export class NgTerminalComponent implements OnInit, OnChanges {
         });
     }
 
-    private onViewPortFocus() {
+    onViewPortFocus() {
         this.cursorSubject.next();
     }
 
-    private onCursorDone($event) {
+    onCursorDone($event) {
         this.cursorSubject.next();
     }
 }
