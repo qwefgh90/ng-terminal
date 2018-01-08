@@ -23,3 +23,13 @@
     white-space: pre-wrap;
     word-break: break-all;
 }
+@keyframes bgchange {
+  0% { background: black }
+  50% { background: white }
+  0% { background: black }
+}
+
+.ani-bgchange {
+  animation: bgchange 1s infinite;
+}
+
