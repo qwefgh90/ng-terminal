@@ -1,6 +1,8 @@
 # NgTerminal
 
-NgTerminal is a interactive terminal component on Angular. `NgTerminal` component is simply controlled by `Disposable` object.
+[![version](https://img.shields.io/badge/ng--terminal-1.0.0-green.svg)](https://www.npmjs.com/package/ng-terminal)
+
+NgTerminal is a interactive terminal component on Angular. `NgTerminal`'s buffer is simply controlled by `TerminalBuffer` object. 
 
 This project contains a example and a core library.
 
@@ -36,19 +38,39 @@ import { NgTerminalModule } from 'ng-terminal';
 Implements your callback functions to your `app.component.ts`.
 
 ```typescript
-import { Disposible } from 'ng-terminal';
+import { TerminalBuffer, keyMap } from 'ng-terminal';
     //your codes
-    onInit(disposable: Disposable) {
-      disposable.println('https://github.com/qwefgh90/ng-terminal')
-        .println('Welcome to NgTerminal!!').prompt('ng>');
-    }
 
-    onNext(disposable: Disposable) {
-      if (disposable.event.key == 'Enter') {
-        let newDisposable = disposable.println('').println('something is in progress...')
-        setTimeout(() => { newDisposable.println('').print('').print('complete!').prompt('ng>'); }, 2000);
-      } else
-        disposable.handle();
+    public bf: TerminalBuffer;
+    
+    onInit(bf: TerminalBuffer) {
+        this.bf = bf;
+    }
+    
+    onKey(e: KeyboardEvent) {
+        if (e.key == 'Enter') {
+            this.bf.write(keyMap.Linefeed);
+        } else if (e.key == 'Backspace') {
+            this.bf.write(keyMap.BackSpace);
+        } else if (e.key == 'ArrowLeft') {
+            this.bf.write(keyMap.ArrowLeft);
+        } else if (e.key == 'ArrowRight') {
+            this.bf.write(keyMap.ArrowRight);
+        } else if (e.key == 'ArrowUp') {
+            this.bf.write(keyMap.ArrowUp);
+        } else if (e.key == 'ArrowDown') {
+            this.bf.write(keyMap.ArrowDown);
+        } else if (e.key == 'Delete') {
+            this.bf.write(keyMap.Delete);
+        } else if (e.key == 'Home') {
+            this.bf.write(keyMap.KeyHome);
+        } else if (e.key == 'End') {
+            this.bf.write(keyMap.KeyEnd);
+        } else if (e.key == 'Tab') {
+            this.bf.write(keyMap.Tab);
+        } else
+            this.bf.write(e.key);
+    }
 }
 ```
 
@@ -63,13 +85,12 @@ And, add `<ng-terminal>` to your `app.component.html` with your callback functio
 
 ## API
 
-Here is `<ng-terminal>` tag that you can use in your templates.
+Here is `<ng-terminal>` tag that you can use in your templates. Optionally `renderHtmlStrategy` can be set up.
 
 ```html
     <ng-terminal
       (onInit)="onInit($event)" 
-      (onNext)="onNext($event)"
-      [consumeMode]="true">
+      (onNext)="onNext($event)">
     </ng-terminal>
 ```
 
@@ -80,49 +101,51 @@ Here is `<ng-terminal>` tag that you can use in your templates.
 
 ```typescript
 class ngTerminalComponent {
-  @Output() onNext = new EventEmitter<Disposable>();
-  @Output() onInit = new EventEmitter<Disposable>();
-  @Input() consumeMode = true;
+  @Output() onInit = new EventEmitter<TerminalBuffer>();
+  @Output() onKey = new EventEmitter<KeyboardEvent>();
+  @Input() renderHtmlStrategy: (item: string) => { html: string, isContainingCharacter: boolean };
 }
 ```
 
-*You must register two callback functions.* After `NgTerminal` component is initialized, `onInit()` is called only **once**. If `consumeMode` is true, `onNext()` is called with `Disposable` when previous disposible object is consumed. If not, whenever users enter a charactor, `onNext()` is called.
-
-#### Disposable 
-
-Disposable is a object emitted with `KeyboardEvent` for interaction with terminal.
-
-```typescript
-class Disposable {
-  event: KeyboardEvent
-  isUsed(): boolean
-  /* print methods */
-  print(text: string): Disposable
-  println(text: string): Disposable
-  /* consume methods which need to be called for continuing to accept a next command.*/
-  skip(): void
-  handle(strategy: ($event: KeyboardEvent, input: string) => string = defaultStrategy): void
-  prompt(prompt: string): void
-}
-```
-
-*You must call one of consume methods to continue to accept a next command in terminal.*
-
-##### skip(): void
-
-This consume method does nothing. It closes disposable object.
-
-##### handle(strategy: ($event: KeyboardEvent, input: string) => string = defaultStrategy): void
-  
-This consume method manipulates current input buffer which is displayed with a strategy. It closes disposable object.
-
-##### prompt(prompt: string): void
-
-This consume method displays prompt on a new line. It closes disposable object.
-
-#### KeyboardEvent
+*You must register two callback functions.* After `NgTerminal` component is initialized, `onInit()` is called only **once**. `onInit()` is callback to provides `TerminalBuffer` object and you can control `NgTerminalComponent`'s buffer with this. `onKey()` is called whenever you press key and emit `KeyboardEvent` object.
 
 You can see [KeyboardEvent](https://developer.mozilla.org/ko/docs/Web/API/KeyboardEvent) in developer.mozilla.org.
+
+#### TerminalBuffer
+
+`TerminalBuffer` is new object to control `NgTerminalComponent`'s buffer. so, you must assign `TerminalBuffer` object in a variable and use it.
+
+```typescript
+class TerminalBuffer extends Buffer<ViewItem> {
+  constructor(private renderHtmlStrategy: (item: string) => { html: string, isContainingCharacter: boolean } = defaultRenderStrategy)
+  public setRenderHtmlStrategy(strategy: (item: string) => { html: string, isContainingCharacter: boolean }): void
+  public write(e: string): TerminalBuffer
+```
+
+##### constructor(private renderHtmlStrategy: (item: string) => { html: string, isContainingCharacter: boolean } = defaultRenderStrategy)
+
+It's `TerminalBuffer`'s constructor. You can initialize custom `renderHtmlStrategy` which decides how to convert your input to html code.
+
+##### public setRenderHtmlStrategy(strategy: (item: string) => { html: string, isContainingCharacter: boolean }): void
+
+In runtime, you can initialize custom `renderHtmlStrategy` which decides how to convert your input to html code.
+
+##### public write(e: string): TerminalBuffer
+
+You can write **characters** to `NgTerminalComponent`'s buffer. Characters is converted to html code with default or custom strategy. Also, `NgTerminalComponent` can accept **telnet's characters.** This is a specialized characters that controls the buffer.
+
+You can see **telnet's characters** in following a link.
+[Telnet Keyboard Equivalents](https://www.novell.com/documentation/extend5/Docs/help/Composer/books/TelnetAppendixB.html) and use the table `keyMap`
+
+##### renderHtmlStrategy: (item: string) => { html: string, isContainingCharacter: boolean } = defaultRenderStrategy
+
+By replacing `renderHtmlStratgy`, you can change a rendering way. `renderHtmlStrategy` is used when converting your input to html code. You should know that Input characters is broken into one character which is passed to `item` parameter.
+
+If a html code to be converted doesn't contains any character, `isContainingCharacter` should be false. For example, `<br/>` doesn't contain any chracter.
+
+#### keyMap
+
+`keyMap` is the exported object and **the table of telnet's characters.**
 
 ## Contribution
 
