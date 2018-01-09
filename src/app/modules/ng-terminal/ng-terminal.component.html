@@ -1,6 +1,6 @@
 <div #terminalViewPort (window:keydown)="onKeyDown($event)" class="terminal-view-port" (focus)="onViewPortFocus()" tabindex="-1">
   <div #terminalCanvas class="terminal-canvas">
-    <span class="typing-unit" *ngFor="let item of bf.buf; let i=index" [class.ani-bgchange]="bf.index == i && isViewPortInFocus()" [innerHtml]="item.html" ></span>
+    <span class="typing-unit" *ngFor="let item of bf.buf; let i=index" [class.ani-bgchange]="bf.index == i && isViewPortInFocus()" ><span *ngIf="bf.index == i && !item.isContainingCharacter">&nbsp;</span><span [innerHtml]="item.html"></span></span>
 <!--    <div class="typing-unit">(@cursorState.done)="onCursorDone($event)"
       <pre class="prompt" *ngIf="prompt != ''">{{prompt}} </pre><pre class="text" *ngIf="userInput != ''">{{userInput}}</pre><span [@cursorState]="cursorState" (@cursorState.done)="onCursorDone($event)">_</span>
     </div>-->

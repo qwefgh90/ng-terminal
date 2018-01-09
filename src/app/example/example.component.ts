@@ -1,17 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { TerminalBuffer } from '../modules/ng-terminal/terminal-buffer';
+import { TerminalBuffer, keyMap } from '../modules/ng-terminal/terminal-buffer';
 
 @Component({
     selector: 'app-example',
     templateUrl: './example.component.html',
     styleUrls: ['./example.component.css']
 })
-export class ExampleComponent implements OnInit {
+export class ExampleComponent {
 
     constructor() { }
-
-    ngOnInit() {
-    }
 
     public bf: TerminalBuffer;
 
@@ -21,28 +18,27 @@ export class ExampleComponent implements OnInit {
 
     onKey(e: KeyboardEvent) {
         if (e.key == 'Enter') {
-            this.bf.write('\n');
+            this.bf.write(keyMap.Linefeed);
         } else if (e.key == 'Backspace') {
-            this.bf.write('\b \b');
+            this.bf.write(keyMap.BackSpace);
         } else if (e.key == 'ArrowLeft') {
-            this.bf.write('\b');
+            this.bf.write(keyMap.ArrowLeft);
         } else if (e.key == 'ArrowRight') {
-            this.bf.right();
-        } else if (e.key.length == 1) {
-            this.bf.write(e.key);
-        }
+            this.bf.write(keyMap.ArrowRight);
+        } else if (e.key == 'ArrowUp') {
+            this.bf.write(keyMap.ArrowUp);
+        } else if (e.key == 'ArrowDown') {
+            this.bf.write(keyMap.ArrowDown);
+        } else if (e.key == 'Delete') {
+            this.bf.write(keyMap.Delete);
+        } else if (e.key == 'Home') {
+            this.bf.write(keyMap.KeyHome);
+        } else if (e.key == 'End') {
+            this.bf.write(keyMap.KeyEnd);
+        } else if (e.key == 'Tab') {
+            this.bf.write(keyMap.Tab);
+        } else
+            if (e.key.length == 1)
+                this.bf.write(e.key);
     }
-    /*
-        onInit(disposible: Disposable) {
-            disposible.println('https://github.com/qwefgh90/ng-terminal').println('Welcome to NgTerminal!!').prompt('ng>');
-        }
-    
-        onNext(disposible: Disposable) {
-            if (disposible.event.key == 'Enter') {
-                let newDisposible = disposible.println('').println('something is in progress...')
-                setTimeout(() => { newDisposible.println('').print('').print('complete!').prompt('ng>'); }, 2000);
-            } else
-                disposible.handle();
-        }
-    */
 }
