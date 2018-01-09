@@ -1,3 +1,6 @@
+import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
+
 export class Buffer<T> {
     public buf: Array<T> = new Array<T>();//only allowed to modify data with low level API
     public index: number = -1;//cursor offset
@@ -133,6 +136,7 @@ export class TerminalBuffer extends Buffer<ViewItem> {
     }
 
     protected insertMode = true;
+    protected writeSubject = new Subject<string>();
 
     protected up() {
         while (this.index > 0) {
@@ -255,6 +259,11 @@ export class TerminalBuffer extends Buffer<ViewItem> {
 
     public write(e: string): TerminalBuffer {
         this.tokenize(e).forEach((v, i, arr) => this.handle(v))
+        this.writeSubject.next(e);
         return this;
+    }
+
+    public getWriteObservable(): Observable<string> {
+        return this.writeSubject;
     }
 }

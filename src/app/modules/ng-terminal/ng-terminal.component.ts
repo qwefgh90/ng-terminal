@@ -41,6 +41,9 @@ export class NgTerminalComponent implements OnInit, OnChanges {
 
     ngOnInit() {
         this.onInit.next(this.bf);
+        this.bf.getWriteObservable().subscribe((str) => {
+            this.scrollDown();
+        })
     }
 
     ngOnChanges() {
@@ -57,6 +60,7 @@ export class NgTerminalComponent implements OnInit, OnChanges {
     }
 
     private scrollDown() {
+        console.log('scroll');
         setTimeout(() => { this.terminalViewPort.nativeElement.scrollTop = this.terminalViewPort.nativeElement.scrollHeight; }, 200);
     }
 
