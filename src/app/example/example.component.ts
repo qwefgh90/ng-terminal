@@ -37,6 +37,8 @@ export class ExampleComponent {
             this.bf.write(keyMap.KeyEnd);
         } else if (e.key == 'Tab') {
             this.bf.write(keyMap.Tab);
+        } else if (e.key == 'Insert') {
+            this.bf.write(keyMap.Insert);
         } else
             if (e.key.length == 1)
                 this.bf.write(e.key);

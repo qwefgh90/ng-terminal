@@ -132,6 +132,8 @@ export class TerminalBuffer extends Buffer<ViewItem> {
         this.rightOrExtendRight(new ViewItem(' ', renderHtmlStrategy));
     }
 
+    protected insertMode = true;
+
     protected up() {
         while (this.index > 0) {
             this.index--;
@@ -167,6 +169,14 @@ export class TerminalBuffer extends Buffer<ViewItem> {
             this.up();
     }
 
+    protected toggleInsertKey() {
+        this.insertMode = !this.insertMode;
+    }
+
+    public isInsertMode(): boolean {
+        return this.insertMode;
+    }
+
     //This follows telnet keys with ascii. https://www.novell.com/documentation/extend5/Docs/help/Composer/books/TelnetAppendixB.html
     protected handle(ch: string) {
         if (ch == keyMap.BackSpace) {
@@ -184,14 +194,21 @@ export class TerminalBuffer extends Buffer<ViewItem> {
             this.home();
         } else if (ch == keyMap.KeyEnd) {
             this.end();
+        } else if (ch == keyMap.Insert) {
+            this.toggleInsertKey();
         } else if (ch == keyMap.Delete) {
             if (this.right() && this.left())
                 this.pullLeft();
         } else {
             if (ch.length == 1) {
-                this.pushRight(new ViewItem(' ', this.renderHtmlStrategy))
-                this.overwrite(new ViewItem(ch, this.renderHtmlStrategy))
-                this.rightOrExtendRight(new ViewItem(' ', this.renderHtmlStrategy))
+                if (this.insertMode) {
+                    this.pushRight(new ViewItem(' ', this.renderHtmlStrategy))
+                    this.overwrite(new ViewItem(ch, this.renderHtmlStrategy))
+                    this.rightOrExtendRight(new ViewItem(' ', this.renderHtmlStrategy))
+                } else {
+                    this.overwrite(new ViewItem(ch, this.renderHtmlStrategy))
+                    this.rightOrExtendRight(new ViewItem(' ', this.renderHtmlStrategy))
+                }
             }
         }
     }
