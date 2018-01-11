@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 export class Buffer<T> {
     public buf: Array<T> = new Array<T>();//only allowed to modify data with low level API
     public index: number = -1;//cursor offset
+
     /*
      * low level API
      * [a,b,c,d]+[?] range in (buffer + 1)
@@ -122,7 +123,30 @@ export let keyMap = {
     NextScn: '\u001b[6~',
     PrevScn: '\u001b[5~',
     Remove: '\u001b[3~',
-    Select: '\u001b[44~'
+    Select: '\u001b[44~',
+    /*
+     * ANSI Escape sequences 
+     * https://en.wikipedia.org/wiki/ANSI_escape_code
+     * http://invisible-island.net/xterm/ctlseqs/ctlseqs.html
+     */
+    FnCursorCharacterAbsolute: <T>(column: T, isRegexp = false) =>
+        unescapeUnicode('\\u001b\\u005b', isRegexp) + (column != undefined ? column : '') + 'G',
+    FnArrowUp: <T>(i: T, isRegexp = false) =>
+        unescapeUnicode('\\u001b\\u005b', isRegexp) + (i != undefined ? i : '') + 'A', //1
+    FnArrowDown: <T>(i: T, isRegexp = false) =>
+        unescapeUnicode('\\u001b\\u005b', isRegexp) + (i != undefined ? i : '') + 'B', //1
+    FnEraseInLine: <T>(i: T, isRegexp = false) =>
+        unescapeUnicode('\\u001b\\u005b', isRegexp) + (i != undefined ? i : '') + 'K', //0
+}
+
+
+function unescapeUnicode(str: string, isRegexp: boolean) {
+    if (isRegexp)
+        return str;
+    else
+        return str.replace(/\\u([a-fA-F0-9]{4})/g, function(g, m1) {
+            return String.fromCharCode(parseInt(m1, 16));
+        });
 }
 
 /*
@@ -133,6 +157,42 @@ export class TerminalBuffer extends Buffer<ViewItem> {
     constructor(private renderHtmlStrategy: (item: string) => { html: string, isContainingCharacter: boolean } = defaultRenderStrategy) {
         super();
         this.rightOrExtendRight(new ViewItem(' ', renderHtmlStrategy));
+    }
+
+    //public selectedRow: number = -1;
+    //public selectedColumn: number = -1;
+    //public lastRow: number = -1;
+    //public lastColumn: number = -1;
+
+    public getIndex(row: number, column: number): number {
+        let cRow = 1;
+        let cColumn = 1;
+        let resultIndex = undefined;
+        let ignoreList = [];
+        this.buf.forEach((viewItem, index) => {
+            let ch = viewItem.item
+            if (ch == "\n") {
+                cRow++;
+                cColumn = 1;
+            } else if (cColumn == 80) {
+                cRow++;
+                cColumn = 1;
+            } else if (ignoreList.find((v, i) => {
+                if (v == ch)
+                    return true;
+                else
+                    return false;
+            })) {
+            } else
+                cColumn++;
+            // add some codes
+        })
+
+        return undefined;
+    }
+
+    public getRowCol(index: number): { row: number, col: number } {
+        return undefined;
     }
 
     protected insertMode = true;
@@ -203,13 +263,21 @@ export class TerminalBuffer extends Buffer<ViewItem> {
         } else if (ch == keyMap.Delete) {
             if (this.right() && this.left())
                 this.pullLeft();
+        } else if (ch.match(new RegExp("^" + keyMap.FnArrowUp('([0-9]+)', true) + "$")) != null) {
+            this.up();
+        } else if (ch.match(new RegExp("^" + keyMap.FnCursorCharacterAbsolute('([0-9]+)', true) + "$")) != null) {
+
+            //            this.up();
+        } else if (ch.match(new RegExp("^" + keyMap.FnEraseInLine('([0-3])', true) + "$")) != null) {
+
+            //            this.up();
         } else {
             if (ch.length == 1) {
                 if (this.insertMode) {
                     this.pushRight(new ViewItem(' ', this.renderHtmlStrategy))
                     this.overwrite(new ViewItem(ch, this.renderHtmlStrategy))
                     this.rightOrExtendRight(new ViewItem(' ', this.renderHtmlStrategy))
-                } else {
+                } else { //overlay mode
                     this.overwrite(new ViewItem(ch, this.renderHtmlStrategy))
                     this.rightOrExtendRight(new ViewItem(' ', this.renderHtmlStrategy))
                 }
@@ -223,9 +291,17 @@ export class TerminalBuffer extends Buffer<ViewItem> {
                 return undefined;
             var keys = Object.keys(keyMap);
             let foundKey = keys
-                .filter((v, i, arr) => fullText.startsWith(keyMap[v]))
+                .filter((v, i, arr) => {
+                    if (typeof keyMap[v] === "string")
+                        return fullText.startsWith(keyMap[v]);
+                    else if (typeof keyMap[v] === "function")
+                        return fullText.match(new RegExp("^" + keyMap[v]("[0-9]+", true))) != null;
+                })
                 .map((v: string, i, arr) => {
-                    return keyMap[v];
+                    if (typeof keyMap[v] === "string")
+                        return keyMap[v];
+                    else if (typeof keyMap[v] === "function")
+                        return fullText.match(new RegExp("^" + keyMap[v]("[0-9]+", true)))[0];
                 }).reduce((acc, c, i, arr) => {
                     if (acc != undefined && (acc.length > c.length))
                         return acc;
