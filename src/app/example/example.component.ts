@@ -17,6 +17,7 @@ export class ExampleComponent {
     }
 
     onKey(e: KeyboardEvent) {
+        //console.log("event.type " + e.type + ":" + e.key);
         if (e.key == 'Enter') {
             this.bf.write(keyMap.Linefeed);
         } else if (e.key == 'Backspace') {
@@ -39,8 +40,31 @@ export class ExampleComponent {
             this.bf.write(keyMap.Tab);
         } else if (e.key == 'Insert') {
             this.bf.write(keyMap.Insert);
+        } else if (e.type == 'compositionstart') {
+            this.bf.write(' ');
+        } else if (e.type == 'compositionupdate' && e.key.length == 1) {
+            if (this.bf.isInsertMode()) {
+                this.bf.write('\b');
+                this.bf.write(e.key);
+            } else {
+                this.bf.write(keyMap.ArrowLeft);
+                this.bf.write(e.key);
+            }
+        } else if (e.type == 'compositionend' && e.key.length == 1) {
+            if (e.key < '\u007f') { //ignore writing low unicode key in mobile. It should be written in textInput event
+                if (this.bf.isInsertMode())
+                    this.bf.write('\b');
+                else
+                    this.bf.write(keyMap.ArrowLeft);
+            } else if (this.bf.isInsertMode()) {
+                this.bf.write('\b');
+                this.bf.write(e.key);
+            } else {
+                this.bf.write(keyMap.ArrowLeft);
+                this.bf.write(e.key);
+            }
         } else
             if (e.key.length == 1)
-                this.bf.write(e.key);
+                this.bf.write(e.key + '');
     }
 }
