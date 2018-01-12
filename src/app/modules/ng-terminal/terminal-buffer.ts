@@ -390,10 +390,16 @@ export class TerminalBuffer extends Buffer<ViewItem> {
             let defaultValue = 0;
             let selector = parseInt(m[1] != '' ? m[1] : defaultValue);
             console.log('FnEraseInLine:' + selector);
+            let rc = this.getRowCol();
+            let lastCol = this.getLastColumn(rc.row);
+            let countToRight = lastCol - rc.col + 1;
+            let countToLeft = rc.col - 1;
             if (selector == 0)
-                this.handle(keyMap.Delete);
+                this.write(keyMap.Delete.repeat(countToRight));
             else if (selector == 1)
-                this.handle(keyMap.BackSpace);
+                this.write(keyMap.BackSpace.repeat(countToLeft));
+            else if (selector == 2)
+                this.write(keyMap.BackSpace.repeat(countToLeft) + keyMap.Delete.repeat(countToRight));
         } else {
             if (ch.length == 1) {
                 if (this.insertMode) {

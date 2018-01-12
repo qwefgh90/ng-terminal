@@ -31,7 +31,7 @@ export class ExampleComponent {
         } else if (e.key == 'ArrowDown') {
             this.bf.write(keyMap.ArrowDown);
         } else if (e.key == 'Delete') {
-            this.bf.write(keyMap.FnEraseInLine(undefined));
+            this.bf.write(keyMap.Delete);
         } else if (e.key == 'Home') {
             this.bf.write(keyMap.KeyHome);
         } else if (e.key == 'End') {
