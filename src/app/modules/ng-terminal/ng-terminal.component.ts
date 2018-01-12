@@ -32,10 +32,11 @@ export class NgTerminalComponent implements OnInit, OnChanges {
     @ViewChild('virtualViewPort') virtualViewPort: ElementRef;
     public bf = new TerminalBuffer();
     private keyEventQueue = new Array<any>();
-
     @Output() onInit = new EventEmitter<TerminalBuffer>();
     @Output() onKey = new EventEmitter<KeyboardEvent>();
     @Input() renderHtmlStrategy: (item: string) => { html: string, isContainingCharacter: boolean };
+    @Input() viewMode = false;
+    virtualTop = 0;
 
     constructor() {
     }
@@ -54,14 +55,14 @@ export class NgTerminalComponent implements OnInit, OnChanges {
 
     onTextInput($event: TextEvent) {
         let ke = new KeyboardEvent($event.type, { key: $event.data });
-        if (this.isViewPortInFocus() && ($event.data < '\u007f')) { //only read ascii, ignore high unicode. it removes duplicate with compositionend in mobile
+        if (this.isCanvasInFocus() && ($event.data < '\u007f')) { //only read ascii, ignore high unicode. it removes duplicate with compositionend in mobile
             this.keyEventQueue.push(ke);
             this.emitNextKey();
         }
     }
 
     onKeyDown($event) {
-        if (this.isViewPortInFocus()) {
+        if (this.isCanvasInFocus()) {
             this.keyEventQueue.push($event);
             $event.preventDefault();
             this.emitNextKey();
@@ -74,8 +75,14 @@ export class NgTerminalComponent implements OnInit, OnChanges {
         this.emitNextKey();
     }
 
-    private scrollDown() {
-        setTimeout(() => { this.terminalViewPort.nativeElement.scrollTop = this.terminalViewPort.nativeElement.scrollHeight; }, 200);
+    onScroll($event: Event) { // move virtual viewport
+        this.virtualTop = $event.srcElement.scrollTop;
+    }
+
+    scrollDown() { //scroll to end of viewport
+        setTimeout(() => {
+            this.terminalCanvas.nativeElement.scrollTop = this.terminalCanvas.nativeElement.scrollHeight;
+        }, 200);
     }
 
     private emitNextKey() {
@@ -85,12 +92,13 @@ export class NgTerminalComponent implements OnInit, OnChanges {
         }
     }
 
-    private isViewPortInFocus() {
+    private isCanvasInFocus() {
         return this.virtualViewPort.nativeElement == document.activeElement;
     }
 
     onViewPortFocus() {
     }
+
     compositionstart($event) {
         //console.log("event.type " + $event.type + ":" + $event.data);
         let ke = new KeyboardEvent($event.type, { key: $event.data });

@@ -1,7 +1,11 @@
-<h2>
+<h1>
   Example
-</h2>
-<div >
-  <ng-terminal (onInit)="onInit($event)" (onKey)="onKey($event)" >
+</h1>
+<div>
+  <button [class.viewbutton]="view" (click)="onViewButtonClick()">{{view ? 'View':'Edit'}}</button>
+</div>
+<br>
+<div class="terminal">
+  <ng-terminal (onInit)="onInit($event)" (onKey)="onKey($event)" [viewMode]="view">
   </ng-terminal>
 </div>

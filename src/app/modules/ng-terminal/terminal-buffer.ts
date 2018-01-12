@@ -154,27 +154,33 @@ function unescapeUnicode(str: string, isRegexp: boolean) {
  *  https://www.novell.com/documentation/extend5/Docs/help/Composer/books/TelnetAppendixB.html
  */
 export class TerminalBuffer extends Buffer<ViewItem> {
-    constructor(private renderHtmlStrategy: (item: string) => { html: string, isContainingCharacter: boolean } = defaultRenderStrategy) {
+    constructor(private width: number = 80, private renderHtmlStrategy: (item: string) => { html: string, isContainingCharacter: boolean } = defaultRenderStrategy) {
         super();
         this.rightOrExtendRight(new ViewItem(' ', renderHtmlStrategy));
     }
 
-    //public selectedRow: number = -1;
-    //public selectedColumn: number = -1;
-    //public lastRow: number = -1;
-    //public lastColumn: number = -1;
+    public setWidth(width: number) {
+        if (width < 1)
+            return
+        else
+            this.width = width;
+    }
 
-    public getIndex(row: number, column: number): number {
+    public getLastColumn(row: number): number {
         let cRow = 1;
         let cColumn = 1;
-        let resultIndex = undefined;
+        let lastColumn = -1;
         let ignoreList = [];
         this.buf.forEach((viewItem, index) => {
             let ch = viewItem.item
+            if (cRow == row) {
+                if (cColumn > lastColumn)
+                    lastColumn = cColumn;
+            }
             if (ch == "\n") {
                 cRow++;
                 cColumn = 1;
-            } else if (cColumn == 80) {
+            } else if (cColumn == this.width) {
                 cRow++;
                 cColumn = 1;
             } else if (ignoreList.find((v, i) => {
@@ -185,14 +191,79 @@ export class TerminalBuffer extends Buffer<ViewItem> {
             })) {
             } else
                 cColumn++;
-            // add some codes
         })
-
-        return undefined;
+        return lastColumn == -1 ? undefined : lastColumn;
     }
 
-    public getRowCol(index: number): { row: number, col: number } {
-        return undefined;
+    public getIndex(row: number = undefined, column: number = undefined): number {
+        if (row != undefined && column == undefined) {
+            column = 1;
+        } else if (row == undefined && column == undefined) {
+            let rc = this.getRowCol();
+            if (rc == undefined)
+                return undefined;
+            else {
+                row = rc.row;
+                column = rc.col;
+            }
+        }
+        let cRow = 1;
+        let cColumn = 1;
+        let foundIndex = undefined;
+        let ignoreList = [];
+        this.buf.forEach((viewItem, index) => {
+            let ch = viewItem.item
+            if (cRow == row && cColumn == column)
+                foundIndex = index;
+            if (ch == "\n") {
+                cRow++;
+                cColumn = 1;
+            } else if (cColumn == this.width) {
+                cRow++;
+                cColumn = 1;
+            } else if (ignoreList.find((v, i) => {
+                if (v == ch)
+                    return true;
+                else
+                    return false;
+            })) {
+            } else
+                cColumn++;
+        })
+        return foundIndex;
+    }
+
+    public getRowCol(targetIndex: number = this.index): { row: number, col: number } {
+        let cRow = 1;
+        let cColumn = 1;
+        let foundRow = undefined;
+        let foundCol = undefined;
+        let ignoreList = [];
+        this.buf.forEach((viewItem, index) => {
+            let ch = viewItem.item
+            if (targetIndex == index) {
+                foundRow = cRow;
+                foundCol = cColumn;
+            }
+            if (ch == "\n") {
+                cRow++;
+                cColumn = 1;
+            } else if (cColumn == this.width) {
+                cRow++;
+                cColumn = 1;
+            } else if (ignoreList.find((v, i) => {
+                if (v == ch)
+                    return true;
+                else
+                    return false;
+            })) {
+            } else
+                cColumn++;
+        })
+        if (foundRow == undefined || foundCol == undefined)
+            return undefined;
+        else
+            return { row: foundRow, col: foundCol };
     }
 
     protected insertMode = true;
@@ -203,7 +274,6 @@ export class TerminalBuffer extends Buffer<ViewItem> {
             this.index--;
             let item = this.current();
             if (item.item == '\n') {
-                //                    this.index++;
                 break;
             }
         }
@@ -243,6 +313,7 @@ export class TerminalBuffer extends Buffer<ViewItem> {
 
     //This follows telnet keys with ascii. https://www.novell.com/documentation/extend5/Docs/help/Composer/books/TelnetAppendixB.html
     protected handle(ch: string) {
+        console.log('ch:' + ch);
         if (ch == keyMap.BackSpace) {
             if (this.left())
                 this.pullLeft();
@@ -258,19 +329,71 @@ export class TerminalBuffer extends Buffer<ViewItem> {
             this.home();
         } else if (ch == keyMap.KeyEnd) {
             this.end();
+        } else if (ch == keyMap.Return) {
+            let rc = this.getRowCol()
+            let index = this.getIndex(rc.row, 1)
+            if (index != undefined)
+                this.index = index;
         } else if (ch == keyMap.Insert) {
             this.toggleInsertKey();
         } else if (ch == keyMap.Delete) {
             if (this.right() && this.left())
                 this.pullLeft();
-        } else if (ch.match(new RegExp("^" + keyMap.FnArrowUp('([0-9]+)', true) + "$")) != null) {
-            this.up();
-        } else if (ch.match(new RegExp("^" + keyMap.FnCursorCharacterAbsolute('([0-9]+)', true) + "$")) != null) {
-
-            //            this.up();
-        } else if (ch.match(new RegExp("^" + keyMap.FnEraseInLine('([0-3])', true) + "$")) != null) {
-
-            //            this.up();
+        } else if (this.findTokenRegex(ch, keyMap.FnArrowUp, true) != null) {
+            let m = this.findTokenRegex(ch, keyMap.FnArrowUp, true).matched;
+            let defaultValue = 1
+            let repeatCount = parseInt(m[1] != '' ? m[1] : defaultValue);
+            console.log('FnArrowUp:' + repeatCount);
+            while (repeatCount > 0) {
+                let rc = this.getRowCol()
+                let index = this.getIndex(rc.row - 1, rc.col)
+                if (index == undefined)//fallback1
+                    index = this.getIndex(rc.row - 1, this.getLastColumn(rc.row - 1))
+                if (index == undefined)//fallback2
+                    index = this.getIndex(rc.row, 1)
+                if (index != undefined)
+                    this.index = index;
+                repeatCount--;
+            }
+        } else if (this.findTokenRegex(ch, keyMap.FnArrowDown, true) != null) {
+            let m = this.findTokenRegex(ch, keyMap.FnArrowDown, true).matched;
+            let defaultValue = 1;
+            let repeatCount = parseInt(m[1] != '' ? m[1] : defaultValue);
+            console.log('FnArrowDown:' + repeatCount);
+            while (repeatCount > 0) {
+                let rc = this.getRowCol()
+                let index = this.getIndex(rc.row + 1, rc.col)
+                if (index == undefined)//fallback1
+                    index = this.getIndex(rc.row + 1, this.getLastColumn(rc.row + 1))
+                if (index == undefined)//fallback2
+                    index = this.getIndex(rc.row, this.getLastColumn(rc.row))
+                if (index != undefined)
+                    this.index = index;
+                repeatCount--;
+            }
+        } else if (this.findTokenRegex(ch, keyMap.FnCursorCharacterAbsolute, true) != null) {
+            let m = this.findTokenRegex(ch, keyMap.FnCursorCharacterAbsolute, true).matched;
+            let defaultValue = 1
+            let targetCol = parseInt(m[1] != '' ? m[1] : defaultValue);
+            let rc = this.getRowCol()
+            let index = this.getIndex(rc.row, targetCol);
+            if (index == undefined && targetCol > this.getLastColumn(rc.row))
+                index = this.getIndex(rc.row + 1, 1)
+            else if (index == undefined && targetCol < 1) {
+                index = this.getIndex(rc.row - 1, this.getLastColumn(rc.row - 1))
+            }
+            if (index != undefined)
+                this.index = index;
+            console.log('FnCursorCharacterAbsolute:' + JSON.stringify(this.getRowCol(this.index)));
+        } else if (this.findTokenRegex(ch, keyMap.FnEraseInLine, true) != null) {
+            let m = this.findTokenRegex(ch, keyMap.FnEraseInLine, true).matched;
+            let defaultValue = 0;
+            let selector = parseInt(m[1] != '' ? m[1] : defaultValue);
+            console.log('FnEraseInLine:' + selector);
+            if (selector == 0)
+                this.handle(keyMap.Delete);
+            else if (selector == 1)
+                this.handle(keyMap.BackSpace);
         } else {
             if (ch.length == 1) {
                 if (this.insertMode) {
@@ -285,6 +408,32 @@ export class TerminalBuffer extends Buffer<ViewItem> {
         }
     }
 
+    private findTokenRegex(ch: string, func: Function, isFullMatch = false): { regExp: Function, matched: Array<any> } {
+        let fullMatch = isFullMatch ? "$" : "";
+        //        console.log('up: ' + new RegExp("^" + keyMap.FnArrowUp('([0-9]+)', true) + fullMatch));
+        if (func == keyMap.FnArrowUp
+            && ch.match(new RegExp("^" + keyMap.FnArrowUp('([0-9]*)', true) + fullMatch)) != null) {
+            let matched = ch.match(new RegExp("^" + keyMap.FnArrowUp('([0-9]*)', true)));
+            return { regExp: keyMap.FnArrowUp, matched: matched };
+        }
+        else if (func == keyMap.FnArrowDown
+            && ch.match(new RegExp("^" + keyMap.FnArrowDown('([0-9]*)', true) + fullMatch)) != null) {
+            let matched = ch.match(new RegExp("^" + keyMap.FnArrowDown('([0-9]*)', true)));
+            return { regExp: keyMap.FnArrowDown, matched: matched };
+        }
+        else if (func == keyMap.FnCursorCharacterAbsolute
+            && ch.match(new RegExp("^" + keyMap.FnCursorCharacterAbsolute('([0-9]*)', true) + fullMatch)) != null) {
+            let matched = ch.match(new RegExp("^" + keyMap.FnCursorCharacterAbsolute('([0-9]*)', true)));
+            return { regExp: keyMap.FnCursorCharacterAbsolute, matched: matched };
+        }
+        else if (func == keyMap.FnEraseInLine
+            && ch.match(new RegExp("^" + keyMap.FnEraseInLine('([0-2]?)', true) + fullMatch)) != null) {
+            let matched = ch.match(new RegExp("^" + keyMap.FnEraseInLine('([0-2]?)', true)));
+            return { regExp: keyMap.FnEraseInLine, matched: matched };
+        }
+        return null;
+    }
+
     protected tokenize(fullText: string): Array<string> {
         let getToken: (fullText: string) => string = (fullText: string) => {
             if (fullText.length == 0)
@@ -295,13 +444,13 @@ export class TerminalBuffer extends Buffer<ViewItem> {
                     if (typeof keyMap[v] === "string")
                         return fullText.startsWith(keyMap[v]);
                     else if (typeof keyMap[v] === "function")
-                        return fullText.match(new RegExp("^" + keyMap[v]("[0-9]+", true))) != null;
+                        return this.findTokenRegex(fullText, keyMap[v]) != null;
                 })
                 .map((v: string, i, arr) => {
                     if (typeof keyMap[v] === "string")
                         return keyMap[v];
                     else if (typeof keyMap[v] === "function")
-                        return fullText.match(new RegExp("^" + keyMap[v]("[0-9]+", true)))[0];
+                        return this.findTokenRegex(fullText, keyMap[v]).matched[0];
                 }).reduce((acc, c, i, arr) => {
                     if (acc != undefined && (acc.length > c.length))
                         return acc;
@@ -312,7 +461,6 @@ export class TerminalBuffer extends Buffer<ViewItem> {
                 return fullText.charAt(0);
             else
                 return foundKey;
-
         }
         let result: Array<string> = [];
         while (true) {
