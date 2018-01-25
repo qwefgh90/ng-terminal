@@ -64,7 +64,9 @@ export class NgTerminalComponent implements OnInit, OnChanges {
 
     onKeyDown($event) {
         if (this.isCanvasInFocus()) {
-            //            this.logging = this.logging + "|event.type " + $event.type + ":" + $event.key
+            //this.logging = this.logging + "|event.type " + $event.type + ":" + $event.key
+            if ($event.key == 'Enter')
+                this.virtualViewPort.nativeElement.innerHTML = '';
             this.keyEventQueue.push($event);
             $event.preventDefault();
             this.emitNextKey();
