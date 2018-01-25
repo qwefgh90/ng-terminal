@@ -401,15 +401,18 @@ export class TerminalBuffer extends Buffer<ViewItem> {
             else if (selector == 2)
                 this.write(keyMap.BackSpace.repeat(countToLeft) + keyMap.Delete.repeat(countToRight));
         } else {
-            if (ch.length == 1) {
+            if (ch.length != 0) {
+                let first = ch[0];
+                //ch.substr
                 if (this.insertMode) {
                     this.pushRight(new ViewItem(' ', this.renderHtmlStrategy))
-                    this.overwrite(new ViewItem(ch, this.renderHtmlStrategy))
+                    this.overwrite(new ViewItem(first, this.renderHtmlStrategy))
                     this.rightOrExtendRight(new ViewItem(' ', this.renderHtmlStrategy))
                 } else { //overlay mode
-                    this.overwrite(new ViewItem(ch, this.renderHtmlStrategy))
+                    this.overwrite(new ViewItem(first, this.renderHtmlStrategy))
                     this.rightOrExtendRight(new ViewItem(' ', this.renderHtmlStrategy))
                 }
+                this.handle(ch.substr(1))
             }
         }
     }
@@ -464,7 +467,7 @@ export class TerminalBuffer extends Buffer<ViewItem> {
                         return c;
                 }, undefined);
             if (foundKey == undefined)
-                return fullText.charAt(0);
+                return fullText;
             else
                 return foundKey;
         }

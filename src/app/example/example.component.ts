@@ -16,6 +16,8 @@ export class ExampleComponent {
         this.bf = bf;
     }
 
+    compositionCount = 0;
+
     onKey(e: KeyboardEvent) {
         //console.log("event.type " + e.type + ":" + e.key);
         if (e.key == 'Enter') {
@@ -42,34 +44,30 @@ export class ExampleComponent {
             this.bf.write(keyMap.Insert);
         } else if (e.type == 'compositionstart') {
             this.bf.write(' ');
-        } else if (e.type == 'compositionupdate' && e.key.length == 1) {
+            this.compositionCount = 1;
+        } else if (e.type == 'compositionupdate') {
             if (this.bf.isInsertMode()) {
-                this.bf.write('\b');
+                this.bf.write('\b'.repeat(this.compositionCount));
                 this.bf.write(e.key);
+                this.compositionCount = e.key.length;
             } else {
-                this.bf.write(keyMap.ArrowLeft);
+                this.bf.write(keyMap.ArrowLeft.repeat(this.compositionCount));
                 this.bf.write(e.key);
+                this.compositionCount = e.key.length;
             }
-        } else if (e.type == 'compositionend' && e.key.length == 1) {
-            if (e.key < '\u007f') { //ignore writing low unicode key in mobile. It should be written in textInput event
-                if (this.bf.isInsertMode())
-                    this.bf.write('\b');
-                else
-                    this.bf.write(keyMap.ArrowLeft);
-            } else if (this.bf.isInsertMode()) {
-                this.bf.write('\b');
+        } else if (e.type == 'compositionend') {
+            if (this.bf.isInsertMode()) {
+                this.bf.write('\b'.repeat(this.compositionCount));
                 this.bf.write(e.key);
+                this.compositionCount = e.key.length;
             } else {
-                this.bf.write(keyMap.ArrowLeft);
+                this.bf.write(keyMap.ArrowLeft.repeat(this.compositionCount));
                 this.bf.write(e.key);
+                this.compositionCount = e.key.length;
             }
         } else
             if (e.key.length == 1)
                 this.bf.write(e.key + '');
-        //        console.log('index -> ' + this.bf.index);
-        //        let rc = this.bf.getRowCol()
-        //        console.log(this.bf.getRowCol());
-        //        console.log('found index -> ' + this.bf.getIndex());
     }
 
     view = false;

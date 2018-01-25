@@ -37,7 +37,7 @@ export class NgTerminalComponent implements OnInit, OnChanges {
     @Input() renderHtmlStrategy: (item: string) => { html: string, isContainingCharacter: boolean };
     @Input() viewMode = false;
     virtualTop = 0;
-
+    //    logging = '';
     constructor() {
     }
 
@@ -54,6 +54,7 @@ export class NgTerminalComponent implements OnInit, OnChanges {
     }
 
     onTextInput($event: TextEvent) {
+        //        this.logging = this.logging + "|event.type " + $event.type + ":" + $event.data
         let ke = new KeyboardEvent($event.type, { key: $event.data });
         if (this.isCanvasInFocus() && ($event.data < '\u007f')) { //only read ascii, ignore high unicode. it removes duplicate with compositionend in mobile
             this.keyEventQueue.push(ke);
@@ -63,6 +64,7 @@ export class NgTerminalComponent implements OnInit, OnChanges {
 
     onKeyDown($event) {
         if (this.isCanvasInFocus()) {
+            //            this.logging = this.logging + "|event.type " + $event.type + ":" + $event.key
             this.keyEventQueue.push($event);
             $event.preventDefault();
             this.emitNextKey();
@@ -100,6 +102,7 @@ export class NgTerminalComponent implements OnInit, OnChanges {
     }
 
     compositionstart($event) {
+        //        this.logging = this.logging + "|event.type " + $event.type + ":" + $event.data
         //console.log("event.type " + $event.type + ":" + $event.data);
         let ke = new KeyboardEvent($event.type, { key: $event.data });
         this.keyEventQueue.push(ke);
@@ -107,12 +110,14 @@ export class NgTerminalComponent implements OnInit, OnChanges {
     }
 
     compositionend($event: CompositionEvent) {
+        //        this.logging = this.logging + "|event.type " + $event.type + ":" + $event.data
         //console.log("event.type " + $event.type + ":" + $event.data);
         let ke = new KeyboardEvent($event.type, { key: $event.data });
         this.keyEventQueue.push(ke);
         this.emitNextKey();
     }
     compositionupdate($event) {
+        //        this.logging = this.logging + "|event.type " + $event.type + ":" + $event.data
         //console.log("event.type " + $event.type + ":" + $event.data);
         let ke = new KeyboardEvent($event.type, { key: $event.data });
         this.keyEventQueue.push(ke);
