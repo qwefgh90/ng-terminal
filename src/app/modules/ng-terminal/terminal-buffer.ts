@@ -102,10 +102,10 @@ export function defaultRenderStrategy(item: string): { html: string, isContainin
 
 export let keyMap = {
     //Common Keys
-    ArrowDown: '\u001b[B',//
+    //ArrowDown: '\u001b[B',//
     ArrowLeft: '\u001b[D',//
     ArrowRight: '\u001b[C',//
-    ArrowUp: '\u001b[A',//
+    //ArrowUp: '\u001b[A',//
     BackSpace: '\u0008',//
     BackTab: '\u001bOP\u0009',
     Delete: '\u007f',//
@@ -195,6 +195,14 @@ export class TerminalBuffer extends Buffer<ViewItem> {
         return lastColumn == -1 ? undefined : lastColumn;
     }
 
+    public padding(row: number, column: number) {
+        if (this.buf.length < (row * this.width + column)) {
+            let count = (row * this.width + column) - this.buf.length
+            while (count--)
+                this.buf.push(new ViewItem(' ', this.renderHtmlStrategy));
+        }
+    }
+
     public getIndex(row: number = undefined, column: number = undefined): number {
         if (row != undefined && column == undefined) {
             column = 1;
@@ -207,6 +215,7 @@ export class TerminalBuffer extends Buffer<ViewItem> {
                 column = rc.col;
             }
         }
+        this.padding(row, column)
         let cRow = 1;
         let cColumn = 1;
         let foundIndex = undefined;
@@ -313,7 +322,7 @@ export class TerminalBuffer extends Buffer<ViewItem> {
 
     //This follows telnet keys with ascii. https://www.novell.com/documentation/extend5/Docs/help/Composer/books/TelnetAppendixB.html
     protected handle(ch: string) {
-        console.log('ch:' + ch);
+        //        console.log('ch:' + ch);
         if (ch == keyMap.BackSpace) {
             if (this.left())
                 this.pullLeft();
@@ -321,11 +330,11 @@ export class TerminalBuffer extends Buffer<ViewItem> {
             this.right();
         } else if (ch == keyMap.ArrowLeft) {
             this.left();
-        } else if (ch == keyMap.ArrowUp) {
+        } /*else if (ch == keyMap.ArrowUp) {
             this.up();
         } else if (ch == keyMap.ArrowDown) {
             this.down();
-        } else if (ch == keyMap.KeyHome) {
+        } */else if (ch == keyMap.KeyHome) {
             this.home();
         } else if (ch == keyMap.KeyEnd) {
             this.end();
@@ -394,12 +403,17 @@ export class TerminalBuffer extends Buffer<ViewItem> {
             let lastCol = this.getLastColumn(rc.row);
             let countToRight = lastCol - rc.col + 1;
             let countToLeft = rc.col - 1;
-            if (selector == 0)
+            if (selector == 0) {
                 this.write(keyMap.Delete.repeat(countToRight));
-            else if (selector == 1)
+                this.write(' '.repeat(countToRight));
+                this.write(keyMap.ArrowLeft.repeat(countToRight));
+            } else if (selector == 1) {
                 this.write(keyMap.BackSpace.repeat(countToLeft));
-            else if (selector == 2)
-                this.write(keyMap.BackSpace.repeat(countToLeft) + keyMap.Delete.repeat(countToRight));
+                this.write(' '.repeat(countToLeft));
+            } else if (selector == 2) {
+                this.write(keyMap.Delete.repeat(countToRight) + ' '.repeat(countToRight) + keyMap.ArrowLeft.repeat(countToRight) + keyMap.BackSpace.repeat(countToLeft));
+                this.write(' '.repeat(countToLeft));
+            }
         } else {
             if (ch.length != 0) {
                 let first = ch[0];
@@ -450,16 +464,17 @@ export class TerminalBuffer extends Buffer<ViewItem> {
             var keys = Object.keys(keyMap);
             let foundKey = keys
                 .filter((v, i, arr) => {
-                    if (typeof keyMap[v] === "string")
-                        return fullText.startsWith(keyMap[v]);
-                    else if (typeof keyMap[v] === "function")
+                    if (typeof keyMap[v] === "function")
                         return this.findTokenRegex(fullText, keyMap[v]) != null;
+                    else if (typeof keyMap[v] === "string")
+                        return fullText.startsWith(keyMap[v]);
+
                 })
                 .map((v: string, i, arr) => {
-                    if (typeof keyMap[v] === "string")
-                        return keyMap[v];
-                    else if (typeof keyMap[v] === "function")
+                    if (typeof keyMap[v] === "function")
                         return this.findTokenRegex(fullText, keyMap[v]).matched[0];
+                    else if (typeof keyMap[v] === "string")
+                        return keyMap[v];
                 }).reduce((acc, c, i, arr) => {
                     if (acc != undefined && (acc.length > c.length))
                         return acc;
@@ -467,7 +482,7 @@ export class TerminalBuffer extends Buffer<ViewItem> {
                         return c;
                 }, undefined);
             if (foundKey == undefined)
-                return fullText;
+                return fullText.charAt(0);
             else
                 return foundKey;
         }

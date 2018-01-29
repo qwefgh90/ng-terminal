@@ -19,19 +19,22 @@ export class ExampleComponent {
     compositionCount = 0;
 
     onKey(e: KeyboardEvent) {
-        //console.log("event.type " + e.type + ":" + e.key);
-        if (e.key == 'Enter') {
+        //        console.log("event.type " + e.type + ":" + e.key);
+        //        console.log(e);
+        if (e.key == 'k' && e.ctrlKey) {
+            this.bf.write(keyMap.FnEraseInLine(0));
+        } else if (e.key == 'Enter') {
             this.bf.write(keyMap.Linefeed);
         } else if (e.key == 'Backspace') {
             this.bf.write(keyMap.BackSpace);
         } else if (e.key == 'ArrowLeft') {
             this.bf.write(keyMap.FnCursorCharacterAbsolute(this.bf.getRowCol().col - 1));
         } else if (e.key == 'ArrowRight') {
-            this.bf.write(keyMap.FnCursorCharacterAbsolute(this.bf.getRowCol().col + 1));
+            this.bf.write(keyMap.ArrowRight);
         } else if (e.key == 'ArrowUp') {
-            this.bf.write(keyMap.ArrowUp);
+            this.bf.write(keyMap.FnArrowUp(''));
         } else if (e.key == 'ArrowDown') {
-            this.bf.write(keyMap.ArrowDown);
+            this.bf.write(keyMap.FnArrowDown(''));
         } else if (e.key == 'Delete') {
             this.bf.write(keyMap.Delete);
         } else if (e.key == 'Home') {
