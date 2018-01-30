@@ -2,7 +2,11 @@
   Example
 </h1>
 <div>
-  <button [class.viewbutton]="view" (click)="onViewButtonClick()">{{view ? 'View':'Edit'}}</button>
+  <button [class.viewbutton]="view" (click)="onViewButtonClick()">{{view ? 'View':'Edit'}}</button>  
+</div>
+<div>
+* mode: {{ansiEscapeMode ? 'Ansi escape is enabled.' : 'Ansi escape is disabled.' }}<br>
+* row: {{bf.getRowCol().row}}, col: {{bf.getRowCol().col}}
 </div>
 <br>
 <div class="terminal">

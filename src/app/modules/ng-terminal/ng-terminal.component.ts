@@ -30,12 +30,12 @@ export class NgTerminalComponent implements OnInit, OnChanges {
     @ViewChild('terminalViewPort') terminalViewPort: ElementRef;
     @ViewChild('terminalCanvas') terminalCanvas: ElementRef;
     @ViewChild('virtualViewPort') virtualViewPort: ElementRef;
-    public bf = new TerminalBuffer();
-    private keyEventQueue = new Array<any>();
     @Output() onInit = new EventEmitter<TerminalBuffer>();
     @Output() onKey = new EventEmitter<KeyboardEvent>();
     @Input() renderHtmlStrategy: (item: string) => { html: string, isContainingCharacter: boolean };
     @Input() viewMode = false;
+    public bf = new TerminalBuffer();
+    private keyEventQueue = new Array<any>();
     virtualTop = 0;
     //    logging = '';
     constructor() {

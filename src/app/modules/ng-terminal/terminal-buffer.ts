@@ -102,10 +102,10 @@ export function defaultRenderStrategy(item: string): { html: string, isContainin
 
 export let keyMap = {
     //Common Keys
-    //ArrowDown: '\u001b[B',//
+    ArrowDown: '\u001b[B',//
     ArrowLeft: '\u001b[D',//
     ArrowRight: '\u001b[C',//
-    //ArrowUp: '\u001b[A',//
+    ArrowUp: '\u001b[A',//
     BackSpace: '\u0008',//
     BackTab: '\u001bOP\u0009',
     Delete: '\u007f',//
@@ -154,9 +154,13 @@ function unescapeUnicode(str: string, isRegexp: boolean) {
  *  https://www.novell.com/documentation/extend5/Docs/help/Composer/books/TelnetAppendixB.html
  */
 export class TerminalBuffer extends Buffer<ViewItem> {
-    constructor(private width: number = 80, private renderHtmlStrategy: (item: string) => { html: string, isContainingCharacter: boolean } = defaultRenderStrategy) {
+    constructor(private width: number = 80, private renderHtmlStrategy: (item: string) => { html: string, isContainingCharacter: boolean } = defaultRenderStrategy, private ansiEscapeMode = false) {
         super();
         this.rightOrExtendRight(new ViewItem(' ', renderHtmlStrategy));
+    }
+
+    public setAnsiEscapeMode(b: boolean) {
+        this.ansiEscapeMode = b;
     }
 
     public setWidth(width: number) {
@@ -196,7 +200,7 @@ export class TerminalBuffer extends Buffer<ViewItem> {
     }
 
     public padding(row: number, column: number) {
-        if (this.buf.length < (row * this.width + column)) {
+        if (this.buf.length < (row * this.width + column) && this.ansiEscapeMode) {
             let count = (row * this.width + column) - this.buf.length
             while (count--)
                 this.buf.push(new ViewItem(' ', this.renderHtmlStrategy));
@@ -323,18 +327,20 @@ export class TerminalBuffer extends Buffer<ViewItem> {
     //This follows telnet keys with ascii. https://www.novell.com/documentation/extend5/Docs/help/Composer/books/TelnetAppendixB.html
     protected handle(ch: string) {
         //        console.log('ch:' + ch);
-        if (ch == keyMap.BackSpace) {
+        if (this.ansiEscapeMode && this.handleAsciiEscape(ch)) {
+
+        } else if (ch == keyMap.BackSpace) {
             if (this.left())
                 this.pullLeft();
         } else if (ch == keyMap.ArrowRight) {
             this.right();
         } else if (ch == keyMap.ArrowLeft) {
             this.left();
-        } /*else if (ch == keyMap.ArrowUp) {
+        } else if (ch == keyMap.ArrowUp) {
             this.up();
         } else if (ch == keyMap.ArrowDown) {
             this.down();
-        } */else if (ch == keyMap.KeyHome) {
+        } else if (ch == keyMap.KeyHome) {
             this.home();
         } else if (ch == keyMap.KeyEnd) {
             this.end();
@@ -348,7 +354,26 @@ export class TerminalBuffer extends Buffer<ViewItem> {
         } else if (ch == keyMap.Delete) {
             if (this.right() && this.left())
                 this.pullLeft();
-        } else if (this.findTokenRegex(ch, keyMap.FnArrowUp, true) != null) {
+        } else {
+            if (ch.length != 0) {
+                let first = ch[0];
+                //ch.substr
+                if (this.insertMode) {
+                    this.pushRight(new ViewItem(' ', this.renderHtmlStrategy))
+                    this.overwrite(new ViewItem(first, this.renderHtmlStrategy))
+                    this.rightOrExtendRight(new ViewItem(' ', this.renderHtmlStrategy))
+                } else { //overlay mode
+                    this.overwrite(new ViewItem(first, this.renderHtmlStrategy))
+                    this.rightOrExtendRight(new ViewItem(' ', this.renderHtmlStrategy))
+                }
+                this.handle(ch.substr(1))
+            }
+        }
+        return true;
+    }
+
+    protected handleAsciiEscape(ch: string) {
+        if (this.findTokenRegex(ch, keyMap.FnArrowUp, true) != null) {
             let m = this.findTokenRegex(ch, keyMap.FnArrowUp, true).matched;
             let defaultValue = 1
             let repeatCount = parseInt(m[1] != '' ? m[1] : defaultValue);
@@ -364,6 +389,7 @@ export class TerminalBuffer extends Buffer<ViewItem> {
                     this.index = index;
                 repeatCount--;
             }
+            return true;
         } else if (this.findTokenRegex(ch, keyMap.FnArrowDown, true) != null) {
             let m = this.findTokenRegex(ch, keyMap.FnArrowDown, true).matched;
             let defaultValue = 1;
@@ -380,6 +406,7 @@ export class TerminalBuffer extends Buffer<ViewItem> {
                     this.index = index;
                 repeatCount--;
             }
+            return true;
         } else if (this.findTokenRegex(ch, keyMap.FnCursorCharacterAbsolute, true) != null) {
             let m = this.findTokenRegex(ch, keyMap.FnCursorCharacterAbsolute, true).matched;
             let defaultValue = 1
@@ -394,6 +421,7 @@ export class TerminalBuffer extends Buffer<ViewItem> {
             if (index != undefined)
                 this.index = index;
             console.log('FnCursorCharacterAbsolute:' + JSON.stringify(this.getRowCol(this.index)));
+            return true;
         } else if (this.findTokenRegex(ch, keyMap.FnEraseInLine, true) != null) {
             let m = this.findTokenRegex(ch, keyMap.FnEraseInLine, true).matched;
             let defaultValue = 0;
@@ -414,21 +442,9 @@ export class TerminalBuffer extends Buffer<ViewItem> {
                 this.write(keyMap.Delete.repeat(countToRight) + ' '.repeat(countToRight) + keyMap.ArrowLeft.repeat(countToRight) + keyMap.BackSpace.repeat(countToLeft));
                 this.write(' '.repeat(countToLeft));
             }
-        } else {
-            if (ch.length != 0) {
-                let first = ch[0];
-                //ch.substr
-                if (this.insertMode) {
-                    this.pushRight(new ViewItem(' ', this.renderHtmlStrategy))
-                    this.overwrite(new ViewItem(first, this.renderHtmlStrategy))
-                    this.rightOrExtendRight(new ViewItem(' ', this.renderHtmlStrategy))
-                } else { //overlay mode
-                    this.overwrite(new ViewItem(first, this.renderHtmlStrategy))
-                    this.rightOrExtendRight(new ViewItem(' ', this.renderHtmlStrategy))
-                }
-                this.handle(ch.substr(1))
-            }
+            return true;
         }
+        return false;
     }
 
     private findTokenRegex(ch: string, func: Function, isFullMatch = false): { regExp: Function, matched: Array<any> } {
@@ -468,9 +484,8 @@ export class TerminalBuffer extends Buffer<ViewItem> {
                         return this.findTokenRegex(fullText, keyMap[v]) != null;
                     else if (typeof keyMap[v] === "string")
                         return fullText.startsWith(keyMap[v]);
-
                 })
-                .map((v: string, i, arr) => {
+                .map((v, i, arr) => {
                     if (typeof keyMap[v] === "function")
                         return this.findTokenRegex(fullText, keyMap[v]).matched[0];
                     else if (typeof keyMap[v] === "string")
