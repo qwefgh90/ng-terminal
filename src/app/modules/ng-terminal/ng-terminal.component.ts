@@ -80,12 +80,18 @@ export class NgTerminalComponent implements OnInit, OnChanges {
     }
 
     onScroll($event: Event) { // move virtual viewport
+        //console.log('top: ' + this.terminalCanvas.nativeElement.scrollTop)
         this.virtualTop = $event.srcElement.scrollTop;
     }
 
     scrollDown() { //scroll to end of viewport
         setTimeout(() => {
-            this.terminalCanvas.nativeElement.scrollTop = this.terminalCanvas.nativeElement.scrollHeight;
+            //console.log('height: ' + this.terminalCanvas.nativeElement.scrollHeight)
+            //console.log('cursor top: ' + this.terminalCanvas.nativeElement.getElementsByClassName('ani-bgchange')[0].offsetTop)
+            if (this.terminalCanvas.nativeElement.getElementsByClassName('ani-bgchange').length > 0) {
+                let halfHeight = this.virtualViewPort.nativeElement.offsetHeight / 2
+                this.terminalCanvas.nativeElement.scrollTop = (this.terminalCanvas.nativeElement.getElementsByClassName('ani-bgchange')[0].offsetTop - halfHeight)
+            }
         }, 200);
     }
 
