@@ -159,6 +159,35 @@ export class TerminalBuffer extends Buffer<ViewItem> {
         this.rightOrExtendRight(new ViewItem(' ', renderHtmlStrategy));
     }
 
+    cacheIndex: number = 0;
+    cache: ViewItem;
+    setCache(baseString: string) {
+        let foundIndex: number = -1;
+        for (let i = this.buf.length - baseString.length; i >= 0; i--) {
+            let matchCount = 0;
+            for (let j = 0; j < baseString.length; j++) {
+                let indexInBuf = i + j;
+                if (this.buf[indexInBuf].item == baseString[j]) {
+                    matchCount += 1;
+                } else
+                    break;
+            }
+            if (matchCount == baseString.length) {
+                foundIndex = i;
+                break;
+            }
+        }
+
+        if (foundIndex != -1 && (foundIndex != this.cacheIndex)) {
+            this.cacheIndex = foundIndex;
+            let v = new ViewItem('', (i) => { return { html: '', isContainingCharacter: false }; })
+            for (let i = 0; i < this.cacheIndex; i++) {
+                v.html += this.buf[i].html;
+            }
+            this.cache = v;
+        }
+    }
+
     public setAnsiEscapeMode(b: boolean) {
         this.ansiEscapeMode = b;
     }
@@ -357,7 +386,6 @@ export class TerminalBuffer extends Buffer<ViewItem> {
         } else {
             if (ch.length != 0) {
                 let first = ch[0];
-                //ch.substr
                 if (this.insertMode) {
                     this.pushRight(new ViewItem(' ', this.renderHtmlStrategy))
                     this.overwrite(new ViewItem(first, this.renderHtmlStrategy))
@@ -480,13 +508,13 @@ export class TerminalBuffer extends Buffer<ViewItem> {
             var keys = Object.keys(keyMap);
             let foundKey = keys
                 .filter((v, i, arr) => {
-                    if (typeof keyMap[v] === "function")
+                    if (typeof keyMap[v] === "function" && this.ansiEscapeMode)
                         return this.findTokenRegex(fullText, keyMap[v]) != null;
                     else if (typeof keyMap[v] === "string")
                         return fullText.startsWith(keyMap[v]);
                 })
                 .map((v, i, arr) => {
-                    if (typeof keyMap[v] === "function")
+                    if (typeof keyMap[v] === "function" && this.ansiEscapeMode)
                         return this.findTokenRegex(fullText, keyMap[v]).matched[0];
                     else if (typeof keyMap[v] === "string")
                         return keyMap[v];

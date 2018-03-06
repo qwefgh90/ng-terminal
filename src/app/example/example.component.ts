@@ -16,11 +16,12 @@ export class ExampleComponent {
     onInit(bf: TerminalBuffer) {
         this.bf = bf;
         this.bf.setAnsiEscapeMode(this.ansiEscapeMode);
+
     }
 
     compositionCount = 0;
 
-    handleAsciiEscapeMode(e: KeyboardEvent) {
+    handleAnsiEscapeMode(e: KeyboardEvent) {
         if (e.key == 'k' && e.ctrlKey) {
             this.bf.write(keyMap.FnEraseInLine(0));
         } else if (e.key == 'l' && e.ctrlKey) {
@@ -135,11 +136,16 @@ export class ExampleComponent {
         if (!this.ansiEscapeMode)
             this.handleTelnetMode(e);
         else
-            this.handleAsciiEscapeMode(e)
+            this.handleAnsiEscapeMode(e)
+        this.bf.setCache("hello");
     }
 
     view = false;
     onViewButtonClick() {
         this.view = !this.view;
+    }
+    onAnsiEscapeButtonClick() {
+        this.ansiEscapeMode = !this.ansiEscapeMode;
+        this.bf.setAnsiEscapeMode(this.ansiEscapeMode);
     }
 }

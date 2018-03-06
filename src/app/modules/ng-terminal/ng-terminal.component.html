@@ -2,6 +2,6 @@
   <div #virtualViewPort [style.display]="viewMode ? 'none':'block'" (textInput)="onTextInput($event)" (keydown)="onKeyDown($event)" (compositionstart)="compositionstart($event)" (compositionend)="compositionend($event)" (compositionupdate)="compositionupdate($event)" (click)="scrollDown()" style="position: absolute; opacity:1; width: inherit; height: inherit; font-size: 0px" tabindex="-1" contenteditable [style.top.px]="virtualTop">
   </div>
   <div #terminalViewPort class="terminal-canvas">
-    <span class="typing-unit" *ngFor="let item of bf.buf; let i=index" [class.ani-bgchange]="bf.index == i && isCanvasInFocus()"><span id="cursor" *ngIf="bf.index == i && !item.isContainingCharacter">&nbsp;</span><span [innerHtml]="item.html"></span></span>
+    <span class="typing-unit" *ngIf="bf.cacheIndex > 0"><span [innerHtml]="bf.cache.html"></span></span><span class="typing-unit" *ngFor="let item of bf.buf | slice:bf.cacheIndex; let i = index" [class.ani-bgchange]="bf.index == (i + bf.cacheIndex) && isCanvasInFocus()"><span id="cursor" *ngIf="bf.index == (i+bf.cacheIndex) && !item.isContainingCharacter">&nbsp;</span><span [innerHtml]="item.html"></span></span>
   </div>
 </div>
