@@ -81,7 +81,8 @@ export class NgTerminalComponent implements OnInit, OnChanges {
 
     onScroll($event: Event) { // move virtual viewport
         //console.log('top: ' + this.terminalCanvas.nativeElement.scrollTop)
-        this.virtualTop = $event.srcElement.scrollTop;
+        if ($event.srcElement != undefined)
+            this.virtualTop = $event.srcElement.scrollTop;
     }
 
     scrollDown() { //scroll to end of viewport
