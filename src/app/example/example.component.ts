@@ -22,7 +22,29 @@ export class ExampleComponent {
     compositionCount = 0;
 
     handleAnsiEscapeMode(e: KeyboardEvent) {
-        if (e.key == 'k' && e.ctrlKey) {
+        if (e.type == 'compositionupdate') {
+            if (this.bf.isInsertMode()) {
+                this.bf.write('\b'.repeat(this.compositionCount));
+                this.bf.write(e.key);
+                this.compositionCount = e.key.length;
+            } else {
+                this.bf.write(keyMap.ArrowLeft.repeat(this.compositionCount));
+                this.bf.write(e.key);
+                this.compositionCount = e.key.length;
+            }
+        } else if (e.type == 'compositionend') {
+            if (this.bf.isInsertMode()) {
+                this.bf.write('\b'.repeat(this.compositionCount));
+                this.bf.write(e.key);
+                this.compositionCount = e.key.length;
+            } else {
+                this.bf.write(keyMap.ArrowLeft.repeat(this.compositionCount));
+                this.bf.write(e.key);
+                this.compositionCount = e.key.length;
+            }
+        } else if (e.type == 'paste') {
+            this.bf.write(e.key);
+        } else if (e.key == 'k' && e.ctrlKey) {
             this.bf.write(keyMap.FnEraseInLine(0));
         } else if (e.key == 'l' && e.ctrlKey) {
             this.bf.write(keyMap.FnEraseInLine(1));
@@ -55,26 +77,6 @@ export class ExampleComponent {
         } else if (e.type == 'compositionstart') {
             this.bf.write(' ');
             this.compositionCount = 1;
-        } else if (e.type == 'compositionupdate') {
-            if (this.bf.isInsertMode()) {
-                this.bf.write('\b'.repeat(this.compositionCount));
-                this.bf.write(e.key);
-                this.compositionCount = e.key.length;
-            } else {
-                this.bf.write(keyMap.ArrowLeft.repeat(this.compositionCount));
-                this.bf.write(e.key);
-                this.compositionCount = e.key.length;
-            }
-        } else if (e.type == 'compositionend') {
-            if (this.bf.isInsertMode()) {
-                this.bf.write('\b'.repeat(this.compositionCount));
-                this.bf.write(e.key);
-                this.compositionCount = e.key.length;
-            } else {
-                this.bf.write(keyMap.ArrowLeft.repeat(this.compositionCount));
-                this.bf.write(e.key);
-                this.compositionCount = e.key.length;
-            }
         } else
             if (e.key.length == 1)
                 this.bf.write(e.key + '');

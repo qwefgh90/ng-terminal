@@ -79,6 +79,15 @@ export class NgTerminalComponent implements OnInit, OnChanges {
         this.emitNextKey();
     }
 
+    onPaste($event) {
+        console.log($event);
+        let clipboardText = $event.clipboardData.getData('Text')
+        console.log(clipboardText);
+        let ke = new KeyboardEvent($event.type, { key: clipboardText });
+        this.keyEventQueue.push(ke);
+        this.emitNextKey();
+    }
+
     onScroll($event: Event) { // move virtual viewport
         //console.log('top: ' + this.terminalCanvas.nativeElement.scrollTop)
         if ($event.srcElement != undefined)
