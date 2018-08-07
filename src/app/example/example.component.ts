@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { TerminalBuffer, keyMap } from '../modules/ng-terminal/terminal-buffer';
 
+/**
+ * This example show how write a app working with ng-terminal component.
+ */
 @Component({
     selector: 'app-example',
     templateUrl: './example.component.html',
@@ -13,10 +16,13 @@ export class ExampleComponent {
     public bf: TerminalBuffer;
     public ansiEscapeMode = true;
 
+    /**
+     * It's good practice to initialize terminal buffer and keep a reference.
+     * a bf is a passed terminal buffer object to use in your app.
+     */
     onInit(bf: TerminalBuffer) {
         this.bf = bf;
         this.bf.setAnsiEscapeMode(this.ansiEscapeMode);
-
     }
 
     compositionCount = 0;
@@ -54,13 +60,13 @@ export class ExampleComponent {
             this.bf.write(' '.repeat(80 - this.bf.getRowCol().col + 1));
         } else if (e.key == 'Backspace') {
             this.bf.write(keyMap.BackSpace);
-        } else if (e.key == 'ArrowLeft') {
+        } else if (e.key == 'ArrowLeft' || e.key == 'Left') {
             this.bf.write(keyMap.FnCursorCharacterAbsolute(this.bf.getRowCol().col - 1));
-        } else if (e.key == 'ArrowRight') {
+        } else if (e.key == 'ArrowRight' || e.key == 'Right') {
             this.bf.write(keyMap.FnCursorCharacterAbsolute(this.bf.getRowCol().col + 1));
-        } else if (e.key == 'ArrowUp') {
+        } else if (e.key == 'ArrowUp' || e.key == 'Up') {
             this.bf.write(keyMap.FnArrowUp(''));
-        } else if (e.key == 'ArrowDown') {
+        } else if (e.key == 'ArrowDown' || e.key == 'Down') {
             this.bf.write(keyMap.FnArrowDown(''));
         } else if (e.key == 'Delete') {
             this.bf.write(keyMap.Delete);
@@ -74,6 +80,8 @@ export class ExampleComponent {
             this.bf.write(keyMap.Tab);
         } else if (e.key == 'Insert') {
             this.bf.write(keyMap.Insert);
+        } else if (e.key == 'Spacebar') {
+            this.bf.write(' ');
         } else if (e.type == 'compositionstart') {
             this.bf.write(' ');
             this.compositionCount = 1;
@@ -87,13 +95,13 @@ export class ExampleComponent {
             this.bf.write(keyMap.Linefeed);
         } else if (e.key == 'Backspace') {
             this.bf.write(keyMap.BackSpace);
-        } else if (e.key == 'ArrowLeft') {
+        } else if (e.key == 'ArrowLeft' || e.key == 'Left') {
             this.bf.write(keyMap.ArrowLeft);
-        } else if (e.key == 'ArrowRight') {
+        } else if (e.key == 'ArrowRight' || e.key == 'Right') {
             this.bf.write(keyMap.ArrowRight);
-        } else if (e.key == 'ArrowUp') {
+        } else if (e.key == 'ArrowUp' || e.key == 'Up') {
             this.bf.write(keyMap.ArrowUp);
-        } else if (e.key == 'ArrowDown') {
+        } else if (e.key == 'ArrowDown' || e.key == 'Down') {
             this.bf.write(keyMap.ArrowDown);
         } else if (e.key == 'Delete') {
             this.bf.write(keyMap.Delete);
@@ -105,6 +113,8 @@ export class ExampleComponent {
             this.bf.write(keyMap.Tab);
         } else if (e.key == 'Insert') {
             this.bf.write(keyMap.Insert);
+        } else if (e.key == 'Spacebar') {
+            this.bf.write(' ');
         } else if (e.type == 'compositionstart') {
             this.bf.write(' ');
             this.compositionCount = 1;
@@ -135,6 +145,7 @@ export class ExampleComponent {
     }
 
     onKey(e: KeyboardEvent) {
+        console.debug(e);
         if (!this.ansiEscapeMode)
             this.handleTelnetMode(e);
         else
@@ -143,9 +154,11 @@ export class ExampleComponent {
     }
 
     view = false;
+
     onViewButtonClick() {
         this.view = !this.view;
     }
+    
     onAnsiEscapeButtonClick() {
         this.ansiEscapeMode = !this.ansiEscapeMode;
         this.bf.setAnsiEscapeMode(this.ansiEscapeMode);

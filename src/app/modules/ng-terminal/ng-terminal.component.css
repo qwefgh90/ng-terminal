@@ -1,18 +1,26 @@
 .terminal-canvas{
     color: white;
     text-align: left;
+    word-break: break-all; /* word break is inserted between any two chars */
+    display: inline-block;
 }
 
 .terminal-view-port{
     background-color: black;
     overflow-y: auto;
     overflow-wrap: break-word;
-    width: 100%;
+    min-width: 400px;
     height: 100%;
+    display: inline-block;
 }
 
 .typing-unit{
     font-family: monospace; 
+}
+
+.end-of-line::after{
+  content:"\A";
+  white-space: pre; /* or pre-wrap */
 }
 
 /*

@@ -1,76 +1,6 @@
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
-
-export class Buffer<T> {
-    public buf: Array<T> = new Array<T>();//only allowed to modify data with low level API
-    public index: number = -1;//cursor offset
-
-    /*
-     * low level API
-     * [a,b,c,d]+[?] range in (buffer + 1)
-     */
-    //cursor move left in leftmost boundary
-    protected left(): boolean {
-        if (this.index > 0) {
-            this.index--;
-            return true;
-        } else
-            return false;
-    }
-    //cursor move right in rightmost boundary
-    protected right(): boolean {
-        if (this.index < this.buf.length - 1) {
-            this.index++;
-            return true;
-        } else
-            return false;
-    }
-    //overwrite current position
-    protected overwrite(e: T): boolean {
-        if (this.index != -1) {
-            this.buf[this.index] = e;
-            return true;
-        } else
-            return false;
-    }
-    //extend buffer
-    protected extend(e: T) {
-        this.buf.push(e)
-    }
-    //reduce count
-    protected reduce(count: number) {
-        this.buf.splice(this.buf.length - count, count)
-    }
-    //pull elements to left from current cursor + 1
-    protected pullLeft(size: number = 1) {
-        for (let i = this.index + 1; i < this.buf.length; i++) {
-            if ((i - size) >= 0)
-                this.buf[i - size] = this.buf[i];
-        }
-        this.reduce(size)
-    }
-    //pull elements to right from current cursor
-    protected pushRight(defaultValue: T, size: number = 1) {
-        this.extend(defaultValue);
-        for (let i = (this.buf.length - 1); i >= this.index; i--) {
-            if ((i + size) < this.buf.length) {
-                this.buf[i + size] = this.buf[i];
-                this.buf[i] = defaultValue;
-            }
-        }
-    }
-    //move cursor right, if the cursor is not at a last position. Otherwise, extend buffer and move cursor right.
-    protected rightOrExtendRight(e: T) {
-        if (!this.right()) {
-            this.extend(e)
-            this.right()
-        }
-    }
-
-    protected current(): T {
-        return this.buf[this.index];
-    }
-}
+import { Buffer } from './buffer'
 
 export class ViewItem {
     constructor(item: string, renderHtmlStrategy: (item: string) => { html: string, isContainingCharacter: boolean }) {
@@ -95,6 +25,9 @@ export function defaultRenderStrategy(item: string): { html: string, isContainin
     } else if (item == keyMap.Tab) {
         html = '&nbsp;&nbsp;&nbsp;&nbsp;';
     } else {
+        item = item.replace(' ', '&nbsp;');
+        item = item.replace(keyMap.Linefeed, '<br/>');
+        item = item.replace(keyMap.Tab, '&nbsp;&nbsp;&nbsp;&nbsp;');
         html = item;
     }
     return { 'html': html, 'isContainingCharacter': isContaingCharacter };
@@ -125,7 +58,8 @@ export let keyMap = {
     Remove: '\u001b[3~',
     Select: '\u001b[44~',
     /*
-     * ANSI Escape sequences 
+     * like ANSI Escape sequences 
+     * https://www.novell.com/documentation/extend5/Docs/help/Composer/books/TelnetAppendixB.html
      * https://en.wikipedia.org/wiki/ANSI_escape_code
      * http://invisible-island.net/xterm/ctlseqs/ctlseqs.html
      */
@@ -149,9 +83,9 @@ function unescapeUnicode(str: string, isRegexp: boolean) {
         });
 }
 
-/*
- *  This follows telnet keys with ascii.
- *  https://www.novell.com/documentation/extend5/Docs/help/Composer/books/TelnetAppendixB.html
+/**
+ * A terminal buffer handle web terminal implementation issues in web pages.
+ * This object accepts input and renders html elements.
  */
 export class TerminalBuffer extends Buffer<ViewItem> {
     constructor(private width: number = 80, private renderHtmlStrategy: (item: string) => { html: string, isContainingCharacter: boolean } = defaultRenderStrategy, private ansiEscapeMode = false) {
@@ -192,11 +126,19 @@ export class TerminalBuffer extends Buffer<ViewItem> {
         this.ansiEscapeMode = b;
     }
 
+    public getAnsiEscapeMode(): boolean{
+        return this.ansiEscapeMode;
+    }
+
     public setWidth(width: number) {
         if (width < 1)
             return
         else
             this.width = width;
+    }
+
+    public getWidth(){
+        return this.width;
     }
 
     public getLastColumn(row: number): number {
@@ -210,7 +152,7 @@ export class TerminalBuffer extends Buffer<ViewItem> {
                 if (cColumn > lastColumn)
                     lastColumn = cColumn;
             }
-            if (ch == "\n") {
+            if (ch == keyMap.Linefeed) {
                 cRow++;
                 cColumn = 1;
             } else if (cColumn == this.width) {
@@ -228,11 +170,21 @@ export class TerminalBuffer extends Buffer<ViewItem> {
         return lastColumn == -1 ? undefined : lastColumn;
     }
 
+    /**
+     * Fill a buffer, if buffer length is smaller than sum of row and col.
+     * @param row 
+     * @param column 
+     */
     public padding(row: number, column: number) {
-        if (this.buf.length < (row * this.width + column) && this.ansiEscapeMode) {
-            let count = (row * this.width + column) - this.buf.length
-            while (count--)
-                this.buf.push(new ViewItem(' ', this.renderHtmlStrategy));
+        let flatCol = (row-1) * this.width + column;
+        if ((this.buf.length < flatCol) && this.ansiEscapeMode) {
+            let count = flatCol - this.buf.length
+            this.moveRightMost(); // should change current position before a location to fill padding.
+            while (count--){
+                this.pushRight(new ViewItem(' ', this.renderHtmlStrategy));
+                this.overwrite(new ViewItem(' ', this.renderHtmlStrategy));
+                this.rightOrExtendRight(new ViewItem(' ', this.renderHtmlStrategy))
+            }
         }
     }
 
@@ -257,7 +209,7 @@ export class TerminalBuffer extends Buffer<ViewItem> {
             let ch = viewItem.item
             if (cRow == row && cColumn == column)
                 foundIndex = index;
-            if (ch == "\n") {
+            if (ch == keyMap.Linefeed) {
                 cRow++;
                 cColumn = 1;
             } else if (cColumn == this.width) {
@@ -276,31 +228,28 @@ export class TerminalBuffer extends Buffer<ViewItem> {
     }
 
     public getRowCol(targetIndex: number = this.index): { row: number, col: number } {
+        console.debug("getRowCol(): " + targetIndex);
         let cRow = 1;
         let cColumn = 1;
         let foundRow = undefined;
         let foundCol = undefined;
-        let ignoreList = [];
-        this.buf.forEach((viewItem, index) => {
+        this.buf.every((viewItem, index) => {
             let ch = viewItem.item
             if (targetIndex == index) {
                 foundRow = cRow;
                 foundCol = cColumn;
+                console.debug("getRowCol() stopped: " + targetIndex )
+                return false;
             }
-            if (ch == "\n") {
+            if (ch == keyMap.Linefeed) {
                 cRow++;
                 cColumn = 1;
             } else if (cColumn == this.width) {
                 cRow++;
                 cColumn = 1;
-            } else if (ignoreList.find((v, i) => {
-                if (v == ch)
-                    return true;
-                else
-                    return false;
-            })) {
             } else
                 cColumn++;
+            return true;
         })
         if (foundRow == undefined || foundCol == undefined)
             return undefined;
@@ -313,9 +262,10 @@ export class TerminalBuffer extends Buffer<ViewItem> {
 
     protected up() {
         while (this.index > 0) {
-            this.index--;
+            //this.index--;
+            this.left()
             let item = this.current();
-            if (item.item == '\n') {
+            if (item.item == keyMap.Linefeed) {
                 break;
             }
         }
@@ -324,12 +274,14 @@ export class TerminalBuffer extends Buffer<ViewItem> {
     protected down() {
         while (this.index < this.buf.length - 1) {
             let item = this.current();
-            if (item.item == '\n') {
+            if (item.item == keyMap.Linefeed) {
                 if (this.index != this.buf.length - 1)
-                    this.index++;
+                    this.right();  
+                //this.index++; 
                 break;
             }
-            this.index++;
+//            this.index++;
+            this.right();
         }
     }
 
@@ -352,10 +304,31 @@ export class TerminalBuffer extends Buffer<ViewItem> {
     public isInsertMode(): boolean {
         return this.insertMode;
     }
+/*
+    private adjustLineFeed(){
+        if(this.ansiEscapeMode){
+            
+            var len = this.getBufLength() / this.width;
+            while(len)
+            if(rc.col == this.width){
+                e = new ViewItem(e.item + keyMap.Linefeed, this.renderHtmlStrategy);
+            }
+        }
+    }
+*/
+    /*protected overwrite(e: ViewItem): boolean {
+        if(this.ansiEscapeMode){
+            let rc = this.getRowCol();
+            if(rc.col == this.width){
+                e = new ViewItem(e.item + keyMap.Linefeed, this.renderHtmlStrategy);
+            }
+        }
+        return super.overwrite(e)
+    }*/
 
     //This follows telnet keys with ascii. https://www.novell.com/documentation/extend5/Docs/help/Composer/books/TelnetAppendixB.html
     protected handle(ch: string) {
-        //        console.log('ch:' + ch);
+        console.debug('handle():' + ch);
         if (this.ansiEscapeMode && this.handleAsciiEscape(ch)) {
 
         } else if (ch == keyMap.BackSpace) {
@@ -405,7 +378,7 @@ export class TerminalBuffer extends Buffer<ViewItem> {
             let m = this.findTokenRegex(ch, keyMap.FnArrowUp, true).matched;
             let defaultValue = 1
             let repeatCount = parseInt(m[1] != '' ? m[1] : defaultValue);
-            console.log('FnArrowUp:' + repeatCount);
+            console.debug('FnArrowUp:' + repeatCount);
             while (repeatCount > 0) {
                 let rc = this.getRowCol()
                 let index = this.getIndex(rc.row - 1, rc.col)
@@ -422,7 +395,7 @@ export class TerminalBuffer extends Buffer<ViewItem> {
             let m = this.findTokenRegex(ch, keyMap.FnArrowDown, true).matched;
             let defaultValue = 1;
             let repeatCount = parseInt(m[1] != '' ? m[1] : defaultValue);
-            console.log('FnArrowDown:' + repeatCount);
+            console.debug('FnArrowDown:' + repeatCount);
             while (repeatCount > 0) {
                 let rc = this.getRowCol()
                 let index = this.getIndex(rc.row + 1, rc.col)
@@ -448,13 +421,13 @@ export class TerminalBuffer extends Buffer<ViewItem> {
             }
             if (index != undefined)
                 this.index = index;
-            console.log('FnCursorCharacterAbsolute:' + JSON.stringify(this.getRowCol(this.index)));
+            console.debug('FnCursorCharacterAbsolute:' + JSON.stringify(this.getRowCol(this.index)));
             return true;
         } else if (this.findTokenRegex(ch, keyMap.FnEraseInLine, true) != null) {
             let m = this.findTokenRegex(ch, keyMap.FnEraseInLine, true).matched;
             let defaultValue = 0;
             let selector = parseInt(m[1] != '' ? m[1] : defaultValue);
-            console.log('FnEraseInLine:' + selector);
+            console.debug('FnEraseInLine:' + selector);
             let rc = this.getRowCol();
             let lastCol = this.getLastColumn(rc.row);
             let countToRight = lastCol - rc.col + 1;
@@ -477,7 +450,7 @@ export class TerminalBuffer extends Buffer<ViewItem> {
 
     private findTokenRegex(ch: string, func: Function, isFullMatch = false): { regExp: Function, matched: Array<any> } {
         let fullMatch = isFullMatch ? "$" : "";
-        //        console.log('up: ' + new RegExp("^" + keyMap.FnArrowUp('([0-9]+)', true) + fullMatch));
+        //        console.debug('up: ' + new RegExp("^" + keyMap.FnArrowUp('([0-9]+)', true) + fullMatch));
         if (func == keyMap.FnArrowUp
             && ch.match(new RegExp("^" + keyMap.FnArrowUp('([0-9]*)', true) + fullMatch)) != null) {
             let matched = ch.match(new RegExp("^" + keyMap.FnArrowUp('([0-9]*)', true)));
