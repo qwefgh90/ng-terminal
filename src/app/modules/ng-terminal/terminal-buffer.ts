@@ -1,17 +1,52 @@
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { Buffer } from './buffer'
+import { $ } from 'protractor';
 
 export class ViewItem {
-    constructor(item: string, renderHtmlStrategy: (item: string) => { html: string, isContainingCharacter: boolean }) {
-        this.item = item;
+    constructor(readonly item: string, readonly renderHtmlStrategy: (item: string) => { html: string, isContainingCharacter: boolean }) {
         let result = renderHtmlStrategy(this.item);
         this.html = result.html;
         this.isContainingCharacter = result.isContainingCharacter;
     }
-    public item: string;
-    public html: string;
-    public isContainingCharacter: boolean;
+
+    public readonly html: string;
+    public readonly isContainingCharacter: boolean;
+
+    public map(func: (v: ViewItem) => ViewItem){
+        return func(this);
+    }
+
+    public concatHtml(v: ViewItem): ViewItem{
+        let containing = this.isContainingCharacter
+        let newOne = new ViewItem(this.html + v.html, item => {return {html: item, isContainingCharacter: containing}} );
+        return newOne;
+    }
+}
+
+/**
+ * This returns strategy selector.
+ * If a last charactor is on a line, a strategy is changed.
+ * @param cCol item's col number
+ * @param width terminal width
+ * @param lineFeedRenderHtmlStrategy if cCol equals to width, this is applied.
+ * @param defaultRenderHtmlStrategy if cCol does not equals to width, this is applied.
+ */
+export function makeStrategySelectorWithColumn(cCol: number
+    , width: number
+    , lineFeedRenderHtmlStrategy: (item: string) => { html: string, isContainingCharacter: boolean }
+    , defaultRenderHtmlStrategy: (item: string) => { html: string, isContainingCharacter: boolean }): (v: ViewItem) => ViewItem {
+    if(cCol == width)
+        return (v: ViewItem) => {
+            return new ViewItem(v.item, lineFeedRenderHtmlStrategy);
+        };
+    else
+        return (v: ViewItem) => {
+            if(v.renderHtmlStrategy == defaultRenderHtmlStrategy)
+                return v;
+            else
+                return new ViewItem(v.item, defaultRenderHtmlStrategy);
+        };
 }
 
 export function defaultRenderStrategy(item: string): { html: string, isContainingCharacter: boolean } {
@@ -31,6 +66,10 @@ export function defaultRenderStrategy(item: string): { html: string, isContainin
         html = item;
     }
     return { 'html': html, 'isContainingCharacter': isContaingCharacter };
+}
+
+function lineFeedRenderHtmlStrategy(item: string): { html: string, isContainingCharacter: boolean } {
+    return defaultRenderStrategy(item + keyMap.Linefeed);
 }
 
 export let keyMap = {
@@ -84,17 +123,30 @@ function unescapeUnicode(str: string, isRegexp: boolean) {
 }
 
 /**
- * A terminal buffer handle web terminal implementation issues in web pages.
+ * A terminal buffer is a core object for web terminal.
  * This object accepts input and renders html elements.
  */
 export class TerminalBuffer extends Buffer<ViewItem> {
     constructor(private width: number = 80, private renderHtmlStrategy: (item: string) => { html: string, isContainingCharacter: boolean } = defaultRenderStrategy, private ansiEscapeMode = false) {
         super();
-        this.rightOrExtendRight(new ViewItem(' ', renderHtmlStrategy));
+        this.init();
     }
 
-    cacheIndex: number = 0;
-    cache: ViewItem;
+    public cacheIndex: number = 0;
+    public cache: ViewItem;
+    public setCache(destIndex: number) {
+        if(destIndex >= this.buf.length)
+            destIndex = this.buf.length;
+        if(Math.abs(destIndex - this.cacheIndex) > 1000){
+            console.info(`Cooking a cache at ${destIndex}`);
+            this.cacheIndex = destIndex;
+            this.cache = this.buf[0];
+            for(let i = 1; i < this.cacheIndex ; i++){
+                this.cache = this.cache.concatHtml(this.buf[i]);
+            }
+        }
+    }
+    /*
     setCache(baseString: string) {
         let foundIndex: number = -1;
         for (let i = this.buf.length - baseString.length; i >= 0; i--) {
@@ -120,9 +172,36 @@ export class TerminalBuffer extends Buffer<ViewItem> {
             }
             this.cache = v;
         }
+    }*/
+
+    protected init(){
+        super.init();
+        this.rightOrExtendRight(new ViewItem(' ', this.renderHtmlStrategy));
+    }
+
+    public setRenderHtmlStrategy(strategy: (item: string) => { html: string, isContainingCharacter: boolean }): void {
+        this.renderHtmlStrategy = strategy;
+        this.buf = this.buf.map((v, i, arr) => {
+            return new ViewItem(v.item, this.renderHtmlStrategy);
+        })
+    }
+
+    public write(e: string): TerminalBuffer {
+        this.tokenize(e).forEach((v, i, arr) => this.handle(v))
+        this.writeSubject.next(e);
+        return this;
+    }
+
+    public isInsertMode(): boolean {
+        return this.insertMode;
+    }
+
+    public getWriteObservable(): Observable<string> {
+        return this.writeSubject;
     }
 
     public setAnsiEscapeMode(b: boolean) {
+        this.init();
         this.ansiEscapeMode = b;
     }
 
@@ -141,7 +220,35 @@ export class TerminalBuffer extends Buffer<ViewItem> {
         return this.width;
     }
 
-    public getLastColumn(row: number): number {
+    public getRowCol(targetIndex: number = this.index): { row: number, col: number } {
+        let cRow = 1;
+        let cColumn = 1;
+        let foundRow = undefined;
+        let foundCol = undefined;
+        this.buf.every((viewItem, index) => {
+            let ch = viewItem.item
+            if (targetIndex == index) {
+                foundRow = cRow;
+                foundCol = cColumn;
+                return false;
+            }
+            if (ch == keyMap.Linefeed) {
+                cRow++;
+                cColumn = 1;
+            } else if (cColumn == this.width) {
+                cRow++;
+                cColumn = 1;
+            } else
+                cColumn++;
+            return true;
+        })
+        if (foundRow == undefined || foundCol == undefined)
+            return undefined;
+        else
+            return { row: foundRow, col: foundCol };
+    }
+
+    private getLastColumn(row: number): number {
         let cRow = 1;
         let cColumn = 1;
         let lastColumn = -1;
@@ -170,25 +277,50 @@ export class TerminalBuffer extends Buffer<ViewItem> {
         return lastColumn == -1 ? undefined : lastColumn;
     }
 
+
+    private invalidate(fromRow: number = 1, toRow: number = 1 + Math.floor((this.buf.length - 1) / this.width)){
+        console.debug(`invalidate from ${fromRow} to ${toRow}`);
+        fromRow = Math.floor(fromRow);
+        toRow = Math.floor(toRow);
+        if(!this.ansiEscapeMode){
+            console.debug("invalidating does work only with ansi mode");
+            return;
+        }
+        if(fromRow < 1){
+            console.debug("invalid parameter: " + fromRow);
+            fromRow = 1;
+        }
+        this.setCache((fromRow - 1) * this.width - 1);
+        let bufLen = this.buf.length;
+        for(let r=fromRow; r <= toRow; r++){
+            for(let c=1; c <= this.width; c++){
+                let currentIndex = (r-1) * this.width + c - 1;
+                if(currentIndex < bufLen){
+                    let strategy = makeStrategySelectorWithColumn(c, this.width, lineFeedRenderHtmlStrategy, this.renderHtmlStrategy);
+                    this.overwriteOnIndex(currentIndex, this.buf[currentIndex].map(strategy));
+                }else
+                    return;
+            }
+        }
+    }
+
     /**
      * Fill a buffer, if buffer length is smaller than sum of row and col.
      * @param row 
      * @param column 
      */
-    public padding(row: number, column: number) {
+    private padding(row: number, column: number) {
         let flatCol = (row-1) * this.width + column;
         if ((this.buf.length < flatCol) && this.ansiEscapeMode) {
             let count = flatCol - this.buf.length
             this.moveRightMost(); // should change current position before a location to fill padding.
             while (count--){
-                this.pushRight(new ViewItem(' ', this.renderHtmlStrategy));
-                this.overwrite(new ViewItem(' ', this.renderHtmlStrategy));
                 this.rightOrExtendRight(new ViewItem(' ', this.renderHtmlStrategy))
             }
         }
     }
 
-    public getIndex(row: number = undefined, column: number = undefined): number {
+    private getIndex(row: number = undefined, column: number = undefined): number {
         if (row != undefined && column == undefined) {
             column = 1;
         } else if (row == undefined && column == undefined) {
@@ -205,40 +337,10 @@ export class TerminalBuffer extends Buffer<ViewItem> {
         let cColumn = 1;
         let foundIndex = undefined;
         let ignoreList = [];
-        this.buf.forEach((viewItem, index) => {
-            let ch = viewItem.item
-            if (cRow == row && cColumn == column)
-                foundIndex = index;
-            if (ch == keyMap.Linefeed) {
-                cRow++;
-                cColumn = 1;
-            } else if (cColumn == this.width) {
-                cRow++;
-                cColumn = 1;
-            } else if (ignoreList.find((v, i) => {
-                if (v == ch)
-                    return true;
-                else
-                    return false;
-            })) {
-            } else
-                cColumn++;
-        })
-        return foundIndex;
-    }
-
-    public getRowCol(targetIndex: number = this.index): { row: number, col: number } {
-        console.debug("getRowCol(): " + targetIndex);
-        let cRow = 1;
-        let cColumn = 1;
-        let foundRow = undefined;
-        let foundCol = undefined;
         this.buf.every((viewItem, index) => {
             let ch = viewItem.item
-            if (targetIndex == index) {
-                foundRow = cRow;
-                foundCol = cColumn;
-                console.debug("getRowCol() stopped: " + targetIndex )
+            if (cRow == row && cColumn == column){
+                foundIndex = index;
                 return false;
             }
             if (ch == keyMap.Linefeed) {
@@ -251,18 +353,14 @@ export class TerminalBuffer extends Buffer<ViewItem> {
                 cColumn++;
             return true;
         })
-        if (foundRow == undefined || foundCol == undefined)
-            return undefined;
-        else
-            return { row: foundRow, col: foundCol };
+        return foundIndex;
     }
 
-    protected insertMode = true;
-    protected writeSubject = new Subject<string>();
+    private insertMode = true;
+    private writeSubject = new Subject<string>();
 
-    protected up() {
+    private up() {
         while (this.index > 0) {
-            //this.index--;
             this.left()
             let item = this.current();
             if (item.item == keyMap.Linefeed) {
@@ -271,38 +369,32 @@ export class TerminalBuffer extends Buffer<ViewItem> {
         }
     }
 
-    protected down() {
+    private down() {
         while (this.index < this.buf.length - 1) {
             let item = this.current();
             if (item.item == keyMap.Linefeed) {
                 if (this.index != this.buf.length - 1)
                     this.right();  
-                //this.index++; 
                 break;
             }
-//            this.index++;
             this.right();
         }
     }
 
-    protected home() {
+    private home() {
         this.up();
         if (this.index != 0)
             this.down();
     }
 
-    protected end() {
+    private end() {
         this.down();
         if (this.index != this.buf.length - 1)
             this.up();
     }
 
-    protected toggleInsertKey() {
+    private toggleInsertKey() {
         this.insertMode = !this.insertMode;
-    }
-
-    public isInsertMode(): boolean {
-        return this.insertMode;
     }
 /*
     private adjustLineFeed(){
@@ -327,13 +419,14 @@ export class TerminalBuffer extends Buffer<ViewItem> {
     }*/
 
     //This follows telnet keys with ascii. https://www.novell.com/documentation/extend5/Docs/help/Composer/books/TelnetAppendixB.html
-    protected handle(ch: string) {
+    private handle(ch: string) {
         console.debug('handle():' + ch);
         if (this.ansiEscapeMode && this.handleAsciiEscape(ch)) {
 
         } else if (ch == keyMap.BackSpace) {
-            if (this.left())
+            if (this.left()){
                 this.pullLeft();
+            }
         } else if (ch == keyMap.ArrowRight) {
             this.right();
         } else if (ch == keyMap.ArrowLeft) {
@@ -347,15 +440,18 @@ export class TerminalBuffer extends Buffer<ViewItem> {
         } else if (ch == keyMap.KeyEnd) {
             this.end();
         } else if (ch == keyMap.Return) {
-            let rc = this.getRowCol()
+        /*    let rc = this.getRowCol()
             let index = this.getIndex(rc.row, 1)
             if (index != undefined)
-                this.index = index;
+                this.setIndex(index);
+                */
+            this.home();
         } else if (ch == keyMap.Insert) {
             this.toggleInsertKey();
         } else if (ch == keyMap.Delete) {
-            if (this.right() && this.left())
+            if (this.right() && this.left()){
                 this.pullLeft();
+            }
         } else {
             if (ch.length != 0) {
                 let first = ch[0];
@@ -370,10 +466,11 @@ export class TerminalBuffer extends Buffer<ViewItem> {
                 this.handle(ch.substr(1))
             }
         }
+        this.invalidate((this.index - 1)/this.width);
         return true;
     }
 
-    protected handleAsciiEscape(ch: string) {
+    private handleAsciiEscape(ch: string) {
         if (this.findTokenRegex(ch, keyMap.FnArrowUp, true) != null) {
             let m = this.findTokenRegex(ch, keyMap.FnArrowUp, true).matched;
             let defaultValue = 1
@@ -387,7 +484,7 @@ export class TerminalBuffer extends Buffer<ViewItem> {
                 if (index == undefined)//fallback2
                     index = this.getIndex(rc.row, 1)
                 if (index != undefined)
-                    this.index = index;
+                    this.setIndex(index);
                 repeatCount--;
             }
             return true;
@@ -404,7 +501,7 @@ export class TerminalBuffer extends Buffer<ViewItem> {
                 if (index == undefined)//fallback2
                     index = this.getIndex(rc.row, this.getLastColumn(rc.row))
                 if (index != undefined)
-                    this.index = index;
+                    this.setIndex(index);
                 repeatCount--;
             }
             return true;
@@ -420,7 +517,7 @@ export class TerminalBuffer extends Buffer<ViewItem> {
                 index = this.getIndex(rc.row - 1, this.getLastColumn(rc.row - 1))
             }
             if (index != undefined)
-                this.index = index;
+                this.setIndex(index);
             console.debug('FnCursorCharacterAbsolute:' + JSON.stringify(this.getRowCol(this.index)));
             return true;
         } else if (this.findTokenRegex(ch, keyMap.FnEraseInLine, true) != null) {
@@ -474,7 +571,7 @@ export class TerminalBuffer extends Buffer<ViewItem> {
         return null;
     }
 
-    protected tokenize(fullText: string): Array<string> {
+    private tokenize(fullText: string): Array<string> {
         let getToken: (fullText: string) => string = (fullText: string) => {
             if (fullText.length == 0)
                 return undefined;
@@ -512,22 +609,5 @@ export class TerminalBuffer extends Buffer<ViewItem> {
                 break;
         }
         return result;
-    }
-
-    public setRenderHtmlStrategy(strategy: (item: string) => { html: string, isContainingCharacter: boolean }): void {
-        this.renderHtmlStrategy = strategy;
-        this.buf = this.buf.map((v, i, arr) => {
-            return new ViewItem(v.item, this.renderHtmlStrategy);
-        })
-    }
-
-    public write(e: string): TerminalBuffer {
-        this.tokenize(e).forEach((v, i, arr) => this.handle(v))
-        this.writeSubject.next(e);
-        return this;
-    }
-
-    public getWriteObservable(): Observable<string> {
-        return this.writeSubject;
     }
 }

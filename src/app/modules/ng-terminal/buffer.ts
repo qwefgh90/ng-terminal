@@ -8,11 +8,20 @@ export class Buffer<T> {
     public buf: Array<T> = new Array<T>();  //only allowed to modify data with low level API
     public index: number = -1;  //only allowed to modify data with low level API
 
+    protected init(){
+        this.buf.splice(0, this.buf.length);
+        this.index = -1;
+    }
+
     protected moveRightMost() {
         if(this.right())
             this.moveRightMost();
         else
             return;
+    }
+
+    protected setIndex(index: number) {
+        this.index = index;
     }
 
     /*
@@ -35,6 +44,13 @@ export class Buffer<T> {
         } else
             return false;
     }
+    protected overwriteOnIndex(index: number, e: T): boolean{
+        if(index > 0 && index < this.buf.length){
+            this.buf[index] = e;
+            return true;
+        }else return false;
+    }
+
     //overwrite current position
     protected overwrite(e: T): boolean {
         if (this.index != -1) {

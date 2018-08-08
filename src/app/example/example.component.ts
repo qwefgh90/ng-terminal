@@ -150,7 +150,7 @@ export class ExampleComponent {
             this.handleTelnetMode(e);
         else
             this.handleAnsiEscapeMode(e)
-        this.bf.setCache("hello");
+        //this.bf.setCache("hello");
     }
 
     view = false;
