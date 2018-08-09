@@ -134,11 +134,18 @@ export class TerminalBuffer extends Buffer<ViewItem> {
 
     public cacheIndex: number = 0;
     public cache: ViewItem;
-    public setCache(destIndex: number) {
+    /**
+     * Make a cache to (destIndex - 1) from zero.
+     * @param destIndex 
+     */
+    protected setCache(destIndex: number) {
+        if(destIndex < 0){
+            destIndex = 0;
+        }
         if(destIndex >= this.buf.length)
             destIndex = this.buf.length;
-        if(Math.abs(destIndex - this.cacheIndex) > 1000){
-            console.info(`Cooking a cache at ${destIndex}`);
+        if(((destIndex - this.cacheIndex) > 1000) || ((destIndex - this.cacheIndex) <= 0)){
+            console.info(`Cooking a cache to ${destIndex} from ${this.cacheIndex}`);
             this.cacheIndex = destIndex;
             this.cache = this.buf[0];
             for(let i = 1; i < this.cacheIndex ; i++){
@@ -277,15 +284,17 @@ export class TerminalBuffer extends Buffer<ViewItem> {
         return lastColumn == -1 ? undefined : lastColumn;
     }
 
-
+    /**
+     * Delete all linefeed and insert new linefeed while visiting from fromRow to toRow.
+     */
     private invalidate(fromRow: number = 1, toRow: number = 1 + Math.floor((this.buf.length - 1) / this.width)){
+        if(!this.ansiEscapeMode){
+            console.debug("invalidate() does only work with ansi mode");
+            return;
+        }
         console.debug(`invalidate from ${fromRow} to ${toRow}`);
         fromRow = Math.floor(fromRow);
         toRow = Math.floor(toRow);
-        if(!this.ansiEscapeMode){
-            console.debug("invalidating does work only with ansi mode");
-            return;
-        }
         if(fromRow < 1){
             console.debug("invalid parameter: " + fromRow);
             fromRow = 1;
