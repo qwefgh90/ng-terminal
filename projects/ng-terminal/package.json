@@ -1,0 +1,11 @@
+{
+  "name": "ng-terminal",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0",
+    "angular-resizable-element": "^3.2.4",
+    "rxjs": "^6.4.0",
+    "xterm": "^3.12.0"
+  }
+}
