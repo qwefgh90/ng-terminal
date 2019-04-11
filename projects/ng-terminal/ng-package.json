@@ -3,5 +3,9 @@
   "dest": "../../dist/ng-terminal",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "whitelistedNonPeerDependencies": [
+    "angular-resizable-element",
+    "xterm"
+  ]
 }

@@ -1,18 +1,31 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppComponent } from './app.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 import { NgTerminalModule } from 'ng-terminal';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule } from '@angular/material/card';
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
+import { ExampleComponent } from './example.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    ExampleComponent
   ],
   imports: [
     BrowserModule,
-    NgTerminalModule
+    NgTerminalModule,
+    MatButtonModule,
+    MatSlideToggleModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    NgxJsonViewerModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [ExampleComponent]
 })
 export class AppModule { }
