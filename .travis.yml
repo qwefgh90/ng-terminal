@@ -1,0 +1,20 @@
+language: node_js
+
+node_js:
+  - '10'
+
+script: npm run test ng-terminal
+
+notifications:
+  email: false
+
+cache:
+  directories:
+  - node_modules
+
+addons:
+  chrome: stable
+
+dist: trusty
+
+sudo: required
