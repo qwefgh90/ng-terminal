@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { ExampleComponent } from './example.component';
-
+import {MatFormFieldModule} from '@angular/material/form-field';
 @NgModule({
   declarations: [
     ExampleComponent
@@ -23,7 +23,8 @@ import { ExampleComponent } from './example.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatCardModule,
-    NgxJsonViewerModule
+    NgxJsonViewerModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [ExampleComponent]

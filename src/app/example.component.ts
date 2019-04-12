@@ -12,25 +12,27 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
   styleUrls: ['./example.component.css']
 })
 export class ExampleComponent implements OnInit, AfterViewInit{
-  title = 'NgTerminal Example';
+  title = 'NgTerminal Live Example';
   color = 'accent';
 
   private resizable: boolean;
-  private fixed = false;
+  private fixed = true;
 
   disabled = false;
   rowsControl = new FormControl();
   colsControl = new FormControl();
+  inputControl = new FormControl();
 
   displayOption: DisplayOption = {};
+  displayOptionBounded: DisplayOption = {};//now it's not used
   
   @ViewChild(NgTerminalComponent) child: NgTerminal;
   
   constructor(){ }
 
   ngOnInit(){
-    this.rowsControl.setValue(20);
-    this.colsControl.setValue(80);
+    this.rowsControl.setValue(10);
+    this.colsControl.setValue(40);
   }
 
   ngAfterViewInit(){
@@ -62,6 +64,16 @@ export class ExampleComponent implements OnInit, AfterViewInit{
   fixedChange(event: MatSlideToggleChange){
     this.fixed = event.checked;
     this.invalidate();
+  }
+
+  writeSubject = new Subject<string>();
+  write(){
+    this.writeSubject.next(this.inputControl.value);
+  }
+
+  keyInput: string;
+  onKeyInput(event: string){
+    this.keyInput = event;
   }
 
   get displayOptionForLiveUpdate(){
