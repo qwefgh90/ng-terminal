@@ -15,8 +15,8 @@ export class ExampleComponent implements OnInit, AfterViewInit{
   title = 'NgTerminal Live Example';
   color = 'accent';
 
-  private resizable: boolean;
-  private fixed = true;
+  public resizable: boolean;
+  public fixed = true;
 
   disabled = false;
   rowsControl = new FormControl();
