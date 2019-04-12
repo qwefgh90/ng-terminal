@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "tbuild": "ng build ng-terminal",
+    "travis-test": "ng test ng-terminal --watch false --browsers ChromeHeadless",
     "test": "ng test",
     "ttest": "ng test ng-terminal",
     "lint": "ng lint",

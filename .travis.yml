@@ -3,7 +3,7 @@ language: node_js
 node_js:
   - '10'
 
-script: npm run test ng-terminal
+script: npm run travis-test
 
 notifications:
   email: false
