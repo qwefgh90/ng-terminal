@@ -3,7 +3,9 @@ language: node_js
 node_js:
   - '10'
 
-script: npm run travis-test
+script: 
+  - npm run travis-test
+  - npm run build
 
 notifications:
   email: false
@@ -12,9 +14,22 @@ cache:
   directories:
   - node_modules
 
+branches:
+  only:
+  - master
+  
 addons:
   chrome: stable
 
 dist: trusty
 
 sudo: required
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+  keep-history: true
+  local_dir: dist/ng-terminal-app/
+  on:
+    branch: master
