@@ -58,11 +58,15 @@ export class ExampleComponent implements OnInit, AfterViewInit{
   
   resizableChange(event: MatSlideToggleChange){
     this.resizable = event.checked;
+    if(this.resizable)
+      this.fixed = false;
     this.invalidate();
   }
 
   fixedChange(event: MatSlideToggleChange){
     this.fixed = event.checked;
+    if(this.fixed)
+      this.resizable = false;
     this.invalidate();
   }
 
