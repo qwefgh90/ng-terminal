@@ -9,6 +9,7 @@
     "travis-test": "ng test ng-terminal --watch false --browsers ChromeHeadless",
     "test": "ng test",
     "ttest": "ng test ng-terminal",
+    "gh-pages": "ng build --prod --output-path docs --base-href /ng-terminal/",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
