@@ -1,11 +1,39 @@
 {
   "name": "ng-terminal",
-  "version": "2.0.0",
+  "version": "2.0.3",
+  "description": "NgTerminal is a terminal component on Angular7 or higher.",
+  "license": "MIT",
   "peerDependencies": {
     "@angular/common": "^7.0.0",
     "@angular/core": "^7.0.0",
     "rxjs": ">=6.0.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:qwefgh90/ng-terminal.git"
+  },
+  "bugs": {
+    "url": "https://github.com/qwefgh90/ng-terminal/issues"
+  },
+  "author": {
+    "name": "Choe Changwon",
+    "email": "qwefgh90@naver.com"
+  },
+  "homepage": "https://github.com/qwefgh90/ng-terminal",
+  "private": false,
+  "keywords": [
+    "ng",
+    "angular",
+    "angular7",
+    "term",
+    "xterm",
+    "terminal",
+    "console",
+    "shell",
+    "bash",
+    "library",
+    "ng-terminal"
+  ],
   "dependencies": {
     "angular-resizable-element": "^3.2.4",
     "xterm": "^3.12.0"
