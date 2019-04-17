@@ -41,7 +41,7 @@ And when you run application, you can see web terminal whose color is black.
 ```
 
 Now you can print or do something on the terminal with `NgTerminal` object which has APIs for developers.
-You can get a object by using `@ViewChild` in your component.
+You can get a object by using `@ViewChild` in your component. It is very important that an object of `NgTerminalComponent` is populated after `ngAfterViewInit()` is called.
 
 ```typescript
 //...
