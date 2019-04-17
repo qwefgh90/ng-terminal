@@ -85,4 +85,4 @@ You can control a object of `Terminal` of xtermjs directly by getting a property
 
 ## Contribution
 
-NgTerminal is devleoped with Angular CLI. You can always write issue and contribute through PR to **master** branch.
+NgTerminal is developed with Angular CLI. You can always write issue and contribute through PR to **master** branch.
