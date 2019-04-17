@@ -4,7 +4,7 @@
 
 NgTerminal is web terminal on Angular7 or higher. You can easily make web terminal by adding `<ng-terminal></ng-terminal>` into your component. It's written on xtermjs.
 
-NgTerminal provides some features including [xtermjs](https://xtermjs.org/). It provides to adjust dimensions by dragging and to fix the number of rows and cols.
+NgTerminal provides some features including [xtermjs](https://xtermjs.org/). It provides to adjust dimensions by dragging and to fix the number of rows and cols. New usuful features to devlopers should be added continuously.
 
 ## Install
 
@@ -18,7 +18,8 @@ You can run an example in your local environment.
 
 1) git clone https://github.com/qwefgh90/ng-terminal.git
 2) npm install
-3) ng serve
+3) npm run lib-build
+4) npm run start
 
 ## Getting started
 
@@ -41,7 +42,7 @@ And when you run application, you can see web terminal whose color is black.
 ```
 
 Now you can print or do something on the terminal with `NgTerminal` object which has APIs for developers.
-You can get a object by using `@ViewChild` in your component.
+You can get a object by using `@ViewChild` in your component. It is very important that an object of `NgTerminalComponent` is populated after `ngAfterViewInit()` is called.
 
 ```typescript
 //...
@@ -77,6 +78,10 @@ There are two ways to control Terminal. One is to call APIs of NgTerminal direct
 ```html
 <ng-terminal [dataSource]="writeSubject" (keyInput)="onKeyInput($event)" [displayOption]="displayOptionBounded"></ng-terminal>
 ```
+
+#### Underlying object
+
+You can control a object of `Terminal` of xtermjs directly by getting a property of [underlying](https://github.com/qwefgh90/ng-terminal/blob/changeintoxterm/projects/ng-terminal/src/lib/ng-terminal.ts#L20).
 
 ## Contribution
 

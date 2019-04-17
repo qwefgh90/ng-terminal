@@ -5,6 +5,7 @@ import { NgTerminal } from 'ng-terminal/lib/ng-terminal';
 import { FormControl } from '@angular/forms';
 import { DisplayOption } from 'ng-terminal/lib/display-option';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { Terminal } from 'xterm';
 
 @Component({
   selector: 'app-root',
@@ -25,6 +26,7 @@ export class ExampleComponent implements OnInit, AfterViewInit{
 
   displayOption: DisplayOption = {};
   displayOptionBounded: DisplayOption = {};//now it's not used
+  underlying: Terminal;
   
   @ViewChild(NgTerminalComponent) child: NgTerminal;
   
@@ -36,6 +38,7 @@ export class ExampleComponent implements OnInit, AfterViewInit{
   }
 
   ngAfterViewInit(){
+    this.underlying = this.child.underlying;
     this.invalidate();
     this.child.keyInput.subscribe((input) => {
       this.child.write(input);
