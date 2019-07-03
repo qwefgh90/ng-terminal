@@ -75,7 +75,7 @@ export class ExampleComponent implements OnInit, AfterViewInit{
 
   writeSubject = new Subject<string>();
   write(){
-    this.writeSubject.next(this.inputControl.value);
+    this.writeSubject.next(eval(`'${this.inputControl.value}'`));
   }
 
   keyInput: string;

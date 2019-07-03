@@ -83,6 +83,10 @@ There are two ways to control Terminal. One is to call APIs of NgTerminal direct
 
 You can control a object of `Terminal` of xtermjs directly by getting a property of [underlying](https://github.com/qwefgh90/ng-terminal/blob/changeintoxterm/projects/ng-terminal/src/lib/ng-terminal.ts#L20).
 
+#### Control sequences
+
+Control sequences were made for controlling terminals like NgTerminal. You can find a set of sequences [here](https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h2-Controls-beginning-with-ESC). For example, you can break lines by passing `\x1b[1E` to `write()`. Try in [example](https://qwefgh90.github.io/ng-terminal/)
+
 ## Contribution
 
 NgTerminal is developed with Angular CLI. You can always write issue and contribute through PR to **master** branch.
