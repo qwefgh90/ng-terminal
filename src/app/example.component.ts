@@ -39,6 +39,7 @@ export class ExampleComponent implements OnInit, AfterViewInit{
 
   ngAfterViewInit(){
     this.underlying = this.child.underlying;
+    this.underlying.setOption("fontSize", 20);
     this.invalidate();
     this.child.keyInput.subscribe((input) => {
       this.child.write(input);

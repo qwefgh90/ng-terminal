@@ -12,12 +12,12 @@ export interface NgTerminal {
      * getter only provided
      * observable connected to inputs which user typed on the div of terminal
      */
-    keyInput: Observable<string>
+    readonly keyInput: Observable<string>
     /**
      * getter only provided
      * return the core object of Terminal in xterm
      */
-    underlying: Terminal
+    readonly underlying: Terminal
     /**
      * change row, col, draggable
      */
