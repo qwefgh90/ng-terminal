@@ -35,7 +35,7 @@
     "ngx-json-viewer": "^2.4.0",
     "rxjs": "6.0.0",
     "tslib": "^1.9.0",
-    "xterm": "^3.12.0",
+    "xterm": "^3.14.5",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

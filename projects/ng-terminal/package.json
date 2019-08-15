@@ -1,4 +1,4 @@
-{
+ {
   "name": "ng-terminal",
   "version": "2.0.4",
   "description": "NgTerminal is a terminal component on Angular7 or higher.",
@@ -23,7 +23,7 @@
   "private": false,
   "keywords": [
     "ng",
-    "angular",
+    "angular",  
     "angular7",
     "term",
     "xterm",
@@ -36,6 +36,6 @@
   ],
   "dependencies": {
     "angular-resizable-element": "^3.2.4",
-    "xterm": "^3.12.0"
+    "xterm": "^3.14.5"
   }
 }
