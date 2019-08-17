@@ -2,9 +2,9 @@
 
 [![Build Status](https://travis-ci.org/qwefgh90/ng-terminal.svg?branch=master)](https://travis-ci.org/qwefgh90/ng-terminal) [![version](https://badge.fury.io/js/ng-terminal.svg)](https://www.npmjs.com/package/ng-terminal) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)]()
 
-NgTerminal is web terminal on Angular7 or higher. You can easily make web terminal by adding `<ng-terminal></ng-terminal>` into your component. It's written on xtermjs.
+NgTerminal is a web terminal that leverages xterm.js on Angular 7+. You can easily add it into your application by adding `<ng-terminal></ng-terminal>` into your component.
 
-NgTerminal provides some features including [xtermjs](https://xtermjs.org/). It provides to adjust dimensions by dragging and to fix the number of rows and cols. New usuful features to devlopers should be added continuously.
+NgTerminal provides usuful features like adjusting dimensions by dragging and to fix the number of rows and cols. New features should be developed continuously.
 
 ## Install
 
@@ -42,12 +42,12 @@ And when you run application, you can see web terminal whose color is black.
 ```
 
 Now you can print or do something on the terminal with `NgTerminal` object which has APIs for developers.
-You can get a object by using `@ViewChild` in your component. It is very important that an object of `NgTerminalComponent` is populated after `ngAfterViewInit()` is called.
+You can get a object by using `@ViewChild` in your component. A annotated variable is populated after `ngAfterViewInit()` is called.
 
 ```typescript
 //...
 export class YourComponent implements AfterViewInit{
-  @ViewChild(NgTerminalComponent) child: NgTerminal;
+  @ViewChild(NgTerminalComponent, { static: true }) child: NgTerminal;
   
   ngAfterViewInit(){
     this.invalidate();
@@ -71,9 +71,13 @@ There are two ways to control Terminal. One is to call APIs of NgTerminal direct
   @ViewChild(NgTerminalComponent) child: NgTerminal;
 ```
 
+#### Manipulation of the web termianl with the function of write()
+
+Control sequences are special codes to control terminals like xterm. You can find a set of sequences [here](https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h2-Controls-beginning-with-ESC). For example, you can break a line by passing `\x1b[1E` to `write()`. Try in [example](https://qwefgh90.github.io/ng-terminal/)
+
 #### NgTerminalComponent
 
-[NgTerminalComponent](https://github.com/qwefgh90/ng-terminal/blob/changeintoxterm/projects/ng-terminal/src/lib/ng-terminal.component.ts) is a implementation of `NgTerminal` and a component to draw terminal where you put it.
+[NgTerminalComponent](https://github.com/qwefgh90/ng-terminal/blob/changeintoxterm/projects/ng-terminal/src/lib/ng-terminal.component.ts) is a implementation of `NgTerminal` and a component to draw the web terminal.
 
 ```html
 <ng-terminal [dataSource]="writeSubject" (keyInput)="onKeyInput($event)" [displayOption]="displayOptionBounded"></ng-terminal>
@@ -82,7 +86,6 @@ There are two ways to control Terminal. One is to call APIs of NgTerminal direct
 #### Underlying object
 
 You can control a object of `Terminal` of xtermjs directly by getting a property of [underlying](https://github.com/qwefgh90/ng-terminal/blob/changeintoxterm/projects/ng-terminal/src/lib/ng-terminal.ts#L20).
-
 ## Contribution
 
-NgTerminal is devleoped with Angular CLI. You can always write issue and contribute through PR to **master** branch.
+NgTerminal is developed with Angular CLI. You can always write issue and contribute through PR to **master** branch.

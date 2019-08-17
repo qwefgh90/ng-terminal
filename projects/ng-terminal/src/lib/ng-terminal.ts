@@ -4,18 +4,18 @@ import { DisplayOption } from './display-option';
 
 export interface NgTerminal {
     /**
-     * write charactors to terminal directly
+     * write print charactors or control sequences to the xterm directly
      * @param chars charactors to write
      */
     write(chars: string)
     /**
      * getter only provided
-     * observable connected to inputs which user typed on the div of terminal
+     * observable connected to inputs which user typed on the div for the xterm
      */
     readonly keyInput: Observable<string>
     /**
      * getter only provided
-     * return the core object of Terminal in xterm
+     * return the core object of the terminal where you can control everything directly
      */
     readonly underlying: Terminal
     /**

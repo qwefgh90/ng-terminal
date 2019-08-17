@@ -4,8 +4,8 @@
   "description": "NgTerminal is a terminal component on Angular7 or higher.",
   "license": "MIT",
   "peerDependencies": {
-    "@angular/common": "^7.0.0",
-    "@angular/core": "^7.0.0",
+    "@angular/common": ">=7.0.0 <9.0.0",
+    "@angular/core": ">=7.0.0 <9.0.0",
     "rxjs": ">=6.0.0"
   },
   "repository": {
@@ -22,10 +22,10 @@
   "homepage": "https://github.com/qwefgh90/ng-terminal",
   "private": false,
   "keywords": [
-    "ng",
+    "emulator",
     "angular",  
     "angular7",
-    "term",
+    "angular8",
     "xterm",
     "terminal",
     "console",
