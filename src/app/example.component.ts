@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { NgTerminalComponent } from 'ng-terminal';
 import { Subject } from 'rxjs';
 import { NgTerminal } from 'ng-terminal/lib/ng-terminal';
 import { FormControl } from '@angular/forms';
 import { DisplayOption } from 'ng-terminal/lib/display-option';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { Terminal } from 'xterm';
+import { NgTerminalComponent } from 'ng-terminal/lib/ng-terminal.component';
 
 @Component({
   selector: 'app-root',
@@ -28,7 +28,7 @@ export class ExampleComponent implements OnInit, AfterViewInit{
   displayOptionBounded: DisplayOption = {};//now it's not used
   underlying: Terminal;
   
-  @ViewChild(NgTerminalComponent, { static: true }) child: NgTerminal;
+  @ViewChild('term', { static: true }) child: NgTerminal;
   
   constructor(){ }
 

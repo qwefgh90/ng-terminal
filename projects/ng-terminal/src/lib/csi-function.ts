@@ -6,41 +6,51 @@
 let CSI = '\x9b'
 export class CsiFunction {
     /**
-     *  CSI Ps @  Insert Ps (Blank) Character(s) (default = 1) (ICH). */
+     *  CSI Ps @  Insert Ps (Blank) Character(s) (default = 1) (ICH). 
+     * 
+     * */
     insertBlank(count: number){
         return `${CSI}${count}@`; 
     }
     /**
      *  CSI Ps SP @ */
     /**
-     *  CSI Ps A  Cursor Up Ps Times (default = 1) (CUU). */
+     *  CSI Ps A  Cursor Up Ps Times (default = 1) (CUU). 
+     * \x9b3A*/
     cursorUp(count: number){
         return `${CSI}${count}A`;
     }
     /**
      *  CSI Ps SP A */
     /**
-     *  CSI Ps B  Cursor Down Ps Times (default = 1) (CUD). */
+     *  CSI Ps B  Cursor Down Ps Times (default = 1) (CUD).
+     * \x9b3B */
     cursorDown(count: number){
         return `${CSI}${count}B`;
     }
     /**
-     *  CSI Ps C  Cursor Forward Ps Times (default = 1) (CUF). */
+     *  CSI Ps C  Cursor Forward Ps Times (default = 1) (CUF). 
+     * \x9b3C */
     cursorForward(count: number){
         return `${CSI}${count}C`;
     }
     /**
-     *  CSI Ps D  Cursor Backward Ps Times (default = 1) (CUB). */
+     *  CSI Ps D  Cursor Backward Ps Times (default = 1) (CUB). 
+     * \x9b3D */
     cursorBackward(count: number){
         return `${CSI}${count}D`;
     }
     /**
-     *  CSI Ps E  Cursor Next Line Ps Times (default = 1) (CNL). */
+     *  CSI Ps E  Cursor Next Line Ps Times (default = 1) (CNL). 
+     * \x9b3E
+     * */
     cursorNextLine(count: number){
         return `${CSI}${count}E`;
     }
     /**
-     *  CSI Ps F  Cursor Preceding Line Ps Times (default = 1) (CPL). */
+     *  CSI Ps F  Cursor Preceding Line Ps Times (default = 1) (CPL).
+     * \x9b3F
+     *  */
     cursorPrecedingLine(count: number){
         return `${CSI}${count}F`;
     }
@@ -129,7 +139,7 @@ export class CsiFunction {
     }
     /**
      *  CSI Ps S  Scroll up Ps lines (default = 1) (SU), VT420, ECMA-48.
-     * 
+     * \x9b2S
      *  */
     scrollUpLines(count: number){
         return `${CSI}${count}S`;
@@ -137,13 +147,23 @@ export class CsiFunction {
     /**
      *  CSI ? Pi ; Pa ; Pv S */
     /**
-     *  CSI Ps T  Scroll down Ps lines (default = 1) (SD), VT420. */
+     *  CSI Ps T  Scroll down Ps lines (default = 1) (SD), VT420. 
+     * \x9b2T
+     * */
+    scrollDownLines(count: number){
+        return `${CSI}${count}T`;
+    }
     /**
      *  CSI Ps ; Ps ; Ps ; Ps ; Ps T */
     /**
      *  CSI > Ps ; Ps T */
     /**
-     *  CSI Ps X  Erase Ps Character(s) (default = 1) (ECH). */
+     *  CSI Ps X  Erase Ps Character(s) (default = 1) (ECH).
+     * \x9b2X
+     *  */
+    eraseCharacters(count: number){
+        return `${CSI}${count}X`;
+    }
     /**
      *  CSI Ps Z  Cursor Backward Tabulation Ps tab stops (default = 1) (CBT). */
     /**
@@ -279,9 +299,9 @@ export class CsiFunction {
     /**
      *  CSI Pm ' ~ */
 }
-enum KindOfEraseInDisplay{
+export enum KindOfEraseInDisplay{
     Below=0, Above=1, All=2, SavedLines=3
 }
-enum KindOfEraseInLine{
+export enum KindOfEraseInLine{
     Right=0, Left=1, All=2
 }
