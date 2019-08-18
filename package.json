@@ -7,7 +7,7 @@
     "lib-build": "npm run copy-readme && ng build ng-terminal",
     "travis-test": "ng test ng-terminal --watch false --browsers ChromeHeadless",
     "lib-test": "ng test ng-terminal",
-    "gh-pages": "ng build --prod --output-path docs --base-href /ng-terminal/",
+    "gh-pages": "npm run lib-build && ng build --prod --output-path docs --base-href /ng-terminal/",
     "copy-readme": "copyfiles README.md projects/ng-terminal/",
     "patch-up": "cd projects/ng-terminal/ && npm version patch",
     "minor-up": "cd projects/ng-terminal/ && npm version minor",
