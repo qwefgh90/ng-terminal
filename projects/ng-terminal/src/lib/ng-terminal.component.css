@@ -1,4 +1,5 @@
 .terminal-outer {
     box-sizing: border-box;
     border: solid 3px #429bf4;
+    height: 100%;
 }

@@ -14,7 +14,11 @@ import { ResizeEvent } from 'angular-resizable-element';
 export class NgTerminalComponent implements OnInit, AfterViewChecked, NgTerminal, OnDestroy {
   private term: Terminal
   private keyInputSubject: Subject<string> = new Subject<string>();
+  private keyEventSubject = new Subject<{key: string; domEvent: KeyboardEvent;}>();
+  
+  
   private keyInputSubjectSubscription: Subscription;
+  private keyEventSubjectSubscription: Subscription;
   private h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
   private displayOption: DisplayOption = {};
   private dataSource: Observable<string>;
@@ -43,14 +47,23 @@ export class NgTerminalComponent implements OnInit, AfterViewChecked, NgTerminal
   @Output('keyInput')
   keyInputEmitter  = new EventEmitter<string>();
 
+  @Output('keyEvent')
+  keyEventEmitter  = new EventEmitter<{key: string; domEvent: KeyboardEvent;}>();
+
   constructor() { }
 
   private observableSetup(){
     this.term.on('data', (input) => {
       this.keyInputSubject.next(input);
     });
-    this.keyInputSubjectSubscription = this.keyInputSubjectSubscription = this.keyInputSubject.subscribe((data) => {
+    this.term.onKey(e => {
+      this.keyEventSubject.next(e);
+    })
+    this.keyInputSubjectSubscription = this.keyInputSubject.subscribe((data) => {
       this.keyInputEmitter.emit(data);
+    })
+    this.keyEventSubjectSubscription = this.keyEventSubject.subscribe((e) => {
+      this.keyEventEmitter.emit(e);
     })
   }
 
@@ -110,6 +123,9 @@ export class NgTerminalComponent implements OnInit, AfterViewChecked, NgTerminal
       this.keyInputSubjectSubscription.unsubscribe();
     if(this.dataSourceSubscription)
       this.dataSourceSubscription.unsubscribe();
+    if(this.keyEventSubjectSubscription){
+      this.keyEventSubjectSubscription.unsubscribe();
+    }
   }
 
   write(chars: string) {
@@ -121,8 +137,9 @@ export class NgTerminalComponent implements OnInit, AfterViewChecked, NgTerminal
       console.debug("resizable will be ignored.")
       this.term.resize(opt.fixedGrid.cols, opt.fixedGrid.rows);
       this.setTerminalBlock(false);
-      this.removeTerminalDimension()
+      this.removeTerminalDimension();
     }else{
+      this.removeTerminalDimension();
       this.setTerminalBlock(true);
     }
     this.displayOption = opt;
@@ -130,6 +147,10 @@ export class NgTerminalComponent implements OnInit, AfterViewChecked, NgTerminal
 
   get keyInput(): Observable<string> {
     return this.keyInputSubject;
+  }
+
+  get keyEventInput(): Observable<{key: string; domEvent: KeyboardEvent;}> {
+    return this.keyEventSubject;
   }
 
   get underlying(): Terminal {

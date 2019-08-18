@@ -10,9 +10,16 @@ export interface NgTerminal {
     write(chars: string)
     /**
      * getter only provided
-     * observable connected to inputs which user typed on the div for the xterm
+     * A observable to emit printable characters when a user typed on the div for the xterm
+     * @deprecated since version 2.1.0
      */
     readonly keyInput: Observable<string>
+    
+    /**
+     * getter only provided
+     * A observable to emit keys and keyboard event when a user typed on the div for the xterm
+     */
+    readonly keyEventInput: Observable<{key: string; domEvent: KeyboardEvent;}>
     /**
      * getter only provided
      * return the core object of the terminal where you can control everything directly

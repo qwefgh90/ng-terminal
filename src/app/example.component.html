@@ -1,12 +1,14 @@
 <h2>{{title}}</h2>
-<ng-terminal #term [dataSource]="writeSubject" (keyInput)="onKeyInput($event)" [displayOption]="displayOptionBounded">
+<ng-terminal #term [dataSource]="writeSubject" (keyInput)="onKeyInput($event)" [displayOption]="displayOptionBounded"
+[ngClass]="{'ng-terminal': (displayOption.activateDraggableOnEdge == undefined && displayOption.fixedGrid == undefined)}">
 </ng-terminal>
-<div [class.mat-elevation-z1]="true" style="padding-left: 1em; padding-top: 0.3em; margin-top: 0.7em; padding-bottom: 1em">
-    <div> 
+<div [class.mat-elevation-z1]="true"
+    style="padding-left: 1em; padding-top: 0.3em; margin-top: 0.7em; padding-bottom: 1em">
+    <div>
         <div style="display:inline-block; vertical-align: top; margin-bottom: 0.8em">
             <h3>Display Opiton</h3>
             <div>
-                <mat-slide-toggle class="example-margin" [color]="color" (change)="resizableChange($event)"
+                <mat-slide-toggle class="example-margin" [checked]="resizable" [color]="color" (change)="resizableChange($event)"
                     [disabled]="disabled">
                     Resizable
                 </mat-slide-toggle>
