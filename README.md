@@ -35,10 +35,10 @@ import { NgTerminalModule } from 'ng-terminal';
 ```
 
 Just add `<ng-terminal>` to your `app.component.html`.
-And when you run application, you can see web terminal whose color is black.
+And when the application starts, you can see the web terminal to do nothing.
 
 ```html
-  <ng-terminal></ng-terminal>
+  <ng-terminal #term></ng-terminal>
 ```
 
 Now you can print or do something on the terminal with `NgTerminal` object which has APIs for developers.
@@ -47,12 +47,26 @@ You can get a object by using `@ViewChild` in your component. It is very importa
 ```typescript
 //...
 export class YourComponent implements AfterViewInit{
-  @ViewChild(NgTerminalComponent) child: NgTerminal;
+  @ViewChild('term', { static: true }) child: NgTerminal;
   
   ngAfterViewInit(){
     this.invalidate();
-    this.child.keyInput.subscribe((input) => {
-      this.child.write(input);
+    this.child.keyEventInput.subscribe(e => {
+      console.log('keyboard event:' + e.domEvent.keyCode + ', ' + e.key);
+
+      const ev = e.domEvent;
+      const printable = !ev.altKey && !ev.ctrlKey && !ev.metaKey;
+
+      if (ev.keyCode === 13) {
+        this.child.write('\r\n$ ');
+      } else if (ev.keyCode === 8) {
+        // Do not delete the prompt
+        if (this.child.underlying.buffer.cursorX > 2) {
+          this.child.write('\b \b');
+        }
+      } else if (printable) {
+        this.child.write(e.key);
+      }
     })
   }
 
@@ -61,31 +75,32 @@ export class YourComponent implements AfterViewInit{
 
 ## API
 
-There are two ways to control Terminal. One is to call APIs of NgTerminal directly in your ts code. Another is to use property or event binding .
+There are two ways to control the web terminal. One is to call APIs of NgTerminal directly in your ts code. Another is to use properties or the event binding.
 
 #### NgTerminal
 
-[NgTerminal](https://github.com/qwefgh90/ng-terminal/blob/changeintoxterm/projects/ng-terminal/src/lib/ng-terminal.ts) is a interface to provide public APIs you can call directly. You can get a object by using `@ViewCHild` with a type of `NgTerminal`.
+[NgTerminal](https://github.com/qwefgh90/ng-terminal/blob/master/projects/ng-terminal/src/lib/ng-terminal.ts) is a interface to provide public APIs you can call directly. You can get a object by using `@ViewChild` with a type of `NgTerminal`.
 
 ```typescript 
-  @ViewChild(NgTerminalComponent) child: NgTerminal;
+  @ViewChild('term') child: NgTerminal; // for Angular 7
+  @ViewChild('term', { static: true }) child: NgTerminal; // for Angular 8
 ```
 
 #### NgTerminalComponent
 
-[NgTerminalComponent](https://github.com/qwefgh90/ng-terminal/blob/changeintoxterm/projects/ng-terminal/src/lib/ng-terminal.component.ts) is a implementation of `NgTerminal` and a component to draw terminal where you put it.
+[NgTerminalComponent](https://github.com/qwefgh90/ng-terminal/blob/master/projects/ng-terminal/src/lib/ng-terminal.component.ts) is a implementation of `NgTerminal` and the component to draw the terminal.
 
 ```html
-<ng-terminal [dataSource]="writeSubject" (keyInput)="onKeyInput($event)" [displayOption]="displayOptionBounded"></ng-terminal>
+<ng-terminal #term [dataSource]="writeSubject" (keyEvent)="onKeyEvent($event)" [displayOption]="displayOptionBounded"></ng-terminal>
 ```
 
 #### Underlying object
 
-You can control a object of `Terminal` of xtermjs directly by getting a property of [underlying](https://github.com/qwefgh90/ng-terminal/blob/changeintoxterm/projects/ng-terminal/src/lib/ng-terminal.ts#L20).
+You can control a instance of the xtermjs directly by getting a property of [underlying](https://github.com/qwefgh90/ng-terminal/blob/master/projects/ng-terminal/src/lib/ng-terminal.ts#L27).
 
 #### Control sequences
 
-Control sequences were made for controlling terminals like NgTerminal. You can find a set of sequences [here](https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h2-Controls-beginning-with-ESC). For example, you can break lines by passing `\x1b[1E` to `write()`. Try in [example](https://qwefgh90.github.io/ng-terminal/)
+Control sequences were made to control terminal emulators. You can find a set of sequences [here](https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h2-Controls-beginning-with-ESC). For example, you can break lines by passing `\x1b[1E` to `write()`. Try in the [sample page](https://qwefgh90.github.io/ng-terminal/)
 
 ## Contribution
 
