@@ -143,6 +143,7 @@ THE SOFTWARE.
 
 
 ng-terminal
+MIT
 
 ngx-json-viewer
 MIT
