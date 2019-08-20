@@ -5,7 +5,7 @@ node_js:
 
 script: 
   - npm run travis-test
-  - npm run gh-pages
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then npm run gh-pages; fi'
 
 notifications:
   email: false
