@@ -14,7 +14,8 @@
     "major-up": "cd projects/ng-terminal/ && npm version major",
     "publish": "cd dist/ng-terminal && npm publish",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "add-licenses": "license-checker > LICENSE-THIRD-PARTY"
   },
   "private": true,
   "dependencies": {
@@ -59,6 +60,7 @@
     "ts-node": "~7.0.0",
     "tsickle": "^0.36.0",
     "tslint": "~5.11.0",
-    "typescript": "~3.5.3"
+    "typescript": "~3.5.3",
+    "license-checker": "^25.0.1"
   }
 }

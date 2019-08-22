@@ -6,6 +6,7 @@ import { DisplayOption } from 'ng-terminal/lib/display-option';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { Terminal } from 'xterm';
 import { NgTerminalComponent } from 'ng-terminal/lib/ng-terminal.component';
+import { CsiFunction } from 'projects/ng-terminal/src/lib/csi-function';
 
 @Component({
   selector: 'app-root',

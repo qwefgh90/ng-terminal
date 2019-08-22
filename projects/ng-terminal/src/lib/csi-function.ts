@@ -1,6 +1,6 @@
 /**
  *
- * It is a generator of CSI sequences.
+ * It is a CSI sequences generator
  * https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h2-Functions-using-CSI-_-ordered-by-the-final-character_s_
  */
 let CSI = '\x9b'
