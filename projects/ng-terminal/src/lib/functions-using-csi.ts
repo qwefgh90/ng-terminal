@@ -1,15 +1,15 @@
 /**
  *
- * It is a generator of CSI sequences.
+ * It is a CSI sequences generator
  * https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h2-Functions-using-CSI-_-ordered-by-the-final-character_s_
  */
 let CSI = '\x9b'
-export class CsiFunction {
+export class FunctionsUsingCSI {
     /**
      *  CSI Ps @  Insert Ps (Blank) Character(s) (default = 1) (ICH). 
      * 
      * */
-    insertBlank(count: number){
+    static insertBlank(count: number){
         return `${CSI}${count}@`; 
     }
     /**
@@ -17,7 +17,7 @@ export class CsiFunction {
     /**
      *  CSI Ps A  Cursor Up Ps Times (default = 1) (CUU). 
      * \x9b3A*/
-    cursorUp(count: number){
+    static cursorUp(count: number){
         return `${CSI}${count}A`;
     }
     /**
@@ -25,47 +25,47 @@ export class CsiFunction {
     /**
      *  CSI Ps B  Cursor Down Ps Times (default = 1) (CUD).
      * \x9b3B */
-    cursorDown(count: number){
+    static cursorDown(count: number){
         return `${CSI}${count}B`;
     }
     /**
      *  CSI Ps C  Cursor Forward Ps Times (default = 1) (CUF). 
      * \x9b3C */
-    cursorForward(count: number){
+    static cursorForward(count: number){
         return `${CSI}${count}C`;
     }
     /**
      *  CSI Ps D  Cursor Backward Ps Times (default = 1) (CUB). 
      * \x9b3D */
-    cursorBackward(count: number){
+    static cursorBackward(count: number){
         return `${CSI}${count}D`;
     }
     /**
      *  CSI Ps E  Cursor Next Line Ps Times (default = 1) (CNL). 
      * \x9b3E
      * */
-    cursorNextLine(count: number){
+    static cursorNextLine(count: number){
         return `${CSI}${count}E`;
     }
     /**
      *  CSI Ps F  Cursor Preceding Line Ps Times (default = 1) (CPL).
      * \x9b3F
      *  */
-    cursorPrecedingLine(count: number){
+    static cursorPrecedingLine(count: number){
         return `${CSI}${count}F`;
     }
     /**
      *  CSI Ps G  Cursor Character Absolute  [column] (default = [row,1]) (CHA).
      *  \x9b9G
      *  */
-    cursorColumn(count: number){
+    static cursorColumn(count: number){
         return `${CSI}${count}G`;
     }
     /**
      *  CSI Ps ; Ps H  Cursor Position [row;column] (default = [1,1]) (CUP).
      * \x9b2;2H
      * */
-    cursorPosition(row: number, col: number){
+    static cursorPosition(row: number, col: number){
         return `${CSI}${row};${col}H`;
     }
     /**
@@ -78,7 +78,7 @@ export class CsiFunction {
      *      Ps = 3  -> Erase Saved Lines (xterm).
      * \x9b2J
      *  */
-    eraseInDisplay(category: KindOfEraseInDisplay){
+    static eraseInDisplay(category: KindOfEraseInDisplay){
         return `${CSI}${category}J`;
     }
 
@@ -91,7 +91,7 @@ export class CsiFunction {
      *    Ps = 3  -> Selective Erase Saved Lines (xterm).
      * \x9b?2J 
      * */
-    eraseSelectiveThingsInDisplay(category: KindOfEraseInDisplay){
+    static eraseSelectiveThingsInDisplay(category: KindOfEraseInDisplay){
         return `${CSI}?${category}J`;
     }
     /**
@@ -102,7 +102,7 @@ export class CsiFunction {
      *     Ps = 2  -> Erase All.
      * \x9b?1K
      * */
-    eraseInLine(category: KindOfEraseInLine){
+    static eraseInLine(category: KindOfEraseInLine){
         return `${CSI}${category}K`;
     }
     /**
@@ -113,35 +113,35 @@ export class CsiFunction {
      *      Ps = 2  -> Selective Erase All.
      * \x9b?1K
      * */
-    eraseSelectiveThingsInLine(category: KindOfEraseInLine){
+    static eraseSelectiveThingsInLine(category: KindOfEraseInLine){
         return `${CSI}?${category}K`;
     }
     /**
      *  CSI Ps L  Insert Ps Line(s) (default = 1) (IL).
      * \x9b2L
      *  */
-    insertLines(count: number){
+    static insertLines(count: number){
         return `${CSI}${count}L`;
     }
     /**
      *  CSI Ps M  Delete Ps Line(s) (default = 1) (DL).
      * \x9b2M
      *  */
-    deleteLines(count: number){
+    static deleteLines(count: number){
         return `${CSI}${count}M`;
     }
     /**
      *  CSI Ps P  Delete Ps Character(s) (default = 1) (DCH).
      * \x9b2P
      *  */
-    deleteCharacter(count: number){
+    static deleteCharacter(count: number){
         return `${CSI}${count}P`;
     }
     /**
      *  CSI Ps S  Scroll up Ps lines (default = 1) (SU), VT420, ECMA-48.
      * \x9b2S
      *  */
-    scrollUpLines(count: number){
+    static scrollUpLines(count: number){
         return `${CSI}${count}S`;
     }
     /**
@@ -150,7 +150,7 @@ export class CsiFunction {
      *  CSI Ps T  Scroll down Ps lines (default = 1) (SD), VT420. 
      * \x9b2T
      * */
-    scrollDownLines(count: number){
+    static scrollDownLines(count: number){
         return `${CSI}${count}T`;
     }
     /**
@@ -161,7 +161,7 @@ export class CsiFunction {
      *  CSI Ps X  Erase Ps Character(s) (default = 1) (ECH).
      * \x9b2X
      *  */
-    eraseCharacters(count: number){
+    static eraseCharacters(count: number){
         return `${CSI}${count}X`;
     }
     /**
