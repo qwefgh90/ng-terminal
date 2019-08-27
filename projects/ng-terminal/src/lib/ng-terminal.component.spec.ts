@@ -61,7 +61,7 @@ describe('NgTerminalComponent', () => {
   });
 
   it("@Output('keyInputEmitter')", (doneFn) => {
-    let arr = ['h','i','!','\n']
+    let arr = ['h','i','!','\n']  
     let result = [];
     component.keyInputEmitter.subscribe((char) => {
       result.push(char);
@@ -222,14 +222,14 @@ describe('NgTerminalComponent with CSI functions', () => {
 
   it('write(cursorDown)', fakeAsync(() =>{
     const dummy = "dummy data" + csiFunction.cursorColumn(1) + csiFunction.cursorDown(1) + 'gummy'
-    const expectedResult = "dummy data\r\ngummy"
+    const expectedResult = "dummy data\r?\ngummy"
     component.write(dummy);
     
     const term = component.underlying;
     term.selectAll();
     tick(100);
     console.log(term.getSelection().trim());
-    expect(expectedResult).toEqual(term.getSelection().trim());
+    expect(term.getSelection().trim()).toMatch(expectedResult);
   }));
 
   it('write(cursorForward)', fakeAsync(() =>{
@@ -246,38 +246,38 @@ describe('NgTerminalComponent with CSI functions', () => {
 
   it('write(cursorNextLine)', fakeAsync(() =>{
     const dummy = "dummy data" + csiFunction.cursorNextLine(1) + 'gummy'
-    const expectedResult = "dummy data\r\ngummy"
+    const expectedResult = "dummy data\r?\ngummy"
     component.write(dummy);
     
     const term = component.underlying;
     term.selectAll();
     tick(100);
     console.log(term.getSelection().trim());
-    expect(expectedResult).toEqual(term.getSelection().trim());
+    expect(term.getSelection().trim()).toMatch(expectedResult);
   }));
 
   it('write(cursorPosition)', fakeAsync(() =>{
     const dummy = "dummy data" + csiFunction.cursorPosition(2,2) + 'gummy'
-    const expectedResult = "dummy data\r\n gummy"
+    const expectedResult = "dummy data\r?\n gummy"
     component.write(dummy);
     
     const term = component.underlying;
     term.selectAll();
     tick(100);
     console.log(term.getSelection().trim());
-    expect(expectedResult).toEqual(term.getSelection().trim());
+    expect(term.getSelection().trim()).toMatch(expectedResult);
   }));
 
   it('write(cursorPrecedingLine)', fakeAsync(() =>{
     const dummy = "dummy data\n\n\n" + csiFunction.cursorPrecedingLine(2) + 'gummy'
-    const expectedResult = "dummy data\r\ngummy"
+    const expectedResult = "dummy data\r?\ngummy"
     component.write(dummy);
     
     const term = component.underlying;
     term.selectAll();
     tick(100);
     console.log(term.getSelection().trim());
-    expect(expectedResult).toEqual(term.getSelection().trim());
+    expect(term.getSelection().trim()).toMatch(expectedResult);
   }));
 
   it('write(cursorUp)', fakeAsync(() =>{
@@ -306,14 +306,14 @@ describe('NgTerminalComponent with CSI functions', () => {
 
   it('write(deleteLines)', fakeAsync(() =>{
     const dummy = "dummy data\r\ndata\r\ndata" + csiFunction.cursorPrecedingLine(1) + csiFunction.deleteLines(1)
-    const expectedResult = "dummy data\r\ndata"
+    const expectedResult = "dummy data\r?\ndata"
     component.write(dummy);
     
     const term = component.underlying;
     term.selectAll();
     tick(100);
     console.log(term.getSelection().trim());
-    expect(expectedResult).toEqual(term.getSelection().trim());
+    expect(term.getSelection().trim()).toMatch(expectedResult);
   }));
 
   it('write(eraseCharacters)', fakeAsync(() =>{
@@ -414,13 +414,13 @@ describe('NgTerminalComponent with CSI functions', () => {
 
   it('write(insertLines)', fakeAsync(() =>{
     const dummy = "dummy data\r\ndata" + csiFunction.cursorColumn(1) +  csiFunction.insertLines(2)
-    const expectedResult = "dummy data\r\n\r\n\r\ndata"
+    const expectedResult = "dummy data\r?\n\r?\n\r?\ndata"
     component.write(dummy);
     
     const term = component.underlying;
     term.selectAll();
     tick(100);
     console.log(term.getSelection().trim());
-    expect(expectedResult).toEqual(term.getSelection().trim());
+    expect(term.getSelection().trim()).toMatch(expectedResult);
   }));
 });
