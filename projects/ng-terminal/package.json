@@ -1,4 +1,4 @@
- {
+{
   "name": "ng-terminal",
   "version": "2.1.0",
   "description": "NgTerminal is a terminal component on Angular7 or higher.",
@@ -23,7 +23,7 @@
   "private": false,
   "keywords": [
     "emulator",
-    "angular",  
+    "angular",
     "angular7",
     "angular8",
     "xterm",

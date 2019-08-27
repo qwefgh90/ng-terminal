@@ -2,7 +2,7 @@
   "name": "ng-terminal-app",
   "version": "0.0.0",
   "scripts": {
-    "start": "ng serve",
+    "start": "ng build && ng serve",
     "build": "npm run copy-readme && ng build",
     "lib-build": "npm run copy-readme && ng build ng-terminal",
     "travis-test": "ng test ng-terminal --watch false --browsers ChromeHeadless",

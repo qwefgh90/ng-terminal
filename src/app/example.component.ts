@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { NgTerminal } from 'ng-terminal/lib/ng-terminal';
+import { NgTerminal } from 'ng-terminal';
 import { FormControl } from '@angular/forms';
-import { DisplayOption } from 'ng-terminal/lib/display-option';
+import { DisplayOption } from 'ng-terminal';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { Terminal } from 'xterm';
-import { NgTerminalComponent } from 'ng-terminal/lib/ng-terminal.component';
-import { CsiFunction } from 'projects/ng-terminal/src/lib/csi-function';
+import { FunctionsUsingCSI } from 'ng-terminal';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +15,7 @@ import { CsiFunction } from 'projects/ng-terminal/src/lib/csi-function';
 export class ExampleComponent implements OnInit, AfterViewInit {
   title = 'NgTerminal Live Example';
   color = 'accent';
-
+  
   public resizable: boolean;
   public fixed = false;
 
@@ -54,7 +53,7 @@ export class ExampleComponent implements OnInit, AfterViewInit {
       const printable = !ev.altKey && !ev.ctrlKey && !ev.metaKey;
 
       if (ev.keyCode === 13) {
-        this.child.write('\r\n$ ');
+        this.child.write(FunctionsUsingCSI.cursorNextLine(1) + '$ '); // \r\n
       } else if (ev.keyCode === 8) {
         // Do not delete the prompt
         if (this.child.underlying.buffer.cursorX > 2) {

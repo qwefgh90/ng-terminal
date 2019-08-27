@@ -1,10 +1,7 @@
-import { CsiFunction, KindOfEraseInDisplay, KindOfEraseInLine } from './csi-function';
+import { FunctionsUsingCSI, KindOfEraseInDisplay, KindOfEraseInLine } from './functions-using-csi';
 
 describe('CsiFunction', () => {
-  let csi = new CsiFunction();
-  it('should create an instance', () => {
-    expect(new CsiFunction()).toBeTruthy();
-  });
+  let csi = FunctionsUsingCSI;
   it('insertBlank' ,() => {
     expect(csi.insertBlank(3)).toBeTruthy('\x9b3@');
   })

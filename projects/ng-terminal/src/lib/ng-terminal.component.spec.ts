@@ -5,7 +5,7 @@ import { GlobalStyleComponent } from './global-style/global-style.component';
 import { ResizableModule } from 'angular-resizable-element';
 import { Subject } from 'rxjs';
 import { keydown } from './test-util'
-import { CsiFunction, KindOfEraseInDisplay, KindOfEraseInLine } from './csi-function';
+import { FunctionsUsingCSI, KindOfEraseInDisplay, KindOfEraseInLine } from './functions-using-csi';
 
 describe('NgTerminalComponent', () => {
   let component: NgTerminalComponent;
@@ -178,7 +178,7 @@ describe('DisplayOption', () => {
 describe('NgTerminalComponent with CSI functions', () => {
   let component: NgTerminalComponent;
   let fixture: ComponentFixture<NgTerminalComponent>;
-  let csiFunction = new CsiFunction();
+  let csiFunction = FunctionsUsingCSI;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

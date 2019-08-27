@@ -82,6 +82,8 @@ There are two ways to control the web terminal. One is to call APIs of NgTermina
 [NgTerminal](https://github.com/qwefgh90/ng-terminal/blob/master/projects/ng-terminal/src/lib/ng-terminal.ts) is a interface to provide public APIs you can call directly. You can get a object by using `@ViewChild` with a type of `NgTerminal`.
 
 ```typescript 
+  import { NgTerminal } from 'ng-terminal';
+  ...
   @ViewChild('term') child: NgTerminal; // for Angular 7
   @ViewChild('term', { static: true }) child: NgTerminal; // for Angular 8
 ```
@@ -102,9 +104,10 @@ You can control a instance of the xtermjs directly by getting a property of [und
 
 Control sequences is a programing interface to control terminal emulators. There are few implemented functions to return sequences including moving the cursor.
 
-```
-    let csiFunction = new CsiFunction();
-    const sequences = "data..1" + csiFunction.cursorBackward(1) + '2';
+```typescript
+    import { FunctionsUsingCSI } from 'ng-terminal';
+    ...
+    const sequences = "data..1" + FunctionsUsingCSI.cursorBackward(1) + '2';
     component.write(sequences);
 ```
 
