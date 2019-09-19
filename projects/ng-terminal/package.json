@@ -1,6 +1,6 @@
 {
   "name": "ng-terminal",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "NgTerminal is a terminal component on Angular7 or higher.",
   "license": "MIT",
   "peerDependencies": {

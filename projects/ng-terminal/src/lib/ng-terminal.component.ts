@@ -23,7 +23,7 @@ export class NgTerminalComponent implements OnInit, AfterViewChecked, NgTerminal
   private displayOption: DisplayOption = {};
   private dataSource: Observable<string>;
   private dataSourceSubscription: Subscription;
-  terminalStyle: object = {};// height: (this.h / 2) + 'px' };
+  terminalStyle: object = {};
   
   @Input('dataSource')
   set _dataSource(ds) {
