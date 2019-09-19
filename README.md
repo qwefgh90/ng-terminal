@@ -4,7 +4,7 @@
 
 NgTerminal is a web terminal that leverages xterm.js on Angular 7+. You can easily add it into your application by adding `<ng-terminal></ng-terminal>` into your component.
 
-NgTerminal provides some features including [xtermjs](https://xtermjs.org/). It provides to adjust dimensions by dragging and to fix the number of rows and cols. New usuful features to devlopers should be added continuously.
+NgTerminal provides some features including [xtermjs](https://xtermjs.org/). You can adjust dimensions of a terminal by dragging and to fix the number of rows and cols. New usuful features should be added continuously.
 
 ## Install
 
@@ -50,7 +50,6 @@ export class YourComponent implements AfterViewInit{
   @ViewChild('term', { static: true }) child: NgTerminal;
   
   ngAfterViewInit(){
-    this.invalidate();
     this.child.keyEventInput.subscribe(e => {
       console.log('keyboard event:' + e.domEvent.keyCode + ', ' + e.key);
 
@@ -75,9 +74,9 @@ export class YourComponent implements AfterViewInit{
 
 ## API
 
-There are two ways to control the web terminal. One is to call APIs of NgTerminal directly in your ts code. Another is to use properties or the event binding.
+There are two ways to control the terminal. Calling API which is a interface of NgTerminal provides is a direct way to control the terminal. You can bind a instance by using @ViewChild. Another way is to use input/output properties.
 
-#### NgTerminal
+#### NgTerminal (API)
 
 [NgTerminal](https://github.com/qwefgh90/ng-terminal/blob/master/projects/ng-terminal/src/lib/ng-terminal.ts) is a interface to provide public APIs you can call directly. You can get a object by using `@ViewChild` with a type of `NgTerminal`.
 
@@ -88,9 +87,9 @@ There are two ways to control the web terminal. One is to call APIs of NgTermina
   @ViewChild('term', { static: true }) child: NgTerminal; // for Angular 8
 ```
 
-#### NgTerminalComponent
+#### NgTerminalComponent (input/output properties)
 
-[NgTerminalComponent](https://github.com/qwefgh90/ng-terminal/blob/master/projects/ng-terminal/src/lib/ng-terminal.component.ts) is a implementation of `NgTerminal` and the component to draw the terminal.
+[NgTerminalComponent](https://github.com/qwefgh90/ng-terminal/blob/master/projects/ng-terminal/src/lib/ng-terminal.component.ts) is a component to implement `NgTerminal` and draw the terminal.
 
 ```html
 <ng-terminal #term [dataSource]="writeSubject" (keyEvent)="onKeyEvent($event)" [displayOption]="displayOptionBounded"></ng-terminal>
@@ -102,7 +101,7 @@ You can control a instance of the xtermjs directly by getting a property of [und
 
 #### Control sequences
 
-Control sequences is a programing interface to control terminal emulators. There are few implemented functions to return sequences including moving the cursor.
+Control sequences is a programing interface to control terminal emulators. There are functions to return control sequences in a class of `FunctionUsingCSI`.
 
 ```typescript
     import { FunctionsUsingCSI } from 'ng-terminal';
@@ -112,7 +111,6 @@ Control sequences is a programing interface to control terminal emulators. There
 ```
 
 You can also find a full set of sequences [here](https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h2-Controls-beginning-with-ESC). For example, you can break lines by passing `\x1b[1E` to `write()`. Try in the [sample page](https://qwefgh90.github.io/ng-terminal/)
-
 
 ## Contribution
 
