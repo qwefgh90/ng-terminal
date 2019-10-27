@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewChecked, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, Input, Output, EventEmitter, OnDestroy, AfterViewInit } from '@angular/core';
 import { Terminal } from 'xterm';
 import * as fit from 'xterm/lib/addons/fit/fit';
 import { NgTerminal } from './ng-terminal';
@@ -11,7 +11,7 @@ import { ResizeEvent } from 'angular-resizable-element';
   templateUrl: './ng-terminal.component.html',
   styleUrls: ['./ng-terminal.component.css']
 })
-export class NgTerminalComponent implements OnInit, AfterViewChecked, NgTerminal, OnDestroy {
+export class NgTerminalComponent implements AfterViewInit, AfterViewChecked, NgTerminal, OnDestroy {
   private term: Terminal
   private keyInputSubject: Subject<string> = new Subject<string>();
   private keyEventSubject = new Subject<{key: string; domEvent: KeyboardEvent;}>();
@@ -25,6 +25,9 @@ export class NgTerminalComponent implements OnInit, AfterViewChecked, NgTerminal
   private dataSourceSubscription: Subscription;
   terminalStyle: object = {};
   
+  @Input('terminalId') 
+  terminalId = 'terminal';
+
   @Input('dataSource')
   set _dataSource(ds) {
     if(this.dataSourceSubscription != null){
@@ -108,10 +111,10 @@ export class NgTerminalComponent implements OnInit, AfterViewChecked, NgTerminal
   /**
    * It creates new terminal in #terminal.
    */
-  ngOnInit() {
+  ngAfterViewInit() {
     Terminal.applyAddon(fit);  // Apply the `fit` addon   
     this.term = new Terminal();
-    this.term.open(document.getElementById('terminal'));
+    this.term.open(document.getElementById(this.terminalId));
     this.observableSetup();
   }
 

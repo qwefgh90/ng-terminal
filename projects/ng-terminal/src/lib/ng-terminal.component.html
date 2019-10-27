@@ -1,5 +1,5 @@
 <global-style></global-style>
 
-<div id="terminal" class="terminal-outer" mwlResizable [ngStyle]="terminalStyle" [validateResize]="validatorFactory()" [enableGhostResize]="true" [resizeEdges]="isDraggableOnEdgeActivated ? {bottom: true, right: true} : {bottom: false, right: false}"
+<div [id]="terminalId" class="terminal-outer" mwlResizable [ngStyle]="terminalStyle" [validateResize]="validatorFactory()" [enableGhostResize]="true" [resizeEdges]="isDraggableOnEdgeActivated ? {bottom: true, right: true} : {bottom: false, right: false}"
 (resizeEnd)="onResizeEnd($event.rectangle.left, $event.rectangle.top, $event.rectangle.width, $event.rectangle.height)">
 </div>
