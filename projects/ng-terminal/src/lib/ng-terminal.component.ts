@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewChecked, Input, Output, EventEmitter, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, ViewChild, ElementRef, Input, Output, EventEmitter, OnDestroy, AfterViewInit } from '@angular/core';
 import { Terminal } from 'xterm';
 import * as fit from 'xterm/lib/addons/fit/fit';
 import { NgTerminal } from './ng-terminal';
@@ -24,9 +24,6 @@ export class NgTerminalComponent implements AfterViewInit, AfterViewChecked, NgT
   private dataSource: Observable<string>;
   private dataSourceSubscription: Subscription;
   terminalStyle: object = {};
-  
-  @Input('terminalId') 
-  terminalId = 'terminal';
 
   @Input('dataSource')
   set _dataSource(ds) {
@@ -52,6 +49,9 @@ export class NgTerminalComponent implements AfterViewInit, AfterViewChecked, NgT
 
   @Output('keyEvent')
   keyEventEmitter  = new EventEmitter<{key: string; domEvent: KeyboardEvent;}>();
+
+  @ViewChild('terminal') 
+  terminalDiv: ElementRef;
 
   constructor() { }
 
@@ -114,7 +114,7 @@ export class NgTerminalComponent implements AfterViewInit, AfterViewChecked, NgT
   ngAfterViewInit() {
     Terminal.applyAddon(fit);  // Apply the `fit` addon   
     this.term = new Terminal();
-    this.term.open(document.getElementById(this.terminalId));
+    this.term.open(this.terminalDiv.nativeElement);
     this.observableSetup();
   }
 
