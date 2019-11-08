@@ -29,13 +29,14 @@
     "@angular/platform-browser": "~7.2.0",
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
-    "angular-resizable-element": "^3.2.4",
+    "angular-resizable-element": "^3.2.6",
     "copyfiles": "^2.1.0",
     "core-js": "^2.5.4",
     "ngx-json-viewer": "^2.4.0",
     "rxjs": "6.5.2",
     "tslib": "^1.10.0",
-    "xterm": "^3.14.5",
+    "xterm": "^4.2.0",
+    "xterm-addon-fit": "^0.3.0",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
