@@ -54,7 +54,7 @@ describe('NgTerminalComponent', () => {
       }
     });
 
-    const terminalEventConsumer = fixture.nativeElement.querySelector('#terminal').getElementsByTagName('textarea')[0];
+    const terminalEventConsumer = fixture.componentInstance.terminalDiv.nativeElement.getElementsByTagName('textarea')[0];
     arr.forEach((v) => {
       terminalEventConsumer.dispatchEvent(keydown(v));
     });
@@ -71,7 +71,7 @@ describe('NgTerminalComponent', () => {
       }
     });
 
-    const terminalEventConsumer = fixture.nativeElement.querySelector('#terminal').getElementsByTagName('textarea')[0];
+    const terminalEventConsumer = fixture.componentInstance.terminalDiv.nativeElement.getElementsByTagName('textarea')[0];
     arr.forEach((v) => {
       terminalEventConsumer.dispatchEvent(keydown(v));
     });
@@ -116,7 +116,7 @@ describe('DisplayOption', () => {
   });
 
   it("@Input('displayOption')", () => {
-    const term = fixture.nativeElement.querySelector('#terminal');
+    const term = fixture.componentInstance.terminalDiv.nativeElement;
     const beforeWidth = term.clientWidth;
     const beforeHeight = term.clientHeight;
     component._displayOption = {fixedGrid:{rows: 4, cols: 4}};
@@ -130,7 +130,7 @@ describe('DisplayOption', () => {
   })
 
   it('should decrease div size after changing fixedSize', () => {
-    const term = fixture.nativeElement.querySelector('#terminal');
+    const term = fixture.componentInstance.terminalDiv.nativeElement;
     const beforeWidth = term.clientWidth;
     const beforeHeight = term.clientHeight;
     component.setDisplayOption({fixedGrid:{rows: 4, cols: 4}});
@@ -144,7 +144,7 @@ describe('DisplayOption', () => {
   })
 
   it('should increase div size after changing fixedSize', () => {
-    const term = fixture.nativeElement.querySelector('#terminal');
+    const term = fixture.componentInstance.terminalDiv.nativeElement;
     component.setDisplayOption({fixedGrid:{rows: 4, cols: 4}});
     fixture.detectChanges();
     const beforeWidth = term.clientWidth;
