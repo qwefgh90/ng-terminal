@@ -91,6 +91,13 @@ describe('NgTerminalComponent', () => {
       expect(component.write).toHaveBeenCalledWith(ch);
     })
   }))
+  
+  it('this.term.dispose()', () => {
+    const disposeSpy = spyOn(component.underlying, 'dispose').and.callThrough();
+    expect(disposeSpy.calls.count()).toBe(0);
+    fixture.destroy();
+    expect(disposeSpy.calls.count()).toBe(1);
+  })
 });
 
 describe('DisplayOption', () => {

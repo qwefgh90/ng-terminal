@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewChecked, ViewChild, ElementRef, Input, Output, EventEmitter, OnDestroy, AfterViewInit } from '@angular/core';
 import { Terminal } from 'xterm';
-import * as fit from 'xterm/lib/addons/fit/fit';
+import { FitAddon } from 'xterm-addon-fit';
 import { NgTerminal } from './ng-terminal';
 import { Subject, Observable, Subscription } from 'rxjs';
 import { DisplayOption } from './display-option';
@@ -12,7 +12,8 @@ import { ResizeEvent } from 'angular-resizable-element';
   styleUrls: ['./ng-terminal.component.css']
 })
 export class NgTerminalComponent implements AfterViewInit, AfterViewChecked, NgTerminal, OnDestroy {
-  private term: Terminal
+  private term: Terminal;
+  private fitAddon: FitAddon;
   private keyInputSubject: Subject<string> = new Subject<string>();
   private keyEventSubject = new Subject<{key: string; domEvent: KeyboardEvent;}>();
   
@@ -56,7 +57,7 @@ export class NgTerminalComponent implements AfterViewInit, AfterViewChecked, NgT
   constructor() { }
 
   private observableSetup(){
-    this.term.on('data', (input) => {
+    this.term.onData((input) => {
       this.keyInputSubject.next(input);
     });
     this.term.onKey(e => {
@@ -105,16 +106,17 @@ export class NgTerminalComponent implements AfterViewInit, AfterViewChecked, NgT
    */
   ngAfterViewChecked() {
     if(this.displayOption.fixedGrid == null)
-      fit.fit(this.term);
+      this.fitAddon.fit();
   }
 
   /**
    * It creates new terminal in #terminal.
    */
   ngAfterViewInit() {
-    Terminal.applyAddon(fit);  // Apply the `fit` addon   
+    this.fitAddon = new FitAddon();
     this.term = new Terminal();
     this.term.open(this.terminalDiv.nativeElement);
+    this.term.loadAddon(this.fitAddon);
     this.observableSetup();
   }
 
@@ -126,9 +128,10 @@ export class NgTerminalComponent implements AfterViewInit, AfterViewChecked, NgT
       this.keyInputSubjectSubscription.unsubscribe();
     if(this.dataSourceSubscription)
       this.dataSourceSubscription.unsubscribe();
-    if(this.keyEventSubjectSubscription){
+    if(this.keyEventSubjectSubscription)
       this.keyEventSubjectSubscription.unsubscribe();
-    }
+    if(this.term)
+      this.term.dispose();
   }
 
   write(chars: string) {
