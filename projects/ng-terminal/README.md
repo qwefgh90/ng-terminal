@@ -95,21 +95,6 @@ There are two ways to control the terminal. Calling API which is a interface of 
 <ng-terminal #term [dataSource]="writeSubject" (keyEvent)="onKeyEvent($event)" [displayOption]="displayOptionBounded"></ng-terminal>
 ```
 
-Non-Default Terminal ID
-
-If you want multiple terminal windows, you need to specify an ID for each.  There are two ways: give a static ID or use databinding to bind the ID to a variable on the implementing component.
-
-Static ID
-```html
-<ng-terminal #term id="someStaticID" [dataSource]="writeSubject" (keyEvent)="onKeyEvent($event)" [displayOption]="displayOptionBounded"></ng-terminal>
-```
-
-Data-bound ID
-```html
-<ng-terminal #term [id]="variableContainingId" [dataSource]="writeSubject" (keyEvent)="onKeyEvent($event)" [displayOption]="displayOptionBounded"></ng-terminal>
-```
-
-
 #### Underlying object
 
 You can control a instance of the xtermjs directly by getting a property of [underlying](https://github.com/qwefgh90/ng-terminal/blob/master/projects/ng-terminal/src/lib/ng-terminal.ts#L27). Check out API of the Terminal from the [API document](https://xtermjs.org/docs/)
