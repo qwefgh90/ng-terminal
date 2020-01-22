@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewChecked, ViewChild, ElementRef, Input, Outp
 import { Terminal } from 'xterm';
 import { FitAddon } from 'xterm-addon-fit';
 import { NgTerminal } from './ng-terminal';
-import { Subject, Observable, Subscription } from 'rxjs';
+import { Subject, Observable, Subscription, combineLatest } from 'rxjs';
 import { DisplayOption } from './display-option';
 import { ResizeEvent } from 'angular-resizable-element';
 
@@ -11,15 +11,17 @@ import { ResizeEvent } from 'angular-resizable-element';
   templateUrl: './ng-terminal.component.html',
   styleUrls: ['./ng-terminal.component.css']
 })
-export class NgTerminalComponent implements AfterViewInit, AfterViewChecked, NgTerminal, OnDestroy {
+export class NgTerminalComponent implements OnInit, AfterViewInit, AfterViewChecked, NgTerminal, OnDestroy {
   private term: Terminal;
   private fitAddon: FitAddon;
   private keyInputSubject: Subject<string> = new Subject<string>();
   private keyEventSubject = new Subject<{key: string; domEvent: KeyboardEvent;}>();
-  
+  private termSnippetSubject = new Subject<()=>void>();
+  private afterViewInitSubject = new Subject<void>();
   
   private keyInputSubjectSubscription: Subscription;
   private keyEventSubjectSubscription: Subscription;
+  private termSnippetSubscription: Subscription;
   private h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
   private displayOption: DisplayOption = {};
   private dataSource: Observable<string>;
@@ -54,7 +56,11 @@ export class NgTerminalComponent implements AfterViewInit, AfterViewChecked, NgT
   @ViewChild('terminal') 
   terminalDiv: ElementRef;
 
-  constructor() { }
+  constructor() { 
+    this.termSnippetSubscription = combineLatest(this.termSnippetSubject, this.afterViewInitSubject).subscribe(([snippet]) => {
+      snippet();
+    });
+  }
 
   private observableSetup(){
     this.term.onData((input) => {
@@ -68,7 +74,8 @@ export class NgTerminalComponent implements AfterViewInit, AfterViewChecked, NgT
     })
     this.keyEventSubjectSubscription = this.keyEventSubject.subscribe((e) => {
       this.keyEventEmitter.emit(e);
-    })
+    });
+    this.afterViewInitSubject.next();
   }
 
   /**
@@ -101,6 +108,9 @@ export class NgTerminalComponent implements AfterViewInit, AfterViewChecked, NgT
     this.terminalStyle['height'] = undefined;
   }
 
+  ngOnInit(){
+  }
+
   /**
    * When a dimension of div changes, fit a terminal in div.
    */
@@ -130,6 +140,8 @@ export class NgTerminalComponent implements AfterViewInit, AfterViewChecked, NgT
       this.dataSourceSubscription.unsubscribe();
     if(this.keyEventSubjectSubscription)
       this.keyEventSubjectSubscription.unsubscribe();
+    if(this.termSnippetSubscription)
+    this.termSnippetSubscription.unsubscribe();
     if(this.term)
       this.term.dispose();
   }
@@ -137,18 +149,23 @@ export class NgTerminalComponent implements AfterViewInit, AfterViewChecked, NgT
   write(chars: string) {
     this.term.write(chars);
   }
-  
-  setDisplayOption(opt: DisplayOption){
-    if(opt.fixedGrid != null){
-      console.debug("resizable will be ignored.")
-      this.term.resize(opt.fixedGrid.cols, opt.fixedGrid.rows);
-      this.setTerminalBlock(false);
-      this.removeTerminalDimension();
-    }else{
-      this.removeTerminalDimension();
-      this.setTerminalBlock(true);
-    }
-    this.displayOption = opt;
+
+  setDisplayOption(opt: DisplayOption) {
+    if (opt) {
+      if (opt.fixedGrid != null) {
+        console.debug("resizable will be ignored.");
+        this.termSnippetSubject.next(() => {
+          this.term.resize(opt.fixedGrid.cols, opt.fixedGrid.rows);
+        });
+        this.setTerminalBlock(false);
+        this.removeTerminalDimension();
+      } else {
+        this.removeTerminalDimension();
+        this.setTerminalBlock(true);
+      }
+      this.displayOption = opt;
+    } else
+      console.warn(`Am empty option is not allowed`);
   }
 
   get keyInput(): Observable<string> {
