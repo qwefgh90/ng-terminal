@@ -154,11 +154,18 @@ export class NgTerminalComponent implements OnInit, AfterViewInit, AfterViewChec
     if (opt) {
       if (opt.fixedGrid != null) {
         console.debug("resizable will be ignored.");
+        this.setTerminalBlock(true);
+        this.removeTerminalDimension();
         this.termSnippetSubject.next(() => {
           this.term.resize(opt.fixedGrid.cols, opt.fixedGrid.rows);
+          let xtermScreen = this.term.element.getElementsByClassName('xterm-screen')[0];
+          let terminal = this.term.element;
+          let scrollArea = this.term.element.getElementsByClassName('xterm-scroll-area')[0];
+          const contentWidth = xtermScreen.clientWidth;
+          const scrollWidth = terminal.clientWidth - scrollArea.clientWidth;
+          const borderPx = 6;
+          this.setTerminalDimension(undefined, undefined, contentWidth + scrollWidth + borderPx, undefined);
         });
-        this.setTerminalBlock(false);
-        this.removeTerminalDimension();
       } else {
         this.removeTerminalDimension();
         this.setTerminalBlock(true);
