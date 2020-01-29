@@ -43,6 +43,21 @@ describe('NgTerminalComponent', () => {
     expect(term.getSelection().trim()).toEqual(dummy);
   }));
 
+  it("make a scroll in xterm-viewport with write(newlines)", fakeAsync(() => {
+    const term = fixture.componentInstance.terminalDiv.nativeElement as HTMLElement;
+    component._displayOption = {fixedGrid:{rows: 4, cols: 4}};
+    fixture.detectChanges();
+    tick(1000);
+    
+    component.write('\n\n\n\n\n\n\n\n\n\n\n\n\n\n');
+    fixture.detectChanges();
+    tick(1000);
+    const viewPort = term.querySelector('.xterm-viewport');
+    const height = viewPort.clientHeight;
+    const scrollHeight = viewPort.scrollHeight;
+    expect(scrollHeight).toBeGreaterThan(height);
+  }))
+
   it('keyInput', (doneFn) => {
     let arr = ['h','i','!','\n']
     let result = [];
@@ -182,99 +197,6 @@ describe('DisplayOption', () => {
   });
 });
 
-describe('NgTerminalComponent', () => {
-  let component: NgTerminalComponent;
-  let fixture: ComponentFixture<NgTerminalComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ NgTerminalComponent, GlobalStyleComponent ],
-      imports: [ ResizableModule ]
-    })
-    .compileComponents();
-  }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(NgTerminalComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
-  it('underlying', () => {
-    expect(component.underlying).toBeDefined("underlying doesn't exist.")
-  });
-
-  it('write()', fakeAsync(() =>{
-    const dummy = "dummy data"
-    component.write(dummy);
-    
-    const term = component.underlying;
-    term.selectAll();
-    tick(100);
-    expect(term.getSelection().trim()).toEqual(dummy);
-  }));
-
-  it('keyInput', (doneFn) => {
-    let arr = ['h','i','!','\n']
-    let result = [];
-    component.keyInput.subscribe((char) => {
-      result.push(char);
-      if(arr.length == result.length){
-        expect(arr.join('')).toEqual(result.join(''));
-        doneFn();
-      }
-    });
-
-    const terminalEventConsumer = fixture.componentInstance.terminalDiv.nativeElement.getElementsByTagName('textarea')[0];
-    arr.forEach((v) => {
-      terminalEventConsumer.dispatchEvent(keydown(v));
-    });
-  });
-
-  it("@Output('keyInputEmitter')", (doneFn) => {
-    let arr = ['h','i','!','\n']  
-    let result = [];
-    component.keyInputEmitter.subscribe((char) => {
-      result.push(char);
-      if(arr.length == result.length){
-        expect(arr.join('')).toEqual(result.join(''));
-        doneFn();
-      }
-    });
-
-    const terminalEventConsumer = fixture.componentInstance.terminalDiv.nativeElement.getElementsByTagName('textarea')[0];
-    arr.forEach((v) => {
-      terminalEventConsumer.dispatchEvent(keydown(v));
-    });
-  });
-
-  it("@Input('dataSource')", fakeAsync(() => {
-    let arr = ['h','i','!','\n']
-    let result = [];
-    let dataSource = new Subject<string>();
-    let spy: jasmine.Spy = spyOn(component, 'write').and.callThrough();
-
-    component._dataSource = dataSource;
-    arr.forEach((char) => dataSource.next(char));
-    tick(100);
-    expect(spy.calls.count()).toBe(4);
-    arr.forEach((ch) => {
-      expect(component.write).toHaveBeenCalledWith(ch);
-    })
-  }))
-  
-  it('this.term.dispose()', () => {
-    const disposeSpy = spyOn(component.underlying, 'dispose').and.callThrough();
-    expect(disposeSpy.calls.count()).toBe(0);
-    fixture.destroy();
-    expect(disposeSpy.calls.count()).toBe(1);
-  })
-});
-
 describe('NgTerminalComponent before opening', () => {
   let component: NgTerminalComponent;
   let fixture: ComponentFixture<NgTerminalComponent>;
@@ -303,14 +225,8 @@ describe('NgTerminalComponent before opening', () => {
         minWidth: 100
       }
     };
-
-    // fixture.detectChanges();
     
-    // const afterWidth = term.clientWidth;
-    // const afterHeight = term.clientHeight;
-    
-    // expect(afterWidth).toBeLessThan(beforeWidth);
-    // expect(afterHeight).toBeLessThan(beforeHeight);
+    fixture.detectChanges();
   })
 });
 

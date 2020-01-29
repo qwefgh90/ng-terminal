@@ -91,22 +91,31 @@ export class NgTerminalComponent implements OnInit, AfterViewInit, AfterViewChec
   /**
    * set dimensions
    */
-  private setTerminalDimension(left: number, top: number, width: number, height: number) {
-    this.terminalStyle['left'] = `${left}px`;
-    this.terminalStyle['top'] = `${top}px`;
-    this.terminalStyle['width'] = `${width}px`;
-    this.terminalStyle['height'] = `${height}px`;
+  private setTerminalDimensions(left: number, top: number, width: number, height: number) {
+    this.terminalStyle['left'] = left ? `${left}px` : undefined;
+    this.terminalStyle['top'] = top ? `${top}px` : undefined;
+    this.terminalStyle['width'] = width ? `${width}px` : undefined;
+    this.terminalStyle['height'] = height ? `${height}px` : undefined;
   }
   
   /**
    * remove dimensions
    */
-  private removeTerminalDimension(){
+  private removeTerminalDimensions(){
     this.terminalStyle['left'] = undefined;
     this.terminalStyle['top'] = undefined;
     this.terminalStyle['width'] = undefined;
     this.terminalStyle['height'] = undefined;
   }
+
+  setBorder(style: string = 'solid 3px #429bf4'){
+    this.terminalStyle['border'] = style;
+  }
+
+  removeBorder(){
+    this.terminalStyle['border'] = 'unset';
+  }
+
 
   ngOnInit(){
   }
@@ -115,8 +124,21 @@ export class NgTerminalComponent implements OnInit, AfterViewInit, AfterViewChec
    * When a dimension of div changes, fit a terminal in div.
    */
   ngAfterViewChecked() {
-    if(this.displayOption.fixedGrid == null)
+    let dims = this.fitAddon.proposeDimensions();
+    if(isNaN(dims.rows) || dims.rows == Infinity || isNaN(dims.cols) || dims.cols == Infinity){
+      console.debug(`Remove an bug where dimensions of the detached terminal element aren't set`)
+      this.term.resize(10, 10);
+    }else if(!this.displayOption.fixedGrid){
       this.fitAddon.fit();
+    }else{
+      this.term.resize(this.displayOption.fixedGrid.cols, this.displayOption.fixedGrid.rows);
+      let xtermScreen = this.term.element.getElementsByClassName('xterm-screen')[0];
+      let scrollArea = this.term.element.getElementsByClassName('xterm-scroll-area')[0];
+      let terminal = this.term.element;
+      const contentWidth = xtermScreen.clientWidth;
+      const scrollWidth = terminal.clientWidth - scrollArea.clientWidth;
+      this.setTerminalDimensions(undefined, undefined, contentWidth + scrollWidth, undefined);
+    }
   }
 
   /**
@@ -154,14 +176,12 @@ export class NgTerminalComponent implements OnInit, AfterViewInit, AfterViewChec
     if (opt) {
       if (opt.fixedGrid != null) {
         console.debug("resizable will be ignored.");
-        this.termSnippetSubject.next(() => {
-          this.term.resize(opt.fixedGrid.cols, opt.fixedGrid.rows);
-        });
         this.setTerminalBlock(false);
-        this.removeTerminalDimension();
+        this.removeTerminalDimensions();
+        this.removeBorder();
       } else {
-        this.removeTerminalDimension();
         this.setTerminalBlock(true);
+        this.setBorder();
       }
       this.displayOption = opt;
     } else
@@ -192,7 +212,7 @@ export class NgTerminalComponent implements OnInit, AfterViewInit, AfterViewChec
    * @param height 
    */
   onResizeEnd(left: number, top: number, width: number, height: number): void {
-    this.setTerminalDimension(left, top, width, height);
+    this.setTerminalDimensions(left, top, width, height);
   }
 
   /**
