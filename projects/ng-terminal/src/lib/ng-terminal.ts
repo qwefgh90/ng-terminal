@@ -29,4 +29,6 @@ export interface NgTerminal {
      * change row, col, draggable
      */
     setDisplayOption(opt: DisplayOption): void
+    
+    setStyle(styleObject: any): void;
 }

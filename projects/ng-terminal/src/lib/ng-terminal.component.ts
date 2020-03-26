@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewChecked, ViewChild, ElementRef, Input, Outp
 import { Terminal } from 'xterm';
 import { FitAddon } from 'xterm-addon-fit';
 import { NgTerminal } from './ng-terminal';
-import { Subject, Observable, Subscription, combineLatest } from 'rxjs';
+import { Subject, Observable, Subscription, combineLatest, ObjectUnsubscribedError } from 'rxjs';
 import { DisplayOption } from './display-option';
 import { ResizeEvent } from 'angular-resizable-element';
 
@@ -45,6 +45,11 @@ export class NgTerminalComponent implements OnInit, AfterViewInit, AfterViewChec
   @Input('displayOption')
   set _displayOption(opt: DisplayOption){
     this.setDisplayOption(opt);
+  }
+
+  @Input('style')
+  set _style(opt: any){
+    this.setStyle(opt);
   }
 
   @Output('keyInput')
@@ -108,14 +113,9 @@ export class NgTerminalComponent implements OnInit, AfterViewInit, AfterViewChec
     this.terminalStyle['height'] = undefined;
   }
 
-  setBorder(style: string = 'solid 3px #429bf4'){
-    this.terminalStyle['border'] = style;
+  setStyle(styleObject: any){
+    Object.assign(this.terminalStyle, styleObject);
   }
-
-  removeBorder(){
-    this.terminalStyle['border'] = 'unset';
-  }
-
 
   ngOnInit(){
   }
@@ -178,10 +178,8 @@ export class NgTerminalComponent implements OnInit, AfterViewInit, AfterViewChec
         console.debug("resizable will be ignored.");
         this.setTerminalBlock(false);
         this.removeTerminalDimensions();
-        this.removeBorder();
       } else {
         this.setTerminalBlock(true);
-        this.setBorder();
       }
       this.displayOption = opt;
     } else

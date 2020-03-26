@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { NgTerminal } from 'ng-terminal';
+import { NgTerminal, NgTerminalComponent } from 'ng-terminal';
 import { FormControl } from '@angular/forms';
 import { DisplayOption } from 'ng-terminal';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
@@ -81,15 +81,19 @@ export class ExampleComponent implements OnInit, AfterViewInit {
 
   resizableChange(event: MatSlideToggleChange) {
     this.resizable = event.checked;
-    if (this.resizable)
+    if (this.resizable){
+      this.child.setStyle({"border": "4px solid #85858a"});
       this.fixed = false;
+    }
     this.invalidate();
   }
 
   fixedChange(event: MatSlideToggleChange) {
     this.fixed = event.checked;
-    if (this.fixed)
+    if (this.fixed){
+      this.child.setStyle({"border": "unset"});
       this.resizable = false;
+    }
     this.invalidate();
   }
 
