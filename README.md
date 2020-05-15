@@ -60,7 +60,7 @@ export class YourComponent implements AfterViewInit{
         this.child.write('\r\n$ ');
       } else if (ev.keyCode === 8) {
         // Do not delete the prompt
-        if (this.child.underlying.buffer.cursorX > 2) {
+        if (this.child.underlying.buffer.active.cursorX > 2) {
           this.child.write('\b \b');
         }
       } else if (printable) {
