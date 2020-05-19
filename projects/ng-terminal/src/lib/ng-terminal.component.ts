@@ -183,7 +183,7 @@ export class NgTerminalComponent implements OnInit, AfterViewInit, AfterViewChec
       }
       this.displayOption = opt;
     } else
-      console.warn(`Am empty option is not allowed`);
+      console.warn(`A falsy option is not allowed`);
   }
 
   get keyInput(): Observable<string> {
