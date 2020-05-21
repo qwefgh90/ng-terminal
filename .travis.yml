@@ -21,7 +21,7 @@ branches:
 addons:
   chrome: stable
 
-dist: trusty
+dist: xenial
 
 sudo: required
 
