@@ -24,8 +24,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     </mat-tab>
   </mat-tab-group>`})
 class AppMatTabComponent{
-  @ViewChild('tabGroup') tabGroup: MatTabGroup;
-  @ViewChild(NgTerminalComponent) terminal: NgTerminal;
+  @ViewChild('tabGroup', {static: false}) tabGroup: MatTabGroup;
+  @ViewChild(NgTerminalComponent, {static: false}) terminal: NgTerminal;
 }
 
 describe('NgTerminalComponent with MaterialTab', () => {

@@ -28,7 +28,7 @@ export class ExampleComponent implements OnInit, AfterViewInit {
   displayOptionBounded: DisplayOption = {};//now it's not used
   underlying: Terminal;
 
-  @ViewChild('term') child: NgTerminal;
+  @ViewChild('term', { static: true }) child: NgTerminal;
 
   constructor() { }
 
