@@ -65,6 +65,7 @@ describe('NgTerminalComponent with MaterialTab', () => {
   }));
 
   it(`gets a terminal component inside DOM`, fakeAsync(() => {
+    mattabFixture.detectChanges();
     mattabComponent.tabGroup.selectedIndex = 1;
     mattabFixture.detectChanges();
     tick(1000);
@@ -79,6 +80,7 @@ describe('NgTerminalComponent with MaterialTab', () => {
   }));
 
   it(`gets a terminal component inside DOM as soon as a tab is activated`, fakeAsync(() => {
+    mattabFixture.detectChanges();
     mattabComponent.tabGroup.selectedIndex = 0;
     mattabFixture.detectChanges();
     tick(1000);
@@ -102,6 +104,7 @@ describe('NgTerminalComponent with MaterialTab', () => {
   }));
 
   it(`changes rows and cols with setDisplayOption()`, fakeAsync(() => {
+    mattabFixture.detectChanges();
     mattabComponent.tabGroup.selectedIndex = 1;
     mattabFixture.detectChanges();
     tick(1000);
