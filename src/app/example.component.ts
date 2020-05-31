@@ -28,7 +28,7 @@ export class ExampleComponent implements OnInit, AfterViewInit {
   displayOptionBounded: DisplayOption = {};//now it's not used
   underlying: Terminal;
 
-  @ViewChild('term', { static: true }) child: NgTerminal;
+  @ViewChild('term', {static: false}) child: NgTerminal;
 
   constructor() { }
 
@@ -56,7 +56,7 @@ export class ExampleComponent implements OnInit, AfterViewInit {
         this.child.write('\n' + FunctionsUsingCSI.cursorColumn(1) + '$ '); // \r\n
       } else if (ev.keyCode === 8) {
         // Do not delete the prompt
-        if (this.child.underlying.buffer.cursorX > 2) {
+        if (this.child.underlying.buffer.active.cursorX > 2) {
           this.child.write('\b \b');
         }
       } else if (printable) {
