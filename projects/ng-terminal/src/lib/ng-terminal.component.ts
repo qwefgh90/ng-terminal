@@ -58,7 +58,7 @@ export class NgTerminalComponent implements OnInit, AfterViewInit, AfterViewChec
   @Output('keyEvent')
   keyEventEmitter  = new EventEmitter<{key: string; domEvent: KeyboardEvent;}>();
 
-  @ViewChild('terminal') 
+  @ViewChild('terminal', { static: true }) 
   terminalDiv: ElementRef;
 
   constructor() { 

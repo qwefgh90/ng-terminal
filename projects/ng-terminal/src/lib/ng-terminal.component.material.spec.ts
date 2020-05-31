@@ -13,19 +13,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({selector: 'app-mat-tab', template: `
   <mat-tab-group #tabGroup>
-    <mat-tab>
-      <ng-template mat-tab-label>Tab1</ng-template>
+    <mat-tab label="Tab1">
     </mat-tab>
-    <mat-tab>
-      <ng-template mat-tab-label>Tab2</ng-template>
+    <mat-tab label="Tab2">
       <div>
         <ng-terminal></ng-terminal>
       </div>
     </mat-tab>
   </mat-tab-group>`})
 class AppMatTabComponent{
-  @ViewChild('tabGroup') tabGroup: MatTabGroup;
-  @ViewChild(NgTerminalComponent) terminal: NgTerminal;
+  @ViewChild('tabGroup', {static: false}) tabGroup: MatTabGroup;
+  @ViewChild(NgTerminalComponent, {static: false}) terminal: NgTerminal;
 }
 
 describe('NgTerminalComponent with MaterialTab', () => {
@@ -65,9 +63,11 @@ describe('NgTerminalComponent with MaterialTab', () => {
   }));
 
   it(`gets a terminal component inside DOM`, fakeAsync(() => {
+    mattabFixture.detectChanges();
     mattabComponent.tabGroup.selectedIndex = 1;
     mattabFixture.detectChanges();
     tick(1000);
+    mattabFixture.detectChanges();
 
     let mattabEl = mattabFixture.nativeElement as HTMLElement;
     let xtermScreen = mattabEl.querySelector('.xterm-screen');
@@ -79,9 +79,11 @@ describe('NgTerminalComponent with MaterialTab', () => {
   }));
 
   it(`gets a terminal component inside DOM as soon as a tab is activated`, fakeAsync(() => {
+    mattabFixture.detectChanges();
     mattabComponent.tabGroup.selectedIndex = 0;
     mattabFixture.detectChanges();
     tick(1000);
+    mattabFixture.detectChanges();
 
     let hiddenXtermScreen = mattabComponent.terminal.underlying.element.getElementsByClassName('xterm-screen')[0];
     let hiddenViewport = mattabComponent.terminal.underlying.element.getElementsByClassName('xterm-viewport')[0];
@@ -91,6 +93,7 @@ describe('NgTerminalComponent with MaterialTab', () => {
     mattabComponent.tabGroup.selectedIndex = 1;
     mattabFixture.detectChanges();
     tick(1000);
+    mattabFixture.detectChanges();
 
     let mattabEl = mattabFixture.nativeElement as HTMLElement;
     let xtermScreen = mattabEl.querySelector('.xterm-screen');
@@ -102,6 +105,7 @@ describe('NgTerminalComponent with MaterialTab', () => {
   }));
 
   it(`changes rows and cols with setDisplayOption()`, fakeAsync(() => {
+    mattabFixture.detectChanges();
     mattabComponent.tabGroup.selectedIndex = 1;
     mattabFixture.detectChanges();
     tick(1000);
