@@ -30,7 +30,7 @@
     "@angular/router": "~8.2.14",
     "angular-resizable-element": "^3.3.2",
     "copyfiles": "^2.1.0",
-    "core-js": "^2.5.4",
+    "core-js": "^3.6.5",
     "ngx-json-viewer": "^2.4.0",
     "rxjs": "6.5.5",
     "tslib": "^1.13.0",
