@@ -29,7 +29,7 @@
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
     "angular-resizable-element": "^3.3.2",
-    "copyfiles": "^2.1.0",
+    "copyfiles": "^2.3.0",
     "core-js": "^2.5.4",
     "ngx-json-viewer": "^2.4.0",
     "rxjs": "6.5.5",
