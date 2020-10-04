@@ -126,7 +126,6 @@ export class NgTerminalComponent implements OnInit, AfterViewInit, AfterViewChec
   ngAfterViewChecked() {
     let dims = this.fitAddon.proposeDimensions();
     if(isNaN(dims.rows) || dims.rows == Infinity || isNaN(dims.cols) || dims.cols == Infinity){
-      console.debug(`Remove an bug where dimensions of the detached terminal element aren't set`)
       this.term.resize(10, 10);
     }else if(!this.displayOption.fixedGrid){
       this.fitAddon.fit();
