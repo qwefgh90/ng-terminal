@@ -4,12 +4,12 @@
   "scripts": {
     "start": "ng serve demo",
     "build": "npm run lib:build",
-    "test": "ng test ng-terminal",
+    "test": "npm run lib:test",
     "page": "npm run lib:build && ng build demo --prod --output-path docs --base-href /ng-terminal/",
     "lib:build": "ng build ng-terminal",
     "lib:test": "ng test ng-terminal",
     "lib:travis:test": "ng test ng-terminal --watch false --browsers ChromeHeadless",
-    "lib:publish": "cd dist/ng-terminal && npm publish",
+    "lib:publish": "npm run lib:build && cd dist/ng-terminal && npm publish",
     "add-licenses": "license-checker > LICENSE-THIRD-PARTY"
   },
   "private": true,
