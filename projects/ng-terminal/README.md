@@ -1,116 +1,24 @@
 # NgTerminal
 
-[![Build Status](https://travis-ci.org/qwefgh90/ng-terminal.svg?branch=master)](https://travis-ci.org/qwefgh90/ng-terminal) [![version](https://badge.fury.io/js/ng-terminal.svg)](https://www.npmjs.com/package/ng-terminal) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)]()
+This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.14.
 
-NgTerminal is a web terminal that leverages xterm.js on Angular 8+. You can easily add it into your application by adding `<ng-terminal></ng-terminal>` into your component.
+## Code scaffolding
 
-NgTerminal provides some features including [xtermjs](https://xtermjs.org/). You can adjust dimensions of a terminal by dragging and to fix the number of rows and cols. New usuful features should be added continuously.
+Run `ng generate component component-name --project ng-terminal` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ng-terminal`.
+> Note: Don't forget to add `--project ng-terminal` or else it will be added to the default project in your `angular.json` file. 
 
-## Install
+## Build
 
-```
-npm install ng-terminal --save
-```
+Run `ng build ng-terminal` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Example
+## Publishing
 
-You can run an example in your local environment.
+After building your library with `ng build ng-terminal`, go to the dist folder `cd dist/ng-terminal` and run `npm publish`.
 
-1) git clone https://github.com/qwefgh90/ng-terminal.git
-2) npm install
-3) npm run lib-build
-4) npm run start
+## Running unit tests
 
-## Getting started
+Run `ng test ng-terminal` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-`NgTerminalModule` should be imported within **your app module.**
+## Further help
 
-```typescript
-import { NgTerminalModule } from 'ng-terminal';
-//...
-@NgModule({
-    imports: [
-        NgTerminalModule
-    //...
-```
-
-Just add `<ng-terminal>` to your `app.component.html`.
-And when the application starts, you can see the web terminal to do nothing.
-
-```html
-  <ng-terminal #term></ng-terminal>
-```
-
-Now you can print or do something on the terminal with `NgTerminal` object which has APIs for developers.
-You can get a object by using `@ViewChild` in your component. It is very important that an object of `NgTerminalComponent` is populated after `ngAfterViewInit()` is called.
-
-```typescript
-//...
-export class YourComponent implements AfterViewInit{
-  @ViewChild('term', { static: true }) child: NgTerminal;
-  
-  ngAfterViewInit(){
-    this.child.keyEventInput.subscribe(e => {
-      console.log('keyboard event:' + e.domEvent.keyCode + ', ' + e.key);
-
-      const ev = e.domEvent;
-      const printable = !ev.altKey && !ev.ctrlKey && !ev.metaKey;
-
-      if (ev.keyCode === 13) {
-        this.child.write('\r\n$ ');
-      } else if (ev.keyCode === 8) {
-        // Do not delete the prompt
-        if (this.child.underlying.buffer.active.cursorX > 2) {
-          this.child.write('\b \b');
-        }
-      } else if (printable) {
-        this.child.write(e.key);
-      }
-    })
-  }
-
-  //...
-```
-
-## API
-
-There are two ways to control the terminal. Calling API which is a interface of NgTerminal provides is a direct way to control the terminal. You can bind a instance by using @ViewChild. Another way is to use input/output properties.
-
-#### NgTerminal (API)
-
-[NgTerminal](https://github.com/qwefgh90/ng-terminal/blob/master/projects/ng-terminal/src/lib/ng-terminal.ts) is a interface to provide public APIs you can call directly. You can get a object by using `@ViewChild` with a type of `NgTerminal`.
-
-```typescript 
-  import { NgTerminal } from 'ng-terminal';
-  ...
-  @ViewChild('term', { static: true }) child: NgTerminal; // for Angular 8
-```
-
-#### NgTerminalComponent (input/output properties)
-
-[NgTerminalComponent](https://github.com/qwefgh90/ng-terminal/blob/master/projects/ng-terminal/src/lib/ng-terminal.component.ts) is a component to implement `NgTerminal` and draw the terminal.
-
-```html
-<ng-terminal #term [dataSource]="writeSubject" (keyEvent)="onKeyEvent($event)" [displayOption]="displayOptionBounded"></ng-terminal>
-```
-
-#### Underlying object
-
-You can control a instance of the xtermjs directly by getting a property of [underlying](https://github.com/qwefgh90/ng-terminal/blob/master/projects/ng-terminal/src/lib/ng-terminal.ts#L27). Check out API of the Terminal from the [API document](https://xtermjs.org/docs/)
-
-#### Control sequences
-
-Control sequences is a programing interface to control terminal emulators. There are functions to return control sequences in a class of `FunctionUsingCSI`.
-
-```typescript
-    import { FunctionsUsingCSI } from 'ng-terminal';
-    ...
-    const sequences = "data..1" + FunctionsUsingCSI.cursorBackward(1) + '2';
-    component.write(sequences);
-```
-
-You can also find a full set of sequences [here](https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h2-Controls-beginning-with-ESC). For example, you can move a cursor down by passing `\x1b[1E` to `write()`. Try in the [sample page](https://qwefgh90.github.io/ng-terminal/)
-
-## Contribution
-
-NgTerminal is developed with Angular CLI. You can always write issue and contribute through PR to **master** branch.
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

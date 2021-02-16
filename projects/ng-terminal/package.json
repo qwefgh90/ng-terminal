@@ -4,9 +4,12 @@
   "description": "NgTerminal is a terminal component on Angular8 or higher.",
   "license": "MIT",
   "peerDependencies": {
-    "@angular/common": ">=8.2.0 <10.0.0",
-    "@angular/core": ">=8.2.0 <10.0.0",
-    "rxjs": ">=6.5.0"
+    "@angular/common": ">=8.2.14",
+    "@angular/core": ">=8.2.14",
+    "rxjs": ">=6.4.0",
+    "angular-resizable-element": "^3.3.5",
+    "xterm-addon-fit": "^0.4.0",
+    "xterm": "^4.6.0"
   },
   "repository": {
     "type": "git",
