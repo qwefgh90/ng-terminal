@@ -145,6 +145,8 @@ THE SOFTWARE.
 ng-terminal
 MIT
 
+ng-terminal-workspace
+
 ngx-json-viewer
 MIT
 MIT License
