@@ -12,18 +12,17 @@ NgTerminal provides some features including [xtermjs](https://xtermjs.org/). You
 npm install ng-terminal --save
 ```
 
-## Example
+## Run an example locally
 
 You can run an example in your local environment.
 
 1) git clone https://github.com/qwefgh90/ng-terminal.git
 2) npm install
-3) npm run lib-build
 4) npm run start
 
 ## Getting started
 
-`NgTerminalModule` should be imported within **your app module.**
+Import `NgTerminalModule` in your **AppModule**.
 
 ```typescript
 import { NgTerminalModule } from 'ng-terminal';
@@ -34,15 +33,18 @@ import { NgTerminalModule } from 'ng-terminal';
     //...
 ```
 
-Just add `<ng-terminal>` to your `app.component.html`.
-And when the application starts, you can see the web terminal to do nothing.
+And put `<ng-terminal>` into a source code of **Component**.
+Now a web terminal appears where you code it. 
+The terminal will do nothing first. So, you should define how to operate.
 
 ```html
   <ng-terminal #term></ng-terminal>
 ```
 
-Now you can print or do something on the terminal with `NgTerminal` object which has APIs for developers.
-You can get a object by using `@ViewChild` in your component. It is very important that an object of `NgTerminalComponent` is populated after `ngAfterViewInit()` is called.
+You can print or do something on the terminal with `NgTerminal` object which has some APIs for developers.
+You can get it by using `@ViewChild` in your component. It is important that an object of `NgTerminalComponent` is populated after `ngAfterViewInit()` is called.
+
+You can print something in a terminal by passing them to the `NgTerminal.write()`  function as an argument **as follows**, as soon as it receives user inputs from the terminal.
 
 ```typescript
 //...
@@ -50,6 +52,7 @@ export class YourComponent implements AfterViewInit{
   @ViewChild('term', { static: true }) child: NgTerminal;
   
   ngAfterViewInit(){
+    //...
     this.child.keyEventInput.subscribe(e => {
       console.log('keyboard event:' + e.domEvent.keyCode + ', ' + e.key);
 
@@ -59,7 +62,6 @@ export class YourComponent implements AfterViewInit{
       if (ev.keyCode === 13) {
         this.child.write('\r\n$ ');
       } else if (ev.keyCode === 8) {
-        // Do not delete the prompt
         if (this.child.underlying.buffer.active.cursorX > 2) {
           this.child.write('\b \b');
         }
@@ -67,6 +69,7 @@ export class YourComponent implements AfterViewInit{
         this.child.write(e.key);
       }
     })
+    //...
   }
 
   //...
@@ -74,9 +77,9 @@ export class YourComponent implements AfterViewInit{
 
 ## API
 
-There are two ways to control the terminal. Calling API which is a interface of NgTerminal provides is a direct way to control the terminal. You can bind a instance by using @ViewChild. Another way is to use input/output properties.
+There are two ways to control the terminal. Calling API in `NgTerminal` is a direct way to control the terminal. You can get a instance of `NgTerminal` by using @ViewChild. Another way is to use input/output properties.
 
-#### NgTerminal (API)
+### NgTerminal (API)
 
 [NgTerminal](https://github.com/qwefgh90/ng-terminal/blob/master/projects/ng-terminal/src/lib/ng-terminal.ts) is a interface to provide public APIs you can call directly. You can get a object by using `@ViewChild` with a type of `NgTerminal`.
 
@@ -86,7 +89,7 @@ There are two ways to control the terminal. Calling API which is a interface of 
   @ViewChild('term', { static: true }) child: NgTerminal; // for Angular 8
 ```
 
-#### NgTerminalComponent (input/output properties)
+### NgTerminalComponent (input/output properties)
 
 [NgTerminalComponent](https://github.com/qwefgh90/ng-terminal/blob/master/projects/ng-terminal/src/lib/ng-terminal.component.ts) is a component to implement `NgTerminal` and draw the terminal.
 
@@ -94,11 +97,15 @@ There are two ways to control the terminal. Calling API which is a interface of 
 <ng-terminal #term [dataSource]="writeSubject" (keyEvent)="onKeyEvent($event)" [displayOption]="displayOptionBounded"></ng-terminal>
 ```
 
-#### Underlying object
+### Underlying object
 
-You can control a instance of the xtermjs directly by getting a property of [underlying](https://github.com/qwefgh90/ng-terminal/blob/master/projects/ng-terminal/src/lib/ng-terminal.ts#L27). Check out API of the Terminal from the [API document](https://xtermjs.org/docs/)
+You can control a instance of the xtermjs directly by getting a property of [underlying](https://github.com/qwefgh90/ng-terminal/blob/master/projects/ng-terminal/src/lib/ng-terminal.ts#L27). Check out API of the Terminal from the [API document](https://xtermjs.org/docs/). 
 
-#### Control sequences
+#### Addons
+
+`ng-terminal` uses only one addon which is [fit](https://github.com/xtermjs/xterm.js/tree/master/addons/xterm-addon-fit) to support the resize feature. If you want to use other addons, you can apply them to a underlying object. Maybe you can do that without any problem.
+
+### Control sequences
 
 Control sequences is a programing interface to control terminal emulators. There are functions to return control sequences in a class of `FunctionUsingCSI`.
 
