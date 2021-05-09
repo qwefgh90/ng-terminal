@@ -1,6 +1,6 @@
 {
   "name": "ng-terminal",
-  "version": "3.0.2",
+  "version": "3.1.0",
   "description": "NgTerminal is a terminal component on Angular8 or higher.",
   "license": "MIT",
   "peerDependencies": {
@@ -41,7 +41,7 @@
   ],
   "dependencies": {
     "angular-resizable-element": "^3.3.2",
-    "xterm-addon-fit": "^0.4.0",
-    "xterm": "^4.6.0"
+    "xterm-addon-fit": "^0.5.0",
+    "xterm": "^4.11.0"
   }
 }

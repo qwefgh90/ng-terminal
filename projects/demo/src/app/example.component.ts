@@ -6,6 +6,7 @@ import { DisplayOption } from 'ng-terminal';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { Terminal } from 'xterm';
 import { FunctionsUsingCSI } from 'ng-terminal';
+import { WebLinksAddon } from 'xterm-addon-web-links';
 
 @Component({
   selector: 'app-root',
@@ -40,6 +41,7 @@ export class ExampleComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.underlying = this.child.underlying;
     this.underlying.setOption("fontSize", 20);
+    this.underlying.loadAddon(new WebLinksAddon());
     this.invalidate();
     this.child.write('$ ');
     this.child.keyInput.subscribe((input) => {

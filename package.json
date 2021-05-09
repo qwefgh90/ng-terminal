@@ -2,7 +2,7 @@
   "name": "ng-terminal-workspace",
   "version": "0.0.0",
   "scripts": {
-    "start": "ng serve demo",
+    "start": "npm run build && ng serve demo",
     "build": "npm run lib:build",
     "test": "npm run lib:test",
     "page": "npm run lib:build && ng build demo --prod --output-path docs --base-href /ng-terminal/",
@@ -26,8 +26,9 @@
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1",
     "angular-resizable-element": "^3.3.5",
-    "xterm-addon-fit": "^0.4.0",
-    "xterm": "^4.7.0",
+    "xterm-addon-fit": "^0.5.0",
+    "xterm-addon-web-links": "^0.4.0",
+    "xterm": "^4.11.0",
     "@angular/material": "^8.2.3",
     "@angular/cdk": "^8.2.3",
     "ngx-json-viewer": "^2.4.0"
