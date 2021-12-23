@@ -1,23 +1,24 @@
-import { Component, OnInit, AfterViewChecked, ViewChild, ElementRef, Input, Output, EventEmitter, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, ViewChild, ElementRef, Input, Output, EventEmitter, OnDestroy, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { Terminal } from 'xterm';
 import { FitAddon } from 'xterm-addon-fit';
 import { NgTerminal } from './ng-terminal';
 import { Subject, Observable, Subscription, combineLatest, ObjectUnsubscribedError } from 'rxjs';
-import { DisplayOption } from './display-option';
+import { compareDisplayOption as equalsDisplayOption, DisplayOption } from './display-option';
 import { ResizeEvent } from 'angular-resizable-element';
 
 @Component({
   selector: 'ng-terminal',
   templateUrl: './ng-terminal.component.html',
-  styleUrls: ['./ng-terminal.component.css']
+  styleUrls: ['./ng-terminal.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NgTerminalComponent implements OnInit, AfterViewInit, AfterViewChecked, NgTerminal, OnDestroy {
   private term: Terminal;
   private fitAddon: FitAddon;
   private keyInputSubject: Subject<string> = new Subject<string>();
   private keyEventSubject = new Subject<{key: string; domEvent: KeyboardEvent;}>();
-  private termSnippetSubject = new Subject<()=>void>();
-  private afterViewInitSubject = new Subject<void>();
+  // private termSnippetSubject = new Subject<()=>void>();
+  // private afterViewInitSubject = new Subject<void>();
   
   private keyInputSubjectSubscription: Subscription;
   private keyEventSubjectSubscription: Subscription;
@@ -26,7 +27,7 @@ export class NgTerminalComponent implements OnInit, AfterViewInit, AfterViewChec
   private displayOption: DisplayOption = {};
   private dataSource: Observable<string>;
   private dataSourceSubscription: Subscription;
-  terminalStyle: object = {};
+  outerStyle: object = {};
 
   @Input('dataSource')
   set _dataSource(ds) {
@@ -61,10 +62,10 @@ export class NgTerminalComponent implements OnInit, AfterViewInit, AfterViewChec
   @ViewChild('terminal', { static: true }) 
   terminalDiv: ElementRef;
 
-  constructor() { 
-    this.termSnippetSubscription = combineLatest(this.termSnippetSubject, this.afterViewInitSubject).subscribe(([snippet]) => {
-      snippet();
-    });
+  constructor(private ref: ChangeDetectorRef) { 
+    // this.termSnippetSubscription = combineLatest(this.termSnippetSubject, this.afterViewInitSubject).subscribe(([snippet]) => {
+    //   snippet();
+    // });
   }
 
   private observableSetup(){
@@ -80,64 +81,64 @@ export class NgTerminalComponent implements OnInit, AfterViewInit, AfterViewChec
     this.keyEventSubjectSubscription = this.keyEventSubject.subscribe((e) => {
       this.keyEventEmitter.emit(e);
     });
-    this.afterViewInitSubject.next();
+    // this.afterViewInitSubject.next();
   }
 
   /**
    * set block or inline-block to #terminal for fitting client or outer element
    */
-  private setTerminalBlock(isBlock: boolean){
+  private setOuterBlock(isBlock: boolean){
     if(isBlock)
-      this.terminalStyle['display'] = 'block';
+      this.outerStyle['display'] = 'block';
     else
-      this.terminalStyle['display'] = 'inline-block';
+      this.outerStyle['display'] = 'inline-block';
   }
 
   /**
    * set dimensions
    */
-  private setTerminalDimensions(left: number, top: number, width: number, height: number) {
-    this.terminalStyle['left'] = left ? `${left}px` : undefined;
-    this.terminalStyle['top'] = top ? `${top}px` : undefined;
-    this.terminalStyle['width'] = width ? `${width}px` : undefined;
-    this.terminalStyle['height'] = height ? `${height}px` : undefined;
+  private setOuterDimensions(left: number, top: number, width: number, height: number) {
+    this.outerStyle['left'] = left ? `${left}px` : undefined;
+    this.outerStyle['top'] = top ? `${top}px` : undefined;
+    this.outerStyle['width'] = width ? `${width}px` : undefined;
+    this.outerStyle['height'] = height ? `${height}px` : undefined;
   }
   
   /**
    * remove dimensions
    */
-  private removeTerminalDimensions(){
-    this.terminalStyle['left'] = undefined;
-    this.terminalStyle['top'] = undefined;
-    this.terminalStyle['width'] = undefined;
-    this.terminalStyle['height'] = undefined;
+  private removeOuterDimensions(){
+    this.outerStyle['left'] = undefined;
+    this.outerStyle['top'] = undefined;
+    this.outerStyle['width'] = undefined;
+    this.outerStyle['height'] = undefined;
+  }
+
+  private getDimensionsAheadOfRendering(): {width: number, height: number} | undefined {
+    const proposedDimensions = this.fitAddon.proposeDimensions();
+    const core = (this.underlying as any)._core;
+    try {
+      const actualWidth: number | undefined = core._renderService.dimensions.actualCellWidth as number | undefined;
+      const actualHeight: number | undefined = core._renderService.dimensions.actualCellWidth as number | undefined;
+      const scrollWidth: number = core.viewport.scrollBarWidth as number;
+      if (actualWidth && actualHeight) {
+        const width = actualWidth * proposedDimensions.cols + scrollWidth;
+        const height = actualHeight * proposedDimensions.rows;
+        return { width, height }
+      }
+    } catch (err) {
+      console.debug(err);
+    }
   }
 
   setStyle(styleObject: any){
-    Object.assign(this.terminalStyle, styleObject);
+    if(JSON.stringify(this.outerStyle) != JSON.stringify(styleObject)){
+      Object.assign(this.outerStyle, styleObject);
+      this.ref.markForCheck();
+    }
   }
 
   ngOnInit(){
-  }
-
-  /**
-   * When a dimension of div changes, fit a terminal in div.
-   */
-  ngAfterViewChecked() {
-    let dims = this.fitAddon.proposeDimensions();
-    if(dims === undefined || isNaN(dims.rows) || dims.rows == Infinity || isNaN(dims.cols) || dims.cols == Infinity){
-      this.term.resize(10, 10);
-    }else if(!this.displayOption.fixedGrid){
-      this.fitAddon.fit();
-    }else{
-      this.term.resize(this.displayOption.fixedGrid.cols, this.displayOption.fixedGrid.rows);
-      let xtermScreen = this.term.element.getElementsByClassName('xterm-screen')[0];
-      let scrollArea = this.term.element.getElementsByClassName('xterm-scroll-area')[0];
-      let terminal = this.term.element;
-      const contentWidth = xtermScreen.clientWidth;
-      const scrollWidth = terminal.clientWidth - scrollArea.clientWidth;
-      this.setTerminalDimensions(undefined, undefined, contentWidth + scrollWidth, undefined);
-    }
   }
 
   /**
@@ -149,8 +150,33 @@ export class NgTerminalComponent implements OnInit, AfterViewInit, AfterViewChec
     this.term.open(this.terminalDiv.nativeElement);
     this.term.loadAddon(this.fitAddon);
     this.observableSetup();
+    console.debug('ngAfterViewInit');
   }
 
+
+  /**
+   * When a dimension of div changes, fit a terminal in div.
+   */
+  ngAfterViewChecked() {
+    console.debug('ngAfterViewChecked');
+    let dims = this.fitAddon.proposeDimensions();
+    if(dims === undefined || isNaN(dims.rows) || dims.rows == Infinity || isNaN(dims.cols) || dims.cols == Infinity){
+      this.term.resize(10, 10);
+    }else if(!this.displayOption.fixedGrid){
+      this.fitAddon.fit();
+      let dim = this.getDimensionsAheadOfRendering();
+      console.debug(dim);
+      this.setOuterDimensions(undefined, undefined, dim.width+5, dim.height+5);
+    }else{
+      this.term.resize(this.displayOption.fixedGrid.cols, this.displayOption.fixedGrid.rows);
+      let xtermScreen = this.term.element.getElementsByClassName('xterm-screen')[0];
+      let scrollArea = this.term.element.getElementsByClassName('xterm-scroll-area')[0];
+      let terminal = this.term.element;
+      const contentWidth = xtermScreen.clientWidth;
+      const scrollWidth = terminal.clientWidth - scrollArea.clientWidth;
+      this.setOuterDimensions(undefined, undefined, contentWidth + scrollWidth, undefined);
+    }
+  }
   /**
    * clean all resources
    */
@@ -172,17 +198,18 @@ export class NgTerminalComponent implements OnInit, AfterViewInit, AfterViewChec
   }
 
   setDisplayOption(opt: DisplayOption) {
-    if (opt) {
+    if (opt && !equalsDisplayOption(opt, this.displayOption)) {
       if (opt.fixedGrid != null) {
         console.debug("resizable will be ignored.");
-        this.setTerminalBlock(false);
-        this.removeTerminalDimensions();
+        this.setOuterBlock(false);
+        this.removeOuterDimensions();
       } else {
-        this.setTerminalBlock(true);
+        this.setOuterBlock(true);
       }
       this.displayOption = opt;
+      this.ref.markForCheck();
     } else
-      console.warn(`A falsy option is not allowed`);
+      console.warn(`This option can't be applied.`);
   }
 
   get keyInput(): Observable<string> {
@@ -209,7 +236,7 @@ export class NgTerminalComponent implements OnInit, AfterViewInit, AfterViewChec
    * @param height 
    */
   onResizeEnd(left: number, top: number, width: number, height: number): void {
-    this.setTerminalDimensions(left, top, width, height);
+    this.setOuterDimensions(left, top, width, height);
   }
 
   /**
