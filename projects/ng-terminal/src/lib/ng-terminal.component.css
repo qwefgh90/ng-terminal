@@ -2,3 +2,6 @@
     box-sizing: border-box;
     height: 100%;
 }
+.draggable{
+    border: 4px solid #85858a;
+}

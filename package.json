@@ -2,15 +2,16 @@
   "name": "ng-terminal-workspace",
   "version": "0.0.0",
   "scripts": {
-    "start": "npm run build && ng serve demo",
+    "start": "npm run build && ng serve demo-v10",
     "build": "npm run lib:build",
     "test": "npm run lib:test",
-    "page": "npm run lib:build && ng build demo --prod --output-path docs --base-href /ng-terminal/",
+    "page": "npm run lib:build && ng build demo-v10 --prod --output-path docs --base-href /ng-terminal/",
     "lib:build": "ng build ng-terminal",
     "lib:test": "ng test ng-terminal",
     "lib:travis:test": "ng test ng-terminal --watch false --browsers ChromeHeadless",
     "lib:publish": "npm run lib:build && cd dist/ng-terminal && npm publish",
-    "add-licenses": "license-checker > LICENSE-THIRD-PARTY"
+    "add-licenses": "license-checker > LICENSE-THIRD-PARTY",
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {

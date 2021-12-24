@@ -24,6 +24,10 @@
       ],
       "ng-terminal/*": [
         "dist/ng-terminal/*"
+      ],
+      "test": [
+        "dist/test/test",
+        "dist/test"
       ]
     }
   },

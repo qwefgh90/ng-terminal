@@ -6,7 +6,7 @@ import { ResizableModule } from 'angular-resizable-element';
 import { Subject } from 'rxjs';
 import { keydown } from './test-util'
 import { FunctionsUsingCSI, KindOfEraseInDisplay, KindOfEraseInLine } from './functions-using-csi';
-import { ViewChild, Component, OnInit } from '@angular/core';
+import { ViewChild, Component, OnInit, SimpleChange } from '@angular/core';
 import { NgTerminal } from './ng-terminal';
 import { MatTabsModule, MatTabGroup } from '@angular/material/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -64,10 +64,16 @@ describe('NgTerminalComponent with MaterialTab', () => {
 
   it(`gets a terminal component inside DOM`, fakeAsync(() => {
     mattabFixture.detectChanges();
+    tick(1000);
+    (mattabComponent.terminal as any).ngOnChanges({
+      _rows: new SimpleChange(undefined, undefined, true),
+      _cols: new SimpleChange(undefined, undefined, true),
+      _draggable: new SimpleChange(undefined, undefined, true)
+    });
+    tick(1000);
     mattabComponent.tabGroup.selectedIndex = 1;
     mattabFixture.detectChanges();
     tick(1000);
-    mattabFixture.detectChanges();
 
     let mattabEl = mattabFixture.nativeElement as HTMLElement;
     let xtermScreen = mattabEl.querySelector('.xterm-screen');
@@ -110,7 +116,8 @@ describe('NgTerminalComponent with MaterialTab', () => {
     mattabFixture.detectChanges();
     tick(1000);
 
-    mattabComponent.terminal.setDisplayOption({fixedGrid: {rows: 10, cols: 10}});
+    mattabComponent.terminal.setRows(10);
+    mattabComponent.terminal.setCols(10);
     mattabFixture.detectChanges();
     tick(1000);
     let mattabEl = mattabFixture.nativeElement as HTMLElement;
@@ -118,7 +125,8 @@ describe('NgTerminalComponent with MaterialTab', () => {
     let screenWidth1= xtermScreen.clientWidth;
     let screenHeight1= xtermScreen.clientHeight;
 
-    mattabComponent.terminal.setDisplayOption({fixedGrid: {rows: 15, cols: 15}});
+    mattabComponent.terminal.setRows(15);
+    mattabComponent.terminal.setCols(15);
     mattabFixture.detectChanges();
     tick(1000);
     let screenWidth2= xtermScreen.clientWidth;
@@ -126,7 +134,8 @@ describe('NgTerminalComponent with MaterialTab', () => {
     expect(screenWidth2).toBeGreaterThan(screenWidth1);
     expect(screenHeight2).toBeGreaterThan(screenHeight1);
 
-    mattabComponent.terminal.setDisplayOption({fixedGrid: {rows: 8, cols: 8}});
+    mattabComponent.terminal.setRows(8);
+    mattabComponent.terminal.setCols(8);
     mattabFixture.detectChanges();
     tick(1000);
     let screenWidth3= xtermScreen.clientWidth;

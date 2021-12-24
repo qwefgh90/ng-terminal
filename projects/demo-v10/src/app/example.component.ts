@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { NgTerminal, NgTerminalComponent } from 'ng-terminal';
 import { FormControl } from '@angular/forms';
-import { DisplayOption } from 'ng-terminal';
+// import { DisplayOption } from 'ng-terminal';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { Terminal } from 'xterm';
 import { FunctionsUsingCSI } from 'ng-terminal';
@@ -25,8 +25,8 @@ export class ExampleComponent implements OnInit, AfterViewInit {
   colsControl = new FormControl();
   inputControl = new FormControl();
 
-  displayOption: DisplayOption = {};
-  displayOptionBounded: DisplayOption = {};//now it's not used
+  // displayOption: DisplayOption = {};
+  // displayOptionBounded: DisplayOption = {};//now it's not used
   underlying: Terminal;
 
   @ViewChild('term', {static: false}) child: NgTerminal;
@@ -70,21 +70,21 @@ export class ExampleComponent implements OnInit, AfterViewInit {
   }
 
   invalidate() {
-    if (this.resizable)
-      this.displayOption.activateDraggableOnEdge = { minWidth: 100, minHeight: 100 };
-    else
-      this.displayOption.activateDraggableOnEdge = undefined;
-    if (this.fixed)
-      this.displayOption.fixedGrid = { rows: this.rowsControl.value, cols: this.colsControl.value };
-    else
-      this.displayOption.fixedGrid = undefined;
-    this.child.setDisplayOption(this.displayOption);
+    // if (this.resizable)
+    //   this.displayOption.activateDraggableOnEdge = { minWidth: 100, minHeight: 100 };
+    // else
+    //   this.displayOption.activateDraggableOnEdge = undefined;
+    // if (this.fixed)
+    //   this.displayOption.fixedGrid = { rows: this.rowsControl.value, cols: this.colsControl.value };
+    // else
+    //   this.displayOption.fixedGrid = undefined;
+    // this.child.setDisplayOption(this.displayOption);
   }
 
   resizableChange(event: MatSlideToggleChange) {
     this.resizable = event.checked;
     if (this.resizable){
-      this.child.setStyle({"border": "4px solid #85858a"});
+      // this.child.setStyle({"border": "4px solid #85858a"});
       this.fixed = false;
     }
     this.invalidate();
@@ -93,7 +93,7 @@ export class ExampleComponent implements OnInit, AfterViewInit {
   fixedChange(event: MatSlideToggleChange) {
     this.fixed = event.checked;
     if (this.fixed){
-      this.child.setStyle({"border": "unset"});
+      // this.child.setStyle({"border": "unset"});
       this.resizable = false;
     }
     this.invalidate();
@@ -110,6 +110,6 @@ export class ExampleComponent implements OnInit, AfterViewInit {
   }
 
   get displayOptionForLiveUpdate() {
-    return JSON.parse(JSON.stringify(this.displayOption));
+    return {rows: this.rowsControl.value, cols: this.colsControl.value, draggable: this.resizable};
   }
 }

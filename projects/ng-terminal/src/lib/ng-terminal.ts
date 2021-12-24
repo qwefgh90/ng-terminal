@@ -1,6 +1,6 @@
 import { Subscription, Observable } from 'rxjs';
 import { Terminal } from 'xterm';
-import { DisplayOption } from './display-option';
+// import { DisplayOption } from './display-option';
 
 export interface NgTerminal {
     /**
@@ -28,7 +28,8 @@ export interface NgTerminal {
     /**
      * change row, col, draggable
      */
-    setDisplayOption(opt: DisplayOption): void
-    
+    setDraggable(draggable: boolean): void;
+    setRows(rows: number): void;
+    setCols(cols: number): void;
     setStyle(styleObject: any): void;
 }
