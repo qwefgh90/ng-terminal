@@ -1,6 +1,10 @@
 <h2>{{title}}</h2>
-<ng-terminal #term [dataSource]="writeSubject" (keyInput)="onKeyInput($event)" [displayOption]="displayOptionBounded"
-[ngClass]="{'ng-terminal': (displayOption.activateDraggableOnEdge == undefined && displayOption.fixedGrid == undefined)}">
+<ng-terminal #term [dataSource]="writeSubject" (keyInput)="onKeyInput($event)" 
+[rows]="rowsControl.value"
+[cols]="colsControl.value"
+[draggable]="resizable"
+class="ng-terminal"
+>
 </ng-terminal>
 <div [class.mat-elevation-z1]="true"
     style="padding-left: 1em; padding-top: 0.3em; margin-top: 0.7em; padding-bottom: 1em">

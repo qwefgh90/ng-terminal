@@ -6,6 +6,7 @@ import { ResizableModule } from 'angular-resizable-element';
 import { Subject } from 'rxjs';
 import { keydown } from './test-util'
 import { FunctionsUsingCSI, KindOfEraseInDisplay, KindOfEraseInLine } from './functions-using-csi';
+import { SimpleChange } from '@angular/core';
 
 describe('NgTerminalComponent', () => {
   let component: NgTerminalComponent;
@@ -42,21 +43,6 @@ describe('NgTerminalComponent', () => {
     tick(100);
     expect(term.getSelection().trim()).toEqual(dummy);
   }));
-
-  it("make a scroll in xterm-viewport with write(newlines)", fakeAsync(() => {
-    const term = fixture.componentInstance.terminalDiv.nativeElement as HTMLElement;
-    component._displayOption = {fixedGrid:{rows: 4, cols: 4}};
-    fixture.detectChanges();
-    tick(1000);
-    
-    component.write('\n\n\n\n\n\n\n\n\n\n\n\n\n\n');
-    fixture.detectChanges();
-    tick(1000);
-    const viewPort = term.querySelector('.xterm-viewport');
-    const height = viewPort.clientHeight;
-    const scrollHeight = viewPort.scrollHeight;
-    expect(scrollHeight).toBeGreaterThan(height);
-  }))
 
   it('keyInput', (doneFn) => {
     let arr = ['h','i','!','\n']
@@ -115,7 +101,7 @@ describe('NgTerminalComponent', () => {
   })
 });
 
-describe('DisplayOption', () => {
+describe('Input properties', () => {
   let component: NgTerminalComponent;
   let fixture: ComponentFixture<NgTerminalComponent>;
 
@@ -137,11 +123,47 @@ describe('DisplayOption', () => {
     expect(component).toBeTruthy();
   });
 
-  it("@Input('displayOption')", () => {
+  it("@Input('rows'), @Input('cols')", fakeAsync(() => {
     const term = fixture.componentInstance.terminalDiv.nativeElement;
+    component.ngOnChanges({
+      _rows: new SimpleChange(undefined, undefined, true),
+      _cols: new SimpleChange(undefined, undefined, true),
+      _draggable: new SimpleChange(undefined, undefined, true)
+    });
+    tick(1000);
     const beforeWidth = term.clientWidth;
     const beforeHeight = term.clientHeight;
-    component._displayOption = {fixedGrid:{rows: 4, cols: 4}};
+    component._rows = 4;
+    component._cols = 4;
+    component.ngOnChanges({
+      _rows: new SimpleChange(undefined, 4, false),
+      _cols: new SimpleChange(undefined, 4, false)
+    });
+    tick(1000);
+    const afterWidth = term.clientWidth;
+    const afterHeight = term.clientHeight;
+    
+    expect(afterWidth).toBeLessThan(beforeWidth);
+    expect(afterHeight).toBeLessThan(beforeHeight);
+  }))
+
+  it('should decrease div size after changing fixedSize', fakeAsync(() => {
+    const term = fixture.componentInstance.terminalDiv.nativeElement;
+    component.ngOnChanges({
+      _rows: new SimpleChange(undefined, undefined, true),
+      _cols: new SimpleChange(undefined, undefined, true),
+      _draggable: new SimpleChange(undefined, undefined, true)
+    });
+    tick(1000);
+    const beforeWidth = term.clientWidth;
+    const beforeHeight = term.clientHeight;
+    component._rows = 4;
+    component._cols = 4;
+    component.ngOnChanges({
+      _rows: new SimpleChange(undefined, 4, false),
+      _cols: new SimpleChange(undefined, 4, false)
+    });
+    tick(1000);
     fixture.detectChanges();
     
     const afterWidth = term.clientWidth;
@@ -149,45 +171,54 @@ describe('DisplayOption', () => {
     
     expect(afterWidth).toBeLessThan(beforeWidth);
     expect(afterHeight).toBeLessThan(beforeHeight);
-  })
+  }))
 
-  it('should decrease div size after changing fixedSize', () => {
+  it('should increase div size after changing fixedSize', fakeAsync(() => {
     const term = fixture.componentInstance.terminalDiv.nativeElement;
+    component.ngOnChanges({
+      _rows: new SimpleChange(undefined, undefined, true),
+      _cols: new SimpleChange(undefined, undefined, true),
+      _draggable: new SimpleChange(undefined, undefined, true)
+    });
+    tick(1000);
+
+    component._rows = 4;
+    component._cols = 4;
+    component.ngOnChanges({
+      _rows: new SimpleChange(undefined, 4, false),
+      _cols: new SimpleChange(undefined, 4, false)
+    });
+
+    fixture.detectChanges();
+    tick(1000);
     const beforeWidth = term.clientWidth;
     const beforeHeight = term.clientHeight;
-    component.setDisplayOption({fixedGrid:{rows: 4, cols: 4}});
+    
+    component._rows = 100;
+    component._cols = 100;
+    component.ngOnChanges({
+      _rows: new SimpleChange(undefined, 100, false),
+      _cols: new SimpleChange(undefined, 100, false)
+    });
     fixture.detectChanges();
-    
-    const afterWidth = term.clientWidth;
-    const afterHeight = term.clientHeight;
-    
-    expect(afterWidth).toBeLessThan(beforeWidth);
-    expect(afterHeight).toBeLessThan(beforeHeight);
-  })
+    tick(1000);
 
-  it('should increase div size after changing fixedSize', () => {
-    const term = fixture.componentInstance.terminalDiv.nativeElement;
-    component.setDisplayOption({fixedGrid:{rows: 4, cols: 4}});
-    fixture.detectChanges();
-    const beforeWidth = term.clientWidth;
-    const beforeHeight = term.clientHeight;
-    
-    component.setDisplayOption({fixedGrid:{rows: 100, cols: 100}});
-    fixture.detectChanges();
     const afterWidth = term.clientWidth;
     const afterHeight = term.clientHeight;
     
     expect(afterWidth).toBeGreaterThan(beforeWidth);
     expect(afterHeight).toBeGreaterThan(beforeHeight);
-  })
+  }))
 
   it('isDraggableOnEdgeActivated', () => {
-    component.setDisplayOption({activateDraggableOnEdge: { minWidth: 100, minHeight: 100 }});
+    component._rows = 100;
+    component._cols = 100;
     expect(component.isDraggableOnEdgeActivated).toBe(true);
   })
 
   it('validatorFactory()', () => {
-    component.setDisplayOption({activateDraggableOnEdge:{minHeight:100, minWidth:100}});
+    component._rows = 100;
+    component._cols = 100;
     let res1 = component.validatorFactory()({rectangle:{left: undefined, top: undefined, bottom: undefined, right: undefined, width: 99, height: 99}, edges: undefined})
     expect(res1).toBeFalsy('it must be false because it is smaller than minimum size');
     let res2 = component.validatorFactory()({rectangle:{left: undefined, top: undefined, bottom: undefined, right: undefined, width: 100, height: 100}, edges: undefined})
@@ -195,39 +226,6 @@ describe('DisplayOption', () => {
     let res3 = component.validatorFactory()({rectangle:{left: undefined, top: undefined, bottom: undefined, right: undefined, width: 200, height: 200}, edges: undefined})
     expect(res3).toBeTruthy('it must be true because it is bigger than minimum size');
   });
-});
-
-describe('NgTerminalComponent before opening', () => {
-  let component: NgTerminalComponent;
-  let fixture: ComponentFixture<NgTerminalComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ NgTerminalComponent, GlobalStyleComponent ],
-      imports: [ ResizableModule ]
-    })
-    .compileComponents();
-  }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(NgTerminalComponent);
-    component = fixture.componentInstance;
-  });
-
-  it("@Input('displayOption')", () => {
-    component._displayOption = {
-      fixedGrid: {
-        cols: 100,
-        rows: 15
-      },
-      activateDraggableOnEdge: {
-        minHeight: 100,
-        minWidth: 100
-      }
-    };
-    
-    fixture.detectChanges();
-  })
 });
 
 describe('NgTerminalComponent with CSI functions', () => {

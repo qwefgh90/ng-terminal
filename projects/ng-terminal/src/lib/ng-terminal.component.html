@@ -1,6 +1,6 @@
 <global-style></global-style>
 
-<div #terminal class="terminal-outer" mwlResizable [ngStyle]="outerStyle" [validateResize]="validatorFactory()"
+<div #terminal class="terminal-outer" mwlResizable [validateResize]="validatorFactory()"
     [enableGhostResize]="true"
     [resizeEdges]="isDraggableOnEdgeActivated ? {bottom: true, right: true} : {bottom: false, right: false}"
     (resizeEnd)="onResizeEnd($event.rectangle.left, $event.rectangle.top, $event.rectangle.width, $event.rectangle.height)">
