@@ -1,6 +1,6 @@
 [![Build Status](https://app.travis-ci.com/qwefgh90/ng-terminal.svg?branch=master)](https://app.travis-ci.com/qwefgh90/ng-terminal) [![version](https://badge.fury.io/js/ng-terminal.svg)](https://www.npmjs.com/package/ng-terminal) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)]()
 
-NgTerminal is a web terminal that leverages xterm.js on Angular 8+. You can easily add it into your application by adding `<ng-terminal></ng-terminal>` into your component.
+NgTerminal is a web terminal that leverages xterm.js on Angular 11+. You can easily add it into your application by adding `<ng-terminal></ng-terminal>` into your component.
 
 NgTerminal provides some features including [xtermjs](https://xtermjs.org/). You can adjust dimensions of a terminal by dragging and to fix the number of rows and cols. New usuful features should be added continuously.
 
@@ -58,7 +58,7 @@ export class YourComponent implements AfterViewInit{
       const printable = !ev.altKey && !ev.ctrlKey && !ev.metaKey;
 
       if (ev.keyCode === 13) {
-        this.child.write('\r\n$ ');
+        this.child.write('\n' + FunctionsUsingCSI.cursorColumn(1) + '$ '); // \r\n
       } else if (ev.keyCode === 8) {
         if (this.child.underlying.buffer.active.cursorX > 2) {
           this.child.write('\b \b');
@@ -73,29 +73,31 @@ export class YourComponent implements AfterViewInit{
   //...
 ```
 
-## API
+## NgTerminal
 
-There are two ways to control the terminal. Calling API in `NgTerminal` is a direct way to control the terminal. You can get a instance of `NgTerminal` by using @ViewChild. Another way is to use input/output properties.
+There are two ways to control the terminal. A first way is passing the arguments to input/output properties. API in `NgTerminal` is also a way to control the terminal. You can get a instance of `NgTerminal` by using `@ViewChild`.
 
-### NgTerminal (API)
+### Input/Output properties
+
+Four properties (`dataSource`, `rows`, `cols` and `draggable`) are helpful to construct your temrinal. Check [here](https://qwefgh90.github.io/ng-terminal/).
+
+```html
+<ng-terminal #term [dataSource]="writeSubject" (keyEvent)="onKeyEvent($event)" 
+[rows]="10" 
+[cols]="20" 
+[draggable]="false"></ng-terminal>
+```
+
+### API
 
 [NgTerminal](https://github.com/qwefgh90/ng-terminal/blob/master/projects/ng-terminal/src/lib/ng-terminal.ts) is a interface to provide public APIs you can call directly. You can get a object by using `@ViewChild` with a type of `NgTerminal`.
 
 ```typescript 
   import { NgTerminal } from 'ng-terminal';
   ...
-  @ViewChild('term', { static: true }) child: NgTerminal; // for Angular 8
+  @ViewChild('term', { static: true }) child: NgTerminal;
 ```
-
-### NgTerminalComponent (input/output properties)
-
-[NgTerminalComponent](https://github.com/qwefgh90/ng-terminal/blob/master/projects/ng-terminal/src/lib/ng-terminal.component.ts) is a component to implement `NgTerminal` and draw the terminal.
-
-```html
-<ng-terminal #term [dataSource]="writeSubject" (keyEvent)="onKeyEvent($event)" [displayOption]="displayOptionBounded"></ng-terminal>
-```
-
-### Underlying object
+### Underlying object (Xtermjs)
 
 You can control a instance of the xtermjs directly by getting a property of [underlying](https://github.com/qwefgh90/ng-terminal/blob/master/projects/ng-terminal/src/lib/ng-terminal.ts#L27). Check out API of the Terminal from the [API document](https://xtermjs.org/docs/). 
 
@@ -114,7 +116,7 @@ Control sequences is a programing interface to control terminal emulators. There
     component.write(sequences);
 ```
 
-You can also find a full set of sequences [here](https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h2-Controls-beginning-with-ESC). For example, you can move a cursor down by passing `\x1b[1E` to `write()`. Try in the [sample page](https://qwefgh90.github.io/ng-terminal/)
+You can find official supported terminal sequences in https://xtermjs.org/docs/api/vtfeatures/. And you can also read helpful article [here](https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h2-Controls-beginning-with-ESC). For example, you can move a cursor down by passing `\x1b[1E` to `write()`. Try in the [sample page](https://qwefgh90.github.io/ng-terminal/)
 
 ## Contribution
 
