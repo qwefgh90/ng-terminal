@@ -9,7 +9,7 @@
     "lib:build": "ng build ng-terminal",
     "lib:test": "ng test ng-terminal",
     "lib:travis:test": "ng test ng-terminal --watch false --browsers ChromeHeadless",
-    "lib:publish": "npm run lib:build && cd dist/ng-terminal && npm publish",
+    "lib:publish": "ng build ng-terminal --prod && cd dist/ng-terminal && npm publish",
     "add-licenses": "license-checker > LICENSE-THIRD-PARTY",
     "e2e": "ng e2e"
   },

@@ -10,10 +10,15 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/ng-terminal/tsconfig.lib.json",
             "project": "projects/ng-terminal/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ng-terminal/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
