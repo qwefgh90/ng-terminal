@@ -2,10 +2,11 @@ import { Component, OnInit, AfterViewChecked, ViewChild, ElementRef, Input, Outp
 import { Terminal } from 'xterm';
 import { FitAddon } from 'xterm-addon-fit';
 import { NgTerminal } from './ng-terminal';
-import { Subject, Observable, Subscription, combineLatest, ObjectUnsubscribedError } from 'rxjs';
-// import { compareDisplayOption as equalsDisplayOption, DisplayOption } from './display-option';
+import { Subject, Observable, Subscription, combineLatest, ObjectUnsubscribedError, ReplaySubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { ResizeEvent } from 'angular-resizable-element';
-import { deprecate } from 'util';
+import { ResizeObserver } from '@juggle/resize-observer';
+
 
 @Component({
   selector: 'ng-terminal',
@@ -18,18 +19,31 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
   private fitAddon: FitAddon;
   private keyInputSubject: Subject<string> = new Subject<string>();
   private keyEventSubject = new Subject<{ key: string; domEvent: KeyboardEvent; }>();
-  private requestRenderFromAPI = new Subject<{ rowColChange: boolean }>();
-  private afterViewInitSubject = new Subject<void>();
+  private requestRenderFromAPI = new Subject<{
+    rowChanged?: boolean, columnChanged?: boolean
+    , dragged?: { draggedWidth: string, draggedHeight: string }
+    , hostResized?: { width: string, height: string }
+    , whenTerminalDimensionIsOverOuterDiv?: { width: string, height: string }
+  }>();
+  private allLogsSubject = new Subject<{
+    rowChanged: boolean
+    , columnChanged: boolean
+    , dragged?: { draggedWidth: string, draggedHeight: string }
+    , hostResized?: { width: string, height: string }
+    , whenTerminalDimensionIsOverOuterDiv?: { width: string, height: string }
+  }>();
+  // private afterViewInitSubject = new Subject<void>();
 
   private keyInputSubjectSubscription: Subscription;
   private keyEventSubjectSubscription: Subscription;
+  private allLogsSubjectSubscription: Subscription;
   private requestRenderSubscription: Subscription;
+  private resizableObservers: ResizeObserver[] = [];
   private h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
   // private displayOption: DisplayOption = {};
   private dataSource: Observable<string>;
   private dataSourceSubscription: Subscription;
-  preOuterStyle: Partial<CSSStyleDeclaration> = { 'display': 'block' };
-  outerStyle: Partial<CSSStyleDeclaration> = {};
+  stylesForDiv: Partial<CSSStyleDeclaration> = { 'display': 'block' };
 
   @Input('dataSource')
   set _dataSource(ds) {
@@ -46,36 +60,60 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
   }
 
   @Input('rows')
-  _rows?: number;
+  _rowsInput?: number;
   @Input('cols')
-  _cols?: number;
+  _colsInput?: number;
   @Input('minWidth')
-  _minWidth?: number;
+  _minWidthInput?: number;
   @Input('minHeight')
-  _minHeight?: number;
+  _minHeightInput?: number;
   @Input('draggable')
-  _draggable?: boolean = true;
+  set draggable(draggable: boolean) {
+    this._draggableInput = draggable;
+    this.applyStyleToDraggable();
+  }
+  get draggable(){
+    return this._draggableInput;
+  }
+  lastDraggedPosition:{width: string, height: string};
+
+  _draggableInput?: boolean = false;
+
+  _stylesInput: any = {};
+
+  setMinWidth(width: number): void {
+    this._minWidthInput = width;
+  }
+  setMinHeight(height: number): void {
+    this._minHeightInput = height;
+  }
 
   setDraggable(draggable: boolean): void {
-    this._draggable = draggable;
-    this.ref.markForCheck();
+    this._draggableInput = draggable;
+    this.lastDraggedPosition = undefined;
+    this.applyStyleToDraggable();
   }
 
   setRows(rows: number): void {
-    this._rows = rows;
-    this.requestRenderFromAPI.next({ rowColChange: true });
+    if (this._rowsInput != rows){
+      this._rowsInput = rows;
+      this.requestRenderFromAPI.next({ rowChanged: true });
+    }
   }
 
   setCols(cols: number): void {
-    this._cols = cols;
-    this.requestRenderFromAPI.next({ rowColChange: true });
+    if (this._colsInput != cols){
+      this._colsInput = cols;
+      this.requestRenderFromAPI.next({ columnChanged: true });
+    }
   }
 
-  @Input('style')
-  set _style(opt: any) {
-    this.setStyle(opt);
-    console.debug("style");
-    this.requestRenderFromAPI.next({ rowColChange: false });
+  setStyle(styleObject: any): void {
+    if (JSON.stringify(this._stylesInput ?? {}) != JSON.stringify(styleObject ?? {})){
+      this._stylesInput = styleObject;
+      this.requestRenderFromAPI.next({});
+    }
+    
   }
 
   @Output('keyInput')
@@ -85,14 +123,80 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
   keyEventEmitter = new EventEmitter<{ key: string; domEvent: KeyboardEvent; }>();
 
   @ViewChild('terminal', { static: true })
-  terminalDiv: ElementRef;
+  div: ElementRef;
 
-  constructor(private renderer: Renderer2, private ref: ChangeDetectorRef) {
-    this.requestRenderSubscription = combineLatest(this.requestRenderFromAPI, this.afterViewInitSubject).subscribe(([{ rowColChange }]) => {
-      if (rowColChange)
-        this.coordinateOuterAndTerminal(true);
-      else
-        this.coordinateOuterAndTerminal(false);
+  private getNextOrWait() {
+    if (!this.hostRef.nativeElement.isConnected) {
+      this.stopAndPolling();
+    } else {
+      this.releaseNextOne();
+    }
+  }
+  private pushToWaitingQueue(item: {
+    rowChanged: boolean
+    , columnChanged: boolean
+    , dragged?: { draggedWidth: string, draggedHeight: string }
+    , hostResized?: { width: string, height: string }
+    , whenTerminalDimensionIsOverOuterDiv?: { width: string, height: string }
+  }) {
+    this.waitingQueue.push(item);
+    this.releaseNextOne();
+  }
+
+  /**
+   * @internal
+   */
+  private stopAndPolling() {
+    const pollFunction = () => {
+      if (this.interval)
+        return;
+      const interval = setInterval(() => {
+        if (this.hostRef.nativeElement.isConnected) {
+          clearInterval(interval);
+          this.interval = undefined;
+          this.releaseNextOne();
+        }
+      }, 500);
+      this.interval = interval;
+    }
+    pollFunction();
+  }
+
+  /**
+   * @internal don't make a direct call
+   */
+  interval: ReturnType<typeof setInterval>;
+
+  /**
+   * @internal don't make a direct call
+   */
+  private releaseNextOne = () => {
+    if (!this.interval) {
+      let list = this.waitingQueue.splice(0, 1);
+      if (list.length == 1) {
+        this.allLogsSubject.next(list[0]);
+      }
+    }
+  }
+
+  /**
+   * @internal don't make a direct call
+   */
+  private waitingQueue: {
+    rowChanged: boolean
+    , columnChanged: boolean
+    , dragged?: { draggedWidth: string, draggedHeight: string }
+    , hostResized?: { width: string, height: string }
+    , whenTerminalDimensionIsOverOuterDiv?: { width: string, height: string }
+  }[] = [];
+
+  constructor(private renderer: Renderer2, private ref: ChangeDetectorRef, private hostRef: ElementRef) {
+    this.requestRenderSubscription = this.requestRenderFromAPI.subscribe(change => {
+      let changeWithDefault = {
+        rowChanged: false, columnChanged: false, ...change
+      };
+      this.pushToWaitingQueue(changeWithDefault);
+      this.getNextOrWait();
     });
   }
   private observableSetup() {
@@ -108,65 +212,52 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
     this.keyEventSubjectSubscription = this.keyEventSubject.subscribe((e) => {
       this.keyEventEmitter.emit(e);
     });
-  }
 
+    this.resizableObservers = [this.observeTerminalDimension(), this.observeHostDimension()];
+    this.allLogsSubjectSubscription = this.allLogsSubject.subscribe((change) => {
+      if (change)
+        this.coordinateOuterAndTerminal(change);
+      else
+        this.coordinateOuterAndTerminal(change);
+      this.getNextOrWait();
+    });
+    this.getNextOrWait();
+  }
   /**
    * set dimensions
    */
   private setOuterDimensions(left: number, top: number, width: number, height: number) {
-    this.preOuterStyle['left'] = left ? `${left}px` : undefined;
-    this.preOuterStyle['top'] = top ? `${top}px` : undefined;
-    this.preOuterStyle['width'] = width ? `${width}px` : undefined;
-    this.preOuterStyle['height'] = height ? `${height}px` : undefined;
-    this.requestRenderFromAPI.next({ rowColChange: false });
-  }
-
-  /**
-   * remove dimensions
-   */
-  private removeOuterDimensions() {
-    this.requestRenderFromAPI.next({ rowColChange: false });
-  }
-
-  private getDimensionsAheadOfRendering(): { width: number, height: number } | undefined {
-    const proposedDimensions = this.fitAddon.proposeDimensions();
-    const core = (this.underlying as any)._core;
-    try {
-      const actualWidth: number | undefined = core._renderService.dimensions.actualCellWidth as number | undefined;
-      const actualHeight: number | undefined = core._renderService.dimensions.actualCellHeight as number | undefined;
-      const scrollWidth: number = core.viewport.scrollBarWidth as number;
-      if (actualWidth && actualHeight) {
-        const width = actualWidth * proposedDimensions.cols + scrollWidth;
-        const height = actualHeight * proposedDimensions.rows;
-        return { width, height }
-      }
-    } catch (err) {
-      console.debug(err);
-    }
-    return undefined;
+    this.requestRenderFromAPI.next({
+      rowChanged: false, columnChanged: false
+      , dragged: { draggedWidth: `${width}px`, draggedHeight: `${height}px` }
+    });
   }
 
   /**
    * Render is being used for fast rendering without markForCheck().
    */
-  private applyOuterStyleToElement() {
-    Object.keys(this.outerStyle).map(key => {
-      return { key, value: this.outerStyle[key] }
+  private applyStyleToDiv() {
+    Object.keys(this.stylesForDiv).map(key => {
+      return { key, value: this.stylesForDiv[key] }
     }).forEach(({ key, value }) => {
       if (value)
-        this.renderer.setStyle(this.terminalDiv.nativeElement, key, value);
+        this.renderer.setStyle(this.div.nativeElement, key, value);
       else {
-        this.renderer.removeStyle(this.terminalDiv.nativeElement, key);
+        this.renderer.removeStyle(this.div.nativeElement, key);
       }
     });
-    this.preOuterStyle = this.outerStyle; //invalidate
+    this.stylesForDiv = this.stylesForDiv; //invalidate
   }
 
-  setStyle(styleObject: any) {
-    if (JSON.stringify(this.preOuterStyle) != JSON.stringify(styleObject)) {
-      this.preOuterStyle = { ...this.preOuterStyle, ...styleObject };
-      this.requestRenderFromAPI.next({ rowColChange: false });
-    }
+  /**
+   * When draggable is true, add border styles 
+   * Render is being used for fast rendering without markForCheck().
+   */
+  private applyStyleToDraggable() {
+    if (this._draggableInput)
+      this.renderer.addClass(this.div.nativeElement, 'draggable');
+    else
+      this.renderer.removeClass(this.div.nativeElement, 'draggable');
   }
 
   ngOnInit() {
@@ -176,84 +267,167 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
    * It creates new terminal in #terminal.
    */
   ngAfterViewInit() {
+    console.debug("ngAfterViewInit");
     this.fitAddon = new FitAddon();
     this.term = new Terminal();
-    this.term.open(this.terminalDiv.nativeElement);
+    this.term.open(this.div.nativeElement);
     this.term.loadAddon(this.fitAddon);
     this.observableSetup();
-    console.debug('ngAfterViewInit');
-    this.afterViewInitSubject.next();
-    // this.ngOnChanges();
+    this.requestRenderFromAPI.next({});
   }
 
   ngOnChanges(changes?: SimpleChanges) {
-    console.group('ngOnChanges');
-    for (const propName in changes) {
-      console.debug('prop: ' + propName);
-    }
+    console.group("onChanges");
+    console.debug('prop: ', changes);
     console.groupEnd();
-    if (changes?._rows || changes?._cols)
-      this.requestRenderFromAPI.next({ rowColChange: true });
-    else if (changes?._draggable && (changes._draggable.previousValue == true) && (changes._draggable.currentValue == false)) {
-      this.requestRenderFromAPI.next({ rowColChange: true });
-    } else
-      this.requestRenderFromAPI.next({ rowColChange: false });
+    if (changes?._rowsInput) {
+      if (changes?._rowsInput?.previousValue != changes?._rowsInput?.currentValue) {
+        this.requestRenderFromAPI.next({ rowChanged: true });
+      }
+    }
+    if (changes?._colsInput) {
+      if (changes?._colsInput?.previousValue != changes?._colsInput?.currentValue) {
+        this.requestRenderFromAPI.next({ columnChanged: true });
+      }
+    }
+    // this.requestRenderFromAPI.next({});
   }
   /**
    * It must be called after having initialized the terminal.
+   * xterm fit
    * @param rowColChange 
    * @returns 
    */
-  private coordinateOuterAndTerminal(rowColChange: boolean) {
-    if (!rowColChange) {
-      this.outerStyle = { ...this.preOuterStyle };
-      this.applyOuterStyleToElement();
+  private coordinateOuterAndTerminal(changeList: {
+    rowChanged: boolean
+    , columnChanged: boolean
+    , dragged?: { draggedWidth: string, draggedHeight: string }
+    , hostResized?: { width: string, height: string }
+    , whenTerminalDimensionIsOverOuterDiv?: { width: string, height: string }
+  }) {
+    console.debug(`changeList: ${JSON.stringify(changeList)}`);
+    // apply a style input while keeping width and height default
+    this.stylesForDiv = {
+      ...this.stylesForDiv
+      , ...this._stylesInput
+      , width: this.stylesForDiv.width
+      , height: this.stylesForDiv.height
+    };
+    // but if the div is dragged, update width, height
+    if (changeList.dragged) {
+      this.stylesForDiv.width = changeList.dragged.draggedWidth;
+      this.stylesForDiv.height = changeList.dragged.draggedHeight;
+      this.lastDraggedPosition = {width: changeList.dragged.draggedWidth, height: changeList.dragged.draggedHeight};
+    } else if (!this._rowsInput && !this._colsInput && !(this.draggable && this.lastDraggedPosition)) {
+      // but if the dimension of host element is resized, update width and height
+      this.stylesForDiv.width = '100%';
+      this.stylesForDiv.height = '100%';
     }
-    // apply border width
-    if (this._draggable)
-      this.renderer.addClass(this.terminalDiv.nativeElement, 'draggable');
-    else
-      this.renderer.removeClass(this.terminalDiv.nativeElement, 'draggable');
+    this.applyStyleToDiv();
 
-    if (rowColChange) {
-      this.term.resize(this._cols ?? this.term.cols, this._rows ?? this.term.rows); //asynchrous operation
-    } else {
-      this.fitAddon.fit(); //asynchrous operation
+    // resize with new cols and rows if they changed.
+    if (changeList.rowChanged || changeList.columnChanged) {
+      this.term.resize(this._colsInput ?? this.term.cols, this._rowsInput ?? this.term.rows);
+      console.debug('finished resize()');
+    } else { // fit with div
+      this.fitAddon.fit();
+      console.debug('finished fit()');
     }
-    console.debug('finished fit()');
 
-    setTimeout(() => {
-      let dim = this.getDimensionsAheadOfRendering();
-      if (dim) {
-        this.outerStyle = { ...this.outerStyle, left: undefined, right: undefined, width: `${dim.width}px`, height: `${dim.height}px` };
-        let xtermScreen = this.term.element.getElementsByClassName('xterm-screen')[0];
-        let xtermViewport = this.term.element.getElementsByClassName('xterm-viewport')[0];
-        // let scrollArea = this.term.element.getElementsByClassName('xterm-scroll-area')[0];
-        // let terminal = this.term.element;
-        const terminalWidth = xtermScreen.clientWidth;
-        const terminalHeight = xtermScreen.clientHeight;
-        const borderWidth = this.terminalDiv.nativeElement ? parseFloat(getComputedStyle(this.terminalDiv.nativeElement).borderWidth) : 0;
-        const core = (this.underlying as any)._core;
-        const scrollWidth: number = core.viewport.scrollBarWidth as number;
-        // const scrollWidth = terminal.clientWidth - scrollArea.clientWidth;
-        // this.setOuterDimensions(undefined, undefined, terminalWidth + scrollWidth, undefined);
-        // It fixes that the viewport's width doesn't changes after calling fit()
-        this.renderer.setStyle(xtermViewport, 'width', `${terminalWidth + scrollWidth}px`);
-        this.outerStyle = {
-          ...this.outerStyle, left: undefined, right: undefined, width: `${terminalWidth + scrollWidth + borderWidth * 2}px`
-          , height: `${terminalHeight + borderWidth * 2}px`
-        };
-        this.applyOuterStyleToElement();
-      }else{
-        console.warn("NgTerminal can't fit to the outer div. Check whether the outer div is accessable.");
-      }
-    }, 50);
+    // coordinate difference between terminal and outer
+
+    // setTimeout(() => {
+
+    // let dim = this.getDimensionsAheadOfRendering();
+    // if (dim) {
+    // this.outerStyle = { ...this.outerStyle, width: `${dim.width}px`, height: `${dim.height}px` };
+    let xtermScreen = this.term.element.getElementsByClassName('xterm-screen')[0];
+    let xtermViewport = this.term.element.getElementsByClassName('xterm-viewport')[0];
+    // let scrollArea = this.term.element.getElementsByClassName('xterm-scroll-area')[0];
+    // let terminal = this.term.element;
+    const terminalWidth = xtermScreen.clientWidth;
+    const terminalHeight = xtermScreen.clientHeight;
+    const borderWidth = this.div.nativeElement ? parseFloat(getComputedStyle(this.div.nativeElement).borderWidth) : 0;
+    const core = (this.underlying as any)._core;
+    const scrollWidth: number = core.viewport.scrollBarWidth as number;
+    
+    // It fixes that the viewport's width doesn't changes after calling fit()
+    this.renderer.setStyle(xtermViewport, 'width', `${terminalWidth + scrollWidth}px`);
+    console.debug(terminalWidth, scrollWidth + borderWidth * 2);
+    console.debug(terminalHeight,  borderWidth * 2);
+    this.stylesForDiv = {
+      ...this.stylesForDiv, width: `${terminalWidth + scrollWidth + borderWidth * 2}px`
+      , height: `${terminalHeight + borderWidth * 2}px`
+    };
+    this.applyStyleToDiv();
     this.ref.markForCheck();
+    // } 
+    // else {
+    // console.warn("NgTerminal can't fit to the outer div. Check whether the outer div is accessable.");
+    // }
+    // }, 50);
+  }
+
+  observeTerminalDimension() {
+    let viewport: HTMLDivElement | undefined = this.div.nativeElement.querySelector('.xterm-viewport');
+    if (viewport) {
+      const resizeObserver = new ResizeObserver(entries => {
+        const divWidth = parseFloat(getComputedStyle(this.div.nativeElement).width);
+        const divHeight = parseFloat(getComputedStyle(this.div.nativeElement).height);
+        let width: number = undefined;
+        let height: number = undefined;
+        for (let entry of entries) {
+          if (entry.contentBoxSize) {
+            if (entry.target instanceof HTMLElement) {
+              width = parseFloat(getComputedStyle(entry.target).width);
+              height = parseFloat(getComputedStyle(entry.target).height);
+            }
+          } else {
+            width = parseFloat(getComputedStyle(entry.target).width);
+            height = parseFloat(getComputedStyle(entry.target).height);
+          }
+        }
+        if (width > divWidth || height > divHeight) {
+          this.requestRenderFromAPI.next({ whenTerminalDimensionIsOverOuterDiv: { width: `${width}px`, height: `${height}px` } });
+        }
+      });
+      resizeObserver.observe(viewport);
+      return resizeObserver;
+    } else {
+      console.error("Invalid state is detected. xterm element should exist below .terminal-outer.")
+    }
+  }
+
+  observeHostDimension() {
+    let hostElement: HTMLDivElement | undefined = this.hostRef.nativeElement;
+    if (hostElement) {
+      const resizeObserver = new ResizeObserver(entries => {
+        let width: number = undefined;
+        let height: number = undefined;
+        for (let entry of entries) {
+          if (entry.contentBoxSize) {
+            if (entry.target instanceof HTMLElement) {
+              width = parseFloat(getComputedStyle(entry.target).width);
+              height = parseFloat(getComputedStyle(entry.target).height);
+            }
+          } else {
+            width = parseFloat(getComputedStyle(entry.target).width);
+            height = parseFloat(getComputedStyle(entry.target).height);
+          }
+        }
+        this.requestRenderFromAPI.next({ hostResized: { width: `${width}px`, height: `${height}px` } });
+      });
+      resizeObserver.observe(hostElement);
+      return resizeObserver;
+    } else {
+      console.error("Invalid state is detected. xterm element should exist below .terminal-outer.")
+    }
   }
   /**
    * clean all resources
    */
   ngOnDestroy(): void {
+    console.debug("ngOnDestroy");
     if (this.keyInputSubjectSubscription)
       this.keyInputSubjectSubscription.unsubscribe();
     if (this.dataSourceSubscription)
@@ -262,8 +436,13 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
       this.keyEventSubjectSubscription.unsubscribe();
     if (this.requestRenderSubscription)
       this.requestRenderSubscription.unsubscribe();
+    if (this.allLogsSubjectSubscription)
+      this.allLogsSubjectSubscription.unsubscribe();
+    if (this.interval)
+      clearInterval(this.interval);
     if (this.term)
       this.term.dispose();
+    this.resizableObservers.forEach(ob => ob.disconnect());
   }
 
   write(chars: string) {
@@ -284,7 +463,7 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
 
   get isDraggableOnEdgeActivated() {
     // return this.displayOption.activateDraggableOnEdge != undefined && this.displayOption.fixedGrid == undefined;
-    return this._draggable;
+    return this._draggableInput;
   }
 
   /**
@@ -306,12 +485,14 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
     const comp = this;
     return (re: ResizeEvent) => {
       // const displayOption = comp.displayOption;
-      if (this._draggable) {
+      if (this._draggableInput) {
         let left = re.rectangle.left, top = re.rectangle.top, width = re.rectangle.width, height = re.rectangle.height;
-        if ((width < (this._minWidth ?? 100)) || (height < (this._minHeight ?? 50))) {
+        if ((width < (this._minWidthInput ?? 100)) || (height < (this._minHeightInput ?? 50))) {
           return false;
         } else return true;
-      }
+      } else
+        return false;
     }
   }
+
 }

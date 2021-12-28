@@ -1,7 +1,13 @@
 .terminal-outer {
     box-sizing: border-box;
     height: 100%;
+    border: 4px solid rgba(0,0,0,1);
 }
 .draggable{
     border: 4px solid #85858a;
+}
+:host{
+    display: block;
+    height: 100%;
+    width: 100%;
 }

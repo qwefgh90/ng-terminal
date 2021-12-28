@@ -17,7 +17,7 @@ export class ExampleComponent implements OnInit, AfterViewInit {
   title = 'NgTerminal Live Example';
   color = 'accent';
   
-  public resizable: boolean;
+  public draggable: boolean;
   public fixed = false;
 
   disabled = false;
@@ -25,8 +25,6 @@ export class ExampleComponent implements OnInit, AfterViewInit {
   colsControl = new FormControl();
   inputControl = new FormControl();
 
-  // displayOption: DisplayOption = {};
-  // displayOptionBounded: DisplayOption = {};//now it's not used
   underlying: Terminal;
 
   @ViewChild('term', {static: false}) child: NgTerminal;
@@ -34,13 +32,12 @@ export class ExampleComponent implements OnInit, AfterViewInit {
   constructor() { }
 
   ngOnInit() {
-    this.rowsControl.setValue(10);
-    this.colsControl.setValue(40);
   }
 
   ngAfterViewInit() {
     this.underlying = this.child.underlying;
-    this.underlying.setOption("fontSize", 20);
+    this.underlying.options.fontSize = 20;
+    console.debug("example: font apply" );
     this.underlying.loadAddon(new WebLinksAddon());
     this.invalidate();
     this.child.write('$ ');
@@ -82,8 +79,8 @@ export class ExampleComponent implements OnInit, AfterViewInit {
   }
 
   resizableChange(event: MatSlideToggleChange) {
-    this.resizable = event.checked;
-    if (this.resizable){
+    this.draggable = event.checked;
+    if (this.draggable){
       // this.child.setStyle({"border": "4px solid #85858a"});
       this.fixed = false;
     }
@@ -94,7 +91,7 @@ export class ExampleComponent implements OnInit, AfterViewInit {
     this.fixed = event.checked;
     if (this.fixed){
       // this.child.setStyle({"border": "unset"});
-      this.resizable = false;
+      this.draggable = false;
     }
     this.invalidate();
   }
@@ -110,6 +107,6 @@ export class ExampleComponent implements OnInit, AfterViewInit {
   }
 
   get displayOptionForLiveUpdate() {
-    return {rows: this.rowsControl.value, cols: this.colsControl.value, draggable: this.resizable};
+    return {rows: this.rowsControl.value, cols: this.colsControl.value, draggable: this.draggable};
   }
 }

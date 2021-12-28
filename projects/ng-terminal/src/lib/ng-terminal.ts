@@ -31,5 +31,7 @@ export interface NgTerminal {
     setDraggable(draggable: boolean): void;
     setRows(rows: number): void;
     setCols(cols: number): void;
+    setMinHeight(height: number): void;
+    setMinWidth(width: number): void;
     setStyle(styleObject: any): void;
 }

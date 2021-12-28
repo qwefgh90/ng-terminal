@@ -16,7 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     <mat-tab label="Tab1">
     </mat-tab>
     <mat-tab label="Tab2">
-      <div>
+      <div style="width:100px; height:100px">
         <ng-terminal></ng-terminal>
       </div>
     </mat-tab>
@@ -60,15 +60,18 @@ describe('NgTerminalComponent with MaterialTab', () => {
     expect(hiddenViewport.isConnected).toBeFalsy();
     expect(hiddenXtermScreen.clientWidth).toBe(0);
     expect(hiddenViewport.clientWidth).toBe(0);
+    (mattabComponent.terminal as NgTerminalComponent).ngOnDestroy();
   }));
 
   it(`gets a terminal component inside DOM`, fakeAsync(() => {
     mattabFixture.detectChanges();
     tick(1000);
+    (mattabComponent.terminal as any)._rowsInput = 10;
+    (mattabComponent.terminal as any)._colsInput = 10;
     (mattabComponent.terminal as any).ngOnChanges({
-      _rows: new SimpleChange(undefined, undefined, true),
-      _cols: new SimpleChange(undefined, undefined, true),
-      _draggable: new SimpleChange(undefined, undefined, true)
+      _rowsInput: new SimpleChange(undefined, 10, true),
+      _colsInput: new SimpleChange(undefined, 10, true),
+      _draggableInput: new SimpleChange(undefined, undefined, true)
     });
     tick(1000);
     mattabComponent.tabGroup.selectedIndex = 1;
@@ -110,7 +113,7 @@ describe('NgTerminalComponent with MaterialTab', () => {
     expect(xtermViewport.clientWidth).toBeGreaterThan(10);
   }));
 
-  it(`changes rows and cols with setDisplayOption()`, fakeAsync(() => {
+  it(`changes rows and cols`, fakeAsync(() => {
     mattabFixture.detectChanges();
     mattabComponent.tabGroup.selectedIndex = 1;
     mattabFixture.detectChanges();
@@ -120,6 +123,7 @@ describe('NgTerminalComponent with MaterialTab', () => {
     mattabComponent.terminal.setCols(10);
     mattabFixture.detectChanges();
     tick(1000);
+
     let mattabEl = mattabFixture.nativeElement as HTMLElement;
     let xtermScreen = mattabEl.querySelector('.xterm-screen');
     let screenWidth1= xtermScreen.clientWidth;
