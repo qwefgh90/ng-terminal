@@ -40,6 +40,7 @@
   ],
   "dependencies": {
     "angular-resizable-element": "^3.4.0",
+    "@juggle/resize-observer": "^3.3.1",
     "tslib": "^2.0.0",
     "xterm-addon-fit": "^0.5.0",
     "xterm": "^4.16.0"
