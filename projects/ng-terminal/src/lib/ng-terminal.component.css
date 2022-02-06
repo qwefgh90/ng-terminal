@@ -1,13 +1,60 @@
 .terminal-outer {
     box-sizing: border-box;
     height: 100%;
-    border: 4px solid rgba(0,0,0,1);
+    /* border: 4px solid rgba(0,0,0,1); */
+    /* angular-resizable-element 5.0 */
+    /* margin: 5px; */
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.draggable{
-    border: 4px solid #85858a;
+div > .draggable{
+    /* border: 4px solid #85858a; */
+    /* angular-resizable-element 5.0 */
+    z-index: 100;
+    background-color: #85858a;
 }
 :host{
     display: block;
     height: 100%;
     width: 100%;
+}
+
+/* angular-resizable-element 5.0 */
+.resize-handle-top,
+.resize-handle-bottom {
+  position: absolute;
+  height: 5px;
+  cursor: row-resize;
+  width: 100%;
+  background-color: rgba(0,0,0,1);
+}
+
+.resize-handle-top {
+  top: -5px;
+}
+
+.resize-handle-bottom {
+  bottom: -5px;
+}
+
+.resize-handle-left,
+.resize-handle-right {
+  position: absolute;
+  height: 100%;
+  cursor: col-resize;
+  width: 5px;
+  background-color: rgba(0,0,0,1);
+}
+
+.resize-handle-left {
+  left: -5px;
+  top: 0px;
+}
+
+.resize-handle-right {
+  right: -5px;
+  top: 0px;
 }
