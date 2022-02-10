@@ -1,11 +1,7 @@
 <h2>{{title}}</h2>
 <div class="outer-box">
-    <ng-terminal #term [dataSource]="writeSubject" 
-    (keyInput)="onKeyInput($event)" 
-    [rows]="rowsControl.value"
-        [cols]="colsControl.value" 
-        [draggable]="draggable" 
-        class="ng-terminal">
+    <ng-terminal #term [dataSource]="writeSubject" (keyInput)="onKeyInput($event)" [rows]="_rows"
+        [cols]="_cols" [draggable]="_draggable" class="ng-terminal">
     </ng-terminal>
 </div>
 <div [class.mat-elevation-z1]="true"
@@ -14,17 +10,15 @@
         <div style="display:inline-block; vertical-align: top; margin-bottom: 0.8em">
             <h3>Display Opiton</h3>
             <div>
-                <mat-slide-toggle class="example-margin" [checked]="draggable" [color]="color"
+                <mat-slide-toggle [checked]="draggableMode" [color]="color"
                     (change)="resizableChange($event)" [disabled]="disabled">
                     Draggable
                 </mat-slide-toggle>
-            </div>
-            <!-- <div>
-                <mat-slide-toggle class="example-margin" [checked]="fixed" [color]="color"
-                    (change)="fixedChange($event)" [disabled]="disabled">
-                    Fixed row and col
+                <mat-slide-toggle style="margin-left: 10px;" [checked]="apiMode" [color]="color"
+                    (change)="apiModeChange($event)" [disabled]="disabled">
+                    by using API
                 </mat-slide-toggle>
-            </div> -->
+            </div>
             <div>
                 <mat-form-field>
                     <input matInput placeholder="rows" [formControl]="rowsControl" type="number">

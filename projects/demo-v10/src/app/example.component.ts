@@ -16,8 +16,13 @@ import { WebLinksAddon } from 'xterm-addon-web-links';
 export class ExampleComponent implements OnInit, AfterViewInit {
   title = 'NgTerminal Live Example';
   color = 'accent';
+
+  _rows: number = undefined;
+  _cols: number = undefined;
+  _draggable: boolean = undefined;
   
-  public draggable: boolean;
+  public draggableMode: boolean;
+  public apiMode: boolean;
   public fixed = false;
 
   disabled = false;
@@ -62,8 +67,8 @@ export class ExampleComponent implements OnInit, AfterViewInit {
         this.child.write(e.key);
       }
     })
-    this.rowsControl.valueChanges.subscribe(() => { this.invalidate() });
-    this.colsControl.valueChanges.subscribe(() => { this.invalidate() });
+    this.rowsControl.valueChanges.subscribe(() => { this.updateRows() });
+    this.colsControl.valueChanges.subscribe(() => { this.updateCols() });
   }
 
   invalidate() {
@@ -79,21 +84,46 @@ export class ExampleComponent implements OnInit, AfterViewInit {
   }
 
   resizableChange(event: MatSlideToggleChange) {
-    this.draggable = event.checked;
-    if (this.draggable){
-      // this.child.setStyle({"border": "4px solid #85858a"});
-      this.fixed = false;
-    }
-    this.invalidate();
+    this.draggableMode = event.checked;
+    // if (this.draggableMode){
+    //   // this.child.setStyle({"border": "4px solid #85858a"});
+    //   this.fixed = false;
+    // }
+    this.updateDraggable();
   }
 
-  fixedChange(event: MatSlideToggleChange) {
-    this.fixed = event.checked;
-    if (this.fixed){
-      // this.child.setStyle({"border": "unset"});
-      this.draggable = false;
-    }
-    this.invalidate();
+  apiModeChange(event: MatSlideToggleChange) {
+    this.apiMode = event.checked;
+  }
+
+  // fixedChange(event: MatSlideToggleChange) {
+  //   this.fixed = event.checked;
+  //   if (this.fixed){
+  //     // this.child.setStyle({"border": "unset"});
+  //     this.draggableMode = false;
+  //   }
+  //   this.updateDraggable();
+  // }
+
+  updateDraggable(){
+    if(this.apiMode)
+      this.child.setDraggable(this.draggableMode);
+    else
+      this._draggable = this.draggableMode;
+  }
+
+  updateRows(){
+    if(this.apiMode)
+      this.child.setRows(this.rowsControl.value);
+    else
+      this._rows = this.rowsControl.value;
+  }
+
+  updateCols(){
+    if(this.apiMode)
+      this.child.setCols(this.colsControl.value);
+    else
+      this._cols = this.colsControl.value;
   }
 
   writeSubject = new Subject<string>();
@@ -107,6 +137,6 @@ export class ExampleComponent implements OnInit, AfterViewInit {
   }
 
   get displayOptionForLiveUpdate() {
-    return {rows: this.rowsControl.value, cols: this.colsControl.value, draggable: this.draggable};
+    return {rows: this.rowsControl.value, cols: this.colsControl.value, draggable: this.draggableMode};
   }
 }

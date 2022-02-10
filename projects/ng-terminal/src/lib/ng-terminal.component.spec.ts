@@ -55,7 +55,7 @@ describe('NgTerminalComponent', () => {
       }
     });
 
-    const terminalEventConsumer = fixture.componentInstance.div.nativeElement.getElementsByTagName('textarea')[0];
+    const terminalEventConsumer = fixture.componentInstance.terminalOuter.nativeElement.getElementsByTagName('textarea')[0];
     arr.forEach((v) => {
       terminalEventConsumer.dispatchEvent(keydown(v));
     });
@@ -72,7 +72,7 @@ describe('NgTerminalComponent', () => {
       }
     });
 
-    const terminalEventConsumer = fixture.componentInstance.div.nativeElement.getElementsByTagName('textarea')[0];
+    const terminalEventConsumer = fixture.componentInstance.terminalOuter.nativeElement.getElementsByTagName('textarea')[0];
     arr.forEach((v) => {
       terminalEventConsumer.dispatchEvent(keydown(v));
     });
@@ -124,7 +124,7 @@ describe('Input properties', () => {
   });
 
   it("@Input('rows'), @Input('cols')", fakeAsync(() => {
-    const term = fixture.componentInstance.div.nativeElement;
+    const term = fixture.componentInstance.terminalOuter.nativeElement;
     component.ngOnChanges({
       _rowsInput: new SimpleChange(undefined, undefined, true),
       _colsInput: new SimpleChange(undefined, undefined, true),
@@ -148,7 +148,7 @@ describe('Input properties', () => {
   }))
 
   it('should decrease div size after changing fixedSize', fakeAsync(() => {
-    const term = fixture.componentInstance.div.nativeElement;
+    const term = fixture.componentInstance.terminalOuter.nativeElement;
     component.ngOnChanges({
       _rowsInput: new SimpleChange(undefined, undefined, true),
       _colsInput: new SimpleChange(undefined, undefined, true),
@@ -174,7 +174,7 @@ describe('Input properties', () => {
   }))
 
   it('should increase div size after changing fixedSize', fakeAsync(() => {
-    const term = fixture.componentInstance.div.nativeElement;
+    const term = fixture.componentInstance.terminalOuter.nativeElement;
     component.ngOnChanges({
       _rowsInput: new SimpleChange(undefined, undefined, true),
       _colsInput: new SimpleChange(undefined, undefined, true),
