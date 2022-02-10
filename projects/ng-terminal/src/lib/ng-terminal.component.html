@@ -1,17 +1,17 @@
 <global-style></global-style>
 
-<div style="margin: 5px; height: 100%; position: relative; width: fit-content;" mwlResizable [validateResize]="validatorFactory()" 
+<div mwlResizable class="resize-box" [validateResize]="validatorFactory()" 
 [enableGhostResize]="true"
 (resizeEnd)="onResizeEnd($event.rectangle.left, $event.rectangle.top, $event.rectangle.width, $event.rectangle.height)">
     <div #terminal class="terminal-outer" >
     </div>
-    <div class="resize-handle-top" mwlResizeHandle [ngClass]="{'draggable' : isDraggableOnEdgeActivated}"
+    <div class="resize-handle-top" mwlResizeHandle [ngClass]="{'handle' : isDraggableOnEdgeActivated}"
         [resizeEdges]="{ top: false }"></div>
-    <div class="resize-handle-left" mwlResizeHandle [ngClass]="{'draggable' : isDraggableOnEdgeActivated}"
+    <div class="resize-handle-left" mwlResizeHandle [ngClass]="{'handle' : isDraggableOnEdgeActivated}"
         [resizeEdges]="{ left: false }"></div>
-    <div class="resize-handle-right" mwlResizeHandle [ngClass]="{'draggable' : isDraggableOnEdgeActivated}"
+    <div class="resize-handle-right" mwlResizeHandle [ngClass]="{'handle' : isDraggableOnEdgeActivated}"
         [resizeEdges]="isDraggableOnEdgeActivated ? { right: true } : { right: false }"></div>
-    <div class="resize-handle-bottom" mwlResizeHandle [ngClass]="{'draggable' : isDraggableOnEdgeActivated}"
+    <div class="resize-handle-bottom" mwlResizeHandle [ngClass]="{'handle' : isDraggableOnEdgeActivated}"
         [resizeEdges]="isDraggableOnEdgeActivated ? { bottom: true } : { bottom: false }"></div>
 
 </div>

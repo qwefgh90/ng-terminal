@@ -356,8 +356,8 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
     console.debug(terminalWidth, scrollWidth + borderWidth * 2);
     console.debug(terminalHeight,  borderWidth * 2);
     this.stylesForDiv = {
-      ...this.stylesForDiv, width: `${terminalWidth + scrollWidth + borderWidth * 2}px`
-      , height: `${terminalHeight + borderWidth * 2}px`
+      ...this.stylesForDiv, width: `${terminalWidth + scrollWidth + borderWidth * 2 + 10}px`
+      , height: `${terminalHeight + borderWidth * 2 + 10}px`
     };
     this.applyStyleToDiv();
     this.ref.markForCheck();
