@@ -121,3 +121,11 @@ You can find official supported terminal sequences in https://xtermjs.org/docs/a
 ## Contribution
 
 NgTerminal is developed with Angular CLI. You can always write issue and contribute through PR to **master** branch.
+
+#### Available commands
+
+- Running an example app in your environment: `npm start`
+- Testing ng-terminal: `npm test`
+- Creating a tarball for testing with external angular apps: `npm run local`
+- (Travis) Creating a static page for this project: `npm run page`
+- (Maintainer) Deploying a library to the npm registry: `npm run publish`

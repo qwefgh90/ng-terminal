@@ -2254,6 +2254,11 @@
 │  ├─ publisher: Len Boyette
 │  ├─ path: /Users/qwefgh90/Documents/ng-terminal/node_modules/copy-webpack-plugin
 │  └─ licenseFile: /Users/qwefgh90/Documents/ng-terminal/node_modules/copy-webpack-plugin/LICENSE
+├─ copyfiles@2.4.1
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/calvinmetcalf/copyfiles
+│  ├─ path: /Users/qwefgh90/Documents/ng-terminal/node_modules/copyfiles
+│  └─ licenseFile: /Users/qwefgh90/Documents/ng-terminal/node_modules/copyfiles/license.md
 ├─ core-js-compat@3.21.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/zloirock/core-js
@@ -4170,6 +4175,14 @@
 │  ├─ url: sindresorhus.com
 │  ├─ path: /Users/qwefgh90/Documents/ng-terminal/node_modules/is-wsl
 │  └─ licenseFile: /Users/qwefgh90/Documents/ng-terminal/node_modules/is-wsl/license
+├─ isarray@0.0.1
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/juliangruber/isarray
+│  ├─ publisher: Julian Gruber
+│  ├─ email: mail@juliangruber.com
+│  ├─ url: http://juliangruber.com
+│  ├─ path: /Users/qwefgh90/Documents/ng-terminal/node_modules/noms/node_modules/isarray
+│  └─ licenseFile: /Users/qwefgh90/Documents/ng-terminal/node_modules/noms/node_modules/isarray/README.md
 ├─ isarray@1.0.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/juliangruber/isarray
@@ -5084,6 +5097,12 @@
 │  ├─ email: matthew.davidson@skyscanner.net
 │  ├─ path: /Users/qwefgh90/Documents/ng-terminal/node_modules/node-sass-tilde-importer
 │  └─ licenseFile: /Users/qwefgh90/Documents/ng-terminal/node_modules/node-sass-tilde-importer/LICENSE
+├─ noms@0.0.0
+│  ├─ licenses: ISC
+│  ├─ repository: https://github.com/calvinmetcalf/noms
+│  ├─ publisher: Calvin Metcalf
+│  ├─ path: /Users/qwefgh90/Documents/ng-terminal/node_modules/noms
+│  └─ licenseFile: /Users/qwefgh90/Documents/ng-terminal/node_modules/noms/readme.md
 ├─ nopt@4.0.3
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/npm/nopt
@@ -5609,8 +5628,8 @@
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/alexeyraspopov/picocolors
 │  ├─ publisher: Alexey Raspopov
-│  ├─ path: /Users/qwefgh90/Documents/ng-terminal/node_modules/postcss-color-functional-notation/node_modules/picocolors
-│  └─ licenseFile: /Users/qwefgh90/Documents/ng-terminal/node_modules/postcss-color-functional-notation/node_modules/picocolors/LICENSE
+│  ├─ path: /Users/qwefgh90/Documents/ng-terminal/node_modules/postcss-color-gray/node_modules/picocolors
+│  └─ licenseFile: /Users/qwefgh90/Documents/ng-terminal/node_modules/postcss-color-gray/node_modules/picocolors/LICENSE
 ├─ picocolors@1.0.0
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/alexeyraspopov/picocolors
@@ -6180,8 +6199,8 @@
 │  ├─ repository: https://github.com/postcss/postcss
 │  ├─ publisher: Andrey Sitnik
 │  ├─ email: andrey@sitnik.ru
-│  ├─ path: /Users/qwefgh90/Documents/ng-terminal/node_modules/postcss-color-functional-notation/node_modules/postcss
-│  └─ licenseFile: /Users/qwefgh90/Documents/ng-terminal/node_modules/postcss-color-functional-notation/node_modules/postcss/LICENSE
+│  ├─ path: /Users/qwefgh90/Documents/ng-terminal/node_modules/postcss-color-gray/node_modules/postcss
+│  └─ licenseFile: /Users/qwefgh90/Documents/ng-terminal/node_modules/postcss-color-gray/node_modules/postcss/LICENSE
 ├─ postcss@8.3.6
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/postcss/postcss
@@ -6373,6 +6392,14 @@
 │  ├─ url: http://blog.izs.me/
 │  ├─ path: /Users/qwefgh90/Documents/ng-terminal/node_modules/read-package-json
 │  └─ licenseFile: /Users/qwefgh90/Documents/ng-terminal/node_modules/read-package-json/LICENSE
+├─ readable-stream@1.0.34
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/isaacs/readable-stream
+│  ├─ publisher: Isaac Z. Schlueter
+│  ├─ email: i@izs.me
+│  ├─ url: http://blog.izs.me/
+│  ├─ path: /Users/qwefgh90/Documents/ng-terminal/node_modules/noms/node_modules/readable-stream
+│  └─ licenseFile: /Users/qwefgh90/Documents/ng-terminal/node_modules/noms/node_modules/readable-stream/LICENSE
 ├─ readable-stream@2.3.7
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/nodejs/readable-stream
@@ -7223,6 +7250,11 @@
 │  ├─ url: sindresorhus.com
 │  ├─ path: /Users/qwefgh90/Documents/ng-terminal/node_modules/string-width
 │  └─ licenseFile: /Users/qwefgh90/Documents/ng-terminal/node_modules/string-width/license
+├─ string_decoder@0.10.31
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/rvagg/string_decoder
+│  ├─ path: /Users/qwefgh90/Documents/ng-terminal/node_modules/noms/node_modules/string_decoder
+│  └─ licenseFile: /Users/qwefgh90/Documents/ng-terminal/node_modules/noms/node_modules/string_decoder/LICENSE
 ├─ string_decoder@1.1.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/nodejs/string_decoder
@@ -7388,6 +7420,14 @@
 │  ├─ url: http://substack.net
 │  ├─ path: /Users/qwefgh90/Documents/ng-terminal/node_modules/text-table
 │  └─ licenseFile: /Users/qwefgh90/Documents/ng-terminal/node_modules/text-table/LICENSE
+├─ through2@2.0.5
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/rvagg/through2
+│  ├─ publisher: Rod Vagg
+│  ├─ email: r@va.gg
+│  ├─ url: https://github.com/rvagg
+│  ├─ path: /Users/qwefgh90/Documents/ng-terminal/node_modules/through2
+│  └─ licenseFile: /Users/qwefgh90/Documents/ng-terminal/node_modules/through2/LICENSE.md
 ├─ through@2.3.8
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/dominictarr/through
@@ -7660,6 +7700,14 @@
 │  ├─ url: https://github.com/jonschlinkert
 │  ├─ path: /Users/qwefgh90/Documents/ng-terminal/node_modules/unset-value
 │  └─ licenseFile: /Users/qwefgh90/Documents/ng-terminal/node_modules/unset-value/LICENSE
+├─ untildify@4.0.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/sindresorhus/untildify
+│  ├─ publisher: Sindre Sorhus
+│  ├─ email: sindresorhus@gmail.com
+│  ├─ url: sindresorhus.com
+│  ├─ path: /Users/qwefgh90/Documents/ng-terminal/node_modules/untildify
+│  └─ licenseFile: /Users/qwefgh90/Documents/ng-terminal/node_modules/untildify/license
 ├─ upath@1.2.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/anodynos/upath
@@ -7967,6 +8015,13 @@
 │  ├─ email: oozcitak@gmail.com
 │  ├─ path: /Users/qwefgh90/Documents/ng-terminal/node_modules/xmlbuilder
 │  └─ licenseFile: /Users/qwefgh90/Documents/ng-terminal/node_modules/xmlbuilder/LICENSE
+├─ xtend@4.0.2
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/Raynos/xtend
+│  ├─ publisher: Raynos
+│  ├─ email: raynos2@gmail.com
+│  ├─ path: /Users/qwefgh90/Documents/ng-terminal/node_modules/xtend
+│  └─ licenseFile: /Users/qwefgh90/Documents/ng-terminal/node_modules/xtend/LICENSE
 ├─ xterm-addon-fit@0.5.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/xtermjs/xterm.js
