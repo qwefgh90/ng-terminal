@@ -1,11 +1,11 @@
 {
   "name": "ng-terminal",
-  "version": "4.0.1",
+  "version": "5.0.0-beta.2",
   "description": "NgTerminal is a terminal component on Angular 11 or higher.",
   "license": "MIT",
   "peerDependencies": {
-    "@angular/common": "^13.0.0 || ^12.0.0 || ^11.2.14 || ^10.0.0",
-    "@angular/core": "^13.0.0 || ^12.0.0 || ^11.2.14 || ^10.0.0"
+    "@angular/common": "^13.0.0 || ^12.0.0",
+    "@angular/core": "^13.0.0 || ^12.0.0"
   },
   "repository": {
     "type": "git",
@@ -25,17 +25,17 @@
     "angular",
     "angular13",
     "angular12",
-    "angular11",
     "xterm",
     "terminal",
     "console",
     "shell",
     "bash",
     "library",
+    "ivy",
     "ng-terminal"
   ],
   "dependencies": {
-    "angular-resizable-element": "^3.4.0",
+    "angular-resizable-element": "^5.0.0",
     "@juggle/resize-observer": "^3.3.1",
     "tslib": "^2.0.0",
     "xterm-addon-fit": "^0.5.0",

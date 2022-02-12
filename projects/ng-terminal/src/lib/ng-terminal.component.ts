@@ -43,6 +43,7 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
   // private displayOption: DisplayOption = {};
   private dataSource: Observable<string>;
   private dataSourceSubscription: Subscription;
+  private readonly paddingSize = 5;
   stylesForDiv: Partial<CSSStyleDeclaration> = { 'display': 'block' };
 
   @Input('dataSource')
@@ -70,7 +71,7 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
   @Input('draggable')
   set draggable(draggable: boolean) {
     this._draggableInput = draggable;
-    this.applyStyleToDraggable();
+    // this.applyStyleToDraggable();
   }
   get draggable(){
     return this._draggableInput;
@@ -91,7 +92,7 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
   setDraggable(draggable: boolean): void {
     this._draggableInput = draggable;
     this.lastDraggedPosition = undefined;
-    this.applyStyleToDraggable();
+    this.ref.markForCheck();
   }
 
   setRows(rows: number): void {
@@ -123,7 +124,10 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
   keyEventEmitter = new EventEmitter<{ key: string; domEvent: KeyboardEvent; }>();
 
   @ViewChild('terminal', { static: true })
-  div: ElementRef;
+  terminalOuter: ElementRef;
+
+  @ViewChild('resizeBox', { static: true })
+  resizeBox: ElementRef;
 
   private getNextOrWait() {
     if (!this.hostRef.nativeElement.isConnected) {
@@ -241,9 +245,9 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
       return { key, value: this.stylesForDiv[key] }
     }).forEach(({ key, value }) => {
       if (value)
-        this.renderer.setStyle(this.div.nativeElement, key, value);
+        this.renderer.setStyle(this.resizeBox.nativeElement, key, value);
       else {
-        this.renderer.removeStyle(this.div.nativeElement, key);
+        this.renderer.removeStyle(this.resizeBox.nativeElement, key);
       }
     });
     this.stylesForDiv = this.stylesForDiv; //invalidate
@@ -253,12 +257,12 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
    * When draggable is true, add border styles 
    * Render is being used for fast rendering without markForCheck().
    */
-  private applyStyleToDraggable() {
-    if (this._draggableInput)
-      this.renderer.addClass(this.div.nativeElement, 'draggable');
-    else
-      this.renderer.removeClass(this.div.nativeElement, 'draggable');
-  }
+  // private applyStyleToDraggable() {
+  //   if (this._draggableInput)
+  //     this.renderer.addClass(this.terminalOuter.nativeElement, 'draggable');
+  //   else
+  //     this.renderer.removeClass(this.terminalOuter.nativeElement, 'draggable');
+  // }
 
   ngOnInit() {
   }
@@ -267,10 +271,9 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
    * It creates new terminal in #terminal.
    */
   ngAfterViewInit() {
-    console.debug("ngAfterViewInit");
     this.fitAddon = new FitAddon();
     this.term = new Terminal();
-    this.term.open(this.div.nativeElement);
+    this.term.open(this.terminalOuter.nativeElement);
     this.term.loadAddon(this.fitAddon);
     this.observableSetup();
     this.requestRenderFromAPI.next({});
@@ -328,52 +331,42 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
     // resize with new cols and rows if they changed.
     if (changeList.rowChanged || changeList.columnChanged) {
       this.term.resize(this._colsInput ?? this.term.cols, this._rowsInput ?? this.term.rows);
-      console.debug('finished resize()');
-    } else { // fit with div
+    } else { 
+      // fit() operation doesn't see padding values of terminalOuter.
+      // But it uses padding values of terminal element.
+      // So we force to set padding values when calling fit() operation for a while.
+      this.term.element.style.paddingLeft = `${this.paddingSize}px`;
+      this.term.element.style.paddingRight = `${this.paddingSize}px`;
       this.fitAddon.fit();
-      console.debug('finished fit()');
+      this.term.element.style.padding = '0px';
     }
 
     // coordinate difference between terminal and outer
-
-    // setTimeout(() => {
-
-    // let dim = this.getDimensionsAheadOfRendering();
-    // if (dim) {
-    // this.outerStyle = { ...this.outerStyle, width: `${dim.width}px`, height: `${dim.height}px` };
     let xtermScreen = this.term.element.getElementsByClassName('xterm-screen')[0];
     let xtermViewport = this.term.element.getElementsByClassName('xterm-viewport')[0];
-    // let scrollArea = this.term.element.getElementsByClassName('xterm-scroll-area')[0];
-    // let terminal = this.term.element;
     const terminalWidth = xtermScreen.clientWidth;
     const terminalHeight = xtermScreen.clientHeight;
-    const borderWidth = this.div.nativeElement ? parseFloat(getComputedStyle(this.div.nativeElement).borderWidth) : 0;
     const core = (this.underlying as any)._core;
     const scrollWidth: number = core.viewport.scrollBarWidth as number;
-    
+     
     // It fixes that the viewport's width doesn't changes after calling fit()
     this.renderer.setStyle(xtermViewport, 'width', `${terminalWidth + scrollWidth}px`);
-    console.debug(terminalWidth, scrollWidth + borderWidth * 2);
-    console.debug(terminalHeight,  borderWidth * 2);
+    console.debug(terminalWidth + scrollWidth + this.paddingSize*2 , terminalWidth, scrollWidth, this.paddingSize*2 ); // + borderWidth * 2
+    console.debug(terminalHeight + this.paddingSize*2 , terminalHeight);
     this.stylesForDiv = {
-      ...this.stylesForDiv, width: `${terminalWidth + scrollWidth + borderWidth * 2}px`
-      , height: `${terminalHeight + borderWidth * 2}px`
+      ...this.stylesForDiv, width: `${terminalWidth + scrollWidth +this.paddingSize*2 }px`
+      , height: `${terminalHeight + this.paddingSize*2 }px`
     };
     this.applyStyleToDiv();
     this.ref.markForCheck();
-    // } 
-    // else {
-    // console.warn("NgTerminal can't fit to the outer div. Check whether the outer div is accessable.");
-    // }
-    // }, 50);
   }
 
   observeTerminalDimension() {
-    let viewport: HTMLDivElement | undefined = this.div.nativeElement.querySelector('.xterm-viewport');
+    let viewport: HTMLDivElement | undefined = this.terminalOuter.nativeElement.querySelector('.xterm-viewport');
     if (viewport) {
       const resizeObserver = new ResizeObserver(entries => {
-        const divWidth = parseFloat(getComputedStyle(this.div.nativeElement).width);
-        const divHeight = parseFloat(getComputedStyle(this.div.nativeElement).height);
+        const divWidth = parseFloat(getComputedStyle(this.terminalOuter.nativeElement).width);
+        const divHeight = parseFloat(getComputedStyle(this.terminalOuter.nativeElement).height);
         let width: number = undefined;
         let height: number = undefined;
         for (let entry of entries) {
@@ -427,7 +420,6 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
    * clean all resources
    */
   ngOnDestroy(): void {
-    console.debug("ngOnDestroy");
     if (this.keyInputSubjectSubscription)
       this.keyInputSubjectSubscription.unsubscribe();
     if (this.dataSourceSubscription)

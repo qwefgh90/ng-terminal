@@ -1,13 +1,72 @@
 .terminal-outer {
     box-sizing: border-box;
     height: 100%;
-    border: 4px solid rgba(0,0,0,1);
+    width: 100%;
+    padding: 5px;
 }
-.draggable{
-    border: 4px solid #85858a;
-}
+
 :host{
     display: block;
     height: 100%;
     width: 100%;
+}
+
+/* angular-resizable-element 5.0 */
+.resize-box{
+    height: 100%;
+    width: 100%;
+    position: relative; 
+}
+
+div > .handle-active{
+    z-index: 100;
+    background-color: #85858a;
+}
+
+.resize-handle{
+  background-color: rgba(0,0,0,1);
+}
+
+.resize-handle-top.handle-active,
+.resize-handle-bottom.handle-active {
+  cursor: row-resize;
+}
+
+.resize-handle-left.handle-active,
+.resize-handle-right.handle-active {
+  cursor: col-resize;
+}
+
+.resize-handle-top,
+.resize-handle-bottom {
+  position: absolute;
+  height: 5px;
+  /* cursor: row-resize; */
+  width: 100%;
+}
+
+.resize-handle-top {
+  top: 0px;
+}
+
+.resize-handle-bottom {
+  bottom: 0px;
+}
+
+.resize-handle-left,
+.resize-handle-right {
+  position: absolute;
+  height: calc(100% );
+  /* cursor: col-resize; */
+  width: 5px;
+}
+
+.resize-handle-left {
+  left: 0px;
+  top: 0px;
+}
+
+.resize-handle-right {
+  right: 0px;
+  top: 0px;
 }
