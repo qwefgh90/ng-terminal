@@ -5609,8 +5609,8 @@
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/alexeyraspopov/picocolors
 │  ├─ publisher: Alexey Raspopov
-│  ├─ path: /Users/qwefgh90/Documents/ng-terminal/node_modules/postcss-attribute-case-insensitive/node_modules/picocolors
-│  └─ licenseFile: /Users/qwefgh90/Documents/ng-terminal/node_modules/postcss-attribute-case-insensitive/node_modules/picocolors/LICENSE
+│  ├─ path: /Users/qwefgh90/Documents/ng-terminal/node_modules/postcss-color-functional-notation/node_modules/picocolors
+│  └─ licenseFile: /Users/qwefgh90/Documents/ng-terminal/node_modules/postcss-color-functional-notation/node_modules/picocolors/LICENSE
 ├─ picocolors@1.0.0
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/alexeyraspopov/picocolors
@@ -6180,8 +6180,8 @@
 │  ├─ repository: https://github.com/postcss/postcss
 │  ├─ publisher: Andrey Sitnik
 │  ├─ email: andrey@sitnik.ru
-│  ├─ path: /Users/qwefgh90/Documents/ng-terminal/node_modules/postcss-attribute-case-insensitive/node_modules/postcss
-│  └─ licenseFile: /Users/qwefgh90/Documents/ng-terminal/node_modules/postcss-attribute-case-insensitive/node_modules/postcss/LICENSE
+│  ├─ path: /Users/qwefgh90/Documents/ng-terminal/node_modules/postcss-color-functional-notation/node_modules/postcss
+│  └─ licenseFile: /Users/qwefgh90/Documents/ng-terminal/node_modules/postcss-color-functional-notation/node_modules/postcss/LICENSE
 ├─ postcss@8.3.6
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/postcss/postcss
