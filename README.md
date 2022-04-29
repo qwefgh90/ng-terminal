@@ -1,6 +1,6 @@
 [![Build Status](https://app.travis-ci.com/qwefgh90/ng-terminal.svg?branch=master)](https://app.travis-ci.com/qwefgh90/ng-terminal) [![version](https://badge.fury.io/js/ng-terminal.svg)](https://www.npmjs.com/package/ng-terminal) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)]()
 
-NgTerminal is a web terminal that leverages xterm.js on Angular 11+. You can easily add it into your application by adding `<ng-terminal></ng-terminal>` into your component.
+NgTerminal is a web terminal that leverages xterm.js on Angular 12+. You can easily add it into your application by adding `<ng-terminal></ng-terminal>` into your component.
 
 NgTerminal provides some features including [xtermjs](https://xtermjs.org/). You can adjust dimensions of a terminal by dragging and to fix the number of rows and cols. New usuful features should be added continuously.
 
@@ -116,7 +116,7 @@ Control sequences is a programing interface to control terminal emulators. There
     component.write(sequences);
 ```
 
-You can find official supported terminal sequences in https://xtermjs.org/docs/api/vtfeatures/. And you can also read helpful article [here](https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h2-Controls-beginning-with-ESC). For example, you can move a cursor down by passing `\x1b[1E` to `write()`. Try in the [sample page](https://qwefgh90.github.io/ng-terminal/)
+You can find official supported terminal sequences in [Supported Terminal Sequences](https://xtermjs.org/docs/api/vtfeatures/). [An article](https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h2-Controls-beginning-with-ESC) and [what-are-terminal-sequences](https://xtermjs.org/docs/guides/hooks/#background---what-are-terminal-sequences) are also helpful. For example, you can move a cursor down by passing `\x1b[1E` to `write()`. Try in the [sample page](https://qwefgh90.github.io/ng-terminal/)
 
 ## Contribution
 
