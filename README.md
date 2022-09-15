@@ -15,7 +15,7 @@ npm install ng-terminal --save
 You can run an example in your local environment.
 
 1) git clone https://github.com/qwefgh90/ng-terminal.git
-2) npm install
+2) npm install --force
 4) npm run start
 
 ## Getting started

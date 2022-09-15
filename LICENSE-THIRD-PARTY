@@ -869,7 +869,7 @@
 │  ├─ url: https://jamesmessinger.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@jsdevtools\coverage-istanbul-loader
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@jsdevtools\coverage-istanbul-loader\LICENSE
-├─ @juggle/resize-observer@3.3.1
+├─ @juggle/resize-observer@3.4.0
 │  ├─ licenses: Apache-2.0
 │  ├─ repository: https://github.com/juggle/resize-observer
 │  ├─ publisher: Juggle
@@ -4999,8 +4999,7 @@
 │  ├─ path: D:\workspace\ng-terminal\node_modules\ng-packagr
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\ng-packagr\LICENSE
 ├─ ng-terminal-workspace@0.0.0
-│  ├─ licenses: UNLICENSED
-│  ├─ private: true
+│  ├─ licenses: MIT*
 │  ├─ path: D:\workspace\ng-terminal
 │  └─ licenseFile: D:\workspace\ng-terminal\README.md
 ├─ ngx-json-viewer@2.4.0
@@ -7984,7 +7983,7 @@
 │  ├─ url: https://xtermjs.org/
 │  ├─ path: D:\workspace\ng-terminal\node_modules\xterm-addon-web-links
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\xterm-addon-web-links\LICENSE
-├─ xterm@4.18.0
+├─ xterm@4.19.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/xtermjs/xterm.js
 │  ├─ path: D:\workspace\ng-terminal\node_modules\xterm
