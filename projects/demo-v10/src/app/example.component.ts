@@ -14,8 +14,9 @@ import { WebLinksAddon } from 'xterm-addon-web-links';
   styleUrls: ['./example.component.css']
 })
 export class ExampleComponent implements OnInit, AfterViewInit {
-  title = 'NgTerminal Live Example';
-  color = 'accent';
+  readonly title = 'NgTerminal Live Example';
+  readonly color = 'accent';
+  readonly prompt = '\n' + FunctionsUsingCSI.cursorColumn(1) + '$ ';
 
   _rows: number = undefined;
   _cols: number = undefined;
@@ -45,42 +46,35 @@ export class ExampleComponent implements OnInit, AfterViewInit {
     console.debug("example: font apply" );
     this.underlying.loadAddon(new WebLinksAddon());
     this.invalidate();
-    this.child.write('$ ');
-    this.child.keyInput.subscribe((input) => {
-      //do nothing because it will be replaced keyEventInput
-    })
-
-    this.child.keyEventInput.subscribe(e => {
-      console.log('keyboard event:' + e.domEvent.keyCode + ', ' + e.key);
-
-      const ev = e.domEvent;
-      const printable = !ev.altKey && !ev.ctrlKey && !ev.metaKey;
-
-      if (ev.keyCode === 13) {
-        this.child.write('\n' + FunctionsUsingCSI.cursorColumn(1) + '$ '); // \r\n
-      } else if (ev.keyCode === 8) {
-        // Do not delete the prompt
+    this.child.setXtermOptions({
+      fontFamily: '"Cascadia Code", Menlo, monospace',
+      theme: this.baseTheme,
+      cursorBlink: true
+    });
+    this.child.write('$ NgTerminal Live Example');
+    this.child.write(this.prompt);
+    this.child.onData().subscribe((input) => {
+      if (input === '\r') { // Carriage Return (When Enter is pressed)
+        this.child.write(this.prompt);
+      } else if (input === '\u007f') { // Delete (When Backspace is pressed)
         if (this.child.underlying.buffer.active.cursorX > 2) {
           this.child.write('\b \b');
         }
-      } else if (printable) {
-        this.child.write(e.key);
-      }
+      } else if (input === '\u0003') { // End of Text (When Ctrl and C are pressed)
+          this.child.write('^C');
+          this.child.write(this.prompt);
+      }else
+        this.child.write(input);
     })
+
+    this.child.onKey().subscribe(e => {
+      //onData() is used more often.
+    });
     this.rowsControl.valueChanges.subscribe(() => { this.updateRows() });
     this.colsControl.valueChanges.subscribe(() => { this.updateCols() });
   }
 
   invalidate() {
-    // if (this.resizable)
-    //   this.displayOption.activateDraggableOnEdge = { minWidth: 100, minHeight: 100 };
-    // else
-    //   this.displayOption.activateDraggableOnEdge = undefined;
-    // if (this.fixed)
-    //   this.displayOption.fixedGrid = { rows: this.rowsControl.value, cols: this.colsControl.value };
-    // else
-    //   this.displayOption.fixedGrid = undefined;
-    // this.child.setDisplayOption(this.displayOption);
   }
 
   resizableChange(event: MatSlideToggleChange) {
@@ -95,15 +89,6 @@ export class ExampleComponent implements OnInit, AfterViewInit {
   apiModeChange(event: MatSlideToggleChange) {
     this.apiMode = event.checked;
   }
-
-  // fixedChange(event: MatSlideToggleChange) {
-  //   this.fixed = event.checked;
-  //   if (this.fixed){
-  //     // this.child.setStyle({"border": "unset"});
-  //     this.draggableMode = false;
-  //   }
-  //   this.updateDraggable();
-  // }
 
   updateDraggable(){
     if(this.apiMode)
@@ -135,8 +120,31 @@ export class ExampleComponent implements OnInit, AfterViewInit {
   onKeyInput(event: string) {
     this.keyInput = event;
   }
-
+  
   get displayOptionForLiveUpdate() {
     return {rows: this.rowsControl.value, cols: this.colsControl.value, draggable: this.draggableMode};
   }
+  
+  baseTheme = {
+    foreground: '#F8F8F8',
+    background: '#2D2E2C',
+    selection: '#5DA5D533',
+    black: '#1E1E1D',
+    brightBlack: '#262625',
+    red: '#CE5C5C',
+    brightRed: '#FF7272',
+    green: '#5BCC5B',
+    brightGreen: '#72FF72',
+    yellow: '#CCCC5B',
+    brightYellow: '#FFFF72',
+    blue: '#5D5DD3',
+    brightBlue: '#7279FF',
+    magenta: '#BC5ED1',
+    brightMagenta: '#E572FF',
+    cyan: '#5DA5D5',
+    brightCyan: '#72F0FF',
+    white: '#F8F8F8',
+    brightWhite: '#FFFFFF',
+    border: '#85858a'
+  };
 }
