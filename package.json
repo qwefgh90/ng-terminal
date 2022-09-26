@@ -13,7 +13,7 @@
     "publish": "cd dist/ng-terminal && npm publish",
     "page": "ng build demo-v10 --configuration production --output-path docs --base-href /ng-terminal/",
     "local": "cd dist/ng-terminal && npm pack",
-    "lib:build": "ng build ng-terminal",
+    "lib:build": "copyfiles --flat node_modules/xterm/css/xterm.css projects/ng-terminal/src/lib/global-style && ng build ng-terminal",
     "lib:test": "ng test ng-terminal",
     "lib:travis:test": "ng test ng-terminal --watch false --browsers ChromeHeadless",
     "lib:build:prod": "ng build ng-terminal --configuration production",
@@ -32,15 +32,16 @@
     "@angular/platform-browser": "~12.2.16",
     "@angular/platform-browser-dynamic": "~12.2.16",
     "@angular/router": "~12.2.16",
+    "@juggle/resize-observer": "^3.4.0",
+    "@syncfusion/ej2-angular-pdfviewer": "^20.2.50-ngcc",
+    "angular-resizable-element": "^5.0.0",
     "ngx-json-viewer": "^2.4.0",
     "rxjs": "~6.6.7",
     "tslib": "^2.0.0",
-    "xterm-addon-web-links": "^0.4.0",
-    "zone.js": "~0.11.4",
-    "angular-resizable-element": "^5.0.0",
-    "@juggle/resize-observer": "^3.4.0",
     "xterm": "^4.19.0",
-    "xterm-addon-fit": "^0.5.0"
+    "xterm-addon-fit": "^0.5.0",
+    "xterm-addon-web-links": "^0.4.0",
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~12.2.16",
@@ -52,6 +53,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "^5.0.0",
+    "copyfiles": "^2.4.1",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~6.3.9",
@@ -65,7 +67,6 @@
     "ts-node": "~7.0.0",
     "tsickle": "^0.39.1",
     "tslint": "~6.1.0",
-    "typescript": "~4.3.5",
-    "copyfiles": "^2.4.1"
+    "typescript": "~4.3.5"
   }
 }

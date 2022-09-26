@@ -1,7 +1,9 @@
-<h2>{{title}}</h2>
+<h2></h2>
 <div class="outer-box">
-    <ng-terminal #term [dataSource]="writeSubject" (keyInput)="onKeyInput($event)" [rows]="_rows"
-        [cols]="_cols" [draggable]="_draggable" class="ng-terminal">
+    <ng-terminal #term [dataSource]="writeSubject" (keyInput)="onKeyInput($event)" [rows]="_rows" [cols]="_cols"
+    [minWidth]="200"
+    [minHeight]="200"
+        [draggable]="_draggable" class="ng-terminal">
     </ng-terminal>
 </div>
 <div [class.mat-elevation-z1]="true"
@@ -10,8 +12,8 @@
         <div style="display:inline-block; vertical-align: top; margin-bottom: 0.8em">
             <h3>Display Opiton</h3>
             <div>
-                <mat-slide-toggle [checked]="draggableMode" [color]="color"
-                    (change)="resizableChange($event)" [disabled]="disabled">
+                <mat-slide-toggle [checked]="draggableMode" [color]="color" (change)="resizableChange($event)"
+                    [disabled]="disabled">
                     Draggable
                 </mat-slide-toggle>
                 <mat-slide-toggle style="margin-left: 10px;" [checked]="apiMode" [color]="color"

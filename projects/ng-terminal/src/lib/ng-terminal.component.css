@@ -20,7 +20,7 @@
 
 div > .handle-active{
     z-index: 100;
-    background-color: #85858a;
+    background-color: #85858a !important;
 }
 
 .resize-handle{

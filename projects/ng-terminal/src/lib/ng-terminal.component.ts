@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewChecked, ViewChild, ElementRef, Input, Output, EventEmitter, OnDestroy, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
-import { Terminal } from 'xterm';
+import { ITerminalOptions, Terminal } from 'xterm';
 import { FitAddon } from 'xterm-addon-fit';
 import { NgTerminal } from './ng-terminal';
 import { Subject, Observable, Subscription, combineLatest, ObjectUnsubscribedError, ReplaySubject } from 'rxjs';
@@ -32,7 +32,6 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
     , hostResized?: { width: string, height: string }
     , whenTerminalDimensionIsOverOuterDiv?: { width: string, height: string }
   }>();
-  // private afterViewInitSubject = new Subject<void>();
 
   private keyInputSubjectSubscription: Subscription;
   private keyEventSubjectSubscription: Subscription;
@@ -40,12 +39,29 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
   private requestRenderSubscription: Subscription;
   private resizableObservers: ResizeObserver[] = [];
   private h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-  // private displayOption: DisplayOption = {};
   private dataSource: Observable<string>;
   private dataSourceSubscription: Subscription;
   private readonly paddingSize = 5;
   stylesForDiv: Partial<CSSStyleDeclaration> = { 'display': 'block' };
 
+  /**
+   * It is an alias of onData()..
+   * An EventEmitter to emit printable characters when a user typed on the div for the xterm
+   */
+   @Output('keyInput')
+   keyInputEmitter = new EventEmitter<string>();
+ 
+   /**
+    * @deprecated
+    * It is an alias of onKey().
+    * An EventEmitter to emit keys and keyboard event when a user typed on the div for the xterm
+    */
+   @Output('keyEvent')
+   keyEventEmitter = new EventEmitter<{ key: string; domEvent: KeyboardEvent; }>();
+ 
+  /**
+   * A datsource where a terminal read charactors.
+   */
   @Input('dataSource')
   set _dataSource(ds) {
     if (this.dataSourceSubscription != null) {
@@ -60,23 +76,44 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
     return this.dataSource;
   }
 
+  /**
+   * Change the row count of a terminal immediately
+   */
   @Input('rows')
   _rowsInput?: number;
+  /**
+   * Change the column count of a terminal immediately.
+   */
   @Input('cols')
   _colsInput?: number;
+  /**
+   * Set the minimum width to limit dragging.
+   */
   @Input('minWidth')
   _minWidthInput?: number;
+  /**
+   * Set the minimum height to limit dragging.
+   */
   @Input('minHeight')
   _minHeightInput?: number;
+  /**
+   * Enable or disable draggable.
+   */
   @Input('draggable')
   set draggable(draggable: boolean) {
     this._draggableInput = draggable;
     // this.applyStyleToDraggable();
   }
-  get draggable(){
+  /**
+   * An wrapper of the property options of the Xterm Terminal
+   * ITerminalOptions is defined in [Xterm.js](https://github.com/xtermjs/xterm.js/blob/4.14.1/typings/xterm.d.ts#L31).
+   */
+  @Input('xtermOptions')
+  _xtermOptions?: ITerminalOptions & { theme?: { border?: string } };
+  get draggable() {
     return this._draggableInput;
   }
-  lastDraggedPosition:{width: string, height: string};
+  lastDraggedPosition: { width: string, height: string };
 
   _draggableInput?: boolean = false;
 
@@ -85,6 +122,7 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
   setMinWidth(width: number): void {
     this._minWidthInput = width;
   }
+
   setMinHeight(height: number): void {
     this._minHeightInput = height;
   }
@@ -95,34 +133,31 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
     this.ref.markForCheck();
   }
 
+  setXtermOptions(options: ITerminalOptions & { theme?: { border?: string } }): void {
+    this._xtermOptions = options;
+    this.requestRenderFromAPI.next({});
+  }
+
   setRows(rows: number): void {
-    if (this._rowsInput != rows){
+    if (this._rowsInput != rows) {
       this._rowsInput = rows;
       this.requestRenderFromAPI.next({ rowChanged: true });
     }
   }
 
   setCols(cols: number): void {
-    if (this._colsInput != cols){
+    if (this._colsInput != cols) {
       this._colsInput = cols;
       this.requestRenderFromAPI.next({ columnChanged: true });
     }
   }
 
   setStyle(styleObject: any): void {
-    if (JSON.stringify(this._stylesInput ?? {}) != JSON.stringify(styleObject ?? {})){
+    if (JSON.stringify(this._stylesInput ?? {}) != JSON.stringify(styleObject ?? {})) {
       this._stylesInput = styleObject;
       this.requestRenderFromAPI.next({});
     }
-    
   }
-
-  @Output('keyInput')
-  keyInputEmitter = new EventEmitter<string>();
-
-  @Output('keyEvent')
-  keyEventEmitter = new EventEmitter<{ key: string; domEvent: KeyboardEvent; }>();
-
   @ViewChild('terminal', { static: true })
   terminalOuter: ElementRef;
 
@@ -209,7 +244,7 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
     });
     this.term.onKey(e => {
       this.keyEventSubject.next(e);
-    })
+    });
     this.keyInputSubjectSubscription = this.keyInputSubject.subscribe((data) => {
       this.keyInputEmitter.emit(data);
     })
@@ -253,17 +288,6 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
     this.stylesForDiv = this.stylesForDiv; //invalidate
   }
 
-  /**
-   * When draggable is true, add border styles 
-   * Render is being used for fast rendering without markForCheck().
-   */
-  // private applyStyleToDraggable() {
-  //   if (this._draggableInput)
-  //     this.renderer.addClass(this.terminalOuter.nativeElement, 'draggable');
-  //   else
-  //     this.renderer.removeClass(this.terminalOuter.nativeElement, 'draggable');
-  // }
-
   ngOnInit() {
   }
 
@@ -295,6 +319,10 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
     }
     // this.requestRenderFromAPI.next({});
   }
+
+  resizeHandleStyleRule?: CSSStyleRule;
+  resizeHandleActiveStyleRule?: CSSStyleRule;
+
   /**
    * It must be called after having initialized the terminal.
    * xterm fit
@@ -309,6 +337,22 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
     , whenTerminalDimensionIsOverOuterDiv?: { width: string, height: string }
   }) {
     console.debug(`changeList: ${JSON.stringify(changeList)}`);
+    // apply options to the xterm terminal
+    this.term.options = { ...this._xtermOptions };
+    // apply the theme to the background of the handle
+    if (this._xtermOptions?.theme?.background) {
+      if (!this.resizeHandleStyleRule)
+        this.resizeHandleStyleRule = this.findCssStyleRule(".resize-handle[");
+      if (this.resizeHandleStyleRule)
+        this.resizeHandleStyleRule.style.backgroundColor = this._xtermOptions.theme.background;
+    }
+    if (this._xtermOptions?.theme?.border) {
+      if (!this.resizeHandleActiveStyleRule)
+        this.resizeHandleActiveStyleRule = this.findCssStyleRule(".handle-active");
+      if (this.resizeHandleActiveStyleRule)
+        this.resizeHandleActiveStyleRule.style.backgroundColor = this._xtermOptions.theme.border;
+    }
+
     // apply a style input while keeping width and height default
     this.stylesForDiv = {
       ...this.stylesForDiv
@@ -320,7 +364,7 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
     if (changeList.dragged) {
       this.stylesForDiv.width = changeList.dragged.draggedWidth;
       this.stylesForDiv.height = changeList.dragged.draggedHeight;
-      this.lastDraggedPosition = {width: changeList.dragged.draggedWidth, height: changeList.dragged.draggedHeight};
+      this.lastDraggedPosition = { width: changeList.dragged.draggedWidth, height: changeList.dragged.draggedHeight };
     } else if (!this._rowsInput && !this._colsInput && !(this.draggable && this.lastDraggedPosition)) {
       // but if the dimension of host element is resized, update width and height
       this.stylesForDiv.width = '100%';
@@ -331,7 +375,7 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
     // resize with new cols and rows if they changed.
     if (changeList.rowChanged || changeList.columnChanged) {
       this.term.resize(this._colsInput ?? this.term.cols, this._rowsInput ?? this.term.rows);
-    } else { 
+    } else {
       // fit() operation doesn't see padding values of terminalOuter.
       // But it uses padding values of terminal element.
       // So we force to set padding values when calling fit() operation for a while.
@@ -348,14 +392,14 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
     const terminalHeight = xtermScreen.clientHeight;
     const core = (this.underlying as any)._core;
     const scrollWidth: number = core.viewport.scrollBarWidth as number;
-     
+
     // It fixes that the viewport's width doesn't changes after calling fit()
     this.renderer.setStyle(xtermViewport, 'width', `${terminalWidth + scrollWidth}px`);
-    console.debug(terminalWidth + scrollWidth + this.paddingSize*2 , terminalWidth, scrollWidth, this.paddingSize*2 ); // + borderWidth * 2
-    console.debug(terminalHeight + this.paddingSize*2 , terminalHeight);
+    console.debug(terminalWidth + scrollWidth + this.paddingSize * 2, terminalWidth, scrollWidth, this.paddingSize * 2); // + borderWidth * 2
+    console.debug(terminalHeight + this.paddingSize * 2, terminalHeight);
     this.stylesForDiv = {
-      ...this.stylesForDiv, width: `${terminalWidth + scrollWidth +this.paddingSize*2 }px`
-      , height: `${terminalHeight + this.paddingSize*2 }px`
+      ...this.stylesForDiv, width: `${terminalWidth + scrollWidth + this.paddingSize * 2}px`
+      , height: `${terminalHeight + this.paddingSize * 2}px`
     };
     this.applyStyleToDiv();
     this.ref.markForCheck();
@@ -445,7 +489,15 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
     return this.keyInputSubject;
   }
 
+  onData(): Observable<string> {
+    return this.keyInputSubject;
+  }
+
   get keyEventInput(): Observable<{ key: string; domEvent: KeyboardEvent; }> {
+    return this.keyEventSubject;
+  }
+
+  onKey(): Observable<{ key: string; domEvent: KeyboardEvent; }> {
     return this.keyEventSubject;
   }
 
@@ -476,7 +528,6 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
   validatorFactory(): (re: ResizeEvent) => boolean {
     const comp = this;
     return (re: ResizeEvent) => {
-      // const displayOption = comp.displayOption;
       if (this._draggableInput) {
         let left = re.rectangle.left, top = re.rectangle.top, width = re.rectangle.width, height = re.rectangle.height;
         if ((width < (this._minWidthInput ?? 100)) || (height < (this._minHeightInput ?? 50))) {
@@ -484,6 +535,18 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
         } else return true;
       } else
         return false;
+    }
+  }
+
+  private findCssStyleRule(containingSelector: string) {
+    for (let i = 0; i < document.styleSheets.length; i++) {
+      let sheet = document.styleSheets.item(i);
+      for (let i = 0; i < sheet.cssRules.length; i++) {
+        let rule = sheet.cssRules.item(i) as CSSStyleRule;
+        if ('selectorText' in rule)
+          if (rule.selectorText.includes(containingSelector))
+            return rule;
+      }
     }
   }
 
