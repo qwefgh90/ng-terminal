@@ -296,7 +296,9 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
    */
   ngAfterViewInit() {
     this.fitAddon = new FitAddon();
-    this.term = new Terminal();
+    this.term = new Terminal({
+      allowProposedApi: true
+    });
     this.term.open(this.terminalOuter.nativeElement);
     this.term.loadAddon(this.fitAddon);
     this.observableSetup();
