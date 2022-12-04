@@ -48,17 +48,17 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
    * It is an alias of onData()..
    * An EventEmitter to emit printable characters when a user typed on the div for the xterm
    */
-   @Output('keyInput')
-   keyInputEmitter = new EventEmitter<string>();
- 
-   /**
-    * @deprecated
-    * It is an alias of onKey().
-    * An EventEmitter to emit keys and keyboard event when a user typed on the div for the xterm
-    */
-   @Output('keyEvent')
-   keyEventEmitter = new EventEmitter<{ key: string; domEvent: KeyboardEvent; }>();
- 
+  @Output('keyInput')
+  keyInputEmitter = new EventEmitter<string>();
+
+  /**
+   * @deprecated
+   * It is an alias of onKey().
+   * An EventEmitter to emit keys and keyboard event when a user typed on the div for the xterm
+   */
+  @Output('keyEvent')
+  keyEventEmitter = new EventEmitter<{ key: string; domEvent: KeyboardEvent; }>();
+
   /**
    * A datsource where a terminal read charactors.
    */
@@ -209,6 +209,10 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
   /**
    * @internal don't make a direct call
    */
+  lazyContainerCheckHandle: ReturnType<typeof setInterval>;
+  /**
+   * @internal don't make a direct call
+   */
   private releaseNextOne = () => {
     if (!this.interval) {
       let list = this.waitingQueue.splice(0, 1);
@@ -299,10 +303,27 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
     this.term = new Terminal({
       allowProposedApi: true
     });
-    this.term.open(this.terminalOuter.nativeElement);
-    this.term.loadAddon(this.fitAddon);
-    this.observableSetup();
-    this.requestRenderFromAPI.next({});
+    if (!(this.terminalOuter.nativeElement as HTMLElement).isConnected) {
+      this.lazyContainerCheckHandle = setInterval(() => {
+        if ((this.terminalOuter.nativeElement as HTMLElement).isConnected) {
+          try {
+            console.debug("The container's been connected.");
+            this.term.open(this.terminalOuter.nativeElement);
+            this.term.loadAddon(this.fitAddon);
+            this.observableSetup();
+            this.requestRenderFromAPI.next({});
+          } finally {
+            if (this.lazyContainerCheckHandle)
+              clearInterval(this.lazyContainerCheckHandle);
+          }
+        }
+      }, 500);
+    } else {
+      this.term.open(this.terminalOuter.nativeElement);
+      this.term.loadAddon(this.fitAddon);
+      this.observableSetup();
+      this.requestRenderFromAPI.next({});
+    }
   }
 
   ngOnChanges(changes?: SimpleChanges) {
@@ -478,6 +499,8 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
       this.allLogsSubjectSubscription.unsubscribe();
     if (this.interval)
       clearInterval(this.interval);
+    if(this.lazyContainerCheckHandle)
+      clearInterval(this.lazyContainerCheckHandle);
     if (this.term)
       this.term.dispose();
     this.resizableObservers.forEach(ob => ob.disconnect());

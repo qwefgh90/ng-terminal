@@ -1,3 +1,13 @@
+<mat-tab-group #tabGroup>
+    <mat-tab label="Tab1">
+    </mat-tab>
+    <mat-tab label="Tab2">
+      <div style="width:100px; height:100px">
+        <ng-terminal></ng-terminal>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+
 <h2></h2>
 <div class="outer-box">
     <ng-terminal #term [dataSource]="writeSubject" (keyInput)="onKeyInput($event)" [rows]="_rows" [cols]="_cols"
