@@ -33,8 +33,8 @@
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/angular/angular-cli
 │  ├─ publisher: Angular Authors
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@angular-devkit\schematics\node_modules\@angular-devkit\core
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular-devkit\schematics\node_modules\@angular-devkit\core\LICENSE
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@angular-devkit\build-webpack\node_modules\@angular-devkit\core
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular-devkit\build-webpack\node_modules\@angular-devkit\core\LICENSE
 ├─ @angular-devkit/schematics@12.2.16
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/angular/angular-cli
@@ -168,8 +168,8 @@
 │  ├─ repository: https://github.com/babel/babel
 │  ├─ publisher: The Babel Team
 │  ├─ url: https://babel.dev/team
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\helper-create-class-features-plugin\node_modules\@babel\helper-annotate-as-pure
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\helper-create-class-features-plugin\node_modules\@babel\helper-annotate-as-pure\LICENSE
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\helper-remap-async-to-generator\node_modules\@babel\helper-annotate-as-pure
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\helper-remap-async-to-generator\node_modules\@babel\helper-annotate-as-pure\LICENSE
 ├─ @babel/helper-builder-binary-assignment-operator-visitor@7.16.7
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/babel/babel
@@ -1441,8 +1441,8 @@
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/ajv-validator/ajv
 │  ├─ publisher: Evgeny Poberezkin
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@angular-devkit\schematics\node_modules\ajv
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular-devkit\schematics\node_modules\ajv\LICENSE
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@angular-devkit\build-webpack\node_modules\ajv
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular-devkit\build-webpack\node_modules\ajv\LICENSE
 ├─ angular-resizable-element@5.0.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/mattlewis92/angular-resizable-element
@@ -4397,8 +4397,8 @@
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/epoberezkin/json-schema-traverse
 │  ├─ publisher: Evgeny Poberezkin
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@angular-devkit\schematics\node_modules\json-schema-traverse
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular-devkit\schematics\node_modules\json-schema-traverse\LICENSE
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@angular-devkit\build-webpack\node_modules\json-schema-traverse
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular-devkit\build-webpack\node_modules\json-schema-traverse\LICENSE
 ├─ json-schema@0.4.0
 │  ├─ licenses: (AFL-2.1 OR BSD-3-Clause)
 │  ├─ repository: https://github.com/kriszyp/json-schema
@@ -5631,8 +5631,8 @@
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/alexeyraspopov/picocolors
 │  ├─ publisher: Alexey Raspopov
-│  ├─ path: D:\workspace\ng-terminal\node_modules\postcss-color-gray\node_modules\picocolors
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\postcss-color-gray\node_modules\picocolors\LICENSE
+│  ├─ path: D:\workspace\ng-terminal\node_modules\postcss-attribute-case-insensitive\node_modules\picocolors
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\postcss-attribute-case-insensitive\node_modules\picocolors\LICENSE
 ├─ picocolors@1.0.0
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/alexeyraspopov/picocolors
@@ -6202,8 +6202,8 @@
 │  ├─ repository: https://github.com/postcss/postcss
 │  ├─ publisher: Andrey Sitnik
 │  ├─ email: andrey@sitnik.ru
-│  ├─ path: D:\workspace\ng-terminal\node_modules\postcss-color-gray\node_modules\postcss
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\postcss-color-gray\node_modules\postcss\LICENSE
+│  ├─ path: D:\workspace\ng-terminal\node_modules\postcss-attribute-case-insensitive\node_modules\postcss
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\postcss-attribute-case-insensitive\node_modules\postcss\LICENSE
 ├─ postcss@8.3.6
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/postcss/postcss
