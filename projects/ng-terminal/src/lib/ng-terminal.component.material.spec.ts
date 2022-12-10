@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 
 import { NgTerminalComponent } from './ng-terminal.component';
 import { GlobalStyleComponent } from './global-style/global-style.component';
@@ -30,7 +30,7 @@ describe('NgTerminalComponent with MaterialTab', () => {
   let mattabComponent: AppMatTabComponent;
   let mattabFixture: ComponentFixture<AppMatTabComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ NgTerminalComponent, AppMatTabComponent, GlobalStyleComponent ],
       imports: [ ResizableModule, MatTabsModule, BrowserAnimationsModule ]
@@ -43,7 +43,7 @@ describe('NgTerminalComponent with MaterialTab', () => {
     mattabComponent = mattabFixture.componentInstance;
   });
 
-  it(`gets a terminal component out of DOM`, fakeAsync(() => {
+  it(`doesn't open the xterm terminal when it's out of DOM`, fakeAsync(() => {
     mattabFixture.detectChanges();
     tick(1000);
 
@@ -54,58 +54,23 @@ describe('NgTerminalComponent with MaterialTab', () => {
     expect(xtermViewport).toBeNull();
 
     // only it is accessed through a component instance
-    let hiddenXtermScreen = mattabComponent.terminal.underlying.element.getElementsByClassName('xterm-screen')[0];
-    let hiddenViewport = mattabComponent.terminal.underlying.element.getElementsByClassName('xterm-viewport')[0];
-    expect(hiddenXtermScreen.isConnected).toBeFalsy();
-    expect(hiddenViewport.isConnected).toBeFalsy();
-    expect(hiddenXtermScreen.clientWidth).toBe(0);
-    expect(hiddenViewport.clientWidth).toBe(0);
+    expect(mattabComponent.terminal.underlying).toBeDefined();
+    expect(mattabComponent.terminal.underlying.element).toBeUndefined();
+
     (mattabComponent.terminal as NgTerminalComponent).ngOnDestroy();
   }));
 
-  it(`gets a terminal component inside DOM`, fakeAsync(() => {
-    mattabFixture.detectChanges();
-    tick(1000);
-    (mattabComponent.terminal as any)._rowsInput = 10;
-    (mattabComponent.terminal as any)._colsInput = 10;
-    (mattabComponent.terminal as any).ngOnChanges({
-      _rowsInput: new SimpleChange(undefined, 10, true),
-      _colsInput: new SimpleChange(undefined, 10, true),
-      _draggableInput: new SimpleChange(undefined, undefined, true)
-    });
-    tick(1000);
-    mattabComponent.tabGroup.selectedIndex = 1;
-    mattabFixture.detectChanges();
-    tick(1000);
-
-    let mattabEl = mattabFixture.nativeElement as HTMLElement;
-    let xtermScreen = mattabEl.querySelector('.xterm-screen');
-    let xtermViewport = mattabEl.querySelector('.xterm-viewport');
-    expect(xtermScreen.isConnected).toBeTruthy();
-    expect(xtermViewport.isConnected).toBeTruthy();
-    expect(xtermScreen.clientWidth).toBeGreaterThan(10);
-    expect(xtermViewport.clientWidth).toBeGreaterThan(10);
-  }));
-
-  it(`gets a terminal component inside DOM as soon as a tab is activated`, fakeAsync(() => {
+  it(`open the xterm terminal as soon as a tab is activated`, fakeAsync(() => {
     mattabFixture.detectChanges();
     mattabComponent.tabGroup.selectedIndex = 0;
     mattabFixture.detectChanges();
     tick(1000);
-    mattabFixture.detectChanges();
 
-    let hiddenXtermScreen = mattabComponent.terminal.underlying.element.getElementsByClassName('xterm-screen')[0];
-    let hiddenViewport = mattabComponent.terminal.underlying.element.getElementsByClassName('xterm-viewport')[0];
-    expect(hiddenXtermScreen.isConnected).toBeFalsy();
-    expect(hiddenViewport.isConnected).toBeFalsy();
-
+    expect(mattabComponent.terminal.underlying.element).toBeUndefined();
     mattabComponent.tabGroup.selectedIndex = 1;
     mattabFixture.detectChanges();
     tick(1000);
-    mattabComponent.terminal.setRows(10);
-    mattabComponent.terminal.setCols(10);
-    mattabFixture.detectChanges();
-
+    
     let mattabEl = mattabFixture.nativeElement as HTMLElement;
     let xtermScreen = mattabEl.querySelector('.xterm-screen');
     let xtermViewport = mattabEl.querySelector('.xterm-viewport');

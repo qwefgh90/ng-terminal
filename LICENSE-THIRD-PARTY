@@ -5,12 +5,6 @@
 │  ├─ email: jridgewell@google.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@ampproject\remapping
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@ampproject\remapping\LICENSE
-├─ @angular-devkit/architect@0.1002.4
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/angular/angular-cli
-│  ├─ publisher: Angular Authors
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@angular-devkit\architect
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular-devkit\architect\LICENSE
 ├─ @angular-devkit/architect@0.1202.16
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/angular/angular-cli
@@ -23,12 +17,6 @@
 │  ├─ publisher: Angular Authors
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@angular-devkit\build-angular
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular-devkit\build-angular\LICENSE
-├─ @angular-devkit/build-ng-packagr@0.1002.4
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/angular/angular-cli
-│  ├─ publisher: Angular Authors
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@angular-devkit\build-ng-packagr
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular-devkit\build-ng-packagr\LICENSE
 ├─ @angular-devkit/build-optimizer@0.1202.16
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/angular/angular-cli
@@ -41,18 +29,12 @@
 │  ├─ publisher: Angular Authors
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@angular-devkit\build-webpack
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular-devkit\build-webpack\LICENSE
-├─ @angular-devkit/core@10.2.4
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/angular/angular-cli
-│  ├─ publisher: Angular Authors
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@angular-devkit\core
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular-devkit\core\LICENSE
 ├─ @angular-devkit/core@12.2.16
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/angular/angular-cli
 │  ├─ publisher: Angular Authors
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@angular-devkit\schematics\node_modules\@angular-devkit\core
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular-devkit\schematics\node_modules\@angular-devkit\core\LICENSE
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@angular-devkit\build-webpack\node_modules\@angular-devkit\core
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular-devkit\build-webpack\node_modules\@angular-devkit\core\LICENSE
 ├─ @angular-devkit/schematics@12.2.16
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/angular/angular-cli
@@ -973,6 +955,151 @@
 │  ├─ publisher: Angular Authors
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@schematics\angular
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@schematics\angular\LICENSE
+├─ @syncfusion/ej2-angular-base@20.2.49
+│  ├─ licenses: Custom: https://www.syncfusion.com/eula/es/
+│  ├─ repository: https://github.com/syncfusion/ej2-angular-ui-components
+│  ├─ publisher: Syncfusion Inc.
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-angular-base
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-angular-base\license
+├─ @syncfusion/ej2-angular-pdfviewer@20.2.50-ngcc
+│  ├─ licenses: Custom: https://www.syncfusion.com/angular-ui-components/angular-pdf-viewer
+│  ├─ repository: https://github.com/syncfusion/ej2-angular-ui-components
+│  ├─ publisher: Syncfusion Inc.
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-angular-pdfviewer
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-angular-pdfviewer\README.md
+├─ @syncfusion/ej2-base@20.2.48
+│  ├─ licenses: Custom: https://www.syncfusion.com/content/downloads/syncfusion
+│  ├─ repository: https://github.com/syncfusion/ej2-javascript-ui-controls
+│  ├─ publisher: Syncfusion Inc.
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-base
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-base\license
+├─ @syncfusion/ej2-buttons@20.2.46
+│  ├─ licenses: Custom: https://ej2.syncfusion.com/products/images/button/readme.gif
+│  ├─ repository: https://github.com/syncfusion/ej2-javascript-ui-controls
+│  ├─ publisher: Syncfusion Inc.
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-buttons
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-buttons\license
+├─ @syncfusion/ej2-calendars@20.2.50
+│  ├─ licenses: Custom: https://www.syncfusion.com/
+│  ├─ repository: https://github.com/syncfusion/ej2-javascript-ui-controls
+│  ├─ publisher: Syncfusion Inc.
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-calendars
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-calendars\license
+├─ @syncfusion/ej2-compression@20.2.45
+│  ├─ licenses: UNKNOWN
+│  ├─ publisher: Syncfusion Inc.
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-compression
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-compression\license
+├─ @syncfusion/ej2-data@20.2.45
+│  ├─ licenses: UNKNOWN
+│  ├─ publisher: Syncfusion Inc.
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-data
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-data\license
+├─ @syncfusion/ej2-drawings@20.2.45
+│  ├─ licenses: Custom: http://ej2.syncfusion.com/demos/
+│  ├─ repository: https://github.com/syncfusion/ej2-javascript-ui-controls
+│  ├─ publisher: Syncfusion Inc.
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-drawings
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-drawings\license
+├─ @syncfusion/ej2-dropdowns@20.2.50
+│  ├─ licenses: Custom: https://www.syncfusion.com/eula/es/
+│  ├─ publisher: Syncfusion Inc.
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-dropdowns
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-dropdowns\license
+├─ @syncfusion/ej2-excel-export@20.2.48
+│  ├─ licenses: UNKNOWN
+│  ├─ repository: https://github.com/syncfusion/ej2-javascript-ui-controls
+│  ├─ publisher: Syncfusion Inc.
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-excel-export
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-excel-export\license
+├─ @syncfusion/ej2-file-utils@20.2.45
+│  ├─ licenses: UNKNOWN
+│  ├─ publisher: Syncfusion Inc.
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-file-utils
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-file-utils\license
+├─ @syncfusion/ej2-filemanager@20.2.45
+│  ├─ licenses: Custom: https://ej2.syncfusion.com/products/images/file-manager/readme.gif
+│  ├─ repository: https://github.com/syncfusion/ej2-javascript-ui-controls
+│  ├─ publisher: Syncfusion Inc.
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-filemanager
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-filemanager\license
+├─ @syncfusion/ej2-grids@20.2.49
+│  ├─ licenses: Custom: https://www.syncfusion.com/javascript-ui-controls/js-data-grid
+│  ├─ repository: https://github.com/syncfusion/ej2-javascript-ui-controls/tree/master/controls/grids
+│  ├─ publisher: Syncfusion Inc.
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-grids
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-grids\license
+├─ @syncfusion/ej2-icons@20.2.45
+│  ├─ licenses: Custom: https://www.syncfusion.com/eula/es/
+│  ├─ repository: https://github.com/syncfusion/ej2-icons
+│  ├─ publisher: Syncfusion Inc.
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-icons
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-icons\README.md
+├─ @syncfusion/ej2-inplace-editor@20.2.45
+│  ├─ licenses: Custom: https://ej2.syncfusion.com/products/images/inplace-editor/readMe.gif
+│  ├─ repository: https://github.com/syncfusion/ej2-javascript-ui-controls
+│  ├─ publisher: Syncfusion Inc.
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-inplace-editor
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-inplace-editor\license
+├─ @syncfusion/ej2-inputs@20.2.48
+│  ├─ licenses: Custom: https://ej2.syncfusion.com/products/images/input/readme.gif
+│  ├─ repository: https://github.com/syncfusion/ej2-javascript-ui-controls/tree/master/controls/inputs
+│  ├─ publisher: Syncfusion Inc.
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-inputs
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-inputs\license
+├─ @syncfusion/ej2-layouts@20.2.46
+│  ├─ licenses: Custom: https://ej2.syncfusion.com/products/images/layout/readme.png
+│  ├─ repository: https://github.com/syncfusion/ej2-javascript-ui-controls/tree/master/controls/layouts
+│  ├─ publisher: Syncfusion Inc.
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-layouts
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-layouts\license
+├─ @syncfusion/ej2-lists@20.2.46
+│  ├─ licenses: Custom: https://ej2.syncfusion.com/products/images/listview/readme.gif
+│  ├─ repository: https://github.com/syncfusion/ej2-javascript-ui-controls/tree/master/controls/lists
+│  ├─ publisher: Syncfusion Inc.
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-lists
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-lists\license
+├─ @syncfusion/ej2-navigations@20.2.50
+│  ├─ licenses: Custom: https://ej2.syncfusion.com/products/images/navigations/readMe.gif
+│  ├─ repository: https://github.com/syncfusion/ej2-javascript-ui-controls
+│  ├─ publisher: Syncfusion Inc.
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-navigations
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-navigations\license
+├─ @syncfusion/ej2-notifications@20.2.45
+│  ├─ licenses: Custom: https://ej2.syncfusion.com/products/images/notifications/readMe.gif
+│  ├─ repository: https://github.com/syncfusion/ej2-javascript-ui-controls/tree/master/controls/notifications
+│  ├─ publisher: Syncfusion Inc.
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-notifications
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-notifications\license
+├─ @syncfusion/ej2-pdf-export@20.2.45
+│  ├─ licenses: UNKNOWN
+│  ├─ publisher: Syncfusion Inc.
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-pdf-export
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-pdf-export\README.md
+├─ @syncfusion/ej2-pdfviewer@20.2.50
+│  ├─ licenses: Custom: https://www.syncfusion.com/javascript-ui-controls/js-pdf-viewer
+│  ├─ repository: https://github.com/syncfusion/ej2-pdfviewer
+│  ├─ publisher: Syncfusion Inc.
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-pdfviewer
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-pdfviewer\license
+├─ @syncfusion/ej2-popups@20.2.49
+│  ├─ licenses: Custom: https://ej2.syncfusion.com/products/images/popup/readme.png
+│  ├─ repository: https://github.com/syncfusion/ej2-javascript-ui-controls
+│  ├─ publisher: Syncfusion Inc.
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-popups
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-popups\license
+├─ @syncfusion/ej2-richtexteditor@20.2.50
+│  ├─ licenses: Custom: https://www.syncfusion.com/javascript-ui-controls/js-wysiwyg-rich-text-editor
+│  ├─ repository: https://github.com/syncfusion/ej2-javascript-ui-controls
+│  ├─ publisher: Syncfusion Inc.
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-richtexteditor
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-richtexteditor\license
+├─ @syncfusion/ej2-splitbuttons@20.2.45
+│  ├─ licenses: Custom: https://ej2.syncfusion.com/products/images/splitbutton/readme.gif
+│  ├─ repository: https://github.com/syncfusion/ej2-javascript-ui-controls
+│  ├─ publisher: Syncfusion Inc.
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-splitbuttons
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-splitbuttons\license
 ├─ @tootallnate/once@1.1.2
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/TooTallNate/once
@@ -1314,8 +1441,8 @@
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/ajv-validator/ajv
 │  ├─ publisher: Evgeny Poberezkin
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@angular-devkit\schematics\node_modules\ajv
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular-devkit\schematics\node_modules\ajv\LICENSE
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@angular-devkit\build-webpack\node_modules\ajv
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular-devkit\build-webpack\node_modules\ajv\LICENSE
 ├─ angular-resizable-element@5.0.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/mattlewis92/angular-resizable-element
@@ -1412,13 +1539,6 @@
 │  ├─ url: https://github.com/es128
 │  ├─ path: D:\workspace\ng-terminal\node_modules\anymatch
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\anymatch\LICENSE
-├─ app-root-path@2.2.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/inxilpro/node-app-root-path
-│  ├─ publisher: Chris Morrell
-│  ├─ email: http://cmorrell.com
-│  ├─ path: D:\workspace\ng-terminal\node_modules\app-root-path
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\app-root-path\LICENSE
 ├─ aproba@2.0.0
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/iarna/aproba
@@ -1437,13 +1557,6 @@
 │  ├─ repository: https://github.com/nodeca/argparse
 │  ├─ path: D:\workspace\ng-terminal\node_modules\argparse
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\argparse\LICENSE
-├─ aria-query@3.0.0
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/A11yance/aria-query
-│  ├─ publisher: Jesse Beach
-│  ├─ email: splendidnoise@gmail.com
-│  ├─ path: D:\workspace\ng-terminal\node_modules\aria-query
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\aria-query\LICENSE
 ├─ arr-diff@4.0.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/jonschlinkert/arr-diff
@@ -1554,12 +1667,6 @@
 │  ├─ url: https://github.com/jonschlinkert
 │  ├─ path: D:\workspace\ng-terminal\node_modules\assign-symbols
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\assign-symbols\LICENSE
-├─ ast-types-flow@0.0.7
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/kyldvs/ast-types-flow
-│  ├─ publisher: kyldvs
-│  ├─ path: D:\workspace\ng-terminal\node_modules\ast-types-flow
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\ast-types-flow\README.md
 ├─ async-each@1.0.3
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/paulmillr/async-each
@@ -1617,13 +1724,6 @@
 │  ├─ url: https://github.com/mhart
 │  ├─ path: D:\workspace\ng-terminal\node_modules\aws4
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\aws4\LICENSE
-├─ axobject-query@2.0.2
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/A11yance/axobject-query
-│  ├─ publisher: Jesse Beach
-│  ├─ email: splendidnoise@gmail.com
-│  ├─ path: D:\workspace\ng-terminal\node_modules\axobject-query
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\axobject-query\LICENSE
 ├─ babel-loader@8.2.2
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/babel/babel-loader
@@ -2038,13 +2138,6 @@
 │  ├─ url: http://paul.vorba.ch/
 │  ├─ path: D:\workspace\ng-terminal\node_modules\clone
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\clone\LICENSE
-├─ codelyzer@5.2.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/mgechev/codelyzer
-│  ├─ publisher: Minko Gechev
-│  ├─ email: mgechev@gmail.com
-│  ├─ path: D:\workspace\ng-terminal\node_modules\codelyzer
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\codelyzer\README.md
 ├─ collection-visit@1.0.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/jonschlinkert/collection-visit
@@ -2351,12 +2444,6 @@
 │  ├─ email: me@feedic.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\css-select
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\css-select\LICENSE
-├─ css-selector-tokenizer@0.7.3
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/css-modules/css-selector-tokenizer
-│  ├─ publisher: Tobias Koppers @sokra
-│  ├─ path: D:\workspace\ng-terminal\node_modules\css-selector-tokenizer
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\css-selector-tokenizer\LICENSE
 ├─ css-tree@1.1.3
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/csstree/csstree
@@ -2380,13 +2467,6 @@
 │  ├─ email: tj@vision-media.ca
 │  ├─ path: D:\workspace\ng-terminal\node_modules\css
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\css\LICENSE
-├─ cssauron@1.4.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/chrisdickinson/cssauron
-│  ├─ publisher: Chris Dickinson
-│  ├─ email: chris@neversaw.us
-│  ├─ path: D:\workspace\ng-terminal\node_modules\cssauron
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\cssauron\README.md
 ├─ cssdb@4.4.0
 │  ├─ licenses: CC0-1.0
 │  ├─ repository: https://github.com/csstools/cssdb
@@ -2451,12 +2531,6 @@
 │  ├─ url: http://n8.io/
 │  ├─ path: D:\workspace\ng-terminal\node_modules\custom-event
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\custom-event\LICENSE
-├─ damerau-levenshtein@1.0.6
-│  ├─ licenses: BSD-2-Clause
-│  ├─ repository: https://github.com/tad-lispy/node-damerau-levenshtein
-│  ├─ publisher: The Spanish Inquisition
-│  ├─ path: D:\workspace\ng-terminal\node_modules\damerau-levenshtein
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\damerau-levenshtein\LICENSE
 ├─ dashdash@1.14.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/trentm/node-dashdash
@@ -2671,11 +2745,6 @@
 │  ├─ email: vojta.jina@gmail.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\di
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\di\LICENSE
-├─ diff@3.5.0
-│  ├─ licenses: BSD-3-Clause
-│  ├─ repository: https://github.com/kpdecker/jsdiff
-│  ├─ path: D:\workspace\ng-terminal\node_modules\diff
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\diff\LICENSE
 ├─ diff@4.0.2
 │  ├─ licenses: BSD-3-Clause
 │  ├─ repository: https://github.com/kpdecker/jsdiff
@@ -3093,12 +3162,6 @@
 │  ├─ url: http://substack.net
 │  ├─ path: D:\workspace\ng-terminal\node_modules\fast-json-stable-stringify
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\fast-json-stable-stringify\LICENSE
-├─ fastparse@1.1.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/webpack/fastparse
-│  ├─ publisher: Tobias Koppers @sokra
-│  ├─ path: D:\workspace\ng-terminal\node_modules\fastparse
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\fastparse\LICENSE
 ├─ fastq@1.13.0
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/mcollina/fastq
@@ -4334,8 +4397,8 @@
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/epoberezkin/json-schema-traverse
 │  ├─ publisher: Evgeny Poberezkin
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@angular-devkit\schematics\node_modules\json-schema-traverse
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular-devkit\schematics\node_modules\json-schema-traverse\LICENSE
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@angular-devkit\build-webpack\node_modules\json-schema-traverse
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular-devkit\build-webpack\node_modules\json-schema-traverse\LICENSE
 ├─ json-schema@0.4.0
 │  ├─ licenses: (AFL-2.1 OR BSD-3-Clause)
 │  ├─ repository: https://github.com/kriszyp/json-schema
@@ -4653,13 +4716,6 @@
 │  ├─ url: sindresorhus.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\istanbul-lib-report\node_modules\make-dir
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\istanbul-lib-report\node_modules\make-dir\license
-├─ make-error@1.3.6
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/JsCommunity/make-error
-│  ├─ publisher: Julien Fontanet
-│  ├─ email: julien.fontanet@isonoe.net
-│  ├─ path: D:\workspace\ng-terminal\node_modules\make-error
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\make-error\LICENSE
 ├─ make-fetch-happen@9.1.0
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/npm/make-fetch-happen
@@ -6641,13 +6697,10 @@
 │  ├─ url: https://feross.org
 │  ├─ path: D:\workspace\ng-terminal\node_modules\run-parallel
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\run-parallel\LICENSE
-├─ rxjs@6.6.2
+├─ rxjs-compat@6.6.7
 │  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/reactivex/rxjs
-│  ├─ publisher: Ben Lesh
-│  ├─ email: ben@benlesh.com
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@angular-devkit\core\node_modules\rxjs
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular-devkit\core\node_modules\rxjs\LICENSE.txt
+│  ├─ path: D:\workspace\ng-terminal\node_modules\rxjs-compat
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\rxjs-compat\LICENSE.txt
 ├─ rxjs@6.6.7
 │  ├─ licenses: Apache-2.0
 │  ├─ repository: https://github.com/reactivex/rxjs
@@ -6766,13 +6819,6 @@
 │  ├─ url: http://joseoncode.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\selfsigned
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\selfsigned\LICENSE
-├─ semver-dsl@1.0.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/mgechev/semver-dsl
-│  ├─ publisher: Minko Gechev
-│  ├─ email: mgechev@gmail.com
-│  ├─ path: D:\workspace\ng-terminal\node_modules\semver-dsl
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\semver-dsl\README.md
 ├─ semver@5.7.1
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/npm/node-semver
@@ -7135,13 +7181,6 @@
 │  ├─ url: http://alexei.ro/
 │  ├─ path: D:\workspace\ng-terminal\node_modules\argparse\node_modules\sprintf-js
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\argparse\node_modules\sprintf-js\LICENSE
-├─ sprintf-js@1.1.2
-│  ├─ licenses: BSD-3-Clause
-│  ├─ repository: https://github.com/alexei/sprintf.js
-│  ├─ publisher: Alexandru Mărășteanu
-│  ├─ email: hello@alexei.ro
-│  ├─ path: D:\workspace\ng-terminal\node_modules\sprintf-js
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\sprintf-js\LICENSE
 ├─ sshpk@1.16.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/joyent/node-sshpk
@@ -7486,19 +7525,6 @@
 │  ├─ email: notatestuser@gmail.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\treeify
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\treeify\LICENSE
-├─ ts-node@7.0.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/TypeStrong/ts-node
-│  ├─ publisher: Blake Embrey
-│  ├─ email: hello@blakeembrey.com
-│  ├─ url: http://blakeembrey.me
-│  ├─ path: D:\workspace\ng-terminal\node_modules\ts-node
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\ts-node\LICENSE
-├─ tsickle@0.39.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/angular/tsickle
-│  ├─ path: D:\workspace\ng-terminal\node_modules\tsickle
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\tsickle\LICENSE
 ├─ tslib@1.14.1
 │  ├─ licenses: 0BSD
 │  ├─ repository: https://github.com/Microsoft/tslib
@@ -7722,8 +7748,8 @@
 ├─ uuid@8.3.2
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/uuidjs/uuid
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@angular\cli\node_modules\uuid
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular\cli\node_modules\uuid\LICENSE.md
+│  ├─ path: D:\workspace\ng-terminal\node_modules\sockjs\node_modules\uuid
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\sockjs\node_modules\uuid\LICENSE.md
 ├─ validate-npm-package-license@3.0.4
 │  ├─ licenses: Apache-2.0
 │  ├─ repository: https://github.com/kemitchell/validate-npm-package-license.js
@@ -7969,21 +7995,21 @@
 │  ├─ email: raynos2@gmail.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\xtend
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\xtend\LICENSE
-├─ xterm-addon-fit@0.5.0
+├─ xterm-addon-fit@0.6.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/xtermjs/xterm.js
 │  ├─ publisher: The xterm.js authors
 │  ├─ url: https://xtermjs.org/
 │  ├─ path: D:\workspace\ng-terminal\node_modules\xterm-addon-fit
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\xterm-addon-fit\LICENSE
-├─ xterm-addon-web-links@0.4.0
+├─ xterm-addon-web-links@0.7.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/xtermjs/xterm.js
 │  ├─ publisher: The xterm.js authors
 │  ├─ url: https://xtermjs.org/
 │  ├─ path: D:\workspace\ng-terminal\node_modules\xterm-addon-web-links
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\xterm-addon-web-links\LICENSE
-├─ xterm@4.19.0
+├─ xterm@5.0.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/xtermjs/xterm.js
 │  ├─ path: D:\workspace\ng-terminal\node_modules\xterm
@@ -8071,14 +8097,6 @@
 │  ├─ repository: https://github.com/yargs/yargs
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@angular\compiler-cli\node_modules\yargs
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular\compiler-cli\node_modules\yargs\LICENSE
-├─ yn@2.0.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/sindresorhus/yn
-│  ├─ publisher: Sindre Sorhus
-│  ├─ email: sindresorhus@gmail.com
-│  ├─ url: sindresorhus.com
-│  ├─ path: D:\workspace\ng-terminal\node_modules\yn
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\yn\license
 ├─ yocto-queue@0.1.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/sindresorhus/yocto-queue
@@ -8087,6 +8105,12 @@
 │  ├─ url: https://sindresorhus.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\yocto-queue
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\yocto-queue\license
+├─ zone.js@0.10.3
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/angular/angular
+│  ├─ publisher: Brian Ford
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-angular-base\node_modules\zone.js
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@syncfusion\ej2-angular-base\node_modules\zone.js\LICENSE
 └─ zone.js@0.11.4
    ├─ licenses: MIT
    ├─ repository: https://github.com/angular/angular
