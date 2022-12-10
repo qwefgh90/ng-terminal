@@ -128,7 +128,7 @@ export class ExampleComponent implements OnInit, AfterViewInit {
   baseTheme = {
     foreground: '#F8F8F8',
     background: '#2D2E2C',
-    selection: '#5DA5D533',
+    selectionBackground: '#5DA5D533',
     black: '#1E1E1D',
     brightBlack: '#262625',
     red: '#CE5C5C',

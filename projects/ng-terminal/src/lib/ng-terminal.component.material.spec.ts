@@ -102,6 +102,8 @@ describe('NgTerminalComponent with MaterialTab', () => {
     mattabComponent.tabGroup.selectedIndex = 1;
     mattabFixture.detectChanges();
     tick(1000);
+    mattabComponent.terminal.setRows(10);
+    mattabComponent.terminal.setCols(10);
     mattabFixture.detectChanges();
 
     let mattabEl = mattabFixture.nativeElement as HTMLElement;
