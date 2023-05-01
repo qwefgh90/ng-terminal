@@ -24,6 +24,8 @@ jobs:
         run: |
           npm ci
           npm run lib:travis:test
+      - name: Create the github page
+        run: npm run page
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
