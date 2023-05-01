@@ -3,7 +3,7 @@ name: Test and deploy the ng-terminal
 on:
   workflow_dispatch:
   push:
-    branches: [ master, add-actions ]
+    branches: [ master ]
 
 jobs:
   build:
