@@ -1,5 +1,5 @@
-![Pull Request](https://github.com/github/qwefgh90/ng-terminal/actions/workflows/test.yml/badge.svg)
-![Master](https://github.com/github/qwefgh90/ng-terminal/actions/workflows/deploy.yml/badge.svg)
+![Pull Request](https://github.com/qwefgh90/ng-terminal/actions/workflows/test.yml/badge.svg)
+![Master](https://github.com/qwefgh90/ng-terminal/actions/workflows/deploy.yml/badge.svg)
 [![version](https://badge.fury.io/js/ng-terminal.svg)](https://www.npmjs.com/package/ng-terminal) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)]()
 
 **NgTerminal** is a component to create a terminal emulator in Angular. It completely leverages [Xterm.js](https://xtermjs.org/).
