@@ -3,8 +3,7 @@ name: Test the ng-terminal
 on:
   workflow_dispatch:
   pull_request:
-    branches:
-    - main
+    branches: [ master ]
 
 jobs:
   build:
@@ -25,3 +24,5 @@ jobs:
         run: |
           npm ci
           npm run lib:travis:test
+      - name: Create the github page
+        run: npm run page
