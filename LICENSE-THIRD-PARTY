@@ -168,8 +168,8 @@
 │  ├─ repository: https://github.com/babel/babel
 │  ├─ publisher: The Babel Team
 │  ├─ url: https://babel.dev/team
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\helper-create-class-features-plugin\node_modules\@babel\helper-annotate-as-pure
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\helper-create-class-features-plugin\node_modules\@babel\helper-annotate-as-pure\LICENSE
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\helper-remap-async-to-generator\node_modules\@babel\helper-annotate-as-pure
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\helper-remap-async-to-generator\node_modules\@babel\helper-annotate-as-pure\LICENSE
 ├─ @babel/helper-builder-binary-assignment-operator-visitor@7.16.7
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/babel/babel
@@ -5648,8 +5648,8 @@
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/alexeyraspopov/picocolors
 │  ├─ publisher: Alexey Raspopov
-│  ├─ path: D:\workspace\ng-terminal\node_modules\postcss-color-functional-notation\node_modules\picocolors
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\postcss-color-functional-notation\node_modules\picocolors\LICENSE
+│  ├─ path: D:\workspace\ng-terminal\node_modules\postcss-attribute-case-insensitive\node_modules\picocolors
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\postcss-attribute-case-insensitive\node_modules\picocolors\LICENSE
 ├─ picocolors@1.0.0
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/alexeyraspopov/picocolors
@@ -6219,8 +6219,8 @@
 │  ├─ repository: https://github.com/postcss/postcss
 │  ├─ publisher: Andrey Sitnik
 │  ├─ email: andrey@sitnik.ru
-│  ├─ path: D:\workspace\ng-terminal\node_modules\postcss-color-functional-notation\node_modules\postcss
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\postcss-color-functional-notation\node_modules\postcss\LICENSE
+│  ├─ path: D:\workspace\ng-terminal\node_modules\postcss-attribute-case-insensitive\node_modules\postcss
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\postcss-attribute-case-insensitive\node_modules\postcss\LICENSE
 ├─ postcss@8.3.6
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/postcss/postcss
@@ -7279,8 +7279,8 @@
 │  ├─ publisher: Sindre Sorhus
 │  ├─ email: sindresorhus@gmail.com
 │  ├─ url: sindresorhus.com
-│  ├─ path: D:\workspace\ng-terminal\node_modules\protractor\node_modules\strip-ansi
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\protractor\node_modules\strip-ansi\license
+│  ├─ path: D:\workspace\ng-terminal\node_modules\webpack-dev-server\node_modules\strip-ansi
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\webpack-dev-server\node_modules\strip-ansi\license
 ├─ strip-ansi@5.2.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/chalk/strip-ansi
