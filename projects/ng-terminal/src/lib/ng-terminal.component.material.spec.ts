@@ -22,8 +22,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     </mat-tab>
   </mat-tab-group>`})
 class AppMatTabComponent{
-  @ViewChild('tabGroup', {static: false}) tabGroup: MatTabGroup;
-  @ViewChild(NgTerminalComponent, {static: false}) terminal: NgTerminal;
+  @ViewChild('tabGroup', {static: false}) tabGroup!: MatTabGroup;
+  @ViewChild(NgTerminalComponent, {static: false}) terminal!: NgTerminal;
 }
 
 describe('NgTerminalComponent with MaterialTab', () => {
@@ -55,7 +55,7 @@ describe('NgTerminalComponent with MaterialTab', () => {
 
     // only it is accessed through a component instance
     expect(mattabComponent.terminal.underlying).toBeDefined();
-    expect(mattabComponent.terminal.underlying.element).toBeUndefined();
+    expect(mattabComponent.terminal.underlying?.element).toBeUndefined();
 
     (mattabComponent.terminal as NgTerminalComponent).ngOnDestroy();
   }));
@@ -66,7 +66,7 @@ describe('NgTerminalComponent with MaterialTab', () => {
     mattabFixture.detectChanges();
     tick(1000);
 
-    expect(mattabComponent.terminal.underlying.element).toBeUndefined();
+    expect(mattabComponent.terminal?.underlying?.element).toBeUndefined();
     mattabComponent.tabGroup.selectedIndex = 1;
     mattabFixture.detectChanges();
     tick(1000);
@@ -74,10 +74,10 @@ describe('NgTerminalComponent with MaterialTab', () => {
     let mattabEl = mattabFixture.nativeElement as HTMLElement;
     let xtermScreen = mattabEl.querySelector('.xterm-screen');
     let xtermViewport = mattabEl.querySelector('.xterm-viewport');
-    expect(xtermScreen.isConnected).toBeTruthy();
-    expect(xtermViewport.isConnected).toBeTruthy();
-    expect(xtermScreen.clientWidth).toBeGreaterThan(10);
-    expect(xtermViewport.clientWidth).toBeGreaterThan(10);
+    expect(xtermScreen?.isConnected).toBeTruthy();
+    expect(xtermViewport?.isConnected).toBeTruthy();
+    expect(xtermScreen?.clientWidth).toBeGreaterThan(10);
+    expect(xtermViewport?.clientWidth).toBeGreaterThan(10);
   }));
 
   it(`changes rows and cols`, fakeAsync(() => {
@@ -93,15 +93,15 @@ describe('NgTerminalComponent with MaterialTab', () => {
 
     let mattabEl = mattabFixture.nativeElement as HTMLElement;
     let xtermScreen = mattabEl.querySelector('.xterm-screen');
-    let screenWidth1= xtermScreen.clientWidth;
-    let screenHeight1= xtermScreen.clientHeight;
+    let screenWidth1= xtermScreen!.clientWidth;
+    let screenHeight1= xtermScreen!.clientHeight;
 
     mattabComponent.terminal.setRows(15);
     mattabComponent.terminal.setCols(15);
     mattabFixture.detectChanges();
     tick(1000);
-    let screenWidth2= xtermScreen.clientWidth;
-    let screenHeight2= xtermScreen.clientHeight;
+    let screenWidth2= xtermScreen!.clientWidth;
+    let screenHeight2= xtermScreen!.clientHeight;
     expect(screenWidth2).toBeGreaterThan(screenWidth1);
     expect(screenHeight2).toBeGreaterThan(screenHeight1);
 
@@ -109,8 +109,8 @@ describe('NgTerminalComponent with MaterialTab', () => {
     mattabComponent.terminal.setCols(8);
     mattabFixture.detectChanges();
     tick(1000);
-    let screenWidth3= xtermScreen.clientWidth;
-    let screenHeight3= xtermScreen.clientHeight;
+    let screenWidth3= xtermScreen!.clientWidth;
+    let screenHeight3= xtermScreen!.clientHeight;
     expect(screenWidth3).toBeLessThan(screenWidth2);
     expect(screenHeight3).toBeLessThan(screenHeight2);
   }));

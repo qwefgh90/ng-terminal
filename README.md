@@ -1,9 +1,27 @@
-[![Pull Request](https://github.com/qwefgh90/ng-terminal/actions/workflows/test.yml/badge.svg?label=Pull%20Request)](https://github.com/qwefgh90/ng-terminal/actions)
-[![Master](https://github.com/qwefgh90/ng-terminal/actions/workflows/deploy.yml/badge.svg?label=Master)](https://github.com/qwefgh90/ng-terminal/actions)
-[![version](https://badge.fury.io/js/ng-terminal.svg)](https://www.npmjs.com/package/ng-terminal) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)]()
+# NgTerminal13
 
-**NgTerminal** is a component to create a terminal emulator in Angular. It completely leverages [Xterm.js](https://xtermjs.org/).
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.11.
 
-The objective is to provides only Angular developers with both easy installation and some convenient features during the development of an Angular app including an terminal functionality. Currently, it has some features such as NgTerminal Component, Draggable.
+## Development server
 
-We provide [Wiki](https://github.com/qwefgh90/ng-terminal/wiki) for a collection of guides such as APIs, Control Sequence and Contributing.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+
+## Code scaffolding
+
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
+## Build
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
