@@ -1,6 +1,6 @@
 <global-style></global-style>
 <div mwlResizable #resizeBox class="resize-box" [validateResize]="validatorFactory()" [enableGhostResize]="true"
-    (resizeEnd)="onResizeEnd($event.rectangle.left, $event.rectangle.top, $event.rectangle.width, $event.rectangle.height)">
+    (resizeEnd)="onResizeEnd($event.rectangle.left, $event.rectangle.top, $event.rectangle.width??0, $event.rectangle.height??0)">
     <div #terminal class="terminal-outer">
     </div>
     <div class="resize-handle resize-handle-top" mwlResizeHandle [ngClass]="{'handle-active' : isDraggableOnEdgeActivated}"

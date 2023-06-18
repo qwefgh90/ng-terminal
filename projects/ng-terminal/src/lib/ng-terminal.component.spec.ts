@@ -38,7 +38,7 @@ describe('NgTerminalComponent', () => {
     const dummy = "dummy data"
     component.write(dummy);
     
-    const term = component.underlying;
+    const term = component.underlying!;
     term.selectAll();
     tick(100);
     expect(term.getSelection().trim()).toEqual(dummy);
@@ -46,7 +46,7 @@ describe('NgTerminalComponent', () => {
 
   it('keyInput', (doneFn) => {
     let arr = ['h','i','!','\n']
-    let result = [];
+    let result: string[] = [];
     component.keyInput.subscribe((char) => {
       result.push(char);
       if(arr.length == result.length){
@@ -63,7 +63,7 @@ describe('NgTerminalComponent', () => {
 
   it("@Output('keyInputEmitter')", (doneFn) => {
     let arr = ['h','i','!','\n']  
-    let result = [];
+    let result: string[] = [];
     component.keyInputEmitter.subscribe((char) => {
       result.push(char);
       if(arr.length == result.length){
@@ -94,7 +94,7 @@ describe('NgTerminalComponent', () => {
   }))
   
   it('this.term.dispose()', () => {
-    const disposeSpy = spyOn(component.underlying, 'dispose').and.callThrough();
+    const disposeSpy = spyOn(component.underlying!, 'dispose').and.callThrough();
     expect(disposeSpy.calls.count()).toBe(0);
     fixture.destroy();
     expect(disposeSpy.calls.count()).toBe(1);
@@ -258,7 +258,7 @@ describe('NgTerminalComponent with CSI functions', () => {
     const expectedResult = "dummy dat a"
     component.write(dummy);
     
-    const term = component.underlying;
+    const term = component.underlying!;
     term.selectAll();
     tick(100);
     expect(expectedResult).toEqual(term.getSelection().trim());
@@ -269,7 +269,7 @@ describe('NgTerminalComponent with CSI functions', () => {
     const expectedResult = "gummy data"
     component.write(dummy);
     
-    const term = component.underlying;
+    const term = component.underlying!;
     term.selectAll();
     tick(100);
     expect(expectedResult).toEqual(term.getSelection().trim());
@@ -280,7 +280,7 @@ describe('NgTerminalComponent with CSI functions', () => {
     const expectedResult = "dummy data\r?\ngummy"
     component.write(dummy);
     
-    const term = component.underlying;
+    const term = component.underlying!;
     term.selectAll();
     tick(100);
     console.log(term.getSelection().trim());
@@ -292,7 +292,7 @@ describe('NgTerminalComponent with CSI functions', () => {
     const expectedResult = "dummy data gummy"
     component.write(dummy);
     
-    const term = component.underlying;
+    const term = component.underlying!;
     term.selectAll();
     tick(100);
     console.log(term.getSelection().trim());
@@ -304,7 +304,7 @@ describe('NgTerminalComponent with CSI functions', () => {
     const expectedResult = "dummy data\r?\ngummy"
     component.write(dummy);
     
-    const term = component.underlying;
+    const term = component.underlying!;
     term.selectAll();
     tick(100);
     console.log(term.getSelection().trim());
@@ -316,7 +316,7 @@ describe('NgTerminalComponent with CSI functions', () => {
     const expectedResult = "dummy data\r?\n gummy"
     component.write(dummy);
     
-    const term = component.underlying;
+    const term = component.underlying!;
     term.selectAll();
     tick(100);
     console.log(term.getSelection().trim());
@@ -328,7 +328,7 @@ describe('NgTerminalComponent with CSI functions', () => {
     const expectedResult = "dummy data\r?\ngummy"
     component.write(dummy);
     
-    const term = component.underlying;
+    const term = component.underlying!;
     term.selectAll();
     tick(100);
     console.log(term.getSelection().trim());
@@ -340,7 +340,7 @@ describe('NgTerminalComponent with CSI functions', () => {
     const expectedResult = "dzmmy data"
     component.write(dummy);
     
-    const term = component.underlying;
+    const term = component.underlying!;
     term.selectAll();
     tick(100);
     console.log(term.getSelection().trim());
@@ -352,7 +352,7 @@ describe('NgTerminalComponent with CSI functions', () => {
     const expectedResult = "dummy ta"
     component.write(dummy);
     
-    const term = component.underlying;
+    const term = component.underlying!;
     term.selectAll();
     tick(100);
     console.log(term.getSelection().trim());
@@ -364,7 +364,7 @@ describe('NgTerminalComponent with CSI functions', () => {
     const expectedResult = "dummy data\r?\ndata"
     component.write(dummy);
     
-    const term = component.underlying;
+    const term = component.underlying!;
     term.selectAll();
     tick(100);
     console.log(term.getSelection().trim());
@@ -376,7 +376,7 @@ describe('NgTerminalComponent with CSI functions', () => {
     const expectedResult = "dummy   ta"
     component.write(dummy);
     
-    const term = component.underlying;
+    const term = component.underlying!;
     term.selectAll();
     tick(100);
     console.log(term.getSelection().trim());
@@ -388,7 +388,7 @@ describe('NgTerminalComponent with CSI functions', () => {
     const expectedResult = ""
     component.write(dummy);
     
-    const term = component.underlying;
+    const term = component.underlying!;
     term.selectAll();
     tick(100);
     console.log(term.getSelection().trim());
@@ -400,7 +400,7 @@ describe('NgTerminalComponent with CSI functions', () => {
     const expectedResult = "a"
     component.write(dummy);
     
-    const term = component.underlying;
+    const term = component.underlying!;
     term.selectAll();
     tick(100);
     console.log(term.getSelection().trim());
@@ -412,7 +412,7 @@ describe('NgTerminalComponent with CSI functions', () => {
     const expectedResult = "dummy da"
     component.write(dummy);
     
-    const term = component.underlying;
+    const term = component.underlying!;
     term.selectAll();
     tick(100);
     console.log(term.getSelection().trim());
@@ -424,7 +424,7 @@ describe('NgTerminalComponent with CSI functions', () => {
     const expectedResult = "a"
     component.write(dummy);
     
-    const term = component.underlying;
+    const term = component.underlying!;
     term.selectAll();
     tick(100);
     console.log(term.getSelection().trim());
@@ -436,7 +436,7 @@ describe('NgTerminalComponent with CSI functions', () => {
     const expectedResult = "dummy da"
     component.write(dummy);
     
-    const term = component.underlying;
+    const term = component.underlying!;
     term.selectAll();
     tick(100);
     console.log(term.getSelection().trim());
@@ -448,7 +448,7 @@ describe('NgTerminalComponent with CSI functions', () => {
     const expectedResult = ""
     component.write(dummy);
     
-    const term = component.underlying;
+    const term = component.underlying!;
     term.selectAll();
     tick(100);
     console.log(term.getSelection().trim());
@@ -460,7 +460,7 @@ describe('NgTerminalComponent with CSI functions', () => {
     const expectedResult = "dummy data   2"
     component.write(dummy);
     
-    const term = component.underlying;
+    const term = component.underlying!;
     term.selectAll();
     tick(100);
     console.log(term.getSelection().trim());
@@ -472,7 +472,7 @@ describe('NgTerminalComponent with CSI functions', () => {
     const expectedResult = "dummy data\r?\n\r?\n\r?\ndata"
     component.write(dummy);
     
-    const term = component.underlying;
+    const term = component.underlying!;
     term.selectAll();
     tick(100);
     console.log(term.getSelection().trim());

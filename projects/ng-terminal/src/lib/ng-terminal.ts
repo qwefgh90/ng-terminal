@@ -7,7 +7,7 @@ interface TerminalWrapper{
      * write printable charactors or control sequences to the xterm directly
      * @param chars charactors to write
      */
-    write(chars: string)
+    write(chars: string): void
     /**
      * @deprecated
      * It is an alias of onData() that is recommended instead of using it.
@@ -39,12 +39,12 @@ interface TerminalWrapper{
     /**
      * The instnace of the Xterm Terminal.
      */
-    readonly underlying: Terminal
+    readonly underlying: Terminal | undefined
 }
 
 export interface NgTerminal extends TerminalWrapper{
     /**
-     * Enable or disable draggable.
+     * Toggle draggable.
      */
     setDraggable(draggable: boolean): void;
     /**
