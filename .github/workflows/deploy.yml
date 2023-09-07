@@ -3,11 +3,10 @@ name: Test and deploy the ng-terminal
 on:
   workflow_dispatch:
   push:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:

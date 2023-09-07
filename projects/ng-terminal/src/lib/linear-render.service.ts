@@ -2,26 +2,26 @@ import { Injectable, ElementRef, OnDestroy } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 
 /**
- * 
+ *
  * In the past, indivisual property changes caused very unexpected behavior on NgTerminal.
  * To solve issues related to property changes, Queue is applied.
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class LinearRenderService implements OnDestroy{
+export class LinearRenderService implements OnDestroy {
+  constructor(private hostRef: ElementRef) {}
 
-  constructor(private hostRef: ElementRef) { }
+  private handlerToCheckElementConnection?: ReturnType<typeof setInterval> =
+    undefined;
 
-  private handlerToCheckElementConnection?: ReturnType<typeof setInterval> = undefined;
-  
   /**
    * This queue has items to have a influence on the view and items are handled in order.
    */
   private propertyChangeQueue: PropertyChangeSet[] = [];
   private itemsToBeHandled = new Subject<PropertyChangeSet>();
 
-  get renderObservable(): Observable<PropertyChangeSet>{
+  get renderObservable(): Observable<PropertyChangeSet> {
     return this.itemsToBeHandled;
   }
 
@@ -39,11 +39,13 @@ export class LinearRenderService implements OnDestroy{
 
   /**
    * This method pushes item into {@link propertyChangeQueue}.
-   * @param item 
+   * @param item
    */
   public pushAndHandle(item: Partial<PropertyChangeSet>) {
     let changeWithDefault = {
-      rowChanged: false, columnChanged: false, ...item
+      rowChanged: false,
+      columnChanged: false,
+      ...item,
     };
     this.propertyChangeQueue.push(changeWithDefault);
     this.handleNextOne();
@@ -54,8 +56,7 @@ export class LinearRenderService implements OnDestroy{
    */
   public pollAndHandle() {
     const pollFunction = () => {
-      if (this.handlerToCheckElementConnection)
-        return;
+      if (this.handlerToCheckElementConnection) return;
       const interval = setInterval(() => {
         if (this.hostRef.nativeElement.isConnected) {
           clearInterval(interval);
@@ -64,13 +65,13 @@ export class LinearRenderService implements OnDestroy{
         }
       }, 500);
       this.handlerToCheckElementConnection = interval;
-    }
+    };
     // Start polling
     pollFunction();
   }
 
   /**
-   * Handle a next set of changes if it exists. 
+   * Handle a next set of changes if it exists.
    */
   private handleImmediate = () => {
     if (!this.handlerToCheckElementConnection) {
@@ -79,7 +80,7 @@ export class LinearRenderService implements OnDestroy{
         this.itemsToBeHandled.next(list[0]);
       }
     }
-  }
+  };
 
   ngOnDestroy(): void {
     if (this.handlerToCheckElementConnection)
@@ -88,9 +89,9 @@ export class LinearRenderService implements OnDestroy{
 }
 
 type PropertyChangeSet = {
-  rowChanged: boolean
-  , columnChanged: boolean
-  , dragged?: { draggedWidth: string, draggedHeight: string }
-  , hostResized?: { width: string, height: string }
-  , whenTerminalDimensionIsOverOuterDiv?: { width: string, height: string }
+  rowChanged: boolean;
+  columnChanged: boolean;
+  dragged?: { draggedWidth: string; draggedHeight: string };
+  hostResized?: { width: string; height: string };
+  whenTerminalDimensionIsOverOuterDiv?: { width: string; height: string };
 };

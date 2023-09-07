@@ -10,7 +10,7 @@ import { WebLinksAddon } from 'xterm-addon-web-links';
 @Component({
   selector: 'app-root',
   templateUrl: './example.component.html',
-  styleUrls: ['./example.component.css']
+  styleUrls: ['./example.component.css'],
 })
 export class ExampleComponent implements OnInit, AfterViewInit {
   readonly title = 'NgTerminal Live Example';
@@ -20,11 +20,12 @@ export class ExampleComponent implements OnInit, AfterViewInit {
   _rows?: number = undefined;
   _cols?: number = undefined;
   _draggable: boolean = false;
-  
+
   public draggableMode: boolean = false;
   public apiMode: boolean = false;
   public fixed = false;
 
+  asdf_asdf_asdf: number = 0;
   disabled = false;
   rowsControl = new FormControl();
   colsControl = new FormControl();
@@ -34,44 +35,47 @@ export class ExampleComponent implements OnInit, AfterViewInit {
   writeSubject = new Subject<string>();
   keyInput: string = '';
 
-  @ViewChild('term', {static: false}) child?: NgTerminal;
+  @ViewChild('term', { static: false }) child?: NgTerminal;
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ngAfterViewInit() {
-    if(!this.child)
-      return;
+    if (!this.child) return;
     this.underlying = this.child.underlying!!;
     this.underlying.options.fontSize = 20;
     this.underlying.loadAddon(new WebLinksAddon());
     this.child.setXtermOptions({
       fontFamily: '"Cascadia Code", Menlo, monospace',
       theme: this.baseTheme,
-      cursorBlink: true
+      cursorBlink: true,
     });
     this.child.write('$ NgTerminal Live Example');
     this.child.write(this.prompt);
     this.child.onData().subscribe((input) => {
-      if(!this.child)
-        return;
-      if (input === '\r') { // Carriage Return (When Enter is pressed)
+      if (!this.child) return;
+      if (input === '\r') {
+        // Carriage Return (When Enter is pressed)
         this.child.write(this.prompt);
-      } else if (input === '\u007f') { // Delete (When Backspace is pressed)
+      } else if (input === '\u007f') {
+        // Delete (When Backspace is pressed)
         if (this.child.underlying!!.buffer.active.cursorX > 2)
           this.child.write('\b \b');
-      } else if (input === '\u0003') { // End of Text (When Ctrl and C are pressed)
-          this.child.write('^C');
-          this.child.write(this.prompt);
-      }else
-        this.child.write(input);
-    })
+      } else if (input === '\u0003') {
+        // End of Text (When Ctrl and C are pressed)
+        this.child.write('^C');
+        this.child.write(this.prompt);
+      } else this.child.write(input);
+    });
 
-    this.child.onKey().subscribe(e => {
+    this.child.onKey().subscribe((e) => {
       //onData() is commonly used.
     });
-    this.rowsControl.valueChanges.subscribe(() => { this.updateRows() });
-    this.colsControl.valueChanges.subscribe(() => { this.updateCols() });
+    this.rowsControl.valueChanges.subscribe(() => {
+      this.updateRows();
+    });
+    this.colsControl.valueChanges.subscribe(() => {
+      this.updateCols();
+    });
   }
 
   resizableChange(event: MatSlideToggleChange) {
@@ -84,25 +88,19 @@ export class ExampleComponent implements OnInit, AfterViewInit {
     this.updateDraggable();
   }
 
-  updateDraggable(){
-    if(this.apiMode)
-      this.child!!.setDraggable(this.draggableMode);
-    else
-      this._draggable = this.draggableMode;
+  updateDraggable() {
+    if (this.apiMode) this.child!!.setDraggable(this.draggableMode);
+    else this._draggable = this.draggableMode;
   }
 
-  updateRows(){
-    if(this.apiMode)
-      this.child!!.setRows(this.rowsControl.value);
-    else
-      this._rows = this.rowsControl.value;
+  updateRows() {
+    if (this.apiMode) this.child!!.setRows(this.rowsControl.value);
+    else this._rows = this.rowsControl.value;
   }
 
-  updateCols(){
-    if(this.apiMode)
-      this.child!!.setCols(this.colsControl.value);
-    else
-      this._cols = this.colsControl.value;
+  updateCols() {
+    if (this.apiMode) this.child!!.setCols(this.colsControl.value);
+    else this._cols = this.colsControl.value;
   }
 
   write() {
@@ -112,11 +110,15 @@ export class ExampleComponent implements OnInit, AfterViewInit {
   onKeyInput(event: string) {
     this.keyInput = event;
   }
-  
+
   get displayOptionForLiveUpdate() {
-    return {rows: this.rowsControl.value, cols: this.colsControl.value, draggable: this.draggableMode};
+    return {
+      rows: this.rowsControl.value,
+      cols: this.colsControl.value,
+      draggable: this.draggableMode,
+    };
   }
-  
+
   baseTheme = {
     foreground: '#F8F8F8',
     background: '#2D2E2C',
@@ -137,6 +139,6 @@ export class ExampleComponent implements OnInit, AfterViewInit {
     brightCyan: '#72F0FF',
     white: '#F8F8F8',
     brightWhite: '#FFFFFF',
-    border: '#85858a'
+    border: '#85858a',
   };
 }

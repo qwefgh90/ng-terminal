@@ -1,29 +1,41 @@
-import { async, ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
+import {
+  async,
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+  tick,
+  waitForAsync,
+} from '@angular/core/testing';
 
 import { NgTerminalComponent } from './ng-terminal.component';
 import { GlobalStyleComponent } from './global-style/global-style.component';
 import { ResizableModule } from 'angular-resizable-element';
 import { Subject } from 'rxjs';
-import { keydown } from './test-util'
-import { FunctionsUsingCSI, KindOfEraseInDisplay, KindOfEraseInLine } from './functions-using-csi';
+import { keydown } from './test-util';
+import {
+  FunctionsUsingCSI,
+  KindOfEraseInDisplay,
+  KindOfEraseInLine,
+} from './functions-using-csi';
 import { ViewChild, Component, OnInit, SimpleChange } from '@angular/core';
 import { NgTerminal } from './ng-terminal';
 import { MatTabsModule, MatTabGroup } from '@angular/material/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-@Component({selector: 'app-mat-tab', template: `
-  <mat-tab-group #tabGroup>
-    <mat-tab label="Tab1">
-    </mat-tab>
+@Component({
+  selector: 'app-mat-tab',
+  template: ` <mat-tab-group #tabGroup>
+    <mat-tab label="Tab1"> </mat-tab>
     <mat-tab label="Tab2">
       <div style="width:100px; height:100px">
         <ng-terminal></ng-terminal>
       </div>
     </mat-tab>
-  </mat-tab-group>`})
-class AppMatTabComponent{
-  @ViewChild('tabGroup', {static: false}) tabGroup!: MatTabGroup;
-  @ViewChild(NgTerminalComponent, {static: false}) terminal!: NgTerminal;
+  </mat-tab-group>`,
+})
+class AppMatTabComponent {
+  @ViewChild('tabGroup', { static: false }) tabGroup!: MatTabGroup;
+  @ViewChild(NgTerminalComponent, { static: false }) terminal!: NgTerminal;
 }
 
 describe('NgTerminalComponent with MaterialTab', () => {
@@ -32,10 +44,13 @@ describe('NgTerminalComponent with MaterialTab', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ NgTerminalComponent, AppMatTabComponent, GlobalStyleComponent ],
-      imports: [ ResizableModule, MatTabsModule, BrowserAnimationsModule ]
-    })
-    .compileComponents();
+      declarations: [
+        NgTerminalComponent,
+        AppMatTabComponent,
+        GlobalStyleComponent,
+      ],
+      imports: [ResizableModule, MatTabsModule, BrowserAnimationsModule],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -70,7 +85,7 @@ describe('NgTerminalComponent with MaterialTab', () => {
     mattabComponent.tabGroup.selectedIndex = 1;
     mattabFixture.detectChanges();
     tick(1000);
-    
+
     let mattabEl = mattabFixture.nativeElement as HTMLElement;
     let xtermScreen = mattabEl.querySelector('.xterm-screen');
     let xtermViewport = mattabEl.querySelector('.xterm-viewport');
@@ -93,15 +108,15 @@ describe('NgTerminalComponent with MaterialTab', () => {
 
     let mattabEl = mattabFixture.nativeElement as HTMLElement;
     let xtermScreen = mattabEl.querySelector('.xterm-screen');
-    let screenWidth1= xtermScreen!.clientWidth;
-    let screenHeight1= xtermScreen!.clientHeight;
+    let screenWidth1 = xtermScreen!.clientWidth;
+    let screenHeight1 = xtermScreen!.clientHeight;
 
     mattabComponent.terminal.setRows(15);
     mattabComponent.terminal.setCols(15);
     mattabFixture.detectChanges();
     tick(1000);
-    let screenWidth2= xtermScreen!.clientWidth;
-    let screenHeight2= xtermScreen!.clientHeight;
+    let screenWidth2 = xtermScreen!.clientWidth;
+    let screenHeight2 = xtermScreen!.clientHeight;
     expect(screenWidth2).toBeGreaterThan(screenWidth1);
     expect(screenHeight2).toBeGreaterThan(screenHeight1);
 
@@ -109,8 +124,8 @@ describe('NgTerminalComponent with MaterialTab', () => {
     mattabComponent.terminal.setCols(8);
     mattabFixture.detectChanges();
     tick(1000);
-    let screenWidth3= xtermScreen!.clientWidth;
-    let screenHeight3= xtermScreen!.clientHeight;
+    let screenWidth3 = xtermScreen!.clientWidth;
+    let screenHeight3 = xtermScreen!.clientHeight;
     expect(screenWidth3).toBeLessThan(screenWidth2);
     expect(screenHeight3).toBeLessThan(screenHeight2);
   }));

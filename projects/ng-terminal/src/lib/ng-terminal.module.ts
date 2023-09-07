@@ -6,9 +6,7 @@ import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [NgTerminalComponent, GlobalStyleComponent],
-  imports: [
-    ResizableModule, CommonModule
-  ],
-  exports: [NgTerminalComponent]
+  imports: [ResizableModule, CommonModule],
+  exports: [NgTerminalComponent],
 })
-export class NgTerminalModule { }
+export class NgTerminalModule {}

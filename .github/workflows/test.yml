@@ -3,11 +3,10 @@ name: Test the ng-terminal
 on:
   workflow_dispatch:
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:

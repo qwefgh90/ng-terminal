@@ -8,7 +8,9 @@ describe('LinearRenderService', () => {
   const spy = jasmine.createSpyObj('ElementRef', [''], ['nativeElement']);
 
   beforeEach(() => {
-    TestBed.configureTestingModule({providers: [{provide: ElementRef, useValue: spy}]});
+    TestBed.configureTestingModule({
+      providers: [{ provide: ElementRef, useValue: spy }],
+    });
     service = TestBed.inject(LinearRenderService);
   });
 
