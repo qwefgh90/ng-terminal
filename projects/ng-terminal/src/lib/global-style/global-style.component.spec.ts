@@ -8,9 +8,8 @@ describe('GlobalStyleComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GlobalStyleComponent ]
-    })
-    .compileComponents();
+      declarations: [GlobalStyleComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

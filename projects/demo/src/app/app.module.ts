@@ -9,12 +9,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { ExampleComponent } from './example.component';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTabsModule } from '@angular/material/tabs';
 @NgModule({
-  declarations: [
-    ExampleComponent
-  ],
+  declarations: [ExampleComponent],
   imports: [
     BrowserModule,
     NgTerminalModule,
@@ -26,9 +24,9 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatCardModule,
     NgxJsonViewerModule,
     MatFormFieldModule,
-    MatTabsModule
+    MatTabsModule,
   ],
   providers: [],
-  bootstrap: [ExampleComponent]
+  bootstrap: [ExampleComponent],
 })
-export class AppModule { }
+export class AppModule {}

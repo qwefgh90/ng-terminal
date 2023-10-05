@@ -41,6 +41,13 @@
       ],
       "extends": ["plugin:prettier/recommended"],
       "rules": {}
+    },
+    {
+      "files": [
+        "*.css"
+      ],
+      "extends": ["plugin:prettier/recommended"],
+      "rules": {}
     }
   ]
 }
