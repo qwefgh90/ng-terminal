@@ -17,7 +17,8 @@
     "lib:test": "ng test ng-terminal",
     "lib:travis:test": "ng test ng-terminal --watch false --browsers ChromeHeadless",
     "lib:build:prod": "ng build ng-terminal --configuration production",
-    "license": "license-checker > LICENSE-THIRD-PARTY"
+    "license": "license-checker > LICENSE-THIRD-PARTY",
+    "lint": "ng lint"
   },
   "private": false,
   "dependencies": {
@@ -30,31 +31,39 @@
     "@angular/platform-browser": "~14.3.0",
     "@angular/platform-browser-dynamic": "~14.3.0",
     "@angular/router": "~14.3.0",
+    "@juggle/resize-observer": "^3.4.0",
+    "angular-resizable-element": "^5.0.0",
+    "ngx-json-viewer": "^2.4.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.11.4",
     "xterm": "^5.1.0",
     "xterm-addon-fit": "^0.7.0",
     "xterm-addon-web-links": "^0.7.0",
-    "angular-resizable-element": "^5.0.0",
-    "ngx-json-viewer": "^2.4.0",
-    "@juggle/resize-observer": "^3.4.0"
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~14.2.11",
+    "@angular-eslint/builder": "14.4.0",
+    "@angular-eslint/eslint-plugin": "14.4.0",
+    "@angular-eslint/eslint-plugin-template": "14.4.0",
+    "@angular-eslint/schematics": "14.4.0",
+    "@angular-eslint/template-parser": "14.4.0",
     "@angular/cli": "~14.2.11",
     "@angular/compiler-cli": "~14.3.0",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
+    "@typescript-eslint/eslint-plugin": "5.43.0",
+    "@typescript-eslint/parser": "5.43.0",
+    "copyfiles": "^2.4.1",
+    "eslint": "^8.28.0",
     "jasmine-core": "~4.0.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.1.0",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
+    "license-checker": "^25.0.1",
     "ng-packagr": "^14.2.2",
-    "typescript": "~4.6.2",
-    "copyfiles": "^2.4.1",
-    "license-checker": "^25.0.1"
+    "typescript": "~4.6.2"
   }
 }
