@@ -64,7 +64,7 @@ describe('NgTerminalComponent', () => {
   it("@Output('keyInputEmitter')", (doneFn) => {
     let arr = ['h','i','!','\n']  
     let result: string[] = [];
-    component.keyInputEmitter.subscribe((char) => {
+    component.keyInput.subscribe((char) => {
       result.push(char);
       if(arr.length == result.length){
         expect(arr.join('')).toEqual(result.join(''));

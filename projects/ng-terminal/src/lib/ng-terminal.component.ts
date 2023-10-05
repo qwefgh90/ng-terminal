@@ -27,33 +27,19 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
   private resizableObservers: ResizeObserver[] = [];
   private dataSource?: Observable<string> = undefined;
   private readonly paddingSize = 5;
-  stylesForDiv: Partial<CSSStyleDeclaration> = { 'display': 'block' };
-
-  /**
-   * @deprecated use (data)='' instead.
-   * An emitter emits printable characters pushed from xterm's onData() when a user typed on the terminal.
-   */
-  @Output('keyInput')
-  keyInputEmitter = new EventEmitter<string>();
-
-  /**
-   * @deprecated use (key)='' instead.
-   * An emitter emits key and keybaord event pushed from xterm's onKey() when a user typed on the terminal.
-   */
-  @Output('keyEvent')
-  keyEventEmitter = new EventEmitter<{ key: string; domEvent: KeyboardEvent; }>();
+  stylesForDiv: Partial<CSSStyleDeclaration> = { display: 'block' };
 
   /**
    * An emitter emits printable characters pushed from xterm's onData() when a user typed on the terminal.
    */
-  @Output('data')
-  dataEmitter = this.keyInputEmitter;
+  @Output()
+  data = new EventEmitter<string>();
 
   /**
    * An emitter emits key and keybaord event pushed from xterm's onKey() when a user typed on the terminal.
    */
-  @Output('key')
-  keyEmitter = this.keyEventEmitter;
+  @Output()
+  key = new EventEmitter<{ key: string; domEvent: KeyboardEvent }>();
 
   /**
    * A datsource is an observable where NgTerminal reads charactors.
@@ -178,10 +164,10 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
       });
     }
     this.keyInputSubjectSubscription = this.dataSubject.subscribe((data) => {
-      this.keyInputEmitter.emit(data);
+      this.data.emit(data);
     })
     this.keyEventSubjectSubscription = this.keySubject.subscribe((e) => {
-      this.keyEventEmitter.emit(e);
+      this.key.emit(e);
     });
     this.resizableObservers = [];
     let ob1 = this.observeTerminalDimension();
