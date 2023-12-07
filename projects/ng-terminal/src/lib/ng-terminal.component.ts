@@ -1,24 +1,44 @@
-import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter, OnDestroy, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  Input,
+  Output,
+  EventEmitter,
+  OnDestroy,
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  OnChanges,
+  Renderer2,
+  SimpleChanges,
+  isDevMode,
+} from '@angular/core';
 import { ITerminalOptions, Terminal } from 'xterm';
 import { FitAddon } from 'xterm-addon-fit';
 import { NgTerminal } from './ng-terminal';
 import { Subject, Observable, Subscription } from 'rxjs';
 import { ResizeEvent } from 'angular-resizable-element';
-import { ResizeObserver } from '@juggle/resize-observer';
-import { LinearRenderService } from './linear-render.service';
+import {
+  LinearRenderService,
+  PropertyChangeSet,
+} from './linear-render.service';
 
 @Component({
   selector: 'ng-terminal',
   templateUrl: './ng-terminal.component.html',
   styleUrls: ['./ng-terminal.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, NgTerminal, OnDestroy {
+export class NgTerminalComponent
+  implements OnInit, OnChanges, AfterViewInit, NgTerminal, OnDestroy
+{
   private linearRender: LinearRenderService;
-  private term?: Terminal;
+  private xterm?: Terminal;
   private fitAddon?: FitAddon;
   private dataSubject: Subject<string> = new Subject<string>();
-  private keySubject = new Subject<{ key: string; domEvent: KeyboardEvent; }>();
+  private keySubject = new Subject<{ key: string; domEvent: KeyboardEvent }>();
 
   private keyInputSubjectSubscription?: Subscription = undefined;
   private keyEventSubjectSubscription?: Subscription = undefined;
@@ -27,7 +47,7 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
   private resizableObservers: ResizeObserver[] = [];
   private dataSource?: Observable<string> = undefined;
   private readonly paddingSize = 5;
-  stylesForDiv: Partial<CSSStyleDeclaration> = { 'display': 'block' };
+  stylesForResizeBox: Partial<CSSStyleDeclaration> = { display: 'block' };
 
   /**
    * @deprecated use (data)='' instead.
@@ -41,7 +61,10 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
    * An emitter emits key and keybaord event pushed from xterm's onKey() when a user typed on the terminal.
    */
   @Output('keyEvent')
-  keyEventEmitter = new EventEmitter<{ key: string; domEvent: KeyboardEvent; }>();
+  keyEventEmitter = new EventEmitter<{
+    key: string;
+    domEvent: KeyboardEvent;
+  }>();
 
   /**
    * An emitter emits printable characters pushed from xterm's onData() when a user typed on the terminal.
@@ -60,12 +83,13 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
    */
   @Input('dataSource')
   set _dataSource(dataSource: Observable<string> | undefined) {
-    if (!dataSource)
-      return;
+    if (!dataSource) return;
     if (this.dataSourceSubscription != undefined)
       this.dataSourceSubscription.unsubscribe();
     this.dataSource = dataSource;
-    this.dataSourceSubscription = this.dataSource.subscribe((data) => this.write(data));
+    this.dataSourceSubscription = this.dataSource.subscribe((data) =>
+      this.write(data)
+    );
   }
 
   /**
@@ -97,9 +121,9 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
    */
   @Input('draggable')
   set draggable(draggable: boolean) {
-    this._draggableInput = draggable;
+    this._draggable = draggable;
   }
-  
+
   /**
    * An wrapper of {@link ITerminalOptions} for Xterm.
    */
@@ -107,18 +131,18 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
   _xtermOptions: ITerminalOptions & { theme?: { border?: string } } = {};
 
   @ViewChild('terminal', { static: true })
-  terminalOuter!: ElementRef;
+  terminalOuter!: ElementRef<HTMLDivElement>;
 
   @ViewChild('resizeBox', { static: true })
-  resizeBox!: ElementRef;
+  resizeBox!: ElementRef<HTMLDivElement>;
 
   get draggable() {
-    return this._draggableInput;
+    return this._draggable;
   }
 
-  lastDraggedPosition?: { width: string, height: string } = undefined;
+  lastDraggedPosition?: { width: string; height: string } = undefined;
 
-  _draggableInput: boolean = false;
+  _draggable: boolean = false;
 
   _stylesInput: any = {};
 
@@ -131,122 +155,133 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
   }
 
   setDraggable(draggable: boolean): void {
-    this._draggableInput = draggable;
-    this.lastDraggedPosition = undefined;
-    this.ref.markForCheck();
+    this._draggable = draggable;
+    this.lastDraggedPosition = undefined; // Reset position values
   }
 
-  setXtermOptions(options: ITerminalOptions & { theme?: { border?: string } }): void {
+  setXtermOptions(
+    options: ITerminalOptions & { theme?: { border?: string } }
+  ): void {
     this._xtermOptions = options;
-    this.linearRender.pushAndHandle({});
+    this.linearRender.pushAndHandle({ type: 'none' });
   }
 
   setRows(rows: number): void {
     if (this._rowsInput != rows) {
       this._rowsInput = rows;
-      this.linearRender.pushAndHandle({ rowChanged: true });
+      this.linearRender.pushAndHandle({
+        type: 'rowChanged'
+      });
     }
   }
 
   setCols(cols: number): void {
     if (this._colsInput != cols) {
       this._colsInput = cols;
-      this.linearRender.pushAndHandle({ columnChanged: true });
+      this.linearRender.pushAndHandle({
+        type: 'columnChanged'
+      });
     }
   }
 
   setStyle(styleObject: any): void {
-    if (JSON.stringify(this._stylesInput ?? {}) != JSON.stringify(styleObject ?? {})) {
+    if (
+      JSON.stringify(this._stylesInput ?? {}) !=
+      JSON.stringify(styleObject ?? {})
+    ) {
       this._stylesInput = styleObject;
-      this.linearRender.pushAndHandle({});
+      this.linearRender.pushAndHandle({
+        type: 'none',
+      });
     }
   }
 
   handleToCheckLazyContainer?: ReturnType<typeof setInterval> = undefined;
 
-  constructor(private renderer: Renderer2, private ref: ChangeDetectorRef, private hostRef: ElementRef) {
+  constructor(
+    private renderer: Renderer2, //Render is being used for fast rendering without markForCheck().
+    private hostRef: ElementRef
+  ) {
     this.linearRender = new LinearRenderService(hostRef);
   }
 
-  private observableSetup() {
-    if (this.term) {
-      this.term.onData((input) => {
+  private setup() {
+    if (this.xterm) {
+      this.xterm.onData((input) => {
         this.dataSubject.next(input);
       });
-      this.term.onKey(e => {
+      this.xterm.onKey((e) => {
         this.keySubject.next(e);
       });
     }
     this.keyInputSubjectSubscription = this.dataSubject.subscribe((data) => {
       this.keyInputEmitter.emit(data);
-    })
+    });
     this.keyEventSubjectSubscription = this.keySubject.subscribe((e) => {
       this.keyEventEmitter.emit(e);
     });
-    this.resizableObservers = [];
-    let ob1 = this.observeTerminalDimension();
-    let ob2 = this.observeHostDimension();
-    if (ob1)
-      this.resizableObservers.push(ob1);
-    if (ob2)
-      this.resizableObservers.push(ob2);
-    this.allLogsSubjectSubscription = this.linearRender.renderObservable.subscribe((change) => {
-      if (change)
-        this.coordinateOuterAndTerminal(change);
-      else
-        this.coordinateOuterAndTerminal(change);
-      this.linearRender.handleNextOne();
-    });
+    this.setupResizeObservers();
+    // if (ob3) this.resizableObservers.push(ob3);
+    this.allLogsSubjectSubscription =
+      this.linearRender.renderObservable.subscribe((change) => {
+        if (change) this.coordinateOuterAndTerminal(change);
+        else this.coordinateOuterAndTerminal(change);
+        this.linearRender.handleNextOne();
+      });
     this.linearRender.handleNextOne();
   }
+
   /**
    * set dimensions
    */
-  private setOuterDimensions(left: number, top: number, width: number, height: number) {
+  private setOuterDimensions(
+    left: number,
+    top: number,
+    width: number,
+    height: number
+  ) {
     this.linearRender.pushAndHandle({
-      rowChanged: false, columnChanged: false
-      , dragged: { draggedWidth: `${width}px`, draggedHeight: `${height}px` }
+      type: 'dragged',
+      dragged: { draggedWidth: `${width}px`, draggedHeight: `${height}px` },
     });
   }
 
-  /**
-   * Render is being used for fast rendering without markForCheck().
-   */
-  private applyStyleToDiv() {
-    Object.keys(this.stylesForDiv).map(key => {
-      return { key, value: (this.stylesForDiv as StringToString)[key] }
-    }).forEach(({ key, value }) => {
-      if (this.resizeBox) {
-        if (value)
-          this.renderer.setStyle(this.resizeBox.nativeElement, key, value);
-        else {
-          this.renderer.removeStyle(this.resizeBox.nativeElement, key);
+  private applyStylesToResizeBox() {
+    Object.keys(this.stylesForResizeBox)
+      .map((key) => {
+        return { key, value: (this.stylesForResizeBox as StringToString)[key] };
+      })
+      .forEach(({ key, value }) => {
+        if (this.resizeBox) {
+          if (value)
+            this.renderer.setStyle(this.resizeBox.nativeElement, key, value);
+          else {
+            this.renderer.removeStyle(this.resizeBox.nativeElement, key);
+          }
         }
-      }
-    });
-    this.stylesForDiv = this.stylesForDiv; //invalidate
+      });
+    this.stylesForResizeBox = this.stylesForResizeBox; //invalidate
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   /**
    * It creates new terminal in #terminal.
    */
   ngAfterViewInit() {
     this.fitAddon = new FitAddon();
-    this.term = new Terminal({
-      allowProposedApi: true
+    this.xterm = new Terminal({
+      allowProposedApi: true,
     });
     if (!(this.terminalOuter.nativeElement as HTMLElement).isConnected) {
       this.handleToCheckLazyContainer = setInterval(() => {
         if ((this.terminalOuter.nativeElement as HTMLElement).isConnected) {
           try {
             console.debug("The container's been connected.");
-            this.term!.open(this.terminalOuter.nativeElement);
-            this.term!.loadAddon(this.fitAddon!!);
-            this.observableSetup();
-            this.linearRender.pushAndHandle({});
+            this.xterm!.open(this.terminalOuter.nativeElement);
+            this.xterm!.loadAddon(this.fitAddon!!);
+            this.setup();
+            this.linearRender.pushAndHandle({ type: 'none' });
           } finally {
             if (this.handleToCheckLazyContainer)
               clearInterval(this.handleToCheckLazyContainer);
@@ -254,175 +289,308 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
         }
       }, 500);
     } else {
-      this.term.open(this.terminalOuter.nativeElement);
-      this.term.loadAddon(this.fitAddon);
-      this.observableSetup();
-      this.linearRender.pushAndHandle({});
+      this.xterm.open(this.terminalOuter.nativeElement);
+      this.xterm.loadAddon(this.fitAddon);
+      this.setup();
+      this.linearRender.pushAndHandle({ type: 'none' });
     }
   }
 
   ngOnChanges(changes?: SimpleChanges) {
-    console.group("onChanges");
+    console.group('onChanges');
     console.debug('prop: ', changes);
     console.groupEnd();
     if (changes?.['_rowsInput']) {
-      if (changes?.['_rowsInput']?.previousValue != changes?.['_rowsInput']?.currentValue) {
-        this.linearRender.pushAndHandle({ rowChanged: true });
+      if (
+        changes?.['_rowsInput']?.previousValue !=
+        changes?.['_rowsInput']?.currentValue
+      ) {
+        this.linearRender.pushAndHandle({
+          type: 'rowChanged'
+        });
       }
     }
     if (changes?.['_colsInput']) {
-      if (changes?.['_colsInput']?.previousValue != changes?.['_colsInput']?.currentValue) {
-        this.linearRender.pushAndHandle({ columnChanged: true });
+      if (
+        changes?.['_colsInput']?.previousValue !=
+        changes?.['_colsInput']?.currentValue
+      ) {
+        this.linearRender.pushAndHandle({
+          type: 'columnChanged'
+        });
       }
     }
-    // this.requestRenderFromAPI.next({});
+    if (changes?.['draggable'])
+      this.linearRender.pushAndHandle({ type: 'none' });
   }
 
   resizeHandleStyleRule?: CSSStyleRule;
   resizeHandleActiveStyleRule?: CSSStyleRule;
 
   /**
-   * It must be called after having initialized the terminal.
-   * xterm fit
-   * @param rowColChange 
-   * @returns 
+   * It serves a callback function to adjust the dimensions of the xterm-screen, xterm-view, and resize box
+   * after making any changes to the outer box, rows, or columns, or when the resize box is being dragged.
+   *
+   * There several factors that affect dimensions, as I mentioned earlier.
+   * Regardless of whether the draggable feature is on, if new row or column value is input, this value will be applied.
+   * - Draggable = New specified Row/Column value > Full (Default)
+   * @param change This argument represents a single change that occured.
+   * @returns
    */
-  private coordinateOuterAndTerminal(changeList: {
-    rowChanged: boolean
-    , columnChanged: boolean
-    , dragged?: { draggedWidth: string, draggedHeight: string }
-    , hostResized?: { width: string, height: string }
-    , whenTerminalDimensionIsOverOuterDiv?: { width: string, height: string }
-  }) {
-    console.debug(`changeList: ${JSON.stringify(changeList)}`);
-    if (!this.term)
-      return;
-    // apply options to the xterm terminal
-    this.term.options = { ...this._xtermOptions };
+  private coordinateOuterAndTerminal(change: PropertyChangeSet) {
+    console.debug(`changeList: ${JSON.stringify(change)}`);
+    if (!this.xterm) return;
+    this.doUpdateXtermStyles();
+    this.doAdjustDimensionOfResizeBox(change);
+    this.doAdjustSizeOfXtermScreen(change);
+    this.doUpdateViewportAndResizeBoxWithPixcelUnit();
+  }
+
+  /**
+   * apply options to the xterm terminal
+   * @returns
+   */
+  private doUpdateXtermStyles() {
+    if (!this.xterm) return;
+    this.xterm.options = { ...this._xtermOptions };
     // apply the theme to the background of the handle
     if (this._xtermOptions.theme?.background) {
       if (!this.resizeHandleStyleRule)
-        this.resizeHandleStyleRule = this.findCssStyleRule(".resize-handle[");
+        this.resizeHandleStyleRule = this.findCssStyleRule('.resize-handle[');
       if (this.resizeHandleStyleRule)
-        this.resizeHandleStyleRule.style.backgroundColor = this._xtermOptions.theme.background;
+        this.resizeHandleStyleRule.style.backgroundColor =
+          this._xtermOptions.theme.background;
     }
     if (this._xtermOptions.theme?.border) {
       if (!this.resizeHandleActiveStyleRule)
-        this.resizeHandleActiveStyleRule = this.findCssStyleRule(".handle-active");
+        this.resizeHandleActiveStyleRule =
+          this.findCssStyleRule('.handle-active');
       if (this.resizeHandleActiveStyleRule)
-        this.resizeHandleActiveStyleRule.style.backgroundColor = this._xtermOptions.theme.border;
-    }
-
-    // apply a style input while keeping width and height default
-    this.stylesForDiv = {
-      ...this.stylesForDiv
-      , ...this._stylesInput
-      , width: this.stylesForDiv.width
-      , height: this.stylesForDiv.height
-    };
-    // but if the div is dragged, update width, height
-    if (changeList.dragged) {
-      this.stylesForDiv.width = changeList.dragged.draggedWidth;
-      this.stylesForDiv.height = changeList.dragged.draggedHeight;
-      this.lastDraggedPosition = { width: changeList.dragged.draggedWidth, height: changeList.dragged.draggedHeight };
-    } else if (!this._rowsInput && !this._colsInput && !(this.draggable && this.lastDraggedPosition)) {
-      // but if the dimension of host element is resized, update width and height
-      this.stylesForDiv.width = '100%';
-      this.stylesForDiv.height = '100%';
-    }
-    this.applyStyleToDiv();
-
-    // resize with new cols and rows if they changed.
-    if (changeList.rowChanged || changeList.columnChanged) {
-      this.term.resize(this._colsInput ?? this.term.cols, this._rowsInput ?? this.term.rows);
-    } else {
-      // fit() operation doesn't see padding values of terminalOuter.
-      // But it uses padding values of terminal element.
-      // So we force to set padding values when calling fit() operation for a while.
-      if (this.term.element) {
-        this.term.element.style.paddingLeft = `${this.paddingSize}px`;
-        this.term.element.style.paddingRight = `${this.paddingSize}px`;
-        this.fitAddon?.fit();
-        this.term.element.style.padding = '0px';
-      }
-    }
-
-    // coordinate difference between terminal and outer
-    if (this.term.element) {
-      let xtermScreen = this.term.element.getElementsByClassName('xterm-screen')[0];
-      let xtermViewport = this.term.element.getElementsByClassName('xterm-viewport')[0];
-      const terminalWidth = xtermScreen.clientWidth;
-      const terminalHeight = xtermScreen.clientHeight;
-      const core = (this.underlying as any)._core;
-      const scrollWidth: number = core.viewport.scrollBarWidth as number;
-
-      // It fixes that the viewport's width doesn't changes after calling fit()
-      this.renderer.setStyle(xtermViewport, 'width', `${terminalWidth + scrollWidth}px`);
-      console.debug(terminalWidth + scrollWidth + this.paddingSize * 2, terminalWidth, scrollWidth, this.paddingSize * 2); // + borderWidth * 2
-      console.debug(terminalHeight + this.paddingSize * 2, terminalHeight);
-      this.stylesForDiv = {
-        ...this.stylesForDiv, width: `${terminalWidth + scrollWidth + this.paddingSize * 2}px`
-        , height: `${terminalHeight + this.paddingSize * 2}px`
-      };
-      this.applyStyleToDiv();
-      this.ref.markForCheck();
+        this.resizeHandleActiveStyleRule.style.backgroundColor =
+          this._xtermOptions.theme.border;
     }
   }
 
-  observeTerminalDimension() {
-    let viewport: HTMLDivElement | undefined = this.terminalOuter.nativeElement.querySelector('.xterm-viewport');
-    if (viewport) {
-      const resizeObserver = new ResizeObserver(entries => {
-        const divWidth = parseFloat(getComputedStyle(this.terminalOuter.nativeElement).width);
-        const divHeight = parseFloat(getComputedStyle(this.terminalOuter.nativeElement).height);
-        let width: number = 0;
-        let height: number = 0;
+  /**
+   * If the resize handles are moved, the resize box adjusts to the new dimensions;
+   * otherwise, it defaults to a maximized size.
+   * @param change
+   */
+  private doAdjustDimensionOfResizeBox(change: PropertyChangeSet) {
+    this.stylesForResizeBox = {
+      ...this.stylesForResizeBox,
+      ...this._stylesInput,
+      width: this.stylesForResizeBox.width,
+      height: this.stylesForResizeBox.height,
+    };
+
+    // Reset styles of the resize element
+    if (change.type === 'dragged') {
+      const minWidth = this._minWidthInput ?? 24;
+      const minHeight = this._minHeightInput ?? 24;
+      const width = parseInt(change.dragged.draggedWidth) > minWidth ? change.dragged.draggedWidth : `${minWidth}px`;
+      const height = parseInt(change.dragged.draggedHeight) > minHeight ? change.dragged.draggedHeight : `${minHeight}px`;
+      this.stylesForResizeBox.width = width;
+      this.stylesForResizeBox.height = height;
+      this.lastDraggedPosition = {
+        width,
+        height,
+      };
+      this.applyStylesToResizeBox();
+    } else if (
+      !this._rowsInput &&
+      !this._colsInput &&
+      !(this.draggable && this.lastDraggedPosition)
+    ) {
+      // but if the dimension of host element is resized, update width and height
+      this.stylesForResizeBox.width = '100%';
+      this.stylesForResizeBox.height = '100%';
+      this.applyStylesToResizeBox();
+    }
+  }
+
+  /**
+   * This function uses fitAddon() to adjust the dimension of xterm-screen to character unit
+   * If the draggable value is true or there are no fixed values for the row or column,
+   * it fits the xterm terminal boxes into the resize box;
+   * otherwise, it resizes the xterm terminal with specified row and column values.
+   */
+  private doAdjustSizeOfXtermScreen(change: PropertyChangeSet) {
+    if (!this.xterm) return;
+    if((change.type == 'rowChanged' && this._rowsInput) || (change.type == 'columnChanged' && this._colsInput)){
+      this.xterm.resize(
+        this._colsInput ?? this.xterm.cols,
+        this._rowsInput ?? this.xterm.rows
+      );
+    } else if (!this.draggable && (this._colsInput || this._rowsInput)) {
+      this.xterm.resize(
+        this._colsInput ?? this.xterm.cols,
+        this._rowsInput ?? this.xterm.rows
+      );
+    }
+    else {
+      if (this.xterm.element) {
+        // The fitAddon.fit() operation doesn't recognize the padding values of terminalOuter.
+        // It seems to be using the padding values of the terminal element instead.
+        // Therefore, we establish a brief time frame to adjust the padding values before and after executing fitAddon.fit().
+        this.xterm.element.style.paddingLeft = `${this.scrollBarWidth}px`;
+        this.printDimension('Before fitAddon.fit() of Xterm');
+        this.fitAddon?.fit(); // fitAddon.fit() does not cover all senarios 
+        this.printDimension('After fitAddon.fit() of Xterm');
+        this.xterm.element.style.paddingLeft = `${0}px`;
+      }
+    }
+  }
+
+  /**
+   * This functions sets width of the resize box, xterm-viewport and xterm-screen with specific pixel values.
+   */
+  private doUpdateViewportAndResizeBoxWithPixcelUnit() {
+    if (this.xterm?.element) {
+      let xtermScreen = this.xterm.element.getElementsByClassName('xterm-screen')[0];
+      let xtermViewport = this.xterm.element.getElementsByClassName('xterm-viewport')[0];
+      const screenWidth = xtermScreen.clientWidth;
+      const screenHeight = xtermScreen.clientHeight;
+      const core = (this.underlying as any)._core;
+      const scrollBarWidth: number = core.viewport.scrollBarWidth as number;
+
+      // It fixes a bug where the viewport's width isn't updated by fitAddon.fit()
+      this.renderer.setStyle(
+        xtermViewport,
+        'width',
+        `${screenWidth + scrollBarWidth}px`
+      );
+
+      // It adjusts the dimension of the resize box to the xterm-screen element.
+      const calulatedBoxWidth = screenWidth + scrollBarWidth + this.paddingSize * 2;
+      const componentElement = this.hostRef.nativeElement as HTMLElement;
+      const componentWith = parseInt(getComputedStyle(componentElement).width);
+      const restrictedWidth = calulatedBoxWidth > componentWith ? componentWith : calulatedBoxWidth;
+
+      this.stylesForResizeBox = {
+        ...this.stylesForResizeBox,
+        width: `${restrictedWidth}px`,
+        height: `${screenHeight + this.paddingSize * 2}px`,
+      };
+      this.applyStylesToResizeBox();
+      this.printDimension(
+        'After update the dimensions for all boxes with pixel values'
+      );
+    }
+  }
+
+  private printDimension(title: string) {
+    if (isDevMode() && this.xterm?.element) {
+      let resizeBox = this.resizeBox.nativeElement as HTMLDivElement;
+      let xtermScreen =
+        this.xterm.element.getElementsByClassName('xterm-screen')[0];
+      let xtermViewport =
+        this.xterm.element.getElementsByClassName('xterm-viewport')[0];
+      const screenWidth = xtermScreen.clientWidth;
+      const screenHeight = xtermScreen.clientHeight;
+
+      console.group(`${title}`);
+      console.debug(`width(resizeBox): ${
+        getComputedStyle(resizeBox).width
+      },
+width(viewport): ${getComputedStyle(xtermViewport).width},
+width(screen): ${screenWidth}
+scrollBarWidth: ${this.scrollBarWidth}`);
+      console.debug(`height(resizeBox): ${getComputedStyle(resizeBox).height},
+height(viewport) ${getComputedStyle(xtermViewport).height},
+height(screen): ${screenHeight}`);
+      console.groupEnd();
+    }
+  }
+
+  /**
+   * If pushAndHandle() were used, there could be an issue
+   * because it can adjust the size of elements during a loop of ResizeObserver.
+   */
+  private setupResizeObservers() {
+    this.resizableObservers = [];
+    let ob1 = this.observeXtermViewportDimension();
+    let ob2 = this.observeHostDimension();
+    if (ob1) this.resizableObservers.push(ob1);
+    if (ob2) this.resizableObservers.push(ob2);
+  }
+
+  private observeXtermViewportDimension() {
+    let xtermViewport = this.terminalOuter.nativeElement.querySelector(
+      '.xterm-viewport'
+    ) as HTMLDivElement | undefined;
+    if (xtermViewport) {
+      const resizeObserver = new ResizeObserver((entries) => {
+        const outerDivWidth = (
+          this.terminalOuter.nativeElement as HTMLDivElement | undefined
+        )?.clientWidth;
+        const outerDivHeight = (
+          this.terminalOuter.nativeElement as HTMLDivElement | undefined
+        )?.clientHeight;
         for (let entry of entries) {
-          if (entry.contentBoxSize) {
-            if (entry.target instanceof HTMLElement) {
-              width = parseFloat(getComputedStyle(entry.target).width);
-              height = parseFloat(getComputedStyle(entry.target).height);
+          if (entry.contentBoxSize.length > 0) {
+            let width: number = entry.target.clientWidth;
+            let height: number = entry.target.clientHeight;
+            if (
+              (outerDivWidth && width > outerDivWidth) ||
+              (outerDivHeight && height > outerDivHeight)
+            ) {
+              console.debug(
+                'Changes on a xterm viewport element will be handled.'
+              );
+              this.linearRender.pushAndHandle(
+                {
+                  type: 'xtermViewportExceedingOuterDiv',
+                  xtermViewportExceedingOuterDiv: {
+                    width: `${width}`,
+                    height: `${height}`,
+                    outerDivWidth: `${outerDivWidth}`,
+                    outerDivHeight: `${outerDivHeight}`,
+                  },
+                },
+                true
+              );
             }
-          } else {
-            width = parseFloat(getComputedStyle(entry.target).width);
-            height = parseFloat(getComputedStyle(entry.target).height);
           }
         }
-        if (width > divWidth || height > divHeight) {
-          this.linearRender.pushAndHandle({ whenTerminalDimensionIsOverOuterDiv: { width: `${width}px`, height: `${height}px` } });
-        }
       });
-      resizeObserver.observe(viewport);
+      resizeObserver.observe(xtermViewport);
       return resizeObserver;
     } else {
-      console.error("Invalid state is detected. xterm element should exist below .terminal-outer.");
+      console.error(
+        'Invalid state is detected. xterm element should exist below .terminal-outer.'
+      );
     }
     return undefined;
   }
 
-  observeHostDimension() {
+  private observeHostDimension() {
     let hostElement: HTMLDivElement | undefined = this.hostRef.nativeElement;
     if (hostElement) {
-      const resizeObserver = new ResizeObserver(entries => {
-        let width: number = 0;
-        let height: number = 0;
+      const resizeObserver = new ResizeObserver((entries) => {
         for (let entry of entries) {
-          if (entry.contentBoxSize) {
-            if (entry.target instanceof HTMLElement) {
-              width = parseFloat(getComputedStyle(entry.target).width);
-              height = parseFloat(getComputedStyle(entry.target).height);
+          if (entry.contentBoxSize.length > 0) {
+            let width = entry.target.clientWidth;
+            let height = entry.target.clientHeight;
+            if (width > 0 && height > 0) {
+              console.debug('Changes on a host element will be handled.');
+              this.linearRender.pushAndHandle(
+                {
+                  type: 'hostResized',
+                  hostResized: { width: `${width}`, height: `${height}` },
+                },
+                true
+              );
             }
-          } else {
-            width = parseFloat(getComputedStyle(entry.target).width);
-            height = parseFloat(getComputedStyle(entry.target).height);
           }
         }
-        this.linearRender.pushAndHandle({ hostResized: { width: `${width}px`, height: `${height}px` } });
       });
       resizeObserver.observe(hostElement);
       return resizeObserver;
     } else {
-      console.error("Invalid state is detected. xterm element should exist below .terminal-outer.")
+      console.error(
+        'Invalid state is detected. xterm element should exist below .terminal-outer.'
+      );
     }
     return undefined;
   }
@@ -430,23 +598,22 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
    * clean all resources
    */
   ngOnDestroy(): void {
+    this.resizableObservers.forEach((ob) => ob.disconnect());
     if (this.keyInputSubjectSubscription)
       this.keyInputSubjectSubscription.unsubscribe();
-    if (this.dataSourceSubscription)
-      this.dataSourceSubscription.unsubscribe();
+    if (this.dataSourceSubscription) this.dataSourceSubscription.unsubscribe();
     if (this.keyEventSubjectSubscription)
       this.keyEventSubjectSubscription.unsubscribe();
     if (this.allLogsSubjectSubscription)
       this.allLogsSubjectSubscription.unsubscribe();
     if (this.handleToCheckLazyContainer)
       clearInterval(this.handleToCheckLazyContainer);
-    if (this.term)
-      this.term.dispose();
-    this.resizableObservers.forEach(ob => ob.disconnect());
+    if (this.xterm) this.xterm.dispose();
+    console.debug('All resources has been cleaned up.');
   }
 
   write(chars: string) {
-    this.term?.write(chars);
+    this.xterm?.write(chars);
   }
 
   get keyInput(): Observable<string> {
@@ -457,29 +624,34 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
     return this.dataSubject;
   }
 
-  get keyEventInput(): Observable<{ key: string; domEvent: KeyboardEvent; }> {
+  get keyEventInput(): Observable<{ key: string; domEvent: KeyboardEvent }> {
     return this.keySubject;
   }
 
-  onKey(): Observable<{ key: string; domEvent: KeyboardEvent; }> {
+  onKey(): Observable<{ key: string; domEvent: KeyboardEvent }> {
     return this.keySubject;
   }
 
   get underlying(): Terminal | undefined {
-    return this.term;
+    return this.xterm;
   }
 
   get isDraggableOnEdgeActivated() {
     // return this.displayOption.activateDraggableOnEdge != undefined && this.displayOption.fixedGrid == undefined;
-    return this._draggableInput;
+    return this._draggable;
+  }
+
+  private get scrollBarWidth(){
+    const core = (this.underlying as any)._core;
+    return core.viewport.scrollBarWidth as number;
   }
 
   /**
    * After user coordinate dimensions of terminal, it's called.
-   * @param left 
-   * @param top 
-   * @param width 
-   * @param height 
+   * @param left
+   * @param top
+   * @param width
+   * @param height
    */
   onResizeEnd(left: number, top: number, width: number, height: number): void {
     this.setOuterDimensions(left, top, width, height);
@@ -492,14 +664,10 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
   validatorFactory(): (re: ResizeEvent) => boolean {
     const comp = this;
     return (re: ResizeEvent) => {
-      if (this._draggableInput) {
-        let left = re.rectangle.left, top = re.rectangle.top, width = re.rectangle.width, height = re.rectangle.height;
-        if (width && height && ((width < (this._minWidthInput ?? 100)) || (height < (this._minHeightInput ?? 50)))) {
-          return false;
-        } else return true;
-      } else
-        return false;
-    }
+      if (this._draggable) {
+        return true;
+      } else return false;
+    };
   }
 
   private findCssStyleRule(containingSelector: string) {
@@ -509,16 +677,14 @@ export class NgTerminalComponent implements OnInit, OnChanges, AfterViewInit, Ng
         for (let i = 0; i < sheet.cssRules.length; i++) {
           let rule = sheet.cssRules.item(i) as CSSStyleRule;
           if ('selectorText' in rule)
-            if (rule.selectorText.includes(containingSelector))
-              return rule;
+            if (rule.selectorText.includes(containingSelector)) return rule;
         }
       }
     }
     return undefined;
   }
-
 }
 
 interface StringToString {
-  [index: string]: string
+  [index: string]: string;
 }

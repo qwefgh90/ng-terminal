@@ -11,6 +11,7 @@ import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { ExampleComponent } from './example.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatTabsModule } from '@angular/material/tabs';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 @NgModule({
   declarations: [
     ExampleComponent
@@ -26,7 +27,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatCardModule,
     NgxJsonViewerModule,
     MatFormFieldModule,
-    MatTabsModule
+    MatTabsModule,
+    TabsModule.forRoot()
   ],
   providers: [],
   bootstrap: [ExampleComponent]

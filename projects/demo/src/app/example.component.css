@@ -1,5 +1,7 @@
 .outer-box{
-    min-height: 40vh;
+    height: 40vh;
+    overflow-y: auto;
+    padding: 5px 0px 5px 0px;
     /* TODO: setting max-height doesn't work with ng-terminal's fit() */
     /* TODO: automatically resizing following an outer box */
 }

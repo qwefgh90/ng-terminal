@@ -2,26 +2,26 @@ import { Injectable, ElementRef, OnDestroy } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 
 /**
- * 
+ *
  * In the past, indivisual property changes caused very unexpected behavior on NgTerminal.
  * To solve issues related to property changes, Queue is applied.
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class LinearRenderService implements OnDestroy{
+export class LinearRenderService implements OnDestroy {
+  constructor(private hostRef: ElementRef) {}
 
-  constructor(private hostRef: ElementRef) { }
+  private handlerToCheckElementConnection?: ReturnType<typeof setInterval> =
+    undefined;
 
-  private handlerToCheckElementConnection?: ReturnType<typeof setInterval> = undefined;
-  
   /**
    * This queue has items to have a influence on the view and items are handled in order.
    */
   private propertyChangeQueue: PropertyChangeSet[] = [];
   private itemsToBeHandled = new Subject<PropertyChangeSet>();
 
-  get renderObservable(): Observable<PropertyChangeSet>{
+  get renderObservable(): Observable<PropertyChangeSet> {
     return this.itemsToBeHandled;
   }
 
@@ -29,9 +29,13 @@ export class LinearRenderService implements OnDestroy{
    * {@link handleNextOne()} calls {@link handleImmediate()} if an element is connected.
    * Otherwise, {@link pollAndHandle()} is called.
    */
-  public handleNextOne() {
-    if (!this.hostRef.nativeElement.isConnected) {
-      this.pollAndHandle();
+  public handleNextOne(lazy = false) {
+    if (!this.hostRef.nativeElement.isConnected || lazy) {
+      this.pollAndHandle(
+        !this.hostRef.nativeElement.isConnected
+          ? 'NOT_CONNECTED_ELEMENT'
+          : 'LAZY'
+      );
     } else {
       this.handleImmediate();
     }
@@ -39,38 +43,40 @@ export class LinearRenderService implements OnDestroy{
 
   /**
    * This method pushes item into {@link propertyChangeQueue}.
-   * @param item 
+   * @param item
    */
-  public pushAndHandle(item: Partial<PropertyChangeSet>) {
+  public pushAndHandle(item: PropertyChangeSet, lazy = false) {
     let changeWithDefault = {
-      rowChanged: false, columnChanged: false, ...item
+      ...item,
     };
     this.propertyChangeQueue.push(changeWithDefault);
-    this.handleNextOne();
+    this.handleNextOne(lazy);
   }
 
   /**
    * {@link pollAndHandle()} continues checking whether new item is put on a queue to call {@link handleImmediate()}.
    */
-  public pollAndHandle() {
+  private pollAndHandle(mode: 'NOT_CONNECTED_ELEMENT' | 'LAZY') {
     const pollFunction = () => {
-      if (this.handlerToCheckElementConnection)
-        return;
-      const interval = setInterval(() => {
-        if (this.hostRef.nativeElement.isConnected) {
-          clearInterval(interval);
-          this.handlerToCheckElementConnection = undefined;
-          this.handleImmediate();
-        }
-      }, 500);
+      if (this.handlerToCheckElementConnection) return;
+      const interval = setInterval(
+        () => {
+          if (this.hostRef.nativeElement.isConnected) {
+            clearInterval(interval);
+            this.handlerToCheckElementConnection = undefined;
+            this.handleImmediate();
+          }
+        },
+        mode === 'NOT_CONNECTED_ELEMENT' ? 500 : 30
+      );
       this.handlerToCheckElementConnection = interval;
-    }
+    };
     // Start polling
     pollFunction();
   }
 
   /**
-   * Handle a next set of changes if it exists. 
+   * Handle a next set of changes if it exists.
    */
   private handleImmediate = () => {
     if (!this.handlerToCheckElementConnection) {
@@ -79,7 +85,7 @@ export class LinearRenderService implements OnDestroy{
         this.itemsToBeHandled.next(list[0]);
       }
     }
-  }
+  };
 
   ngOnDestroy(): void {
     if (this.handlerToCheckElementConnection)
@@ -87,10 +93,21 @@ export class LinearRenderService implements OnDestroy{
   }
 }
 
-type PropertyChangeSet = {
-  rowChanged: boolean
-  , columnChanged: boolean
-  , dragged?: { draggedWidth: string, draggedHeight: string }
-  , hostResized?: { width: string, height: string }
-  , whenTerminalDimensionIsOverOuterDiv?: { width: string, height: string }
-};
+export type PropertyChangeSet =
+  | { type: 'rowChanged'}
+  | { type: 'columnChanged'}
+  | {
+      type: 'dragged';
+      dragged: { draggedWidth: string; draggedHeight: string };
+    }
+  | { type: 'hostResized'; hostResized: { width: string; height: string } }
+  | {
+      type: 'xtermViewportExceedingOuterDiv';
+      xtermViewportExceedingOuterDiv: {
+        width: string;
+        height: string;
+        outerDivWidth: string;
+        outerDivHeight: string;
+      };
+    }
+  | { type: 'none' };

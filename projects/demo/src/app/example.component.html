@@ -1,57 +1,118 @@
+<!-- <div>
+  <tabset>
+    <tab heading="Basic title" id="tab1">Basic content</tab>
+    <tab heading="Basic Title 1">Basic content 1</tab>
+    <tab heading="Basic Title 2">
+      <ng-terminal></ng-terminal>
+    </tab>
+  </tabset>
+</div> -->
 <mat-tab-group #tabGroup>
-    <mat-tab label="Terminal1">
-        <div class="outer-box">
-            <ng-terminal #term [dataSource]="writeSubject" (data)="onKeyInput($event)" [rows]="_rows" [cols]="_cols"
-                [minWidth]="200" [minHeight]="200" [draggable]="_draggable" class="ng-terminal">
-            </ng-terminal>
+  <mat-tab label="Terminal1">
+    <div class="outer-box">
+      <ng-terminal
+        #term
+        [dataSource]="writeSubject"
+        (data)="onKeyInput($event)"
+        [rows]="_rows"
+        [cols]="_cols"
+        [minWidth]="200"
+        [minHeight]="200"
+        [draggable]="_draggable"
+        class="ng-terminal"
+      >
+      </ng-terminal>
+    </div>
+    <div
+      [class.mat-elevation-z1]="true"
+      style="
+        padding-left: 1em;
+        padding-top: 0.3em;
+        margin-top: 0.7em;
+        padding-bottom: 1em;
+      "
+    >
+      <div>
+        <div
+          style="
+            display: inline-block;
+            vertical-align: top;
+            margin-bottom: 0.8em;
+          "
+        >
+          <h3>Display Opiton</h3>
+          <div>
+            <mat-slide-toggle
+              [checked]="draggableMode"
+              [color]="color"
+              (change)="resizableChange($event)"
+              [disabled]="disabled"
+            >
+              Draggable
+            </mat-slide-toggle>
+            <mat-slide-toggle
+              style="margin-left: 10px"
+              [checked]="apiMode"
+              [color]="color"
+              (change)="apiModeChange($event)"
+              [disabled]="disabled"
+            >
+              by using API
+            </mat-slide-toggle>
+          </div>
+          <div>
+            <mat-form-field>
+              <input
+                matInput
+                placeholder="rows"
+                [formControl]="rowsControl"
+                type="number"
+              />
+            </mat-form-field>
+            <mat-form-field>
+              <input
+                matInput
+                placeholder="cols"
+                [formControl]="colsControl"
+                type="number"
+              />
+            </mat-form-field>
+          </div>
         </div>
-        <div [class.mat-elevation-z1]="true"
-            style="padding-left: 1em; padding-top: 0.3em; margin-top: 0.7em; padding-bottom: 1em">
-            <div>
-                <div style="display:inline-block; vertical-align: top; margin-bottom: 0.8em">
-                    <h3>Display Opiton</h3>
-                    <div>
-                        <mat-slide-toggle [checked]="draggableMode" [color]="color" (change)="resizableChange($event)"
-                            [disabled]="disabled">
-                            Draggable
-                        </mat-slide-toggle>
-                        <mat-slide-toggle style="margin-left: 10px;" [checked]="apiMode" [color]="color"
-                            (change)="apiModeChange($event)" [disabled]="disabled">
-                            by using API
-                        </mat-slide-toggle>
-                    </div>
-                    <div>
-                        <mat-form-field>
-                            <input matInput placeholder="rows" [formControl]="rowsControl" type="number">
-                        </mat-form-field>
-                        <mat-form-field>
-                            <input matInput placeholder="cols" [formControl]="colsControl" type="number">
-                        </mat-form-field>
-                    </div>
-                </div>
-                <div style="display:inline-block; vertical-align: top">
-                    <h4>JSON</h4>
-                    <ngx-json-viewer [json]="displayOptionForLiveUpdate"></ngx-json-viewer>
-                </div>
-            </div>
-            <h3>Examples of data binding</h3>
-            <div>
-                <span style="font-size: 0.8em; font-weight: bold">[dataSource]</span>
-                <div>
-                    <mat-form-field>
-                        <input matInput placeholder="Type here" value="" [formControl]="inputControl">
-                    </mat-form-field>
-                    <button mat-raised-button color="primary" (click)="write()">Write</button>
-                </div>
-            </div>
-            <div>
-                <span style="font-size: 0.8em; font-weight: bold">(data): {{keyInput}}</span>
-            </div>
+        <div style="display: inline-block; vertical-align: top">
+          <h4>JSON</h4>
+          <ngx-json-viewer
+            [json]="displayOptionForLiveUpdate"
+          ></ngx-json-viewer>
         </div>
-    </mat-tab>
-    <mat-tab label="Terminal2">
-        <div style="width:100px; height:100px">
-            <ng-terminal></ng-terminal>
+      </div>
+      <h3>Examples of data binding</h3>
+      <div>
+        <span style="font-size: 0.8em; font-weight: bold">[dataSource]</span>
+        <div>
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Type here"
+              value=""
+              [formControl]="inputControl"
+            />
+          </mat-form-field>
+          <button mat-raised-button color="primary" (click)="write()">
+            Write
+          </button>
         </div>
-    </mat-tab>
+      </div>
+      <div>
+        <span style="font-size: 0.8em; font-weight: bold"
+          >(data): {{ keyInput }}</span
+        >
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Terminal2">
+    <div>
+      <ng-terminal></ng-terminal>
+    </div>
+  </mat-tab>
 </mat-tab-group>
