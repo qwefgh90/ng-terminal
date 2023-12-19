@@ -101,6 +101,7 @@ export type PropertyChangeSet =
       dragged: { draggedWidth: string; draggedHeight: string };
     }
   | { time: Date; type: 'hostResized'; hostResized: { width: string; height: string } }
+  | { time: Date; type: 'detectBoxResized'; detectBoxResized: { width: string } }
   | {
       time: Date; type: 'xtermViewportExceedingOuterDiv';
       xtermViewportExceedingOuterDiv: {

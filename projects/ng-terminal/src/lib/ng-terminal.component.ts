@@ -136,6 +136,9 @@ export class NgTerminalComponent
   @ViewChild('resizeBox', { static: true })
   resizeBox!: ElementRef<HTMLDivElement>;
 
+  @ViewChild('detectBox', { static: true })
+  detectBox!: ElementRef<HTMLDivElement>;
+
   get draggable() {
     return this._draggable;
   }
@@ -346,12 +349,13 @@ export class NgTerminalComponent
   private coordinateOuterAndTerminal(change: PropertyChangeSet) {
     console.debug(`changeList: ${JSON.stringify(change)}`);
     if (!this.xterm) return;
-    const isHostElementVisible = this.hostRef.nativeElement?.offsetParent !== null;
-    if (!isHostElementVisible){
+    const isHostElementVisible =
+      this.hostRef.nativeElement?.offsetParent !== null;
+    if (!isHostElementVisible) {
       // Do nothing if the host element is invisible.
       console.debug('`display` of host element was set to `none`');
       return;
-    } 
+    }
     this.doUpdateXtermStyles();
     this.doAdjustDimensionOfResizeBox(change);
     this.doAdjustSizeOfXtermScreen(change);
@@ -420,15 +424,14 @@ export class NgTerminalComponent
       !this._colsInput &&
       !(this.draggable && this.lastDraggedPosition)
     ) {
-      const currentHostWidth = getComputedStyle(this.hostRef.nativeElement).width;
-      const originalResizeBoxWidth = this.stylesForResizeBox.width;
-      this.stylesForResizeBox.width = '10px';
-      this.applyStylesToResizeBox();
-      const hostWidthWithoutChild = getComputedStyle(this.hostRef.nativeElement).width;
-      this.stylesForResizeBox.width = originalResizeBoxWidth;
-      this.applyStylesToResizeBox();
+      const currentHostWidth = getComputedStyle(
+        this.hostRef.nativeElement
+      ).width;
+      const detectBoxWidth = getComputedStyle(
+        this.detectBox.nativeElement
+      ).width;
       let smallParent = false;
-      if (parseFloat(hostWidthWithoutChild) < parseFloat(currentHostWidth)) {
+      if (parseFloat(detectBoxWidth) < parseFloat(currentHostWidth)) {
         // the width of the parent is smaller than that of resize-box element
         smallParent = true;
       }
@@ -439,7 +442,7 @@ export class NgTerminalComponent
 
         // This code check if the parent element (that is the parent of `<ng-terminal>), is smaller than `.resize-box`
         // and ensures that the width of the `<ng-terminal>` adjusts to match that of the parent element rather than the child elements, in the subsequent events.
-        this.stylesForResizeBox.width = hostWidthWithoutChild;
+        this.stylesForResizeBox.width = `${parseFloat(detectBoxWidth)}px`;
         this.applyStylesToResizeBox();
       } else {
         // but if the dimension of host element is resized, update width and height
@@ -499,6 +502,9 @@ export class NgTerminalComponent
       const screenHeight = xtermScreen.clientHeight;
       const core = (this.underlying as any)._core;
       const scrollBarWidth: number = core.viewport.scrollBarWidth as number;
+      const hostWidth = parseInt(
+        getComputedStyle(this.hostRef.nativeElement).width
+      );
 
       // It fixes a bug where the viewport's width isn't updated by fitAddon.fit()
       this.renderer.setStyle(
@@ -611,29 +617,51 @@ height(screen): ${screenHeight}`);
     return undefined;
   }
 
+  lastDetectedWidth = 0;
   private observeHostDimension() {
-    let hostElement: HTMLElement | undefined = this.hostRef.nativeElement;
-    if (hostElement) {
+    let hostElement = this.hostRef.nativeElement;
+    let detectBox = this.detectBox.nativeElement;
+    if (hostElement && detectBox) {
       const resizeObserver = new ResizeObserver((entries) => {
         for (let entry of entries) {
-          if (entry.contentBoxSize.length > 0) {
-            let width = getComputedStyle(entry.target).width;
-            let height = getComputedStyle(entry.target).height;
-            if (parseInt(width) >= 0 && parseInt(height) >= 0) {
-              console.debug('Changes on a host element will be handled.');
-              this.linearRender.pushAndHandle(
-                {
-                  time: new Date(),
-                  type: 'hostResized',
-                  hostResized: { width: `${width}`, height: `${height}` },
-                },
-                true
-              );
+          if (entry.target === hostElement) {
+            if (entry.contentBoxSize.length > 0) {
+              let width = getComputedStyle(entry.target).width;
+              let height = getComputedStyle(entry.target).height;
+              if (parseInt(width) >= 0 && parseInt(height) >= 0) {
+                console.debug('Changes on a host element will be handled.');
+                this.linearRender.pushAndHandle(
+                  {
+                    time: new Date(),
+                    type: 'hostResized',
+                    hostResized: { width: `${width}`, height: `${height}` },
+                  },
+                  true
+                );
+              }
+            }
+          }
+          if (entry.target === detectBox) {
+            if (entry.contentBoxSize.length > 0) {
+              let width = getComputedStyle(entry.target).width;
+              if (parseInt(width) >= 0 && parseInt(width) <= this.lastDetectedWidth) {
+                console.debug('Changes on a detect-box element will be handled.');
+                this.linearRender.pushAndHandle(
+                  {
+                    time: new Date(),
+                    type: 'detectBoxResized',
+                    detectBoxResized: { width: `${width}` },
+                  },
+                  true
+                );
+              }
+              this.lastDetectedWidth = parseInt(width);
             }
           }
         }
       });
       resizeObserver.observe(hostElement);
+      resizeObserver.observe(detectBox);
       return resizeObserver;
     } else {
       console.error(
