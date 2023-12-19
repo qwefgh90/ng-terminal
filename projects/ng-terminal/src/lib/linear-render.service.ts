@@ -94,15 +94,15 @@ export class LinearRenderService implements OnDestroy {
 }
 
 export type PropertyChangeSet =
-  | { type: 'rowChanged'}
-  | { type: 'columnChanged'}
+  | { time: Date; type: 'rowChanged'}
+  | { time: Date; type: 'columnChanged'}
   | {
-      type: 'dragged';
+      time: Date; type: 'dragged';
       dragged: { draggedWidth: string; draggedHeight: string };
     }
-  | { type: 'hostResized'; hostResized: { width: string; height: string } }
+  | { time: Date; type: 'hostResized'; hostResized: { width: string; height: string } }
   | {
-      type: 'xtermViewportExceedingOuterDiv';
+      time: Date; type: 'xtermViewportExceedingOuterDiv';
       xtermViewportExceedingOuterDiv: {
         width: string;
         height: string;
@@ -110,4 +110,4 @@ export type PropertyChangeSet =
         outerDivHeight: string;
       };
     }
-  | { type: 'none' };
+  | { time: Date; type: 'none' };

@@ -1,3 +1,4 @@
+<!-- Hierarchy: parent element(user) > host element(ng-terminal) > resize-box element > outer element -->
 <global-style></global-style>
 <div mwlResizable #resizeBox class="resize-box" [validateResize]="validatorFactory()" [enableGhostResize]="true"
     (resizeEnd)="onResizeEnd($event.rectangle.left, $event.rectangle.top, $event.rectangle.width??0, $event.rectangle.height??0)">

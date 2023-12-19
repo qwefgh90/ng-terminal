@@ -1,27 +1,20 @@
-<!-- <div>
-  <tabset>
-    <tab heading="Basic title" id="tab1">Basic content</tab>
-    <tab heading="Basic Title 1">Basic content 1</tab>
-    <tab heading="Basic Title 2">
-      <ng-terminal></ng-terminal>
-    </tab>
-  </tabset>
-</div> -->
 <mat-tab-group #tabGroup>
   <mat-tab label="Terminal1">
-    <div class="outer-box">
-      <ng-terminal
-        #term
-        [dataSource]="writeSubject"
-        (data)="onKeyInput($event)"
-        [rows]="_rows"
-        [cols]="_cols"
-        [minWidth]="200"
-        [minHeight]="200"
-        [draggable]="_draggable"
-        class="ng-terminal"
-      >
-      </ng-terminal>
+    <div style="display: flex">
+      <div style="flex: 1">
+        <ng-terminal
+          #term
+          [dataSource]="writeSubject"
+          (data)="onKeyInput($event)"
+          [rows]="_rows"
+          [cols]="_cols"
+          [minWidth]="200"
+          [minHeight]="200"
+          [draggable]="_draggable"
+          class="ng-terminal"
+        >
+        </ng-terminal>
+      </div>
     </div>
     <div
       [class.mat-elevation-z1]="true"
