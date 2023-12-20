@@ -29,6 +29,7 @@ import {
   selector: 'ng-terminal',
   templateUrl: './ng-terminal.component.html',
   styleUrls: ['./ng-terminal.component.css'],
+  providers: [LinearRenderService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgTerminalComponent
