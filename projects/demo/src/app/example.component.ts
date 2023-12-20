@@ -52,7 +52,7 @@ export class ExampleComponent implements AfterViewInit {
     this.child.setXtermOptions({
       fontFamily: '"Cascadia Code", Menlo, monospace',
       theme: this.baseTheme,
-      cursorBlink: true,
+      cursorBlink: true
     });
     this.child.write('$ NgTerminal Live Example');
     this.child.write(this.prompt);

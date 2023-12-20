@@ -15,7 +15,7 @@ import {
   SimpleChanges,
   isDevMode,
 } from '@angular/core';
-import { ITerminalOptions, Terminal } from 'xterm';
+import { ITerminalInitOnlyOptions, ITerminalOptions, Terminal } from 'xterm';
 import { FitAddon } from 'xterm-addon-fit';
 import { NgTerminal } from './ng-terminal';
 import { Subject, Observable, Subscription } from 'rxjs';
@@ -420,11 +420,9 @@ export class NgTerminalComponent
         height,
       };
       this.applyStylesToResizeBox();
-    } else if (
-      !this._rowsInput &&
-      !this._colsInput &&
-      !(this.draggable && this.lastDraggedPosition)
-    ) {
+    } else if (!(this.draggable && this.lastDraggedPosition)) {
+      // When `_colsInput` and `draggable` is not enabled,
+      // it fits the size to the host element.
       const currentHostWidth = getComputedStyle(
         this.hostRef.nativeElement
       ).width;
@@ -447,8 +445,9 @@ export class NgTerminalComponent
         this.applyStylesToResizeBox();
       } else {
         // but if the dimension of host element is resized, update width and height
-        this.stylesForResizeBox.width = '100%';
-        this.stylesForResizeBox.height = '100%';
+        // If `_rowsInput` is specified, NgTerminal keep the current height; otherwise, the height is set to 100%
+        if (!this._rowsInput) this.stylesForResizeBox.height = '100%';
+        if (!this._colsInput) this.stylesForResizeBox.width = '100%';
         this.applyStylesToResizeBox();
       }
     }
@@ -470,12 +469,8 @@ export class NgTerminalComponent
         this._colsInput ?? this.xterm.cols,
         this._rowsInput ?? this.xterm.rows
       );
-    } else if (!this.draggable && (this._colsInput || this._rowsInput)) {
-      this.xterm.resize(
-        this._colsInput ?? this.xterm.cols,
-        this._rowsInput ?? this.xterm.rows
-      );
-    } else {
+    }
+    else {
       if (this.xterm.element) {
         // The fitAddon.fit() operation doesn't recognize the padding values of terminalOuter.
         // It seems to be using the padding values of xterm element instead.
@@ -483,7 +478,7 @@ export class NgTerminalComponent
         // If this line is removed, when dragging resize-box vertically, the width is decreased.
         this.xterm.element.style.paddingLeft = `${this.paddingSize}px`;
         this.printDimension('Before fitAddon.fit() of Xterm');
-        this.fitAddon?.fit(); // fitAddon.fit() does not cover all senarios
+        this.fitAddon?.fit();
         this.printDimension('After fitAddon.fit() of Xterm');
         this.xterm.element.style.paddingLeft = `${0}px`;
       }
@@ -645,8 +640,13 @@ height(screen): ${screenHeight}`);
           if (entry.target === detectBox) {
             if (entry.contentBoxSize.length > 0) {
               let width = getComputedStyle(entry.target).width;
-              if (parseInt(width) >= 0 && parseInt(width) <= this.lastDetectedWidth) {
-                console.debug('Changes on a detect-box element will be handled.');
+              if (
+                parseInt(width) >= 0 &&
+                parseInt(width) <= this.lastDetectedWidth
+              ) {
+                console.debug(
+                  'Changes on a detect-box element will be handled.'
+                );
                 this.linearRender.pushAndHandle(
                   {
                     time: new Date(),
