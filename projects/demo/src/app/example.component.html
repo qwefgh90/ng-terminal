@@ -1,6 +1,23 @@
+
+<div style="display: flex">
+  <div style="flex: 1">
+    <ng-terminal
+      #term
+      [dataSource]="writeSubject"
+      (data)="onKeyInput($event)"
+      [rows]="_rows"
+      [cols]="_cols"
+      [minWidth]="200"
+      [minHeight]="200"
+      [draggable]="_draggable"
+      class="ng-terminal"
+    >
+    </ng-terminal>
+  </div>
+</div>
 <mat-tab-group #tabGroup>
   <mat-tab label="Terminal1">
-    <div style="display: flex">
+    <!-- <div style="display: flex">
       <div style="flex: 1">
         <ng-terminal
           #term
@@ -15,7 +32,7 @@
         >
         </ng-terminal>
       </div>
-    </div>
+    </div> -->
     <div
       [class.mat-elevation-z1]="true"
       style="
