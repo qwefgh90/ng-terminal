@@ -21,7 +21,7 @@ export class FunctionsUsingCSI {
    *  CSI Ps SP @ */
   /**
    *  CSI Ps A  Cursor Up Ps Times (default = 1) (CUU).
-   * \x9b3A*/
+   * \x9b3A */
   static cursorUp(count: number) {
     return `${CSI}${count}A`;
   }
@@ -170,48 +170,102 @@ export class FunctionsUsingCSI {
     return `${CSI}${count}X`;
   }
   /**
-   *  CSI Ps Z  Cursor Backward Tabulation Ps tab stops (default = 1) (CBT). */
+   *  CSI Ps Z  Cursor Backward Tabulation Ps tab stops (default = 1) (CBT).
+   * \x9b2Z
+   * */
+  static cursorBackwardTabulationPstabstops(count: number) {
+    return `${CSI}${count}Z`;
+  }
   /**
-   *  CSI Ps ^  Scroll down Ps lines (default = 1) (SD), ECMA-48. */
+   *  CSI Ps ^  Scroll down Ps lines (default = 1) (SD), ECMA-48.
+   * \x9b2^
+   * */
+  static scrolldownPslines(count: number) {
+    return `${CSI}${count}^`;
+  }
   /**
-   *  CSI Pm `  Character Position Absolute  [column] (default = [row,1]) */
+   *  CSI Ps `  Character Position Absolute  [column] (default = [row,1])
+   * \x9b1` */
+  static characterPositionAbsolute(count: number) {
+    return `${CSI}${count}\``;
+  }
   /**
-   *  CSI Pm a  Character Position Relative  [columns] (default = [row,col+1]) */
+   *  CSI Ps a  Character Position Relative  [columns] (default = [row,col+1])
+   * \x9b1a */
+  static characterPositionRelative(count: number) {
+    return `${CSI}${count}a`;
+  }
   /**
-   *  CSI Ps b  Repeat the preceding graphic character Ps times (REP). */
+   *  CSI Ps b  Repeat the preceding graphic character Ps times (REP).
+   * \x9b1b
+   * */
+  static repeatThePrecedingGraphicCharacter(count: number) {
+    return `${CSI}${count}b`;
+  }
   /**
-   *  CSI Ps c  Send Device Attributes (Primary DA). */
+   *  CSI Pm d  Line Position Absolute  [row] (default = [1,column]) (VPA). 
+   * \x9b4d
+   * */
+  static linePositionAbsolute(count: number) {
+    return `${CSI}${count}d`;
+  }
   /**
-   *  CSI = Ps c */
+   *  CSI Pm e  Line Position Relative  [rows] (default = [row+1,column]) 
+   * \x9b1e
+   * */
+  static linePositionRelative(count: number) {
+    return `${CSI}${count}e`;
+  }
   /**
-   *  CSI > Ps c */
+   *  CSI Ps ; Ps f  Horizontal and Vertical Position [row;column] (default =
+   *       [1,1]) 
+   * \x9b3;5f
+   * */
+  static horizontalandVerticalPosition(row: number, column: number) {
+    return `${CSI}${row};${column}f`;
+  }
+
   /**
-   *  CSI Pm d  Line Position Absolute  [row] (default = [1,column]) (VPA). */
+   *  CSI Ps g  Tab Clear (TBC). 
+   * \x9b3g
+   * */
   /**
-   *  CSI Pm e  Line Position Relative  [rows] (default = [row+1,column]) */
+   *  CSI Pm h  Set Mode (SM).
+   *  \x9b4h
+   *  */
+  static setMode(mode: KindOfSetMode, ...additionalModes: KindOfSetMode[]) {
+    const modes = [mode, ...(additionalModes ?? [])];
+    return `${CSI}${modes.join(";")}h`;
+  }
   /**
-   *  CSI Ps ; Ps f */
-  /**
-   *  CSI Ps g  Tab Clear (TBC). */
-  /**
-   *  CSI Pm h  Set Mode (SM). */
-  /**
-   *  CSI ? Pm h */
+   *  CSI ? Pm h  DEC Private Mode Set (DECSET).
+   * */
   /**
    *  CSI Pm i  Media Copy (MC). */
   /**
    *  CSI ? Pm i */
   /**
-   *  CSI Pm l  Reset Mode (RM). */
+   *  CSI Pm l  Reset Mode (RM). 
+   * \x9b4l
+   * */
+  static resetMode(mode: KindOfResetMode, ...additionalModes: KindOfResetMode[]) {
+    const modes = [mode, ...(additionalModes ?? [])];
+    return `${CSI}${modes.join(";")}l`;
+  }
   /**
    *  CSI ? Pm l */
   /**
-   *  CSI Pm m  Character Attributes (SGR). */
+   *  CSI Pm m  Character Attributes (SGR).
+   * \x9b31m
+   * */
   static characterAttributes(
     firstAttribute: KindOfCharacterAttributes,
-    ...additionalAttributes: (KindOfCharacterAttributes)[]
+    ...additionalAttributes: KindOfCharacterAttributes[]
   ) {
-    const chars: (KindOfCharacterAttributes)[] = [firstAttribute, ...(additionalAttributes ?? [])];
+    const chars: KindOfCharacterAttributes[] = [
+      firstAttribute,
+      ...(additionalAttributes ?? []),
+    ];
     return `${CSI}${chars.join(';')}m`;
   }
   /**
@@ -323,6 +377,24 @@ export enum KindOfEraseInLine {
   All = 2,
 }
 
+export enum KindOfTabClear{
+    ClearCurrentColumn = 0,
+    ClearAll = 3
+}
+
+
+export enum KindOfSetMode{
+    KeyboardActionMode = 2,
+    InsertMode = 4,
+    SendReceive = 12,
+    AutomaticNewline = 20
+}
+export enum KindOfResetMode{
+    KeyboardActionMode = 2,
+    ReplaceMode = 4,
+    SendReceive = 12,
+    NormalNewline = 20
+}
 export enum KindOfCharacterAttributes {
   Normal = 0,
   Bold = 1,
