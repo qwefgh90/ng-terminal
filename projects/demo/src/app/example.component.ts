@@ -7,7 +7,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { Subject } from 'rxjs';
-import { NgTerminal } from 'ng-terminal';
+import { KindOfCharacterAttributes, NgTerminal } from 'ng-terminal';
 import { FormControl } from '@angular/forms';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { Terminal } from 'xterm';
@@ -20,7 +20,6 @@ import { WebLinksAddon } from 'xterm-addon-web-links';
   styleUrls: ['./example.component.css'],
 })
 export class ExampleComponent implements AfterViewInit {
-
   readonly title = 'NgTerminal Live Example';
   readonly color = 'accent';
   readonly prompt = '\n' + FunctionsUsingCSI.cursorColumn(1) + '$ ';
@@ -43,7 +42,6 @@ export class ExampleComponent implements AfterViewInit {
 
   @ViewChild('term', { static: false }) child?: NgTerminal;
 
-
   ngAfterViewInit() {
     if (!this.child) return;
     this.underlying = this.child.underlying!!;
@@ -54,8 +52,32 @@ export class ExampleComponent implements AfterViewInit {
       theme: this.baseTheme,
       cursorBlink: true,
     });
-    this.child.write('$ NgTerminal Live Example');
-    this.child.write(this.prompt);
+    this.child.write(
+      '$ NgTerminal Live Example\n' + FunctionsUsingCSI.cursorColumn(1)
+    );
+    this.child.write(
+      FunctionsUsingCSI.characterAttributes(
+        KindOfCharacterAttributes.SetforegroundcolortoRed,
+        KindOfCharacterAttributes.Bold
+      )
+    );
+    this.child.write(
+      `$ 1) Try the data binding in the input below.\n` +
+        FunctionsUsingCSI.cursorColumn(1)
+    );
+    this.child.write(FunctionsUsingCSI.characterAttributes(KindOfCharacterAttributes.Normal));
+    this.child.write(
+      `$ 2) Try dragging on the ${FunctionsUsingCSI.characterAttributes(KindOfCharacterAttributes.SetbackgroundcolortoGreen)}borders\
+${FunctionsUsingCSI.characterAttributes(KindOfCharacterAttributes.Normal)} and set \
+${FunctionsUsingCSI.characterAttributes(KindOfCharacterAttributes.SetbackgroundcolortoCyan)}row and\
+ col${FunctionsUsingCSI.characterAttributes(KindOfCharacterAttributes.Normal)}\
+.\n` +
+        FunctionsUsingCSI.cursorColumn(1)
+    );
+    this.child.write(
+      FunctionsUsingCSI.characterAttributes(KindOfCharacterAttributes.Bold)
+    );
+    this.child.write(`$ `);
     this.child.onData().subscribe((input) => {
       if (!this.child) return;
       if (input === '\r') {

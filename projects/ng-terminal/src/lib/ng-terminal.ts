@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { ITerminalOptions, Terminal } from 'xterm';
+import { ITerminalInitOnlyOptions, ITerminalOptions, Terminal } from 'xterm';
 
 interface TerminalWrapper{
     /**
@@ -35,7 +35,7 @@ interface TerminalWrapper{
      * ITerminalOptions is defined in [Xterm.js](https://github.com/xtermjs/xterm.js/blob/4.14.1/typings/xterm.d.ts#L31).
      * @param options ITerminalOptions or theme.border which is a color of borders.
      */
-    setXtermOptions(options: ITerminalOptions | {theme?: {border?: string}}): void;
+    setXtermOptions(options: ITerminalOptions & {theme?: {border?: string}}): void;
     /**
      * The instnace of the Xterm Terminal.
      */
