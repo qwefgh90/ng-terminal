@@ -15,8 +15,8 @@ import {
   SimpleChanges,
   isDevMode,
 } from '@angular/core';
-import { ITerminalInitOnlyOptions, ITerminalOptions, Terminal } from 'xterm';
-import { FitAddon } from 'xterm-addon-fit';
+import { ITerminalInitOnlyOptions, ITerminalOptions, Terminal } from '@xterm/xterm';
+import { FitAddon } from '@xterm/addon-fit';
 import { NgTerminal } from './ng-terminal';
 import { Subject, Observable, Subscription } from 'rxjs';
 import { ResizeEvent } from 'angular-resizable-element';
