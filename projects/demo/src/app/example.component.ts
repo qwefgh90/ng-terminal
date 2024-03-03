@@ -5,6 +5,7 @@ import {
   AfterViewInit,
   OnChanges,
   SimpleChanges,
+  ElementRef,
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { KindOfCharacterAttributes, NgTerminal } from 'ng-terminal';
@@ -13,6 +14,7 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { Terminal } from 'xterm';
 import { FunctionsUsingCSI } from 'ng-terminal';
 import { WebLinksAddon } from 'xterm-addon-web-links';
+import { WebglAddon } from 'xterm-addon-webgl';
 
 @Component({
   selector: 'app-root',
@@ -41,8 +43,10 @@ export class ExampleComponent implements AfterViewInit {
   keyInput: string = '';
 
   @ViewChild('term', { static: false }) child?: NgTerminal;
+  @ViewChild('term2', { static: false }) child2?: NgTerminal;
 
   ngAfterViewInit() {
+    this.initializeTerm2();
     if (!this.child) return;
     this.underlying = this.child.underlying!!;
     this.underlying.options.fontSize = 20;
@@ -65,14 +69,21 @@ export class ExampleComponent implements AfterViewInit {
       `$ 1) Try the data binding in the input below.\n` +
         FunctionsUsingCSI.cursorColumn(1)
     );
-    this.child.write(FunctionsUsingCSI.characterAttributes(KindOfCharacterAttributes.Normal));
     this.child.write(
-      `$ 2) Try dragging on the ${FunctionsUsingCSI.characterAttributes(KindOfCharacterAttributes.SetbackgroundcolortoGreen)}borders\
-${FunctionsUsingCSI.characterAttributes(KindOfCharacterAttributes.Normal)} and set \
-${FunctionsUsingCSI.characterAttributes(KindOfCharacterAttributes.SetbackgroundcolortoCyan)}row and\
+      FunctionsUsingCSI.characterAttributes(KindOfCharacterAttributes.Normal)
+    );
+    this.child.write(
+      `$ 2) Try dragging on the ${FunctionsUsingCSI.characterAttributes(
+        KindOfCharacterAttributes.SetbackgroundcolortoGreen
+      )}borders\
+${FunctionsUsingCSI.characterAttributes(
+  KindOfCharacterAttributes.Normal
+)} and set \
+${FunctionsUsingCSI.characterAttributes(
+  KindOfCharacterAttributes.SetbackgroundcolortoCyan
+)}row and\
  col${FunctionsUsingCSI.characterAttributes(KindOfCharacterAttributes.Normal)}\
-.\n` +
-        FunctionsUsingCSI.cursorColumn(1)
+.\n` + FunctionsUsingCSI.cursorColumn(1)
     );
     this.child.write(
       FunctionsUsingCSI.characterAttributes(KindOfCharacterAttributes.Bold)
@@ -168,4 +179,27 @@ ${FunctionsUsingCSI.characterAttributes(KindOfCharacterAttributes.Setbackgroundc
     brightWhite: '#FFFFFF',
     border: '#85858a',
   };
+
+  showTerminal2 = true;
+
+  toggleTerminal2() {
+    this.showTerminal2 = !this.showTerminal2;
+  }
+
+  initializeTerm2() {
+    if (!this.child2) return;
+    let addon = new WebglAddon();
+    addon.onContextLoss((e) => {
+      addon.dispose();
+    });
+    this.child2?.underlying!!.loadAddon(addon);
+    this.child2.setXtermOptions({
+      fontFamily: '"Cascadia Code", Menlo, monospace',
+      theme: this.baseTheme,
+      cursorBlink: true,
+    });
+    this.child2.write(
+      '$ NgTerminal2 Live Example\n' + FunctionsUsingCSI.cursorColumn(1)
+    );
+  }
 }
