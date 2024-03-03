@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { ITerminalInitOnlyOptions, ITerminalOptions, Terminal } from 'xterm';
+import { ITerminalInitOnlyOptions, ITerminalOptions, Terminal } from '@xterm/xterm';
 
 interface TerminalWrapper{
     /**

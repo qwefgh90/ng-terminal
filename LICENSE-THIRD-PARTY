@@ -164,8 +164,8 @@
 │  ├─ repository: https://github.com/babel/babel
 │  ├─ publisher: The Babel Team
 │  ├─ url: https://babel.dev/team
-│  ├─ path: H:\workspace\ng-terminal\node_modules\@babel\helper-remap-async-to-generator\node_modules\@babel\helper-annotate-as-pure
-│  └─ licenseFile: H:\workspace\ng-terminal\node_modules\@babel\helper-remap-async-to-generator\node_modules\@babel\helper-annotate-as-pure\LICENSE
+│  ├─ path: H:\workspace\ng-terminal\node_modules\@babel\helper-create-class-features-plugin\node_modules\@babel\helper-annotate-as-pure
+│  └─ licenseFile: H:\workspace\ng-terminal\node_modules\@babel\helper-create-class-features-plugin\node_modules\@babel\helper-annotate-as-pure\LICENSE
 ├─ @babel/helper-builder-binary-assignment-operator-visitor@7.22.5
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/babel/babel
@@ -1391,6 +1391,25 @@
 │  ├─ publisher: Sven Sauleau
 │  ├─ path: H:\workspace\ng-terminal\node_modules\@webassemblyjs\wast-printer
 │  └─ licenseFile: H:\workspace\ng-terminal\node_modules\@webassemblyjs\wast-printer\LICENSE
+├─ @xterm/addon-fit@0.9.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/xtermjs/xterm.js/tree/master/addons/addon-fit
+│  ├─ publisher: The xterm.js authors
+│  ├─ url: https://xtermjs.org/
+│  ├─ path: H:\workspace\ng-terminal\node_modules\@xterm\addon-fit
+│  └─ licenseFile: H:\workspace\ng-terminal\node_modules\@xterm\addon-fit\LICENSE
+├─ @xterm/addon-web-links@0.10.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/xtermjs/xterm.js/tree/master/addons/addon-web-links
+│  ├─ publisher: The xterm.js authors
+│  ├─ url: https://xtermjs.org/
+│  ├─ path: H:\workspace\ng-terminal\node_modules\@xterm\addon-web-links
+│  └─ licenseFile: H:\workspace\ng-terminal\node_modules\@xterm\addon-web-links\LICENSE
+├─ @xterm/xterm@5.4.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/xtermjs/xterm.js
+│  ├─ path: H:\workspace\ng-terminal\node_modules\@xterm\xterm
+│  └─ licenseFile: H:\workspace\ng-terminal\node_modules\@xterm\xterm\LICENSE
 ├─ @xtuc/ieee754@1.2.0
 │  ├─ licenses: BSD-3-Clause
 │  ├─ repository: https://github.com/feross/ieee754
@@ -3683,8 +3702,8 @@
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/webpack/loader-utils
 │  ├─ publisher: Tobias Koppers @sokra
-│  ├─ path: H:\workspace\ng-terminal\node_modules\babel-loader\node_modules\loader-utils
-│  └─ licenseFile: H:\workspace\ng-terminal\node_modules\babel-loader\node_modules\loader-utils\LICENSE
+│  ├─ path: H:\workspace\ng-terminal\node_modules\adjust-sourcemap-loader\node_modules\loader-utils
+│  └─ licenseFile: H:\workspace\ng-terminal\node_modules\adjust-sourcemap-loader\node_modules\loader-utils\LICENSE
 ├─ loader-utils@3.2.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/webpack/loader-utils
@@ -6152,20 +6171,6 @@
 │  ├─ email: raynos2@gmail.com
 │  ├─ path: H:\workspace\ng-terminal\node_modules\xtend
 │  └─ licenseFile: H:\workspace\ng-terminal\node_modules\xtend\LICENSE
-├─ xterm-addon-fit@0.8.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/xtermjs/xterm.js
-│  ├─ publisher: The xterm.js authors
-│  ├─ url: https://xtermjs.org/
-│  ├─ path: H:\workspace\ng-terminal\node_modules\xterm-addon-fit
-│  └─ licenseFile: H:\workspace\ng-terminal\node_modules\xterm-addon-fit\LICENSE
-├─ xterm-addon-web-links@0.9.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/xtermjs/xterm.js
-│  ├─ publisher: The xterm.js authors
-│  ├─ url: https://xtermjs.org/
-│  ├─ path: H:\workspace\ng-terminal\node_modules\xterm-addon-web-links
-│  └─ licenseFile: H:\workspace\ng-terminal\node_modules\xterm-addon-web-links\LICENSE
 ├─ xterm-addon-webgl@0.16.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/xtermjs/xterm.js

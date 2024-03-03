@@ -11,9 +11,9 @@ import { Subject } from 'rxjs';
 import { KindOfCharacterAttributes, NgTerminal } from 'ng-terminal';
 import { FormControl } from '@angular/forms';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
-import { Terminal } from 'xterm';
+import { Terminal } from '@xterm/xterm';
 import { FunctionsUsingCSI } from 'ng-terminal';
-import { WebLinksAddon } from 'xterm-addon-web-links';
+import { WebLinksAddon } from '@xterm/addon-web-links';
 import { WebglAddon } from 'xterm-addon-webgl';
 
 @Component({
