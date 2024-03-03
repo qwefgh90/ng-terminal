@@ -103,9 +103,18 @@
       </div>
     </div>
   </mat-tab>
-  <mat-tab label="Terminal2">
-    <div>
-      <ng-terminal></ng-terminal>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      Terminal2
+    </ng-template>
+    <div *ngIf="showTerminal2">
+      <ng-terminal #term2></ng-terminal>
+    </div>
+    <div *ngIf="showTerminal2">
+      <button mat-raised-button color="primary" (click)="toggleTerminal2()">
+        <span>Hide it</span>
+      </button>
     </div>
   </mat-tab>
 </mat-tab-group>
+
