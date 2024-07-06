@@ -1,11 +1,11 @@
 {
   "name": "ng-terminal",
-  "version": "6.1.1",
-  "description": "NgTerminal is a terminal component on Angular 14 or higher.",
+  "version": "6.2.0",
+  "description": "NgTerminal is a terminal component on Angular 16 or higher.",
   "license": "MIT",
   "peerDependencies": {
-    "@angular/common": "^17.0.0 || ^16.0.0 || ^15.0.0 || ^14.0.0",
-    "@angular/core": "^17.0.0 || ^16.0.0 || ^15.0.0 || ^14.0.0"
+    "@angular/common": "^18.0.0 || ^17.0.0 || ^16.0.0",
+    "@angular/core": "^18.0.0 || ^17.0.0 || ^16.0.0"
   },
   "repository": {
     "type": "git",
@@ -24,9 +24,9 @@
     "emulator",
     "angular",
     "xterm",
+    "angular18",
+    "angular17",
     "angular16",
-    "angular15",
-    "angular14",
     "xtermjs",
     "terminal",
     "console",
@@ -39,7 +39,7 @@
     "angular-resizable-element": "^5.0.0",
     "@juggle/resize-observer": "^3.4.0",
     "@xterm/addon-fit": "^0.9.0",
-    "@xterm/xterm": "^5.4.0",
+    "@xterm/xterm": "^5.5.0",
     "tslib": "^2.3.0"
   }
 }

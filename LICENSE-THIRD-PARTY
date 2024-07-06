@@ -1405,7 +1405,7 @@
 │  ├─ url: https://xtermjs.org/
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@xterm\addon-web-links
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@xterm\addon-web-links\LICENSE
-├─ @xterm/xterm@5.4.0
+├─ @xterm/xterm@5.5.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/xtermjs/xterm.js
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@xterm\xterm
