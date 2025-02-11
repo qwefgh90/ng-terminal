@@ -14,8 +14,9 @@ import {
   Renderer2,
   SimpleChanges,
   isDevMode,
+  Optional,
 } from '@angular/core';
-import { ITerminalInitOnlyOptions, ITerminalOptions, Terminal } from '@xterm/xterm';
+import { ITerminalOptions, Terminal } from '@xterm/xterm';
 import { FitAddon } from '@xterm/addon-fit';
 import { NgTerminal } from './ng-terminal';
 import { Subject, Observable, Subscription } from 'rxjs';
@@ -24,6 +25,7 @@ import {
   LinearRenderService,
   PropertyChangeSet,
 } from './linear-render.service';
+import { LoggingService } from './logging.service';
 
 @Component({
   selector: 'ng-terminal',
@@ -207,7 +209,8 @@ export class NgTerminalComponent
 
   constructor(
     private renderer: Renderer2, //Render is being used for fast rendering without markForCheck().
-    private hostRef: ElementRef<HTMLElement>
+    private hostRef: ElementRef<HTMLElement>,
+    private loggingService: LoggingService,
   ) {
     this.linearRender = new LinearRenderService(hostRef);
   }
@@ -285,7 +288,7 @@ export class NgTerminalComponent
       this.handleToCheckLazyContainer = setInterval(() => {
         if ((this.terminalOuter.nativeElement as HTMLElement).isConnected) {
           try {
-            console.debug("The container's been connected.");
+            this.loggingService.log(() => console.debug("The container's been connected."));
             this.xterm!.open(this.terminalOuter.nativeElement);
             this.xterm!.loadAddon(this.fitAddon!!);
             this.setup();
@@ -305,9 +308,9 @@ export class NgTerminalComponent
   }
 
   ngOnChanges(changes?: SimpleChanges) {
-    console.group('onChanges');
-    console.debug('prop: ', changes);
-    console.groupEnd();
+    this.loggingService.log(() => console.group('onChanges'));
+    this.loggingService.log(() => console.debug('prop: ', changes));
+    this.loggingService.log(() => console.groupEnd());
     if (changes?.['_rowsInput']) {
       if (
         changes?.['_rowsInput']?.previousValue !=
@@ -348,13 +351,13 @@ export class NgTerminalComponent
    * @returns
    */
   private coordinateOuterAndTerminal(change: PropertyChangeSet) {
-    console.debug(`changeList: ${JSON.stringify(change)}`);
+    this.loggingService.log(() => console.debug(`changeList: ${JSON.stringify(change)}`))
     if (!this.xterm) return;
     const isHostElementVisible =
       this.hostRef.nativeElement?.offsetParent !== null;
     if (!isHostElementVisible) {
       // Do nothing if the host element is invisible.
-      console.debug('`display` of host element was set to `none`');
+      this.loggingService.log(() => console.debug('`display` of host element was set to `none`'));
       return;
     }
     this.doUpdateXtermStyles();
@@ -530,7 +533,7 @@ export class NgTerminalComponent
   }
 
   private printDimension(title: string) {
-    if (isDevMode() && this.xterm?.element) {
+    if (this.xterm?.element) {
       let resizeBox = this.resizeBox.nativeElement as HTMLDivElement;
       let xtermScreen =
         this.xterm.element.getElementsByClassName('xterm-screen')[0];
@@ -539,15 +542,15 @@ export class NgTerminalComponent
       const screenWidth = xtermScreen.clientWidth;
       const screenHeight = xtermScreen.clientHeight;
 
-      console.group(`${title}`);
-      console.debug(`width(resizeBox): ${getComputedStyle(resizeBox).width},
+      this.loggingService.log(() => console.group(`${title}`));
+      this.loggingService.log(() => console.debug(`width(resizeBox): ${getComputedStyle(resizeBox).width},
 width(viewport): ${getComputedStyle(xtermViewport).width},
 width(screen): ${screenWidth}
-scrollBarWidth: ${this.scrollBarWidth}`);
-      console.debug(`height(resizeBox): ${getComputedStyle(resizeBox).height},
+scrollBarWidth: ${this.scrollBarWidth}`));
+      this.loggingService.log(() => console.debug(`height(resizeBox): ${getComputedStyle(resizeBox).height},
 height(viewport) ${getComputedStyle(xtermViewport).height},
-height(screen): ${screenHeight}`);
-      console.groupEnd();
+height(screen): ${screenHeight}`));
+      this.loggingService.log(() => console.groupEnd());
     }
   }
 
@@ -583,9 +586,9 @@ height(screen): ${screenHeight}`);
               (outerDivWidth && width > outerDivWidth) ||
               (outerDivHeight && height > outerDivHeight)
             ) {
-              console.debug(
+              this.loggingService.log(() => console.debug(
                 'Changes on a xterm viewport element will be handled.'
-              );
+              ));
               this.linearRender.pushAndHandle(
                 {
                   time: new Date(),
@@ -606,9 +609,9 @@ height(screen): ${screenHeight}`);
       resizeObserver.observe(xtermViewport);
       return resizeObserver;
     } else {
-      console.error(
+      this.loggingService.log(() => console.error(
         'Invalid state is detected. xterm element should exist below .terminal-outer.'
-      );
+      ));
     }
     return undefined;
   }
@@ -625,7 +628,7 @@ height(screen): ${screenHeight}`);
               let width = getComputedStyle(entry.target).width;
               let height = getComputedStyle(entry.target).height;
               if (parseInt(width) >= 0 && parseInt(height) >= 0) {
-                console.debug('Changes on a host element will be handled.');
+                this.loggingService.log(() => console.debug('Changes on a host element will be handled.'));
                 this.linearRender.pushAndHandle(
                   {
                     time: new Date(),
@@ -644,9 +647,9 @@ height(screen): ${screenHeight}`);
                 parseInt(width) >= 0 &&
                 parseInt(width) <= this.lastDetectedWidth
               ) {
-                console.debug(
+                this.loggingService.log(() => console.debug(
                   'Changes on a detect-box element will be handled.'
-                );
+                ));
                 this.linearRender.pushAndHandle(
                   {
                     time: new Date(),
@@ -665,9 +668,9 @@ height(screen): ${screenHeight}`);
       resizeObserver.observe(detectBox);
       return resizeObserver;
     } else {
-      console.error(
+      this.loggingService.log(() => console.error(
         'Invalid state is detected. xterm element should exist below .terminal-outer.'
-      );
+      ));
     }
     return undefined;
   }
@@ -686,7 +689,7 @@ height(screen): ${screenHeight}`);
     if (this.handleToCheckLazyContainer)
       clearInterval(this.handleToCheckLazyContainer);
     if (this.xterm) this.xterm.dispose();
-    console.debug('All resources has been cleaned up.');
+    this.loggingService.log(() => console.debug('All resources has been cleaned up.'));
   }
 
   write(chars: string) {
