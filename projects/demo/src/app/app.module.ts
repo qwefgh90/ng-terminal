@@ -18,7 +18,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
   ],
   imports: [
     BrowserModule,
-    NgTerminalModule.forRoot({enableLog: false}),
+    NgTerminalModule,
     MatButtonModule,
     MatSlideToggleModule,
     MatInputModule,
