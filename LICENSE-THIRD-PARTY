@@ -4170,7 +4170,7 @@
 │  ├─ licenses: MIT*
 │  ├─ path: D:\workspace\ng-terminal
 │  └─ licenseFile: D:\workspace\ng-terminal\README.md
-├─ ngx-bootstrap@11.0.2
+├─ ngx-bootstrap@12.0.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/valor-software/ngx-bootstrap
 │  ├─ publisher: Dmitriy Shekhovtsov
