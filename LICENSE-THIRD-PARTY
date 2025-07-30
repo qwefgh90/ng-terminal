@@ -1,41 +1,41 @@
-├─ @ampproject/remapping@2.2.1
+├─ @ampproject/remapping@2.3.0
 │  ├─ licenses: Apache-2.0
 │  ├─ repository: https://github.com/ampproject/remapping
 │  ├─ publisher: Justin Ridgewell
 │  ├─ email: jridgewell@google.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@ampproject\remapping
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@ampproject\remapping\LICENSE
-├─ @angular-devkit/architect@0.1602.16
+├─ @angular-devkit/architect@0.1703.17
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/angular/angular-cli
 │  ├─ publisher: Angular Authors
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@angular-devkit\architect
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular-devkit\architect\LICENSE
-├─ @angular-devkit/build-angular@16.2.16
+├─ @angular-devkit/build-angular@17.3.17
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/angular/angular-cli
 │  ├─ publisher: Angular Authors
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@angular-devkit\build-angular
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular-devkit\build-angular\LICENSE
-├─ @angular-devkit/build-webpack@0.1602.16
+├─ @angular-devkit/build-webpack@0.1703.17
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/angular/angular-cli
 │  ├─ publisher: Angular Authors
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@angular-devkit\build-webpack
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular-devkit\build-webpack\LICENSE
-├─ @angular-devkit/core@16.2.16
+├─ @angular-devkit/core@17.3.17
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/angular/angular-cli
 │  ├─ publisher: Angular Authors
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@angular-devkit\core
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular-devkit\core\LICENSE
-├─ @angular-devkit/schematics@16.2.16
+├─ @angular-devkit/schematics@17.3.17
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/angular/angular-cli
 │  ├─ publisher: Angular Authors
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@angular-devkit\schematics
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular-devkit\schematics\LICENSE
-├─ @angular/animations@16.2.12
+├─ @angular/animations@17.3.12
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/angular/angular
 │  ├─ publisher: angular
@@ -46,35 +46,35 @@
 │  ├─ repository: https://github.com/angular/components
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@angular\cdk
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular\cdk\LICENSE
-├─ @angular/cli@16.2.16
+├─ @angular/cli@17.3.17
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/angular/angular-cli
 │  ├─ publisher: Angular Authors
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@angular\cli
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular\cli\LICENSE
-├─ @angular/common@16.2.12
+├─ @angular/common@17.3.12
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/angular/angular
 │  ├─ publisher: angular
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@angular\common
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular\common\README.md
-├─ @angular/compiler-cli@16.2.12
+├─ @angular/compiler-cli@17.3.12
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/angular/angular
 │  └─ path: D:\workspace\ng-terminal\node_modules\@angular\compiler-cli
-├─ @angular/compiler@16.2.12
+├─ @angular/compiler@17.3.12
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/angular/angular
 │  ├─ publisher: angular
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@angular\compiler
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular\compiler\README.md
-├─ @angular/core@16.2.12
+├─ @angular/core@17.3.12
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/angular/angular
 │  ├─ publisher: angular
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@angular\core
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular\core\README.md
-├─ @angular/forms@16.2.12
+├─ @angular/forms@17.3.12
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/angular/angular
 │  ├─ publisher: angular
@@ -85,31 +85,24 @@
 │  ├─ repository: https://github.com/angular/components
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@angular\material
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular\material\LICENSE
-├─ @angular/platform-browser-dynamic@16.2.12
+├─ @angular/platform-browser-dynamic@17.3.12
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/angular/angular
 │  ├─ publisher: angular
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@angular\platform-browser-dynamic
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular\platform-browser-dynamic\README.md
-├─ @angular/platform-browser@16.2.12
+├─ @angular/platform-browser@17.3.12
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/angular/angular
 │  ├─ publisher: angular
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@angular\platform-browser
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular\platform-browser\README.md
-├─ @angular/router@16.2.12
+├─ @angular/router@17.3.12
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/angular/angular
 │  ├─ publisher: angular
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@angular\router
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular\router\README.md
-├─ @assemblyscript/loader@0.10.1
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/AssemblyScript/assemblyscript
-│  ├─ publisher: Daniel Wirtz
-│  ├─ email: dcode+assemblyscript@dcode.io
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@assemblyscript\loader
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@assemblyscript\loader\README.md
 ├─ @babel/code-frame@7.27.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/babel/babel
@@ -124,21 +117,21 @@
 │  ├─ url: https://babel.dev/team
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\compat-data
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\compat-data\LICENSE
-├─ @babel/core@7.22.9
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/babel/babel
-│  ├─ publisher: The Babel Team
-│  ├─ url: https://babel.dev/team
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@angular-devkit\build-angular\node_modules\@babel\core
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular-devkit\build-angular\node_modules\@babel\core\LICENSE
-├─ @babel/core@7.23.2
+├─ @babel/core@7.23.9
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/babel/babel
 │  ├─ publisher: The Babel Team
 │  ├─ url: https://babel.dev/team
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\core
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\core\LICENSE
-├─ @babel/generator@7.22.9
+├─ @babel/core@7.26.10
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/babel/babel
+│  ├─ publisher: The Babel Team
+│  ├─ url: https://babel.dev/team
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@angular-devkit\build-angular\node_modules\@babel\core
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular-devkit\build-angular\node_modules\@babel\core\LICENSE
+├─ @babel/generator@7.26.10
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/babel/babel
 │  ├─ publisher: The Babel Team
@@ -152,7 +145,7 @@
 │  ├─ url: https://babel.dev/team
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\core\node_modules\@babel\generator
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\core\node_modules\@babel\generator\LICENSE
-├─ @babel/helper-annotate-as-pure@7.22.5
+├─ @babel/helper-annotate-as-pure@7.25.9
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/babel/babel
 │  ├─ publisher: The Babel Team
@@ -164,8 +157,8 @@
 │  ├─ repository: https://github.com/babel/babel
 │  ├─ publisher: The Babel Team
 │  ├─ url: https://babel.dev/team
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\helper-remap-async-to-generator\node_modules\@babel\helper-annotate-as-pure
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\helper-remap-async-to-generator\node_modules\@babel\helper-annotate-as-pure\LICENSE
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\helper-create-regexp-features-plugin\node_modules\@babel\helper-annotate-as-pure
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\helper-create-regexp-features-plugin\node_modules\@babel\helper-annotate-as-pure\LICENSE
 ├─ @babel/helper-compilation-targets@7.27.2
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/babel/babel
@@ -187,28 +180,11 @@
 │  ├─ url: https://babel.dev/team
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\helper-create-regexp-features-plugin
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\helper-create-regexp-features-plugin\LICENSE
-├─ @babel/helper-define-polyfill-provider@0.4.4
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/babel/babel-polyfills
-│  ├─ path: D:\workspace\ng-terminal\node_modules\babel-plugin-polyfill-corejs3\node_modules\@babel\helper-define-polyfill-provider
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\babel-plugin-polyfill-corejs3\node_modules\@babel\helper-define-polyfill-provider\LICENSE
-├─ @babel/helper-define-polyfill-provider@0.5.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/babel/babel-polyfills
-│  ├─ path: D:\workspace\ng-terminal\node_modules\babel-plugin-polyfill-regenerator\node_modules\@babel\helper-define-polyfill-provider
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\babel-plugin-polyfill-regenerator\node_modules\@babel\helper-define-polyfill-provider\LICENSE
 ├─ @babel/helper-define-polyfill-provider@0.6.5
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/babel/babel-polyfills
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\helper-define-polyfill-provider
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\helper-define-polyfill-provider\LICENSE
-├─ @babel/helper-environment-visitor@7.24.7
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/babel/babel
-│  ├─ publisher: The Babel Team
-│  ├─ url: https://babel.dev/team
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\helper-environment-visitor
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\helper-environment-visitor\LICENSE
 ├─ @babel/helper-globals@7.28.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/babel/babel
@@ -272,7 +248,7 @@
 │  ├─ url: https://babel.dev/team
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\helper-skip-transparent-expression-wrappers
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\helper-skip-transparent-expression-wrappers\LICENSE
-├─ @babel/helper-split-export-declaration@7.22.6
+├─ @babel/helper-split-export-declaration@7.24.7
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/babel/babel
 │  ├─ publisher: The Babel Team
@@ -321,6 +297,20 @@
 │  ├─ url: https://babel.dev/team
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\parser
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\parser\LICENSE
+├─ @babel/plugin-bugfix-firefox-class-in-computed-class-key@7.27.1
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/babel/babel
+│  ├─ publisher: The Babel Team
+│  ├─ url: https://babel.dev/team
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\plugin-bugfix-firefox-class-in-computed-class-key
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\plugin-bugfix-firefox-class-in-computed-class-key\LICENSE
+├─ @babel/plugin-bugfix-safari-class-field-initializer-scope@7.27.1
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/babel/babel
+│  ├─ publisher: The Babel Team
+│  ├─ url: https://babel.dev/team
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\plugin-bugfix-safari-class-field-initializer-scope
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\plugin-bugfix-safari-class-field-initializer-scope\LICENSE
 ├─ @babel/plugin-bugfix-safari-id-destructuring-collision-in-function-expression@7.27.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/babel/babel
@@ -335,13 +325,13 @@
 │  ├─ url: https://babel.dev/team
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\plugin-bugfix-v8-spread-parameters-in-optional-chaining
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\plugin-bugfix-v8-spread-parameters-in-optional-chaining\LICENSE
-├─ @babel/plugin-proposal-async-generator-functions@7.20.7
+├─ @babel/plugin-bugfix-v8-static-class-fields-redefine-readonly@7.27.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/babel/babel
 │  ├─ publisher: The Babel Team
 │  ├─ url: https://babel.dev/team
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\plugin-proposal-async-generator-functions
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\plugin-proposal-async-generator-functions\LICENSE
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\plugin-bugfix-v8-static-class-fields-redefine-readonly
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\plugin-bugfix-v8-static-class-fields-redefine-readonly\LICENSE
 ├─ @babel/plugin-proposal-private-property-in-object@7.21.0-placeholder-for-preset-env.2
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/babel/babel-plugin-proposal-private-property-in-object
@@ -349,40 +339,6 @@
 │  ├─ url: https://babel.dev/team
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\plugin-proposal-private-property-in-object
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\plugin-proposal-private-property-in-object\LICENSE
-├─ @babel/plugin-proposal-unicode-property-regex@7.18.6
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/babel/babel
-│  ├─ publisher: The Babel Team
-│  ├─ url: https://babel.dev/team
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\plugin-proposal-unicode-property-regex
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\plugin-proposal-unicode-property-regex\LICENSE
-├─ @babel/plugin-syntax-async-generators@7.8.4
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/babel/babel/tree/master/packages/babel-plugin-syntax-async-generators
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\plugin-syntax-async-generators
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\plugin-syntax-async-generators\LICENSE
-├─ @babel/plugin-syntax-class-properties@7.12.13
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/babel/babel
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\plugin-syntax-class-properties
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\plugin-syntax-class-properties\LICENSE
-├─ @babel/plugin-syntax-class-static-block@7.14.5
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/babel/babel
-│  ├─ publisher: The Babel Team
-│  ├─ url: https://babel.dev/team
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\plugin-syntax-class-static-block
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\plugin-syntax-class-static-block\LICENSE
-├─ @babel/plugin-syntax-dynamic-import@7.8.3
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/babel/babel/tree/master/packages/babel-plugin-syntax-dynamic-import
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\plugin-syntax-dynamic-import
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\plugin-syntax-dynamic-import\LICENSE
-├─ @babel/plugin-syntax-export-namespace-from@7.8.3
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/babel/babel/tree/master/packages/babel-plugin-syntax-export-namespace-from
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\plugin-syntax-export-namespace-from
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\plugin-syntax-export-namespace-from\LICENSE
 ├─ @babel/plugin-syntax-import-assertions@7.27.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/babel/babel
@@ -397,60 +353,6 @@
 │  ├─ url: https://babel.dev/team
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\plugin-syntax-import-attributes
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\plugin-syntax-import-attributes\LICENSE
-├─ @babel/plugin-syntax-import-meta@7.10.4
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/babel/babel
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\plugin-syntax-import-meta
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\plugin-syntax-import-meta\LICENSE
-├─ @babel/plugin-syntax-json-strings@7.8.3
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/babel/babel/tree/master/packages/babel-plugin-syntax-json-strings
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\plugin-syntax-json-strings
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\plugin-syntax-json-strings\LICENSE
-├─ @babel/plugin-syntax-logical-assignment-operators@7.10.4
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/babel/babel
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\plugin-syntax-logical-assignment-operators
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\plugin-syntax-logical-assignment-operators\LICENSE
-├─ @babel/plugin-syntax-nullish-coalescing-operator@7.8.3
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/babel/babel/tree/master/packages/babel-plugin-syntax-nullish-coalescing-operator
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\plugin-syntax-nullish-coalescing-operator
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\plugin-syntax-nullish-coalescing-operator\LICENSE
-├─ @babel/plugin-syntax-numeric-separator@7.10.4
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/babel/babel
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\plugin-syntax-numeric-separator
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\plugin-syntax-numeric-separator\LICENSE
-├─ @babel/plugin-syntax-object-rest-spread@7.8.3
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/babel/babel/tree/master/packages/babel-plugin-syntax-object-rest-spread
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\plugin-syntax-object-rest-spread
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\plugin-syntax-object-rest-spread\LICENSE
-├─ @babel/plugin-syntax-optional-catch-binding@7.8.3
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/babel/babel/tree/master/packages/babel-plugin-syntax-optional-catch-binding
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\plugin-syntax-optional-catch-binding
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\plugin-syntax-optional-catch-binding\LICENSE
-├─ @babel/plugin-syntax-optional-chaining@7.8.3
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/babel/babel/tree/master/packages/babel-plugin-syntax-optional-chaining
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\plugin-syntax-optional-chaining
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\plugin-syntax-optional-chaining\LICENSE
-├─ @babel/plugin-syntax-private-property-in-object@7.14.5
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/babel/babel
-│  ├─ publisher: The Babel Team
-│  ├─ url: https://babel.dev/team
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\plugin-syntax-private-property-in-object
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\plugin-syntax-private-property-in-object\LICENSE
-├─ @babel/plugin-syntax-top-level-await@7.14.5
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/babel/babel
-│  ├─ publisher: The Babel Team
-│  ├─ url: https://babel.dev/team
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\plugin-syntax-top-level-await
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\plugin-syntax-top-level-await\LICENSE
 ├─ @babel/plugin-syntax-unicode-sets-regex@7.18.6
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/babel/babel
@@ -465,14 +367,14 @@
 │  ├─ url: https://babel.dev/team
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\plugin-transform-arrow-functions
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\plugin-transform-arrow-functions\LICENSE
-├─ @babel/plugin-transform-async-generator-functions@7.28.0
+├─ @babel/plugin-transform-async-generator-functions@7.26.8
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/babel/babel
 │  ├─ publisher: The Babel Team
 │  ├─ url: https://babel.dev/team
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\plugin-transform-async-generator-functions
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\plugin-transform-async-generator-functions\LICENSE
-├─ @babel/plugin-transform-async-to-generator@7.22.5
+├─ @babel/plugin-transform-async-to-generator@7.25.9
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/babel/babel
 │  ├─ publisher: The Babel Team
@@ -542,6 +444,13 @@
 │  ├─ url: https://babel.dev/team
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\plugin-transform-duplicate-keys
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\plugin-transform-duplicate-keys\LICENSE
+├─ @babel/plugin-transform-duplicate-named-capturing-groups-regex@7.27.1
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/babel/babel
+│  ├─ publisher: The Babel Team
+│  ├─ url: https://babel.dev/team
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\plugin-transform-duplicate-named-capturing-groups-regex
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\plugin-transform-duplicate-named-capturing-groups-regex\LICENSE
 ├─ @babel/plugin-transform-dynamic-import@7.27.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/babel/babel
@@ -724,6 +633,13 @@
 │  ├─ url: https://babel.dev/team
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\plugin-transform-regenerator
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\plugin-transform-regenerator\LICENSE
+├─ @babel/plugin-transform-regexp-modifiers@7.27.1
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/babel/babel
+│  ├─ publisher: The Babel Team
+│  ├─ url: https://babel.dev/team
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\plugin-transform-regexp-modifiers
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\plugin-transform-regexp-modifiers\LICENSE
 ├─ @babel/plugin-transform-reserved-words@7.27.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/babel/babel
@@ -731,7 +647,7 @@
 │  ├─ url: https://babel.dev/team
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\plugin-transform-reserved-words
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\plugin-transform-reserved-words\LICENSE
-├─ @babel/plugin-transform-runtime@7.22.9
+├─ @babel/plugin-transform-runtime@7.26.10
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/babel/babel
 │  ├─ publisher: The Babel Team
@@ -801,39 +717,32 @@
 │  ├─ url: https://babel.dev/team
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\plugin-transform-unicode-sets-regex
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\plugin-transform-unicode-sets-regex\LICENSE
-├─ @babel/preset-env@7.22.9
+├─ @babel/preset-env@7.26.9
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/babel/babel
 │  ├─ publisher: The Babel Team
 │  ├─ url: https://babel.dev/team
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\preset-env
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\preset-env\LICENSE
-├─ @babel/preset-modules@0.1.6
+├─ @babel/preset-modules@0.1.6-no-external-plugins
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/babel/preset-modules
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\preset-modules
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\preset-modules\LICENSE
-├─ @babel/runtime@7.22.6
+├─ @babel/runtime@7.26.10
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/babel/babel
 │  ├─ publisher: The Babel Team
 │  ├─ url: https://babel.dev/team
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\runtime
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\runtime\LICENSE
-├─ @babel/template@7.22.5
+├─ @babel/template@7.27.2
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/babel/babel
 │  ├─ publisher: The Babel Team
 │  ├─ url: https://babel.dev/team
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\template
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\template\LICENSE
-├─ @babel/template@7.27.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/babel/babel
-│  ├─ publisher: The Babel Team
-│  ├─ url: https://babel.dev/team
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\traverse\node_modules\@babel\template
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\traverse\node_modules\@babel\template\LICENSE
 ├─ @babel/traverse@7.28.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/babel/babel
@@ -862,23 +771,16 @@
 │  ├─ url: https://github.com/lahmatiy
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@discoveryjs\json-ext
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@discoveryjs\json-ext\LICENSE
-├─ @esbuild/win32-x64@0.18.17
+├─ @esbuild/win32-x64@0.20.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/evanw/esbuild
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@esbuild\win32-x64
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@esbuild\win32-x64\README.md
-├─ @esbuild/win32-x64@0.19.12
+├─ @esbuild/win32-x64@0.21.5
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/evanw/esbuild
-│  ├─ path: D:\workspace\ng-terminal\node_modules\ng-packagr\node_modules\@esbuild\win32-x64
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\ng-packagr\node_modules\@esbuild\win32-x64\README.md
-├─ @gar/promisify@1.1.3
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/wraithgar/gar-promisify
-│  ├─ publisher: Gar
-│  ├─ email: gar+npm@danger.computer
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@gar\promisify
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@gar\promisify\LICENSE.md
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@angular-devkit\build-angular\node_modules\@esbuild\win32-x64
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular-devkit\build-angular\node_modules\@esbuild\win32-x64\README.md
 ├─ @isaacs/cliui@8.0.2
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/yargs/cliui
@@ -944,6 +846,14 @@
 │  ├─ publisher: Martin Heidegger
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@leichtgewicht\ip-codec
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@leichtgewicht\ip-codec\LICENSE
+├─ @ljharb/through@2.3.14
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/ljharb/through
+│  ├─ publisher: Dominic Tarr
+│  ├─ email: dominic.tarr@gmail.com
+│  ├─ url: dominictarr.com
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@ljharb\through
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@ljharb\through\LICENSE
 ├─ @material/animation@15.0.0-canary.bc9ae6c9c.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/material-components/material-components-web
@@ -1194,7 +1104,7 @@
 │  ├─ repository: https://github.com/material-components/material-components-web
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@material\typography
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\typography\LICENSE
-├─ @ngtools/webpack@16.2.16
+├─ @ngtools/webpack@17.3.17
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/angular/angular-cli
 │  ├─ publisher: Angular Authors
@@ -1215,19 +1125,19 @@
 │  ├─ repository: https://github.com/nodelib/nodelib/tree/master/packages/fs/fs.walk
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@nodelib\fs.walk
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@nodelib\fs.walk\LICENSE
-├─ @npmcli/fs@2.1.2
+├─ @npmcli/agent@2.2.2
 │  ├─ licenses: ISC
-│  ├─ repository: https://github.com/npm/fs
+│  ├─ repository: https://github.com/npm/agent
 │  ├─ publisher: GitHub Inc.
-│  ├─ path: D:\workspace\ng-terminal\node_modules\make-fetch-happen\node_modules\@npmcli\fs
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\make-fetch-happen\node_modules\@npmcli\fs\LICENSE.md
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@npmcli\agent
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@npmcli\agent\README.md
 ├─ @npmcli/fs@3.1.1
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/npm/fs
 │  ├─ publisher: GitHub Inc.
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@npmcli\fs
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@npmcli\fs\LICENSE.md
-├─ @npmcli/git@4.1.0
+├─ @npmcli/git@5.0.8
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/npm/git
 │  ├─ publisher: GitHub Inc.
@@ -1239,25 +1149,31 @@
 │  ├─ publisher: GitHub Inc.
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@npmcli\installed-package-contents
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@npmcli\installed-package-contents\LICENSE
-├─ @npmcli/move-file@2.0.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/npm/move-file
-│  ├─ publisher: GitHub Inc.
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@npmcli\move-file
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@npmcli\move-file\LICENSE.md
 ├─ @npmcli/node-gyp@3.0.0
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/npm/node-gyp
 │  ├─ publisher: GitHub Inc.
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@npmcli\node-gyp
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@npmcli\node-gyp\README.md
-├─ @npmcli/promise-spawn@6.0.2
+├─ @npmcli/package-json@5.2.1
+│  ├─ licenses: ISC
+│  ├─ repository: https://github.com/npm/package-json
+│  ├─ publisher: GitHub Inc.
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@npmcli\package-json
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@npmcli\package-json\LICENSE
+├─ @npmcli/promise-spawn@7.0.2
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/npm/promise-spawn
 │  ├─ publisher: GitHub Inc.
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@npmcli\promise-spawn
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@npmcli\promise-spawn\LICENSE
-├─ @npmcli/run-script@6.0.2
+├─ @npmcli/redact@1.1.0
+│  ├─ licenses: ISC
+│  ├─ repository: https://github.com/npm/redact
+│  ├─ publisher: GitHub Inc.
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@npmcli\redact
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@npmcli\redact\LICENSE
+├─ @npmcli/run-script@7.0.4
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/npm/run-script
 │  ├─ publisher: GitHub Inc.
@@ -1295,63 +1211,72 @@
 │  ├─ email: richard.a.harris@gmail.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@rollup\pluginutils
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@rollup\pluginutils\LICENSE
-├─ @schematics/angular@16.2.16
+├─ @rollup/rollup-win32-x64-msvc@4.46.2
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/rollup/rollup
+│  ├─ publisher: Lukas Taegert-Atkinson
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@rollup\rollup-win32-x64-msvc
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@rollup\rollup-win32-x64-msvc\README.md
+├─ @rollup/wasm-node@4.46.2
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/rollup/rollup
+│  ├─ publisher: Rich Harris
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@rollup\wasm-node
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@rollup\wasm-node\LICENSE.md
+├─ @schematics/angular@17.3.17
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/angular/angular-cli
 │  ├─ publisher: Angular Authors
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@schematics\angular
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@schematics\angular\LICENSE
-├─ @sigstore/bundle@1.1.0
+├─ @sigstore/bundle@2.3.2
 │  ├─ licenses: Apache-2.0
 │  ├─ repository: https://github.com/sigstore/sigstore-js
 │  ├─ publisher: bdehamer@github.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@sigstore\bundle
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@sigstore\bundle\LICENSE
-├─ @sigstore/protobuf-specs@0.2.1
+├─ @sigstore/core@1.1.0
+│  ├─ licenses: Apache-2.0
+│  ├─ repository: https://github.com/sigstore/sigstore-js
+│  ├─ publisher: bdehamer@github.com
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@sigstore\core
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@sigstore\core\LICENSE
+├─ @sigstore/protobuf-specs@0.3.3
 │  ├─ licenses: Apache-2.0
 │  ├─ repository: https://github.com/sigstore/protobuf-specs
 │  ├─ publisher: bdehamer@github.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@sigstore\protobuf-specs
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@sigstore\protobuf-specs\LICENSE
-├─ @sigstore/sign@1.0.0
+├─ @sigstore/sign@2.3.2
 │  ├─ licenses: Apache-2.0
 │  ├─ repository: https://github.com/sigstore/sigstore-js
 │  ├─ publisher: bdehamer@github.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@sigstore\sign
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@sigstore\sign\LICENSE
-├─ @sigstore/tuf@1.0.3
+├─ @sigstore/tuf@2.3.4
 │  ├─ licenses: Apache-2.0
 │  ├─ repository: https://github.com/sigstore/sigstore-js
 │  ├─ publisher: bdehamer@github.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@sigstore\tuf
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@sigstore\tuf\LICENSE
+├─ @sigstore/verify@1.2.1
+│  ├─ licenses: Apache-2.0
+│  ├─ repository: https://github.com/sigstore/sigstore-js
+│  ├─ publisher: bdehamer@github.com
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@sigstore\verify
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@sigstore\verify\README.md
 ├─ @socket.io/component-emitter@3.1.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/socketio/emitter
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@socket.io\component-emitter
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@socket.io\component-emitter\LICENSE
-├─ @tootallnate/once@1.1.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/TooTallNate/once
-│  ├─ publisher: Nathan Rajlich
-│  ├─ email: nathan@tootallnate.net
-│  ├─ url: http://n8.io/
-│  └─ path: D:\workspace\ng-terminal\node_modules\@tootallnate\once
-├─ @tootallnate/once@2.0.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/TooTallNate/once
-│  ├─ publisher: Nathan Rajlich
-│  ├─ email: nathan@tootallnate.net
-│  ├─ url: http://n8.io/
-│  ├─ path: D:\workspace\ng-terminal\node_modules\tuf-js\node_modules\@tootallnate\once
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\tuf-js\node_modules\@tootallnate\once\LICENSE
-├─ @tufjs/canonical-json@1.0.0
+├─ @tufjs/canonical-json@2.0.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/theupdateframework/tuf-js
 │  ├─ publisher: bdehamer@github.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@tufjs\canonical-json
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@tufjs\canonical-json\LICENSE
-├─ @tufjs/models@1.0.4
+├─ @tufjs/models@2.0.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/theupdateframework/tuf-js
 │  ├─ publisher: bdehamer@github.com
@@ -1492,7 +1417,7 @@
 │  ├─ repository: https://github.com/DefinitelyTyped/DefinitelyTyped
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@types\ws
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@types\ws\LICENSE
-├─ @vitejs/plugin-basic-ssl@1.0.1
+├─ @vitejs/plugin-basic-ssl@1.1.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/vitejs/vite-plugin-basic-ssl
 │  ├─ publisher: Evan You and Vite Contributors
@@ -1586,11 +1511,6 @@
 │  ├─ publisher: Sven Sauleau
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@webassemblyjs\wast-printer
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@webassemblyjs\wast-printer\LICENSE
-├─ @wessberg/ts-evaluator@0.0.27
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/wessberg/ts-evaluator
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@wessberg\ts-evaluator
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@wessberg\ts-evaluator\LICENSE.md
 ├─ @xterm/addon-fit@0.9.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/xtermjs/xterm.js/tree/master/addons/addon-fit
@@ -1630,13 +1550,6 @@
 │  ├─ repository: https://github.com/yarnpkg/yarn/blob/master/packages/lockfile
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@yarnpkg\lockfile
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@yarnpkg\lockfile\README.md
-├─ abab@2.0.6
-│  ├─ licenses: BSD-3-Clause
-│  ├─ repository: https://github.com/jsdom/abab
-│  ├─ publisher: Jeff Carpenter
-│  ├─ email: gcarpenterv@gmail.com
-│  ├─ path: D:\workspace\ng-terminal\node_modules\abab
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\abab\LICENSE.md
 ├─ abbrev@1.1.1
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/isaacs/abbrev-js
@@ -1644,17 +1557,17 @@
 │  ├─ email: i@izs.me
 │  ├─ path: D:\workspace\ng-terminal\node_modules\abbrev
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\abbrev\LICENSE
+├─ abbrev@2.0.0
+│  ├─ licenses: ISC
+│  ├─ repository: https://github.com/npm/abbrev-js
+│  ├─ publisher: GitHub Inc.
+│  ├─ path: D:\workspace\ng-terminal\node_modules\nopt\node_modules\abbrev
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\nopt\node_modules\abbrev\LICENSE
 ├─ accepts@1.3.8
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/jshttp/accepts
 │  ├─ path: D:\workspace\ng-terminal\node_modules\accepts
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\accepts\LICENSE
-├─ acorn-globals@6.0.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/ForbesLindesay/acorn-globals
-│  ├─ publisher: ForbesLindesay
-│  ├─ path: D:\workspace\ng-terminal\node_modules\acorn-globals
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\acorn-globals\LICENSE
 ├─ acorn-import-attributes@1.9.5
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/xtuc/acorn-import-attributes
@@ -1662,16 +1575,6 @@
 │  ├─ email: sven@sauleau.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\acorn-import-attributes
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\acorn-import-attributes\LICENSE
-├─ acorn-walk@7.2.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/acornjs/acorn
-│  ├─ path: D:\workspace\ng-terminal\node_modules\acorn-walk
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\acorn-walk\LICENSE
-├─ acorn@7.4.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/acornjs/acorn
-│  ├─ path: D:\workspace\ng-terminal\node_modules\acorn-globals\node_modules\acorn
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\acorn-globals\node_modules\acorn\LICENSE
 ├─ acorn@8.15.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/acornjs/acorn
@@ -1683,22 +1586,14 @@
 │  ├─ publisher: bholloway
 │  ├─ path: D:\workspace\ng-terminal\node_modules\adjust-sourcemap-loader
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\adjust-sourcemap-loader\LICENSE
-├─ agent-base@6.0.2
+├─ agent-base@7.1.4
 │  ├─ licenses: MIT
-│  ├─ repository: https://github.com/TooTallNate/node-agent-base
+│  ├─ repository: https://github.com/TooTallNate/proxy-agents
 │  ├─ publisher: Nathan Rajlich
 │  ├─ email: nathan@tootallnate.net
 │  ├─ url: http://n8.io/
 │  ├─ path: D:\workspace\ng-terminal\node_modules\agent-base
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\agent-base\README.md
-├─ agentkeepalive@4.6.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/node-modules/agentkeepalive
-│  ├─ publisher: fengmk2
-│  ├─ email: fengmk2@gmail.com
-│  ├─ url: https://github.com/fengmk2
-│  ├─ path: D:\workspace\ng-terminal\node_modules\agentkeepalive
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\agentkeepalive\LICENSE
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\agent-base\LICENSE
 ├─ aggregate-error@3.1.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/sindresorhus/aggregate-error
@@ -1811,19 +1706,6 @@
 │  ├─ url: https://github.com/es128
 │  ├─ path: D:\workspace\ng-terminal\node_modules\anymatch
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\anymatch\LICENSE
-├─ aproba@2.1.0
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/iarna/aproba
-│  ├─ publisher: Rebecca Turner
-│  ├─ email: me@re-becca.org
-│  ├─ path: D:\workspace\ng-terminal\node_modules\aproba
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\aproba\LICENSE
-├─ are-we-there-yet@3.0.1
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/npm/are-we-there-yet
-│  ├─ publisher: GitHub Inc.
-│  ├─ path: D:\workspace\ng-terminal\node_modules\are-we-there-yet
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\are-we-there-yet\LICENSE.md
 ├─ argparse@1.0.10
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/nodeca/argparse
@@ -1855,14 +1737,7 @@
 │  ├─ repository: https://github.com/kriskowal/asap
 │  ├─ path: D:\workspace\ng-terminal\node_modules\asap
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\asap\LICENSE.md
-├─ asynckit@0.4.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/alexindigo/asynckit
-│  ├─ publisher: Alex Indigo
-│  ├─ email: iam@alexindigo.com
-│  ├─ path: D:\workspace\ng-terminal\node_modules\asynckit
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\asynckit\LICENSE
-├─ autoprefixer@10.4.14
+├─ autoprefixer@10.4.18
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/postcss/autoprefixer
 │  ├─ publisher: Andrey Sitnik
@@ -1887,12 +1762,12 @@
 │  ├─ repository: https://github.com/babel/babel-polyfills
 │  ├─ path: D:\workspace\ng-terminal\node_modules\babel-plugin-polyfill-corejs2
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\babel-plugin-polyfill-corejs2\LICENSE
-├─ babel-plugin-polyfill-corejs3@0.8.7
+├─ babel-plugin-polyfill-corejs3@0.11.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/babel/babel-polyfills
 │  ├─ path: D:\workspace\ng-terminal\node_modules\babel-plugin-polyfill-corejs3
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\babel-plugin-polyfill-corejs3\LICENSE
-├─ babel-plugin-polyfill-regenerator@0.5.5
+├─ babel-plugin-polyfill-regenerator@0.6.5
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/babel/babel-polyfills
 │  ├─ path: D:\workspace\ng-terminal\node_modules\babel-plugin-polyfill-regenerator
@@ -1996,12 +1871,6 @@
 │  ├─ url: https://github.com/jonschlinkert
 │  ├─ path: D:\workspace\ng-terminal\node_modules\braces
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\braces\LICENSE
-├─ browser-process-hrtime@1.0.0
-│  ├─ licenses: BSD-2-Clause
-│  ├─ repository: https://github.com/kumavis/browser-process-hrtime
-│  ├─ publisher: kumavis
-│  ├─ path: D:\workspace\ng-terminal\node_modules\browser-process-hrtime
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\browser-process-hrtime\LICENSE
 ├─ browserslist@4.25.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/browserslist/browserslist
@@ -2030,18 +1899,6 @@
 │  ├─ url: http://tjholowaychuk.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\bytes
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\bytes\LICENSE
-├─ cacache@16.1.3
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/npm/cacache
-│  ├─ publisher: GitHub Inc.
-│  ├─ path: D:\workspace\ng-terminal\node_modules\make-fetch-happen\node_modules\cacache
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\make-fetch-happen\node_modules\cacache\LICENSE.md
-├─ cacache@17.1.4
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/npm/cacache
-│  ├─ publisher: GitHub Inc.
-│  ├─ path: D:\workspace\ng-terminal\node_modules\tuf-js\node_modules\cacache
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\tuf-js\node_modules\cacache\LICENSE.md
 ├─ cacache@18.0.4
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/npm/cacache
@@ -2055,7 +1912,7 @@
 │  ├─ email: ljharb@gmail.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\call-bind-apply-helpers
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\call-bind-apply-helpers\LICENSE
-├─ call-bind@1.0.7
+├─ call-bind@1.0.8
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/ljharb/call-bind
 │  ├─ publisher: Jordan Harband
@@ -2096,6 +1953,11 @@
 │  ├─ repository: https://github.com/chalk/chalk
 │  ├─ path: D:\workspace\ng-terminal\node_modules\ora\node_modules\chalk
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\ora\node_modules\chalk\license
+├─ chalk@5.4.1
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/chalk/chalk
+│  ├─ path: D:\workspace\ng-terminal\node_modules\inquirer\node_modules\chalk
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\inquirer\node_modules\chalk\license
 ├─ chardet@0.7.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/runk/node-chardet
@@ -2148,7 +2010,7 @@
 │  ├─ url: https://sindresorhus.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\cli-spinners
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\cli-spinners\license
-├─ cli-width@3.0.0
+├─ cli-width@4.1.0
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/knownasilya/cli-width
 │  ├─ publisher: Ilya Radchenko
@@ -2212,29 +2074,13 @@
 │  ├─ email: dfcreative@gmail.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\wrap-ansi\node_modules\color-name
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\wrap-ansi\node_modules\color-name\LICENSE
-├─ color-support@1.1.3
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/isaacs/color-support
-│  ├─ publisher: Isaac Z. Schlueter
-│  ├─ email: i@izs.me
-│  ├─ url: http://blog.izs.me/
-│  ├─ path: D:\workspace\ng-terminal\node_modules\color-support
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\color-support\LICENSE
 ├─ colorette@2.0.20
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/jorgebucaran/colorette
 │  ├─ publisher: Jorge Bucaran
 │  ├─ path: D:\workspace\ng-terminal\node_modules\colorette
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\colorette\LICENSE.md
-├─ combined-stream@1.0.8
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/felixge/node-combined-stream
-│  ├─ publisher: Felix Geisendörfer
-│  ├─ email: felix@debuggable.com
-│  ├─ url: http://debuggable.com/
-│  ├─ path: D:\workspace\ng-terminal\node_modules\combined-stream
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\combined-stream\License
-├─ commander@11.1.0
+├─ commander@12.1.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/tj/commander.js
 │  ├─ publisher: TJ Holowaychuk
@@ -2296,14 +2142,6 @@
 │  ├─ url: http://tjholowaychuk.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\connect
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\connect\LICENSE
-├─ console-control-strings@1.1.0
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/iarna/console-control-strings
-│  ├─ publisher: Rebecca Turner
-│  ├─ email: me@re-becca.org
-│  ├─ url: http://re-becca.org/
-│  ├─ path: D:\workspace\ng-terminal\node_modules\console-control-strings
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\console-control-strings\LICENSE
 ├─ content-disposition@0.5.4
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/jshttp/content-disposition
@@ -2396,14 +2234,14 @@
 │  ├─ url: https://github.com/troygoode/
 │  ├─ path: D:\workspace\ng-terminal\node_modules\cors
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\cors\LICENSE
-├─ cosmiconfig@8.3.6
+├─ cosmiconfig@9.0.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/cosmiconfig/cosmiconfig
 │  ├─ publisher: Daniel Fischer
 │  ├─ email: daniel@d-fischer.dev
 │  ├─ path: D:\workspace\ng-terminal\node_modules\cosmiconfig
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\cosmiconfig\LICENSE
-├─ critters@0.0.20
+├─ critters@0.0.22
 │  ├─ licenses: Apache-2.0
 │  ├─ repository: https://github.com/GoogleChromeLabs/critters
 │  ├─ publisher: The Chromium Authors
@@ -2416,7 +2254,7 @@
 │  ├─ email: andre@moxy.studio
 │  ├─ path: D:\workspace\ng-terminal\node_modules\cross-spawn
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\cross-spawn\LICENSE
-├─ css-loader@6.8.1
+├─ css-loader@6.10.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/webpack-contrib/css-loader
 │  ├─ publisher: Tobias Koppers @sokra
@@ -2444,31 +2282,6 @@
 │  ├─ url: https://mathiasbynens.be/
 │  ├─ path: D:\workspace\ng-terminal\node_modules\cssesc
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\cssesc\LICENSE-MIT.txt
-├─ cssom@0.3.8
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/NV/CSSOM
-│  ├─ publisher: Nikita Vasilyev
-│  ├─ email: me@elv1s.ru
-│  ├─ path: D:\workspace\ng-terminal\node_modules\cssstyle\node_modules\cssom
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\cssstyle\node_modules\cssom\LICENSE.txt
-├─ cssom@0.4.4
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/NV/CSSOM
-│  ├─ publisher: Nikita Vasilyev
-│  ├─ email: me@elv1s.ru
-│  ├─ path: D:\workspace\ng-terminal\node_modules\cssom
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\cssom\LICENSE.txt
-├─ cssstyle@2.3.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/jsdom/cssstyle
-│  ├─ path: D:\workspace\ng-terminal\node_modules\cssstyle
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\cssstyle\LICENSE
-├─ cuint@0.2.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/pierrec/js-cuint
-│  ├─ publisher: Pierre Curto
-│  ├─ path: D:\workspace\ng-terminal\node_modules\cuint
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\cuint\README.md
 ├─ custom-event@1.0.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/webmodules/custom-event
@@ -2477,14 +2290,6 @@
 │  ├─ url: http://n8.io/
 │  ├─ path: D:\workspace\ng-terminal\node_modules\custom-event
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\custom-event\LICENSE
-├─ data-urls@2.0.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/jsdom/data-urls
-│  ├─ publisher: Domenic Denicola
-│  ├─ email: d@domenic.me
-│  ├─ url: https://domenic.me/
-│  ├─ path: D:\workspace\ng-terminal\node_modules\data-urls
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\data-urls\LICENSE.txt
 ├─ date-format@4.0.14
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/nomiddlename/date-format
@@ -2527,13 +2332,6 @@
 │  ├─ email: sam@strongloop.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\debuglog
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\debuglog\LICENSE
-├─ decimal.js@10.6.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/MikeMcl/decimal.js
-│  ├─ publisher: Michael Mclaughlin
-│  ├─ email: M8ch88l@gmail.com
-│  ├─ path: D:\workspace\ng-terminal\node_modules\decimal.js
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\decimal.js\LICENCE.md
 ├─ deepmerge@4.3.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/TehShrike/deepmerge
@@ -2567,19 +2365,6 @@
 │  ├─ url: sindresorhus.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\define-lazy-prop
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\define-lazy-prop\license
-├─ delayed-stream@1.0.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/felixge/node-delayed-stream
-│  ├─ publisher: Felix Geisendörfer
-│  ├─ email: felix@debuggable.com
-│  ├─ url: http://debuggable.com/
-│  ├─ path: D:\workspace\ng-terminal\node_modules\delayed-stream
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\delayed-stream\License
-├─ delegates@1.0.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/visionmedia/node-delegates
-│  ├─ path: D:\workspace\ng-terminal\node_modules\delegates
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\delegates\License
 ├─ depd@1.1.2
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/dougwilson/nodejs-depd
@@ -2594,7 +2379,7 @@
 │  ├─ email: doug@somethingdoug.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\depd
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\depd\LICENSE
-├─ dependency-graph@0.11.0
+├─ dependency-graph@1.0.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/jriecken/dependency-graph
 │  ├─ publisher: Jim Riecken
@@ -2666,14 +2451,6 @@
 │  ├─ email: me@feedic.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\domelementtype
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\domelementtype\LICENSE
-├─ domexception@2.0.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/jsdom/domexception
-│  ├─ publisher: Domenic Denicola
-│  ├─ email: d@domenic.me
-│  ├─ url: https://domenic.me/
-│  ├─ path: D:\workspace\ng-terminal\node_modules\domexception
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\domexception\LICENSE.txt
 ├─ domhandler@5.0.3
 │  ├─ licenses: BSD-2-Clause
 │  ├─ repository: https://github.com/fb55/domhandler
@@ -2846,33 +2623,21 @@
 │  ├─ email: ljharb@gmail.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\es-object-atoms
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\es-object-atoms\LICENSE
-├─ es-set-tostringtag@2.1.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/es-shims/es-set-tostringtag
-│  ├─ publisher: Jordan Harband
-│  ├─ email: ljharb@gmail.com
-│  ├─ path: D:\workspace\ng-terminal\node_modules\es-set-tostringtag
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\es-set-tostringtag\LICENSE
-├─ esbuild-wasm@0.18.17
+├─ esbuild-wasm@0.20.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/evanw/esbuild
 │  ├─ path: D:\workspace\ng-terminal\node_modules\esbuild-wasm
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\esbuild-wasm\LICENSE.md
-├─ esbuild-wasm@0.19.12
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/evanw/esbuild
-│  ├─ path: D:\workspace\ng-terminal\node_modules\ng-packagr\node_modules\esbuild-wasm
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\ng-packagr\node_modules\esbuild-wasm\LICENSE.md
-├─ esbuild@0.18.17
+├─ esbuild@0.20.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/evanw/esbuild
 │  ├─ path: D:\workspace\ng-terminal\node_modules\esbuild
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\esbuild\LICENSE.md
-├─ esbuild@0.19.12
+├─ esbuild@0.21.5
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/evanw/esbuild
-│  ├─ path: D:\workspace\ng-terminal\node_modules\ng-packagr\node_modules\esbuild
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\ng-packagr\node_modules\esbuild\LICENSE.md
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@angular-devkit\build-angular\node_modules\vite\node_modules\esbuild
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular-devkit\build-angular\node_modules\vite\node_modules\esbuild\LICENSE.md
 ├─ escalade@3.2.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/lukeed/escalade
@@ -2894,11 +2659,6 @@
 │  ├─ url: sindresorhus.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\escape-string-regexp
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\escape-string-regexp\license
-├─ escodegen@2.1.0
-│  ├─ licenses: BSD-2-Clause
-│  ├─ repository: https://github.com/estools/escodegen
-│  ├─ path: D:\workspace\ng-terminal\node_modules\escodegen
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\escodegen\LICENSE.BSD
 ├─ eslint-scope@5.1.1
 │  ├─ licenses: BSD-2-Clause
 │  ├─ repository: https://github.com/eslint/eslint-scope
@@ -2942,13 +2702,6 @@
 │  ├─ repository: https://github.com/jshttp/etag
 │  ├─ path: D:\workspace\ng-terminal\node_modules\etag
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\etag\LICENSE
-├─ eventemitter-asyncresource@1.0.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/addaleax/eventemitter-asyncresource
-│  ├─ publisher: Anna Henningsen
-│  ├─ email: anna@addaleax.net
-│  ├─ path: D:\workspace\ng-terminal\node_modules\eventemitter-asyncresource
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\eventemitter-asyncresource\LICENSE
 ├─ eventemitter3@4.0.7
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/primus/eventemitter3
@@ -3006,7 +2759,7 @@
 │  ├─ publisher: Evgeny Poberezkin
 │  ├─ path: D:\workspace\ng-terminal\node_modules\fast-deep-equal
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\fast-deep-equal\LICENSE
-├─ fast-glob@3.3.1
+├─ fast-glob@3.3.2
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/mrmlnc/fast-glob
 │  ├─ publisher: Denis Malinochkin
@@ -3094,6 +2847,14 @@
 │  ├─ url: https://sindresorhus.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\pkg-dir\node_modules\find-up
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\pkg-dir\node_modules\find-up\license
+├─ flat@5.0.2
+│  ├─ licenses: BSD-3-Clause
+│  ├─ repository: https://github.com/hughsk/flat
+│  ├─ publisher: Hugh Kennedy
+│  ├─ email: hughskennedy@gmail.com
+│  ├─ url: http://hughskennedy.com
+│  ├─ path: D:\workspace\ng-terminal\node_modules\flat
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\flat\LICENSE
 ├─ flatted@3.2.7
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/WebReflection/flatted
@@ -3116,14 +2877,6 @@
 │  ├─ url: http://blog.izs.me/
 │  ├─ path: D:\workspace\ng-terminal\node_modules\foreground-child
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\foreground-child\LICENSE
-├─ form-data@3.0.4
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/form-data/form-data
-│  ├─ publisher: Felix Geisendörfer
-│  ├─ email: felix@debuggable.com
-│  ├─ url: http://debuggable.com/
-│  ├─ path: D:\workspace\ng-terminal\node_modules\form-data
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\form-data\License
 ├─ forwarded@0.2.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/jshttp/forwarded
@@ -3186,12 +2939,6 @@
 │  ├─ email: raynos2@gmail.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\function-bind
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\function-bind\LICENSE
-├─ gauge@4.0.4
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/npm/gauge
-│  ├─ publisher: GitHub Inc.
-│  ├─ path: D:\workspace\ng-terminal\node_modules\gauge
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\gauge\LICENSE.md
 ├─ gensync@1.0.0-beta.2
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/loganfsmyth/gensync
@@ -3262,8 +3009,8 @@
 │  ├─ publisher: Isaac Z. Schlueter
 │  ├─ email: i@izs.me
 │  ├─ url: https://blog.izs.me/
-│  ├─ path: D:\workspace\ng-terminal\node_modules\tuf-js\node_modules\glob
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\tuf-js\node_modules\glob\LICENSE
+│  ├─ path: D:\workspace\ng-terminal\node_modules\cacache\node_modules\glob
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\cacache\node_modules\glob\LICENSE
 ├─ glob@7.2.0
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/isaacs/node-glob
@@ -3272,14 +3019,6 @@
 │  ├─ url: http://blog.izs.me/
 │  ├─ path: D:\workspace\ng-terminal\node_modules\glob
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\glob\LICENSE
-├─ glob@8.1.0
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/isaacs/node-glob
-│  ├─ publisher: Isaac Z. Schlueter
-│  ├─ email: i@izs.me
-│  ├─ url: http://blog.izs.me/
-│  ├─ path: D:\workspace\ng-terminal\node_modules\make-fetch-happen\node_modules\glob
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\make-fetch-happen\node_modules\glob\LICENSE
 ├─ globby@13.1.4
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/sindresorhus/globby
@@ -3300,13 +3039,6 @@
 │  ├─ repository: https://github.com/isaacs/node-graceful-fs
 │  ├─ path: D:\workspace\ng-terminal\node_modules\graceful-fs
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\graceful-fs\LICENSE
-├─ guess-parser@0.4.22
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/guess-js/guess
-│  ├─ publisher: Minko Gechev
-│  ├─ email: mgechev@gmail.com
-│  ├─ path: D:\workspace\ng-terminal\node_modules\guess-parser
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\guess-parser\LICENSE
 ├─ handle-thing@2.0.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/indutny/handle-thing
@@ -3345,21 +3077,6 @@
 │  ├─ url: http://ljharb.codes
 │  ├─ path: D:\workspace\ng-terminal\node_modules\has-symbols
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\has-symbols\LICENSE
-├─ has-tostringtag@1.0.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/inspect-js/has-tostringtag
-│  ├─ publisher: Jordan Harband
-│  ├─ email: ljharb@gmail.com
-│  ├─ url: http://ljharb.codes
-│  ├─ path: D:\workspace\ng-terminal\node_modules\has-tostringtag
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\has-tostringtag\LICENSE
-├─ has-unicode@2.0.1
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/iarna/has-unicode
-│  ├─ publisher: Rebecca Turner
-│  ├─ email: me@re-becca.org
-│  ├─ path: D:\workspace\ng-terminal\node_modules\has-unicode
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\has-unicode\LICENSE
 ├─ hasown@2.0.2
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/inspect-js/hasOwn
@@ -3367,19 +3084,6 @@
 │  ├─ email: ljharb@gmail.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\hasown
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\hasown\LICENSE
-├─ hdr-histogram-js@2.0.3
-│  ├─ licenses: BSD*
-│  ├─ repository: https://github.com/HdrHistogram/HdrHistogramJS
-│  ├─ publisher: Alexandre Victoor
-│  ├─ path: D:\workspace\ng-terminal\node_modules\hdr-histogram-js
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\hdr-histogram-js\LICENSE
-├─ hdr-histogram-percentiles-obj@3.0.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/GlenTiki/hdr-histogram-percentiles-obj
-│  ├─ publisher: Glen Keane
-│  ├─ email: glenkeane.94@gmail.com
-│  ├─ path: D:\workspace\ng-terminal\node_modules\hdr-histogram-percentiles-obj
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\hdr-histogram-percentiles-obj\LICENSE
 ├─ hosted-git-info@2.8.9
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/npm/hosted-git-info
@@ -3388,7 +3092,7 @@
 │  ├─ url: http://re-becca.org
 │  ├─ path: D:\workspace\ng-terminal\node_modules\normalize-package-data\node_modules\hosted-git-info
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\normalize-package-data\node_modules\hosted-git-info\LICENSE
-├─ hosted-git-info@6.1.3
+├─ hosted-git-info@7.0.2
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/npm/hosted-git-info
 │  ├─ publisher: GitHub Inc.
@@ -3401,14 +3105,6 @@
 │  ├─ email: fedor@indutny.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\hpack.js
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\hpack.js\README.md
-├─ html-encoding-sniffer@2.0.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/jsdom/html-encoding-sniffer
-│  ├─ publisher: Domenic Denicola
-│  ├─ email: d@domenic.me
-│  ├─ url: https://domenic.me/
-│  ├─ path: D:\workspace\ng-terminal\node_modules\html-encoding-sniffer
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\html-encoding-sniffer\LICENSE.txt
 ├─ html-entities@2.6.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/mdevils/html-entities
@@ -3467,23 +3163,15 @@
 │  ├─ url: https://github.com/creationix
 │  ├─ path: D:\workspace\ng-terminal\node_modules\http-parser-js
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\http-parser-js\LICENSE.md
-├─ http-proxy-agent@4.0.1
+├─ http-proxy-agent@7.0.2
 │  ├─ licenses: MIT
-│  ├─ repository: https://github.com/TooTallNate/node-http-proxy-agent
+│  ├─ repository: https://github.com/TooTallNate/proxy-agents
 │  ├─ publisher: Nathan Rajlich
 │  ├─ email: nathan@tootallnate.net
 │  ├─ url: http://n8.io/
 │  ├─ path: D:\workspace\ng-terminal\node_modules\http-proxy-agent
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\http-proxy-agent\README.md
-├─ http-proxy-agent@5.0.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/TooTallNate/node-http-proxy-agent
-│  ├─ publisher: Nathan Rajlich
-│  ├─ email: nathan@tootallnate.net
-│  ├─ url: http://n8.io/
-│  ├─ path: D:\workspace\ng-terminal\node_modules\tuf-js\node_modules\http-proxy-agent
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\tuf-js\node_modules\http-proxy-agent\README.md
-├─ http-proxy-middleware@2.0.9
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\http-proxy-agent\LICENSE
+├─ http-proxy-middleware@2.0.8
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/chimurai/http-proxy-middleware
 │  ├─ publisher: Steven Chim
@@ -3496,14 +3184,14 @@
 │  ├─ email: charlie.robbins@gmail.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\http-proxy
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\http-proxy\LICENSE
-├─ https-proxy-agent@5.0.1
+├─ https-proxy-agent@7.0.4
 │  ├─ licenses: MIT
-│  ├─ repository: https://github.com/TooTallNate/node-https-proxy-agent
+│  ├─ repository: https://github.com/TooTallNate/proxy-agents
 │  ├─ publisher: Nathan Rajlich
 │  ├─ email: nathan@tootallnate.net
 │  ├─ url: http://n8.io/
 │  ├─ path: D:\workspace\ng-terminal\node_modules\https-proxy-agent
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\https-proxy-agent\README.md
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\https-proxy-agent\LICENSE
 ├─ human-signals@2.1.0
 │  ├─ licenses: Apache-2.0
 │  ├─ repository: https://github.com/ehmicky/human-signals
@@ -3512,14 +3200,6 @@
 │  ├─ url: https://github.com/ehmicky
 │  ├─ path: D:\workspace\ng-terminal\node_modules\human-signals
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\human-signals\LICENSE
-├─ humanize-ms@1.2.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/node-modules/humanize-ms
-│  ├─ publisher: dead-horse
-│  ├─ email: dead_horse@qq.com
-│  ├─ url: http://deadhorse.me
-│  ├─ path: D:\workspace\ng-terminal\node_modules\humanize-ms
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\humanize-ms\LICENSE
 ├─ iconv-lite@0.4.24
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/ashtuchkin/iconv-lite
@@ -3599,14 +3279,6 @@
 │  ├─ url: sindresorhus.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\indent-string
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\indent-string\license
-├─ infer-owner@1.0.4
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/npm/infer-owner
-│  ├─ publisher: Isaac Z. Schlueter
-│  ├─ email: i@izs.me
-│  ├─ url: https://izs.me
-│  ├─ path: D:\workspace\ng-terminal\node_modules\infer-owner
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\infer-owner\LICENSE
 ├─ inflight@1.0.6
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/npm/inflight
@@ -3625,12 +3297,18 @@
 │  ├─ repository: https://github.com/isaacs/inherits
 │  ├─ path: D:\workspace\ng-terminal\node_modules\inherits
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\inherits\LICENSE
-├─ ini@4.1.1
+├─ ini@4.1.2
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/npm/ini
 │  ├─ publisher: GitHub Inc.
 │  ├─ path: D:\workspace\ng-terminal\node_modules\ini
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\ini\LICENSE
+├─ ini@4.1.3
+│  ├─ licenses: ISC
+│  ├─ repository: https://github.com/npm/ini
+│  ├─ publisher: GitHub Inc.
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@npmcli\git\node_modules\ini
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@npmcli\git\node_modules\ini\LICENSE
 ├─ injection-js@2.5.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/mgechev/injection-js
@@ -3638,7 +3316,7 @@
 │  ├─ email: mgechev@gmail.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\injection-js
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\injection-js\README.md
-├─ inquirer@8.2.4
+├─ inquirer@9.2.15
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/SBoudrias/Inquirer.js
 │  ├─ publisher: Simon Boudrias
@@ -3765,13 +3443,6 @@
 │  ├─ url: https://github.com/jonschlinkert
 │  ├─ path: D:\workspace\ng-terminal\node_modules\is-plain-object
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\is-plain-object\LICENSE
-├─ is-potential-custom-element-name@1.0.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/mathiasbynens/is-potential-custom-element-name
-│  ├─ publisher: Mathias Bynens
-│  ├─ url: https://mathiasbynens.be/
-│  ├─ path: D:\workspace\ng-terminal\node_modules\is-potential-custom-element-name
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\is-potential-custom-element-name\LICENSE-MIT.txt
 ├─ is-stream@2.0.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/sindresorhus/is-stream
@@ -3831,6 +3502,14 @@
 │  ├─ url: http://blog.izs.me/
 │  ├─ path: D:\workspace\ng-terminal\node_modules\isexe
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\isexe\LICENSE
+├─ isexe@3.1.1
+│  ├─ licenses: ISC
+│  ├─ repository: https://github.com/isaacs/isexe
+│  ├─ publisher: Isaac Z. Schlueter
+│  ├─ email: i@izs.me
+│  ├─ url: http://blog.izs.me/
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@npmcli\promise-spawn\node_modules\isexe
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@npmcli\promise-spawn\node_modules\isexe\LICENSE
 ├─ isobject@3.0.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/jonschlinkert/isobject
@@ -3933,18 +3612,6 @@
 │  ├─ publisher: Tom Wu
 │  ├─ path: D:\workspace\ng-terminal\node_modules\jsbn
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\jsbn\LICENSE
-├─ jsdom@16.7.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/jsdom/jsdom
-│  ├─ path: D:\workspace\ng-terminal\node_modules\jsdom
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\jsdom\LICENSE.txt
-├─ jsesc@2.5.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/mathiasbynens/jsesc
-│  ├─ publisher: Mathias Bynens
-│  ├─ url: https://mathiasbynens.be/
-│  ├─ path: D:\workspace\ng-terminal\node_modules\jsesc
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\jsesc\LICENSE-MIT.txt
 ├─ jsesc@3.0.2
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/mathiasbynens/jsesc
@@ -3957,8 +3624,8 @@
 │  ├─ repository: https://github.com/mathiasbynens/jsesc
 │  ├─ publisher: Mathias Bynens
 │  ├─ url: https://mathiasbynens.be/
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\core\node_modules\jsesc
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\core\node_modules\jsesc\LICENSE-MIT.txt
+│  ├─ path: D:\workspace\ng-terminal\node_modules\jsesc
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\jsesc\LICENSE-MIT.txt
 ├─ json-parse-even-better-errors@2.3.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/npm/json-parse-even-better-errors
@@ -3991,7 +3658,7 @@
 │  ├─ email: aseem.kishore@gmail.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\json5
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\json5\LICENSE.md
-├─ jsonc-parser@3.2.0
+├─ jsonc-parser@3.2.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/microsoft/node-jsonc-parser
 │  ├─ publisher: Microsoft Corporation
@@ -4078,13 +3745,13 @@
 │  ├─ publisher: Johannes Ewald @jhnns
 │  ├─ path: D:\workspace\ng-terminal\node_modules\less-loader
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\less-loader\LICENSE
-├─ less@4.1.3
+├─ less@4.2.0
 │  ├─ licenses: Apache-2.0
 │  ├─ repository: https://github.com/less/less.js
 │  ├─ publisher: Alexis Sellier
 │  ├─ email: self@cloudhead.net
 │  ├─ path: D:\workspace\ng-terminal\node_modules\less
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\less\README.md
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\less\LICENSE
 ├─ license-checker@25.0.1
 │  ├─ licenses: BSD-3-Clause
 │  ├─ repository: https://github.com/davglass/license-checker
@@ -4173,8 +3840,8 @@
 │  ├─ repository: https://github.com/isaacs/node-lru-cache
 │  ├─ publisher: Isaac Z. Schlueter
 │  ├─ email: i@izs.me
-│  ├─ path: D:\workspace\ng-terminal\node_modules\path-scurry\node_modules\lru-cache
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\path-scurry\node_modules\lru-cache\LICENSE
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@npmcli\agent\node_modules\lru-cache
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@npmcli\agent\node_modules\lru-cache\LICENSE
 ├─ lru-cache@5.1.1
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/isaacs/node-lru-cache
@@ -4187,16 +3854,9 @@
 │  ├─ repository: https://github.com/isaacs/node-lru-cache
 │  ├─ publisher: Isaac Z. Schlueter
 │  ├─ email: i@izs.me
-│  ├─ path: D:\workspace\ng-terminal\node_modules\semver\node_modules\lru-cache
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\semver\node_modules\lru-cache\LICENSE
-├─ lru-cache@7.18.3
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/isaacs/node-lru-cache
-│  ├─ publisher: Isaac Z. Schlueter
-│  ├─ email: i@izs.me
-│  ├─ path: D:\workspace\ng-terminal\node_modules\tuf-js\node_modules\lru-cache
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\tuf-js\node_modules\lru-cache\LICENSE
-├─ magic-string@0.30.1
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@angular\cli\node_modules\lru-cache
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular\cli\node_modules\lru-cache\LICENSE
+├─ magic-string@0.30.8
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/rich-harris/magic-string
 │  ├─ publisher: Rich Harris
@@ -4218,18 +3878,12 @@
 │  ├─ url: sindresorhus.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\make-dir
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\make-dir\license
-├─ make-fetch-happen@10.2.1
+├─ make-fetch-happen@13.0.1
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/npm/make-fetch-happen
 │  ├─ publisher: GitHub Inc.
 │  ├─ path: D:\workspace\ng-terminal\node_modules\make-fetch-happen
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\make-fetch-happen\LICENSE
-├─ make-fetch-happen@11.1.1
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/npm/make-fetch-happen
-│  ├─ publisher: GitHub Inc.
-│  ├─ path: D:\workspace\ng-terminal\node_modules\tuf-js\node_modules\make-fetch-happen
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\tuf-js\node_modules\make-fetch-happen\LICENSE
 ├─ math-intrinsics@1.1.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/es-shims/math-intrinsics
@@ -4299,14 +3953,6 @@
 │  ├─ url: http://github.com/broofa
 │  ├─ path: D:\workspace\ng-terminal\node_modules\send\node_modules\mime
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\send\node_modules\mime\LICENSE
-├─ mime@2.5.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/broofa/mime
-│  ├─ publisher: Robert Kieffer
-│  ├─ email: robert@broofa.com
-│  ├─ url: http://github.com/broofa
-│  ├─ path: D:\workspace\ng-terminal\node_modules\postcss-url\node_modules\mime
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\postcss-url\node_modules\mime\LICENSE
 ├─ mime@2.6.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/broofa/mime
@@ -4323,7 +3969,7 @@
 │  ├─ url: sindresorhus.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\mimic-fn
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\mimic-fn\license
-├─ mini-css-extract-plugin@2.7.6
+├─ mini-css-extract-plugin@2.8.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/webpack-contrib/mini-css-extract-plugin
 │  ├─ publisher: Tobias Koppers @sokra
@@ -4342,14 +3988,6 @@
 │  ├─ url: http://blog.izs.me
 │  ├─ path: D:\workspace\ng-terminal\node_modules\minimatch
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\minimatch\LICENSE
-├─ minimatch@5.1.6
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/isaacs/minimatch
-│  ├─ publisher: Isaac Z. Schlueter
-│  ├─ email: i@izs.me
-│  ├─ url: http://blog.izs.me
-│  ├─ path: D:\workspace\ng-terminal\node_modules\make-fetch-happen\node_modules\minimatch
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\make-fetch-happen\node_modules\minimatch\LICENSE
 ├─ minimatch@9.0.5
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/isaacs/minimatch
@@ -4366,13 +4004,6 @@
 │  ├─ url: http://substack.net
 │  ├─ path: D:\workspace\ng-terminal\node_modules\minimist
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\minimist\LICENSE
-├─ minipass-collect@1.0.2
-│  ├─ licenses: ISC
-│  ├─ publisher: Isaac Z. Schlueter
-│  ├─ email: i@izs.me
-│  ├─ url: https://izs.me
-│  ├─ path: D:\workspace\ng-terminal\node_modules\tuf-js\node_modules\minipass-collect
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\tuf-js\node_modules\minipass-collect\LICENSE
 ├─ minipass-collect@2.0.1
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/isaacs/minipass-collect
@@ -4381,18 +4012,12 @@
 │  ├─ url: https://izs.me
 │  ├─ path: D:\workspace\ng-terminal\node_modules\minipass-collect
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\minipass-collect\LICENSE
-├─ minipass-fetch@2.1.2
+├─ minipass-fetch@3.0.5
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/npm/minipass-fetch
 │  ├─ publisher: GitHub Inc.
 │  ├─ path: D:\workspace\ng-terminal\node_modules\minipass-fetch
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\minipass-fetch\LICENSE
-├─ minipass-fetch@3.0.5
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/npm/minipass-fetch
-│  ├─ publisher: GitHub Inc.
-│  ├─ path: D:\workspace\ng-terminal\node_modules\tuf-js\node_modules\minipass-fetch
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\tuf-js\node_modules\minipass-fetch\LICENSE
 ├─ minipass-flush@1.0.5
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/isaacs/minipass-flush
@@ -4430,8 +4055,8 @@
 │  ├─ publisher: Isaac Z. Schlueter
 │  ├─ email: i@izs.me
 │  ├─ url: http://blog.izs.me/
-│  ├─ path: D:\workspace\ng-terminal\node_modules\tuf-js\node_modules\minipass-collect\node_modules\minipass
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\tuf-js\node_modules\minipass-collect\node_modules\minipass\LICENSE
+│  ├─ path: D:\workspace\ng-terminal\node_modules\minipass-flush\node_modules\minipass
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\minipass-flush\node_modules\minipass\LICENSE
 ├─ minipass@5.0.0
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/isaacs/minipass
@@ -4469,7 +4094,7 @@
 │  ├─ repository: https://github.com/isaacs/node-mkdirp
 │  ├─ path: D:\workspace\ng-terminal\node_modules\mkdirp
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\mkdirp\LICENSE
-├─ mrmime@1.0.1
+├─ mrmime@2.0.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/lukeed/mrmime
 │  ├─ publisher: Luke Edwards
@@ -4490,8 +4115,8 @@
 ├─ ms@2.1.3
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/vercel/ms
-│  ├─ path: D:\workspace\ng-terminal\node_modules\send\node_modules\ms
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\send\node_modules\ms\license.md
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\helper-define-polyfill-provider\node_modules\ms
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\helper-define-polyfill-provider\node_modules\ms\license.md
 ├─ multicast-dns@7.2.5
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/mafintosh/multicast-dns
@@ -4499,15 +4124,13 @@
 │  ├─ url: @mafintosh
 │  ├─ path: D:\workspace\ng-terminal\node_modules\multicast-dns
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\multicast-dns\LICENSE
-├─ mute-stream@0.0.8
+├─ mute-stream@1.0.0
 │  ├─ licenses: ISC
-│  ├─ repository: https://github.com/isaacs/mute-stream
-│  ├─ publisher: Isaac Z. Schlueter
-│  ├─ email: i@izs.me
-│  ├─ url: http://blog.izs.me/
+│  ├─ repository: https://github.com/npm/mute-stream
+│  ├─ publisher: GitHub Inc.
 │  ├─ path: D:\workspace\ng-terminal\node_modules\mute-stream
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\mute-stream\LICENSE
-├─ nanoid@3.3.6
+├─ nanoid@3.3.11
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/ai/nanoid
 │  ├─ publisher: Andrey Sitnik
@@ -4536,7 +4159,7 @@
 │  ├─ repository: https://github.com/suguru03/neo-async
 │  ├─ path: D:\workspace\ng-terminal\node_modules\neo-async
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\neo-async\LICENSE
-├─ ng-packagr@16.2.3
+├─ ng-packagr@17.3.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/ng-packagr/ng-packagr
 │  ├─ publisher: David Herges
@@ -4569,7 +4192,7 @@
 │  ├─ url: http://digitalbazaar.com/
 │  ├─ path: D:\workspace\ng-terminal\node_modules\node-forge
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\node-forge\LICENSE
-├─ node-gyp@9.4.1
+├─ node-gyp@10.3.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/nodejs/node-gyp
 │  ├─ publisher: Nathan Rajlich
@@ -4598,7 +4221,7 @@
 │  ├─ url: http://blog.izs.me/
 │  ├─ path: D:\workspace\ng-terminal\node_modules\license-checker\node_modules\nopt
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\license-checker\node_modules\nopt\LICENSE
-├─ nopt@6.0.0
+├─ nopt@7.2.1
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/npm/nopt
 │  ├─ publisher: GitHub Inc.
@@ -4611,12 +4234,12 @@
 │  ├─ email: merynstol@gmail.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\normalize-package-data
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\normalize-package-data\LICENSE
-├─ normalize-package-data@5.0.0
+├─ normalize-package-data@6.0.2
 │  ├─ licenses: BSD-2-Clause
 │  ├─ repository: https://github.com/npm/normalize-package-data
 │  ├─ publisher: GitHub Inc.
-│  ├─ path: D:\workspace\ng-terminal\node_modules\pacote\node_modules\normalize-package-data
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\pacote\node_modules\normalize-package-data\LICENSE
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@npmcli\package-json\node_modules\normalize-package-data
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@npmcli\package-json\node_modules\normalize-package-data\LICENSE
 ├─ normalize-path@3.0.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/jonschlinkert/normalize-path
@@ -4658,25 +4281,25 @@
 │  ├─ publisher: GitHub Inc.
 │  ├─ path: D:\workspace\ng-terminal\node_modules\npm-bundled\node_modules\npm-normalize-package-bin
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\npm-bundled\node_modules\npm-normalize-package-bin\LICENSE
-├─ npm-package-arg@10.1.0
+├─ npm-package-arg@11.0.1
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/npm/npm-package-arg
 │  ├─ publisher: GitHub Inc.
 │  ├─ path: D:\workspace\ng-terminal\node_modules\npm-package-arg
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\npm-package-arg\LICENSE
-├─ npm-packlist@7.0.4
+├─ npm-packlist@8.0.2
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/npm/npm-packlist
 │  ├─ publisher: GitHub Inc.
 │  ├─ path: D:\workspace\ng-terminal\node_modules\npm-packlist
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\npm-packlist\LICENSE
-├─ npm-pick-manifest@8.0.1
+├─ npm-pick-manifest@9.0.0
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/npm/npm-pick-manifest
 │  ├─ publisher: GitHub Inc.
 │  ├─ path: D:\workspace\ng-terminal\node_modules\npm-pick-manifest
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\npm-pick-manifest\LICENSE.md
-├─ npm-registry-fetch@14.0.5
+├─ npm-registry-fetch@16.2.1
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/npm/npm-registry-fetch
 │  ├─ publisher: GitHub Inc.
@@ -4690,12 +4313,6 @@
 │  ├─ url: sindresorhus.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\npm-run-path
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\npm-run-path\license
-├─ npmlog@6.0.2
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/npm/npmlog
-│  ├─ publisher: GitHub Inc.
-│  ├─ path: D:\workspace\ng-terminal\node_modules\npmlog
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\npmlog\LICENSE.md
 ├─ nth-check@2.1.1
 │  ├─ licenses: BSD-2-Clause
 │  ├─ repository: https://github.com/fb55/nth-check
@@ -4703,14 +4320,6 @@
 │  ├─ email: me@feedic.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\nth-check
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\nth-check\LICENSE
-├─ nwsapi@2.2.21
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/dperini/nwsapi
-│  ├─ publisher: Diego Perini
-│  ├─ email: diego.perini@gmail.com
-│  ├─ url: https://www.iport.it/
-│  ├─ path: D:\workspace\ng-terminal\node_modules\nwsapi
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\nwsapi\LICENSE
 ├─ object-assign@4.1.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/sindresorhus/object-assign
@@ -4727,12 +4336,6 @@
 │  ├─ url: http://substack.net
 │  ├─ path: D:\workspace\ng-terminal\node_modules\object-inspect
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\object-inspect\LICENSE
-├─ object-path@0.11.8
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/mariocasciaro/object-path
-│  ├─ publisher: Mario Casciaro
-│  ├─ path: D:\workspace\ng-terminal\node_modules\object-path
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\object-path\LICENSE
 ├─ obuf@1.1.2
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/indutny/offset-buffer
@@ -4877,17 +4480,12 @@
 │  ├─ url: https://izs.me
 │  ├─ path: D:\workspace\ng-terminal\node_modules\package-json-from-dist
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\package-json-from-dist\LICENSE.md
-├─ pacote@15.2.0
+├─ pacote@17.0.6
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/npm/pacote
 │  ├─ publisher: GitHub Inc.
 │  ├─ path: D:\workspace\ng-terminal\node_modules\pacote
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\pacote\LICENSE
-├─ pako@1.0.11
-│  ├─ licenses: (MIT AND Zlib)
-│  ├─ repository: https://github.com/nodeca/pako
-│  ├─ path: D:\workspace\ng-terminal\node_modules\pako
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\pako\LICENSE
 ├─ parent-module@1.0.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/sindresorhus/parent-module
@@ -4928,14 +4526,6 @@
 │  ├─ url: https://github.com/inikulin
 │  ├─ path: D:\workspace\ng-terminal\node_modules\parse5-sax-parser
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\parse5-sax-parser\LICENSE
-├─ parse5@6.0.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/inikulin/parse5
-│  ├─ publisher: Ivan Nikulin
-│  ├─ email: ifaaan@gmail.com
-│  ├─ url: https://github.com/inikulin
-│  ├─ path: D:\workspace\ng-terminal\node_modules\parse5
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\parse5\LICENSE
 ├─ parse5@7.2.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/inikulin/parse5
@@ -5030,6 +4620,13 @@
 │  ├─ url: https://github.com/jonschlinkert
 │  ├─ path: D:\workspace\ng-terminal\node_modules\picomatch
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\picomatch\LICENSE
+├─ picomatch@4.0.1
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/micromatch/picomatch
+│  ├─ publisher: Jon Schlinkert
+│  ├─ url: https://github.com/jonschlinkert
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@angular-devkit\core\node_modules\picomatch
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular-devkit\core\node_modules\picomatch\LICENSE
 ├─ picomatch@4.0.3
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/micromatch/picomatch
@@ -5045,7 +4642,7 @@
 │  ├─ url: sindresorhus.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\pify
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\pify\license
-├─ piscina@4.0.0
+├─ piscina@4.4.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/piscinajs/piscina
 │  ├─ publisher: James M Snell
@@ -5068,13 +4665,19 @@
 │  ├─ url: https://sindresorhus.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\pkg-dir
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\pkg-dir\license
-├─ postcss-loader@7.3.3
+├─ postcss-loader@8.1.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/webpack-contrib/postcss-loader
 │  ├─ publisher: Andrey Sitnik
 │  ├─ email: andrey@sitnik.ru
 │  ├─ path: D:\workspace\ng-terminal\node_modules\postcss-loader
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\postcss-loader\LICENSE
+├─ postcss-media-query-parser@0.2.3
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/dryoma/postcss-media-query-parser
+│  ├─ publisher: dryoma
+│  ├─ path: D:\workspace\ng-terminal\node_modules\postcss-media-query-parser
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\postcss-media-query-parser\README.md
 ├─ postcss-modules-extract-imports@3.1.0
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/css-modules/postcss-modules-extract-imports
@@ -5104,12 +4707,6 @@
 │  ├─ repository: https://github.com/postcss/postcss-selector-parser
 │  ├─ path: D:\workspace\ng-terminal\node_modules\postcss-selector-parser
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\postcss-selector-parser\LICENSE-MIT
-├─ postcss-url@10.1.3
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/postcss/postcss-url
-│  ├─ publisher: Maxime Thirouin
-│  ├─ path: D:\workspace\ng-terminal\node_modules\postcss-url
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\postcss-url\LICENSE
 ├─ postcss-value-parser@4.2.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/TrySound/postcss-value-parser
@@ -5117,27 +4714,32 @@
 │  ├─ email: trysound@yandex.ru
 │  ├─ path: D:\workspace\ng-terminal\node_modules\postcss-value-parser
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\postcss-value-parser\LICENSE
-├─ postcss@8.4.31
+├─ postcss@8.4.35
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/postcss/postcss
+│  ├─ publisher: Andrey Sitnik
+│  ├─ email: andrey@sitnik.ru
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@angular-devkit\build-angular\node_modules\postcss
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular-devkit\build-angular\node_modules\postcss\LICENSE
+├─ postcss@8.5.6
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/postcss/postcss
 │  ├─ publisher: Andrey Sitnik
 │  ├─ email: andrey@sitnik.ru
 │  ├─ path: D:\workspace\ng-terminal\node_modules\postcss
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\postcss\LICENSE
-├─ pretty-bytes@5.6.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/sindresorhus/pretty-bytes
-│  ├─ publisher: Sindre Sorhus
-│  ├─ email: sindresorhus@gmail.com
-│  ├─ url: https://sindresorhus.com
-│  ├─ path: D:\workspace\ng-terminal\node_modules\pretty-bytes
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\pretty-bytes\license
 ├─ proc-log@3.0.0
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/npm/proc-log
 │  ├─ publisher: GitHub Inc.
 │  ├─ path: D:\workspace\ng-terminal\node_modules\proc-log
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\proc-log\LICENSE
+├─ proc-log@4.2.0
+│  ├─ licenses: ISC
+│  ├─ repository: https://github.com/npm/proc-log
+│  ├─ publisher: GitHub Inc.
+│  ├─ path: D:\workspace\ng-terminal\node_modules\make-fetch-happen\node_modules\proc-log
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\make-fetch-happen\node_modules\proc-log\LICENSE
 ├─ process-nextick-args@2.0.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/calvinmetcalf/process-nextick-args
@@ -5174,14 +4776,6 @@
 │  ├─ url: https://github.com/rvagg
 │  ├─ path: D:\workspace\ng-terminal\node_modules\prr
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\prr\LICENSE.md
-├─ psl@1.15.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/lupomontero/psl
-│  ├─ publisher: Lupo Montero
-│  ├─ email: lupomontero@gmail.com
-│  ├─ url: https://lupomontero.com/
-│  ├─ path: D:\workspace\ng-terminal\node_modules\psl
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\psl\LICENSE
 ├─ punycode@2.3.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/mathiasbynens/punycode.js
@@ -5200,12 +4794,6 @@
 │  ├─ repository: https://github.com/ljharb/qs
 │  ├─ path: D:\workspace\ng-terminal\node_modules\qs
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\qs\LICENSE.md
-├─ querystringify@2.2.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/unshiftio/querystringify
-│  ├─ publisher: Arnout Kazemier
-│  ├─ path: D:\workspace\ng-terminal\node_modules\querystringify
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\querystringify\LICENSE
 ├─ queue-microtask@1.2.3
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/feross/queue-microtask
@@ -5257,7 +4845,7 @@
 │  ├─ url: http://blog.izs.me/
 │  ├─ path: D:\workspace\ng-terminal\node_modules\read-package-json
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\read-package-json\LICENSE
-├─ read-package-json@6.0.4
+├─ read-package-json@7.0.1
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/npm/read-package-json
 │  ├─ publisher: GitHub Inc.
@@ -5297,7 +4885,7 @@
 │  ├─ url: thlorenz.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\readdirp
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\readdirp\LICENSE
-├─ reflect-metadata@0.1.14
+├─ reflect-metadata@0.2.2
 │  ├─ licenses: Apache-2.0
 │  ├─ repository: https://github.com/rbuckton/reflect-metadata
 │  ├─ publisher: Ron Buckton
@@ -5319,7 +4907,7 @@
 │  ├─ url: https://mathiasbynens.be/
 │  ├─ path: D:\workspace\ng-terminal\node_modules\regenerate
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\regenerate\LICENSE-MIT.txt
-├─ regenerator-runtime@0.13.11
+├─ regenerator-runtime@0.14.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/facebook/regenerator/tree/main/packages/runtime
 │  ├─ publisher: Ben Newman
@@ -5407,7 +4995,7 @@
 │  ├─ url: http://substack.net
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\helper-define-polyfill-provider\node_modules\resolve
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\helper-define-polyfill-provider\node_modules\resolve\LICENSE
-├─ resolve@1.22.2
+├─ resolve@1.22.8
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/browserify/resolve
 │  ├─ publisher: James Halliday
@@ -5461,13 +5049,13 @@
 │  ├─ url: http://blog.izs.me/
 │  ├─ path: D:\workspace\ng-terminal\node_modules\rimraf
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\rimraf\LICENSE
-├─ rollup@3.29.5
+├─ rollup@4.46.2
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/rollup/rollup
 │  ├─ publisher: Rich Harris
 │  ├─ path: D:\workspace\ng-terminal\node_modules\rollup
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\rollup\LICENSE.md
-├─ run-async@2.4.1
+├─ run-async@3.0.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/SBoudrias/run-async
 │  ├─ publisher: Simon Boudrias
@@ -5501,8 +5089,8 @@
 │  ├─ repository: https://github.com/reactivex/rxjs
 │  ├─ publisher: Ben Lesh
 │  ├─ email: ben@benlesh.com
-│  ├─ path: D:\workspace\ng-terminal\node_modules\ng-packagr\node_modules\rxjs
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\ng-packagr\node_modules\rxjs\LICENSE.txt
+│  ├─ path: D:\workspace\ng-terminal\node_modules\inquirer\node_modules\rxjs
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\inquirer\node_modules\rxjs\LICENSE.txt
 ├─ safe-buffer@5.1.2
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/feross/safe-buffer
@@ -5533,13 +5121,13 @@
 │  ├─ publisher: ISE Hardening
 │  ├─ path: D:\workspace\ng-terminal\node_modules\safevalues
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\safevalues\LICENSE
-├─ sass-loader@13.3.2
+├─ sass-loader@14.1.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/webpack-contrib/sass-loader
 │  ├─ publisher: J. Tangelder
 │  ├─ path: D:\workspace\ng-terminal\node_modules\sass-loader
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\sass-loader\LICENSE
-├─ sass@1.64.1
+├─ sass@1.71.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/sass/dart-sass
 │  ├─ publisher: Natalie Weizenbaum
@@ -5555,13 +5143,6 @@
 │  ├─ url: http://blog.izs.me/
 │  ├─ path: D:\workspace\ng-terminal\node_modules\sax
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\sax\LICENSE
-├─ saxes@5.0.1
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/lddubeau/saxes
-│  ├─ publisher: Louis-Dominique Dubeau
-│  ├─ email: ldd@lddubeau.com
-│  ├─ path: D:\workspace\ng-terminal\node_modules\saxes
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\saxes\README.md
 ├─ schema-utils@3.2.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/webpack/schema-utils
@@ -5603,18 +5184,18 @@
 │  ├─ publisher: GitHub Inc.
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\helper-compilation-targets\node_modules\semver
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\helper-compilation-targets\node_modules\semver\LICENSE
-├─ semver@7.5.3
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/npm/node-semver
-│  ├─ publisher: GitHub Inc.
-│  ├─ path: D:\workspace\ng-terminal\node_modules\semver
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\semver\LICENSE
-├─ semver@7.5.4
+├─ semver@7.6.0
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/npm/node-semver
 │  ├─ publisher: GitHub Inc.
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@angular\cli\node_modules\semver
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular\cli\node_modules\semver\LICENSE
+├─ semver@7.7.2
+│  ├─ licenses: ISC
+│  ├─ repository: https://github.com/npm/node-semver
+│  ├─ publisher: GitHub Inc.
+│  ├─ path: D:\workspace\ng-terminal\node_modules\semver
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\semver\LICENSE
 ├─ send@0.19.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/pillarjs/send
@@ -5643,13 +5224,6 @@
 │  ├─ email: doug@somethingdoug.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\serve-static
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\serve-static\LICENSE
-├─ set-blocking@2.0.0
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/yargs/set-blocking
-│  ├─ publisher: Ben Coe
-│  ├─ email: ben@npmjs.com
-│  ├─ path: D:\workspace\ng-terminal\node_modules\set-blocking
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\set-blocking\LICENSE.txt
 ├─ set-function-length@1.2.2
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/ljharb/set-function-length
@@ -5721,7 +5295,7 @@
 │  ├─ email: ben@npmjs.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\foreground-child\node_modules\signal-exit
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\foreground-child\node_modules\signal-exit\LICENSE.txt
-├─ sigstore@1.9.0
+├─ sigstore@2.3.1
 │  ├─ licenses: Apache-2.0
 │  ├─ repository: https://github.com/sigstore/sigstore-js
 │  ├─ publisher: bdehamer@github.com
@@ -5770,28 +5344,28 @@
 │  ├─ publisher: Marek Majkowski
 │  ├─ path: D:\workspace\ng-terminal\node_modules\sockjs
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\sockjs\LICENSE
-├─ socks-proxy-agent@7.0.0
+├─ socks-proxy-agent@8.0.5
 │  ├─ licenses: MIT
-│  ├─ repository: https://github.com/TooTallNate/node-socks-proxy-agent
+│  ├─ repository: https://github.com/TooTallNate/proxy-agents
 │  ├─ publisher: Nathan Rajlich
 │  ├─ email: nathan@tootallnate.net
 │  ├─ url: http://n8.io/
 │  ├─ path: D:\workspace\ng-terminal\node_modules\socks-proxy-agent
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\socks-proxy-agent\README.md
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\socks-proxy-agent\LICENSE
 ├─ socks@2.8.6
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/JoshGlazebrook/socks
 │  ├─ publisher: Josh Glazebrook
 │  ├─ path: D:\workspace\ng-terminal\node_modules\socks
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\socks\LICENSE
-├─ source-map-js@1.0.2
+├─ source-map-js@1.2.1
 │  ├─ licenses: BSD-3-Clause
 │  ├─ repository: https://github.com/7rulnik/source-map-js
 │  ├─ publisher: Valentin 7rulnik Semirulnik
 │  ├─ email: v7rulnik@gmail.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\source-map-js
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\source-map-js\LICENSE
-├─ source-map-loader@4.0.1
+├─ source-map-loader@5.0.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/webpack-contrib/source-map-loader
 │  ├─ publisher: Tobias Koppers @sokra
@@ -5807,8 +5381,8 @@
 │  ├─ repository: https://github.com/mozilla/source-map
 │  ├─ publisher: Nick Fitzgerald
 │  ├─ email: nfitzgerald@mozilla.com
-│  ├─ path: D:\workspace\ng-terminal\node_modules\escodegen\node_modules\source-map
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\escodegen\node_modules\source-map\LICENSE
+│  ├─ path: D:\workspace\ng-terminal\node_modules\source-map-support\node_modules\source-map
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\source-map-support\node_modules\source-map\LICENSE
 ├─ source-map@0.7.4
 │  ├─ licenses: BSD-3-Clause
 │  ├─ repository: https://github.com/mozilla/source-map
@@ -5899,12 +5473,6 @@
 │  ├─ publisher: GitHub Inc.
 │  ├─ path: D:\workspace\ng-terminal\node_modules\ssri
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\ssri\LICENSE.md
-├─ ssri@9.0.1
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/npm/ssri
-│  ├─ publisher: GitHub Inc.
-│  ├─ path: D:\workspace\ng-terminal\node_modules\make-fetch-happen\node_modules\ssri
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\make-fetch-happen\node_modules\ssri\LICENSE.md
 ├─ statuses@1.5.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/jshttp/statuses
@@ -6015,13 +5583,6 @@
 │  ├─ email: ben@benlesh.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\symbol-observable
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\symbol-observable\license
-├─ symbol-tree@3.2.4
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/jsdom/js-symbol-tree
-│  ├─ publisher: Joris van der Wel
-│  ├─ email: joris@jorisvanderwel.com
-│  ├─ path: D:\workspace\ng-terminal\node_modules\symbol-tree
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\symbol-tree\LICENSE
 ├─ tapable@2.2.2
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/webpack/tapable
@@ -6040,7 +5601,7 @@
 │  ├─ publisher: webpack Contrib Team
 │  ├─ path: D:\workspace\ng-terminal\node_modules\terser-webpack-plugin
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\terser-webpack-plugin\LICENSE
-├─ terser@5.19.2
+├─ terser@5.29.1
 │  ├─ licenses: BSD-2-Clause
 │  ├─ repository: https://github.com/terser/terser
 │  ├─ publisher: Mihai Bazon
@@ -6063,14 +5624,6 @@
 │  ├─ email: ben@npmjs.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\test-exclude
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\test-exclude\LICENSE.txt
-├─ text-table@0.2.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/substack/text-table
-│  ├─ publisher: James Halliday
-│  ├─ email: mail@substack.net
-│  ├─ url: http://substack.net
-│  ├─ path: D:\workspace\ng-terminal\node_modules\text-table
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\text-table\LICENSE
 ├─ through2@2.0.5
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/rvagg/through2
@@ -6079,14 +5632,6 @@
 │  ├─ url: https://github.com/rvagg
 │  ├─ path: D:\workspace\ng-terminal\node_modules\through2
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\through2\LICENSE.md
-├─ through@2.3.8
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/dominictarr/through
-│  ├─ publisher: Dominic Tarr
-│  ├─ email: dominic.tarr@gmail.com
-│  ├─ url: dominictarr.com
-│  ├─ path: D:\workspace\ng-terminal\node_modules\through
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\through\LICENSE.APACHE2
 ├─ thunky@1.1.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/mafintosh/thunky
@@ -6124,20 +5669,6 @@
 │  ├─ email: doug@somethingdoug.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\toidentifier
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\toidentifier\LICENSE
-├─ tough-cookie@4.1.4
-│  ├─ licenses: BSD-3-Clause
-│  ├─ repository: https://github.com/salesforce/tough-cookie
-│  ├─ publisher: Jeremy Stashewsky
-│  ├─ email: jstash@gmail.com
-│  ├─ path: D:\workspace\ng-terminal\node_modules\tough-cookie
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\tough-cookie\LICENSE
-├─ tr46@2.1.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/jsdom/tr46
-│  ├─ publisher: Sebastian Mayr
-│  ├─ email: npm@smayr.name
-│  ├─ path: D:\workspace\ng-terminal\node_modules\tr46
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\tr46\LICENSE.md
 ├─ tree-kill@1.2.2
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/pkrumins/node-tree-kill
@@ -6159,13 +5690,13 @@
 │  ├─ publisher: Microsoft Corp.
 │  ├─ path: D:\workspace\ng-terminal\node_modules\rxjs\node_modules\tslib
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\rxjs\node_modules\tslib\LICENSE.txt
-├─ tslib@2.6.1
+├─ tslib@2.6.2
 │  ├─ licenses: 0BSD
 │  ├─ repository: https://github.com/Microsoft/tslib
 │  ├─ publisher: Microsoft Corp.
 │  ├─ path: D:\workspace\ng-terminal\node_modules\tslib
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\tslib\LICENSE.txt
-├─ tuf-js@1.1.7
+├─ tuf-js@2.2.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/theupdateframework/tuf-js
 │  ├─ publisher: bdehamer@github.com
@@ -6191,7 +5722,7 @@
 │  ├─ email: elie@rotenberg.io
 │  ├─ path: D:\workspace\ng-terminal\node_modules\typed-assert
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\typed-assert\README.md
-├─ typescript@4.9.5
+├─ typescript@5.2.2
 │  ├─ licenses: Apache-2.0
 │  ├─ repository: https://github.com/Microsoft/TypeScript
 │  ├─ publisher: Microsoft Corp.
@@ -6238,24 +5769,12 @@
 │  ├─ url: https://mathiasbynens.be/
 │  ├─ path: D:\workspace\ng-terminal\node_modules\unicode-property-aliases-ecmascript
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\unicode-property-aliases-ecmascript\LICENSE-MIT.txt
-├─ unique-filename@2.0.1
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/npm/unique-filename
-│  ├─ publisher: GitHub Inc.
-│  ├─ path: D:\workspace\ng-terminal\node_modules\make-fetch-happen\node_modules\unique-filename
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\make-fetch-happen\node_modules\unique-filename\LICENSE
 ├─ unique-filename@3.0.0
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/npm/unique-filename
 │  ├─ publisher: GitHub Inc.
 │  ├─ path: D:\workspace\ng-terminal\node_modules\unique-filename
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\unique-filename\LICENSE
-├─ unique-slug@3.0.0
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/npm/unique-slug
-│  ├─ publisher: GitHub Inc.
-│  ├─ path: D:\workspace\ng-terminal\node_modules\make-fetch-happen\node_modules\unique-slug
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\make-fetch-happen\node_modules\unique-slug\LICENSE
 ├─ unique-slug@4.0.0
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/npm/unique-slug
@@ -6269,13 +5788,6 @@
 │  ├─ email: opensrc@ryanzim.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\universalify
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\universalify\LICENSE
-├─ universalify@0.2.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/RyanZim/universalify
-│  ├─ publisher: Ryan Zimmerman
-│  ├─ email: opensrc@ryanzim.com
-│  ├─ path: D:\workspace\ng-terminal\node_modules\tough-cookie\node_modules\universalify
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\tough-cookie\node_modules\universalify\LICENSE
 ├─ unpipe@1.0.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/stream-utils/unpipe
@@ -6305,12 +5817,6 @@
 │  ├─ email: gary.court@gmail.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\uri-js
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\uri-js\LICENSE
-├─ url-parse@1.5.10
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/unshiftio/url-parse
-│  ├─ publisher: Arnout Kazemier
-│  ├─ path: D:\workspace\ng-terminal\node_modules\url-parse
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\url-parse\LICENSE
 ├─ util-deprecate@1.0.2
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/TooTallNate/util-deprecate
@@ -6358,7 +5864,7 @@
 │  ├─ email: doug@somethingdoug.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\vary
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\vary\LICENSE
-├─ vite@4.5.5
+├─ vite@5.4.19
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/vitejs/vite
 │  ├─ publisher: Evan You
@@ -6370,18 +5876,12 @@
 │  ├─ publisher: hemanth.hm
 │  ├─ path: D:\workspace\ng-terminal\node_modules\void-elements
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\void-elements\LICENSE
-├─ w3c-hr-time@1.0.2
+├─ watchpack@2.4.0
 │  ├─ licenses: MIT
-│  ├─ repository: https://github.com/jsdom/w3c-hr-time
-│  ├─ publisher: Timothy Gu
-│  ├─ email: timothygu99@gmail.com
-│  ├─ path: D:\workspace\ng-terminal\node_modules\w3c-hr-time
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\w3c-hr-time\LICENSE.md
-├─ w3c-xmlserializer@2.0.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/jsdom/w3c-xmlserializer
-│  ├─ path: D:\workspace\ng-terminal\node_modules\w3c-xmlserializer
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\w3c-xmlserializer\LICENSE.md
+│  ├─ repository: https://github.com/webpack/watchpack
+│  ├─ publisher: Tobias Koppers @sokra
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@angular-devkit\build-angular\node_modules\watchpack
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular-devkit\build-angular\node_modules\watchpack\LICENSE
 ├─ watchpack@2.4.4
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/webpack/watchpack
@@ -6401,22 +5901,6 @@
 │  ├─ publisher: Tim Oxley
 │  ├─ path: D:\workspace\ng-terminal\node_modules\wcwidth
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\wcwidth\LICENSE
-├─ webidl-conversions@5.0.0
-│  ├─ licenses: BSD-2-Clause
-│  ├─ repository: https://github.com/jsdom/webidl-conversions
-│  ├─ publisher: Domenic Denicola
-│  ├─ email: d@domenic.me
-│  ├─ url: https://domenic.me/
-│  ├─ path: D:\workspace\ng-terminal\node_modules\domexception\node_modules\webidl-conversions
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\domexception\node_modules\webidl-conversions\LICENSE.md
-├─ webidl-conversions@6.1.0
-│  ├─ licenses: BSD-2-Clause
-│  ├─ repository: https://github.com/jsdom/webidl-conversions
-│  ├─ publisher: Domenic Denicola
-│  ├─ email: d@domenic.me
-│  ├─ url: https://domenic.me/
-│  ├─ path: D:\workspace\ng-terminal\node_modules\webidl-conversions
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\webidl-conversions\LICENSE.md
 ├─ webpack-dev-middleware@5.3.4
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/webpack/webpack-dev-middleware
@@ -6435,7 +5919,7 @@
 │  ├─ publisher: Tobias Koppers @sokra
 │  ├─ path: D:\workspace\ng-terminal\node_modules\webpack-dev-server
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\webpack-dev-server\LICENSE
-├─ webpack-merge@5.9.0
+├─ webpack-merge@5.10.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/survivejs/webpack-merge
 │  ├─ publisher: Juho Vepsalainen
@@ -6477,29 +5961,6 @@
 │  ├─ url: http://jcoglan.com/
 │  ├─ path: D:\workspace\ng-terminal\node_modules\websocket-extensions
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\websocket-extensions\LICENSE.md
-├─ whatwg-encoding@1.0.5
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/jsdom/whatwg-encoding
-│  ├─ publisher: Domenic Denicola
-│  ├─ email: d@domenic.me
-│  ├─ url: https://domenic.me/
-│  ├─ path: D:\workspace\ng-terminal\node_modules\whatwg-encoding
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\whatwg-encoding\LICENSE.txt
-├─ whatwg-mimetype@2.3.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/jsdom/whatwg-mimetype
-│  ├─ publisher: Domenic Denicola
-│  ├─ email: d@domenic.me
-│  ├─ url: https://domenic.me/
-│  ├─ path: D:\workspace\ng-terminal\node_modules\whatwg-mimetype
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\whatwg-mimetype\LICENSE.txt
-├─ whatwg-url@8.7.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/jsdom/whatwg-url
-│  ├─ publisher: Sebastian Mayr
-│  ├─ email: github@smayr.name
-│  ├─ path: D:\workspace\ng-terminal\node_modules\whatwg-url
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\whatwg-url\LICENSE.txt
 ├─ which@1.3.1
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/isaacs/node-which
@@ -6516,20 +5977,12 @@
 │  ├─ url: http://blog.izs.me
 │  ├─ path: D:\workspace\ng-terminal\node_modules\cross-spawn\node_modules\which
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\cross-spawn\node_modules\which\LICENSE
-├─ which@3.0.1
+├─ which@4.0.0
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/npm/node-which
 │  ├─ publisher: GitHub Inc.
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@npmcli\promise-spawn\node_modules\which
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@npmcli\promise-spawn\node_modules\which\LICENSE
-├─ wide-align@1.1.5
-│  ├─ licenses: ISC
-│  ├─ repository: https://github.com/iarna/wide-align
-│  ├─ publisher: Rebecca Turner
-│  ├─ email: me@re-becca.org
-│  ├─ url: http://re-becca.org/
-│  ├─ path: D:\workspace\ng-terminal\node_modules\wide-align
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\wide-align\LICENSE
 ├─ wildcard@2.0.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/DamonOehlman/wildcard
@@ -6537,6 +5990,14 @@
 │  ├─ email: damon.oehlman@gmail.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\wildcard
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\wildcard\LICENSE
+├─ wrap-ansi@6.2.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/chalk/wrap-ansi
+│  ├─ publisher: Sindre Sorhus
+│  ├─ email: sindresorhus@gmail.com
+│  ├─ url: sindresorhus.com
+│  ├─ path: D:\workspace\ng-terminal\node_modules\inquirer\node_modules\wrap-ansi
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\inquirer\node_modules\wrap-ansi\license
 ├─ wrap-ansi@7.0.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/chalk/wrap-ansi
@@ -6561,14 +6022,6 @@
 │  ├─ url: http://blog.izs.me/
 │  ├─ path: D:\workspace\ng-terminal\node_modules\wrappy
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\wrappy\LICENSE
-├─ ws@7.5.10
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/websockets/ws
-│  ├─ publisher: Einar Otto Stangvik
-│  ├─ email: einaros@gmail.com
-│  ├─ url: http://2x.io
-│  ├─ path: D:\workspace\ng-terminal\node_modules\jsdom\node_modules\ws
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\jsdom\node_modules\ws\LICENSE
 ├─ ws@8.11.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/websockets/ws
@@ -6585,21 +6038,6 @@
 │  ├─ url: http://2x.io
 │  ├─ path: D:\workspace\ng-terminal\node_modules\webpack-dev-server\node_modules\ws
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\webpack-dev-server\node_modules\ws\LICENSE
-├─ xml-name-validator@3.0.0
-│  ├─ licenses: Apache-2.0
-│  ├─ repository: https://github.com/jsdom/xml-name-validator
-│  ├─ publisher: Domenic Denicola
-│  ├─ email: d@domenic.me
-│  ├─ url: https://domenic.me/
-│  ├─ path: D:\workspace\ng-terminal\node_modules\xml-name-validator
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\xml-name-validator\LICENSE.txt
-├─ xmlchars@2.2.0
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/lddubeau/xmlchars
-│  ├─ publisher: Louis-Dominique Dubeau
-│  ├─ email: ldd@lddubeau.com
-│  ├─ path: D:\workspace\ng-terminal\node_modules\xmlchars
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\xmlchars\LICENSE
 ├─ xtend@4.0.2
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/Raynos/xtend
@@ -6619,12 +6057,6 @@
 │  ├─ repository: https://github.com/xtermjs/xterm.js
 │  ├─ path: D:\workspace\ng-terminal\node_modules\xterm
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\xterm\LICENSE
-├─ xxhashjs@0.2.2
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/pierrec/js-xxhash
-│  ├─ publisher: Pierre Curto
-│  ├─ path: D:\workspace\ng-terminal\node_modules\xxhashjs
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\xxhashjs\LICENSE
 ├─ y18n@5.0.8
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/yargs/y18n
@@ -6646,8 +6078,8 @@
 │  ├─ publisher: Isaac Z. Schlueter
 │  ├─ email: i@izs.me
 │  ├─ url: http://blog.izs.me/
-│  ├─ path: D:\workspace\ng-terminal\node_modules\semver\node_modules\yallist
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\semver\node_modules\yallist\LICENSE
+│  ├─ path: D:\workspace\ng-terminal\node_modules\minipass-flush\node_modules\yallist
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\minipass-flush\node_modules\yallist\LICENSE
 ├─ yargs-parser@20.2.9
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/yargs/yargs-parser
@@ -6680,7 +6112,7 @@
 │  ├─ url: https://sindresorhus.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\yocto-queue
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\yocto-queue\license
-└─ zone.js@0.13.3
+└─ zone.js@0.14.10
    ├─ licenses: MIT
    ├─ repository: https://github.com/angular/angular
    ├─ publisher: Brian Ford
