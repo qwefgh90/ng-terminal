@@ -41,7 +41,7 @@
 │  ├─ publisher: angular
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@angular\animations
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular\animations\README.md
-├─ @angular/cdk@14.2.7
+├─ @angular/cdk@15.2.9
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/angular/components
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@angular\cdk
@@ -80,7 +80,7 @@
 │  ├─ publisher: angular
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@angular\forms
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular\forms\README.md
-├─ @angular/material@14.2.7
+├─ @angular/material@15.2.9
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/angular/components
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@angular\material
@@ -944,6 +944,256 @@
 │  ├─ publisher: Martin Heidegger
 │  ├─ path: D:\workspace\ng-terminal\node_modules\@leichtgewicht\ip-codec
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@leichtgewicht\ip-codec\LICENSE
+├─ @material/animation@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\animation
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\animation\LICENSE
+├─ @material/auto-init@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\auto-init
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\auto-init\LICENSE
+├─ @material/banner@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\banner
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\banner\LICENSE
+├─ @material/base@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\base
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\base\LICENSE
+├─ @material/button@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\button
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\button\LICENSE
+├─ @material/card@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\card
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\card\LICENSE
+├─ @material/checkbox@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\checkbox
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\checkbox\LICENSE
+├─ @material/chips@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\chips
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\chips\LICENSE
+├─ @material/circular-progress@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\circular-progress
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\circular-progress\LICENSE
+├─ @material/data-table@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\data-table
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\data-table\LICENSE
+├─ @material/density@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\density
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\density\LICENSE
+├─ @material/dialog@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\dialog
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\dialog\LICENSE
+├─ @material/dom@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\dom
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\dom\LICENSE
+├─ @material/drawer@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\drawer
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\drawer\LICENSE
+├─ @material/elevation@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\elevation
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\elevation\LICENSE
+├─ @material/fab@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\fab
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\fab\LICENSE
+├─ @material/feature-targeting@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\feature-targeting
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\feature-targeting\LICENSE
+├─ @material/floating-label@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\floating-label
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\floating-label\LICENSE
+├─ @material/focus-ring@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\focus-ring
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\focus-ring\LICENSE
+├─ @material/form-field@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\form-field
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\form-field\LICENSE
+├─ @material/icon-button@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\icon-button
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\icon-button\LICENSE
+├─ @material/image-list@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\image-list
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\image-list\LICENSE
+├─ @material/layout-grid@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\layout-grid
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\layout-grid\LICENSE
+├─ @material/line-ripple@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\line-ripple
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\line-ripple\LICENSE
+├─ @material/linear-progress@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\linear-progress
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\linear-progress\LICENSE
+├─ @material/list@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\list
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\list\LICENSE
+├─ @material/menu-surface@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\menu-surface
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\menu-surface\LICENSE
+├─ @material/menu@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\menu
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\menu\LICENSE
+├─ @material/notched-outline@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\notched-outline
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\notched-outline\LICENSE
+├─ @material/progress-indicator@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\progress-indicator
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\progress-indicator\LICENSE
+├─ @material/radio@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\radio
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\radio\LICENSE
+├─ @material/ripple@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\ripple
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\ripple\LICENSE
+├─ @material/rtl@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\rtl
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\rtl\LICENSE
+├─ @material/segmented-button@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\segmented-button
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\segmented-button\LICENSE
+├─ @material/select@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\select
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\select\LICENSE
+├─ @material/shape@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\shape
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\shape\LICENSE
+├─ @material/slider@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\slider
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\slider\LICENSE
+├─ @material/snackbar@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\snackbar
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\snackbar\LICENSE
+├─ @material/switch@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\switch
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\switch\LICENSE
+├─ @material/tab-bar@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\tab-bar
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\tab-bar\LICENSE
+├─ @material/tab-indicator@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\tab-indicator
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\tab-indicator\LICENSE
+├─ @material/tab-scroller@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\tab-scroller
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\tab-scroller\LICENSE
+├─ @material/tab@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\tab
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\tab\LICENSE
+├─ @material/textfield@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\textfield
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\textfield\LICENSE
+├─ @material/theme@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\theme
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\theme\LICENSE
+├─ @material/tokens@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\tokens
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\tokens\LICENSE
+├─ @material/tooltip@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\tooltip
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\tooltip\LICENSE
+├─ @material/top-app-bar@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\top-app-bar
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\top-app-bar\LICENSE
+├─ @material/touch-target@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\touch-target
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\touch-target\LICENSE
+├─ @material/typography@15.0.0-canary.684e33d25.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/material-components/material-components-web
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@material\typography
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@material\typography\LICENSE
 ├─ @ngtools/webpack@16.2.16
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/angular/angular-cli
@@ -2536,6 +2786,13 @@
 │  ├─ email: me@feedic.com
 │  ├─ path: D:\workspace\ng-terminal\node_modules\entities
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\entities\LICENSE
+├─ entities@6.0.1
+│  ├─ licenses: BSD-2-Clause
+│  ├─ repository: https://github.com/fb55/entities
+│  ├─ publisher: Felix Boehm
+│  ├─ email: me@feedic.com
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@angular\cdk\node_modules\entities
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular\cdk\node_modules\entities\LICENSE
 ├─ env-paths@2.2.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/sindresorhus/env-paths
@@ -4399,8 +4656,8 @@
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/npm/npm-normalize-package-bin
 │  ├─ publisher: GitHub Inc.
-│  ├─ path: D:\workspace\ng-terminal\node_modules\npm-bundled\node_modules\npm-normalize-package-bin
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\npm-bundled\node_modules\npm-normalize-package-bin\LICENSE
+│  ├─ path: D:\workspace\ng-terminal\node_modules\npm-pick-manifest\node_modules\npm-normalize-package-bin
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\npm-pick-manifest\node_modules\npm-normalize-package-bin\LICENSE
 ├─ npm-package-arg@10.1.0
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/npm/npm-package-arg
@@ -4671,14 +4928,6 @@
 │  ├─ url: https://github.com/inikulin
 │  ├─ path: D:\workspace\ng-terminal\node_modules\parse5-sax-parser
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\parse5-sax-parser\LICENSE
-├─ parse5@5.1.1
-│  ├─ licenses: MIT
-│  ├─ repository: https://github.com/inikulin/parse5
-│  ├─ publisher: Ivan Nikulin
-│  ├─ email: ifaaan@gmail.com
-│  ├─ url: https://github.com/inikulin
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@angular\cdk\node_modules\parse5
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular\cdk\node_modules\parse5\LICENSE
 ├─ parse5@6.0.1
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/inikulin/parse5
@@ -4695,6 +4944,14 @@
 │  ├─ url: https://github.com/inikulin
 │  ├─ path: D:\workspace\ng-terminal\node_modules\parse5-html-rewriting-stream\node_modules\parse5
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\parse5-html-rewriting-stream\node_modules\parse5\LICENSE
+├─ parse5@7.3.0
+│  ├─ licenses: MIT
+│  ├─ repository: https://github.com/inikulin/parse5
+│  ├─ publisher: Ivan Nikulin
+│  ├─ email: ifaaan@gmail.com
+│  ├─ url: https://github.com/inikulin
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@angular\cdk\node_modules\parse5
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@angular\cdk\node_modules\parse5\LICENSE
 ├─ parseurl@1.3.3
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/pillarjs/parseurl
@@ -5270,6 +5527,12 @@
 │  ├─ url: https://github.com/ChALkeR
 │  ├─ path: D:\workspace\ng-terminal\node_modules\safer-buffer
 │  └─ licenseFile: D:\workspace\ng-terminal\node_modules\safer-buffer\LICENSE
+├─ safevalues@0.3.4
+│  ├─ licenses: Apache-2.0
+│  ├─ repository: https://github.com/google/safevalues
+│  ├─ publisher: ISE Hardening
+│  ├─ path: D:\workspace\ng-terminal\node_modules\safevalues
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\safevalues\LICENSE
 ├─ sass-loader@13.3.2
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/webpack-contrib/sass-loader

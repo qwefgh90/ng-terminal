@@ -8,7 +8,7 @@ import { keydown } from './test-util'
 import { FunctionsUsingCSI, KindOfEraseInDisplay, KindOfEraseInLine } from './functions-using-csi';
 import { ViewChild, Component, OnInit, SimpleChange } from '@angular/core';
 import { NgTerminal } from './ng-terminal';
-import { MatTabsModule, MatTabGroup } from '@angular/material/tabs';
+import { MatLegacyTabsModule as MatTabsModule, MatLegacyTabGroup as MatTabGroup } from '@angular/material/legacy-tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({selector: 'app-mat-tab', template: `
