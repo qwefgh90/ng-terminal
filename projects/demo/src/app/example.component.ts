@@ -10,11 +10,12 @@ import {
 import { Subject } from 'rxjs';
 import { KindOfCharacterAttributes, NgTerminal } from 'ng-terminal';
 import { FormControl } from '@angular/forms';
-import { MatLegacySlideToggleChange as MatSlideToggleChange } from '@angular/material/legacy-slide-toggle';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { Terminal } from '@xterm/xterm';
 import { FunctionsUsingCSI } from 'ng-terminal';
 import { WebLinksAddon } from '@xterm/addon-web-links';
 import { WebglAddon } from 'xterm-addon-webgl';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-root',
