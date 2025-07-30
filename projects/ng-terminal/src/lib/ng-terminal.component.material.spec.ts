@@ -8,7 +8,7 @@ import { keydown } from './test-util'
 import { FunctionsUsingCSI, KindOfEraseInDisplay, KindOfEraseInLine } from './functions-using-csi';
 import { ViewChild, Component, OnInit, SimpleChange } from '@angular/core';
 import { NgTerminal } from './ng-terminal';
-import { MatLegacyTabsModule as MatTabsModule, MatLegacyTabGroup as MatTabGroup } from '@angular/material/legacy-tabs';
+import { MatTabsModule, MatTabGroup } from '@angular/material/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({selector: 'app-mat-tab', template: `
@@ -70,7 +70,7 @@ describe('NgTerminalComponent with MaterialTab', () => {
     mattabComponent.tabGroup.selectedIndex = 1;
     mattabFixture.detectChanges();
     tick(1000);
-    
+
     let mattabEl = mattabFixture.nativeElement as HTMLElement;
     let xtermScreen = mattabEl.querySelector('.xterm-screen');
     let xtermViewport = mattabEl.querySelector('.xterm-viewport');
