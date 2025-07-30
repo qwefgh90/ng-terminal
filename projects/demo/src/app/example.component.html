@@ -74,9 +74,7 @@
         </div>
         <div style="display: inline-block; vertical-align: top">
           <h4>JSON</h4>
-          <ngx-json-viewer
-            [json]="displayOptionForLiveUpdate"
-          ></ngx-json-viewer>
+          {{displayOptionForLiveUpdate | json}}
         </div>
       </div>
       <h3>Examples of data binding</h3>
