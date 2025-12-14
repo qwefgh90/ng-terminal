@@ -1,11 +1,11 @@
 {
   "name": "ng-terminal",
-  "version": "6.5.0",
+  "version": "6.6.0",
   "description": "NgTerminal is a terminal component on Angular 17 or higher.",
   "license": "MIT",
   "peerDependencies": {
-    "@angular/common": "^20.0.0 || ^19.0.0 || ^18.0.0 || ^17.0.0",
-    "@angular/core": "^20.0.0 || ^19.0.0 || ^18.0.0 || ^17.0.0"
+    "@angular/common": "^21.0.0 || ^20.0.0 || ^19.0.0 || ^18.0.0 || ^17.0.0",
+    "@angular/core": "^21.0.0 || ^20.0.0 || ^19.0.0 || ^18.0.0 || ^17.0.0"
   },
   "repository": {
     "type": "git",
@@ -24,10 +24,11 @@
     "emulator",
     "angular",
     "xterm",
+    "angular21",
+    "angular20",
     "angular19",
     "angular18",
     "angular17",
-    "angular16",
     "xtermjs",
     "terminal",
     "console",
