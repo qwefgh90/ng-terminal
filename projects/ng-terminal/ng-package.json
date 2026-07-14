@@ -6,7 +6,8 @@
   },
   "allowedNonPeerDependencies": [
     "angular-resizable-element",
-    "xterm",
+    "@xterm/xterm",
+    "@xterm/addon-fit",
     "@juggle/resize-observer"
   ]
 }
