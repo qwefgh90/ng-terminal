@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 
 import { NgTerminalComponent } from './ng-terminal.component';
 import { GlobalStyleComponent } from './global-style/global-style.component';
@@ -12,7 +12,7 @@ describe('NgTerminalComponent', () => {
   let component: NgTerminalComponent;
   let fixture: ComponentFixture<NgTerminalComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ NgTerminalComponent, GlobalStyleComponent ],
       imports: [ ResizableModule ]
@@ -105,7 +105,7 @@ describe('Input properties', () => {
   let component: NgTerminalComponent;
   let fixture: ComponentFixture<NgTerminalComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ NgTerminalComponent, GlobalStyleComponent ],
       imports: [ ResizableModule ]
@@ -235,7 +235,7 @@ describe('NgTerminalComponent with CSI functions', () => {
   let fixture: ComponentFixture<NgTerminalComponent>;
   let csiFunction = FunctionsUsingCSI;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ NgTerminalComponent, GlobalStyleComponent ],
       imports: [ ResizableModule ]

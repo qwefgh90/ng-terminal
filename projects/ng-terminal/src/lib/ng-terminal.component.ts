@@ -499,8 +499,13 @@ export class NgTerminalComponent
         this.xterm.element.getElementsByClassName('xterm-viewport')[0];
       const screenWidth = xtermScreen.clientWidth;
       const screenHeight = xtermScreen.clientHeight;
-      const core = (this.underlying as any)._core;
-      const scrollBarWidth: number = core.viewport.scrollBarWidth as number;
+      let scrollBarWidth = 0;
+      if (xtermViewport instanceof HTMLElement) {
+        scrollBarWidth = xtermViewport.offsetWidth - xtermViewport.clientWidth;
+      }
+      if (scrollBarWidth === 0) {
+        scrollBarWidth = 15;
+      }
       const hostWidth = parseInt(
         getComputedStyle(this.hostRef.nativeElement).width
       );
@@ -721,9 +726,15 @@ height(screen): ${screenHeight}`));
     return this._draggable;
   }
 
-  private get scrollBarWidth() {
-    const core = (this.underlying as any)._core;
-    return core.viewport.scrollBarWidth as number;
+  private get scrollBarWidth(): number {
+    const xtermViewport = this.xterm?.element?.getElementsByClassName('xterm-viewport')[0] as HTMLElement;
+    if (xtermViewport) {
+      const width = xtermViewport.offsetWidth - xtermViewport.clientWidth;
+      if (width > 0) {
+        return width;
+      }
+    }
+    return 15;
   }
 
   /**
