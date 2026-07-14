@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 
 import { NgTerminalComponent } from './ng-terminal.component';
 import { GlobalStyleComponent } from './global-style/global-style.component';
@@ -57,7 +57,7 @@ describe('NgTerminalComponent with MaterialTab', () => {
     expect(mattabComponent.terminal.underlying).toBeDefined();
     expect(mattabComponent.terminal.underlying?.element).toBeUndefined();
 
-    (mattabComponent.terminal as NgTerminalComponent).ngOnDestroy();
+    mattabFixture.destroy();
   }));
 
   it(`open the xterm terminal as soon as a tab is activated`, fakeAsync(() => {
@@ -78,6 +78,7 @@ describe('NgTerminalComponent with MaterialTab', () => {
     expect(xtermViewport?.isConnected).toBeTruthy();
     expect(xtermScreen?.clientWidth).toBeGreaterThan(10);
     expect(xtermViewport?.clientWidth).toBeGreaterThan(10);
+    mattabFixture.destroy();
   }));
 
   it(`changes rows and cols`, fakeAsync(() => {
@@ -113,5 +114,6 @@ describe('NgTerminalComponent with MaterialTab', () => {
     let screenHeight3= xtermScreen!.clientHeight;
     expect(screenWidth3).toBeLessThan(screenWidth2);
     expect(screenHeight3).toBeLessThan(screenHeight2);
+    mattabFixture.destroy();
   }));
 });

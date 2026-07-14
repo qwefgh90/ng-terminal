@@ -1,5 +1,4 @@
 import {
-  async,
   ComponentFixture,
   TestBed,
   fakeAsync,
