@@ -14,7 +14,7 @@
     "publish": "cd dist/ng-terminal && npm publish",
     "page": "ng build demo --configuration production --output-path docs --base-href /ng-terminal/",
     "local": "cd dist/ng-terminal && npm pack",
-    "lib:build": "copyfiles --flat node_modules/xterm/css/xterm.css projects/ng-terminal/src/lib/global-style && ng build ng-terminal",
+    "lib:build": "copyfiles --flat 'node_modules/@xterm/xterm/css/xterm.css' projects/ng-terminal/src/lib/global-style && ng build ng-terminal",
     "lib:test": "ng test ng-terminal",
     "lib:watch": "ng test ng-terminal --watch",
     "lib:travis:test": "ng test ng-terminal --watch false --browsers ChromeHeadless",
@@ -35,12 +35,12 @@
     "@juggle/resize-observer": "^3.4.0",
     "@xterm/addon-fit": "^0.11.0",
     "@xterm/addon-web-links": "^0.12.0",
+    "@xterm/addon-webgl": "^0.19.0",
     "@xterm/xterm": "^6.0.0",
     "angular-resizable-element": "^5.0.0",
     "ngx-json-viewer": "^2.4.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
-    "xterm-addon-webgl": "^0.19.0",
     "zone.js": "~0.14.10"
   },
   "devDependencies": {
@@ -59,7 +59,7 @@
     "karma-jasmine-html-reporter": "~1.7.0",
     "license-checker": "^25.0.1",
     "ng-packagr": "^18.2.1",
-    "ngx-bootstrap": "^12.0.0",
+    "ngx-bootstrap": "^18.1.3",
     "typescript": "5.5.4"
   }
 }
