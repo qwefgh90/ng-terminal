@@ -14,7 +14,7 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { Terminal } from '@xterm/xterm';
 import { FunctionsUsingCSI } from 'ng-terminal';
 import { WebLinksAddon } from '@xterm/addon-web-links';
-import { WebglAddon } from 'xterm-addon-webgl';
+import { WebglAddon } from '@xterm/addon-webgl';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 
 @Component({
