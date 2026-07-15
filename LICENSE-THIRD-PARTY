@@ -170,8 +170,8 @@
 │  ├─ repository: https://github.com/babel/babel
 │  ├─ publisher: The Babel Team
 │  ├─ url: https://babel.dev/team
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\helper-create-regexp-features-plugin\node_modules\@babel\helper-annotate-as-pure
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\helper-create-regexp-features-plugin\node_modules\@babel\helper-annotate-as-pure\LICENSE
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\helper-remap-async-to-generator\node_modules\@babel\helper-annotate-as-pure
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\helper-remap-async-to-generator\node_modules\@babel\helper-annotate-as-pure\LICENSE
 ├─ @babel/helper-compilation-targets@7.27.2
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/babel/babel
@@ -1921,8 +1921,8 @@
 │  ├─ publisher: Julian Gruber
 │  ├─ email: mail@juliangruber.com
 │  ├─ url: http://juliangruber.com
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@tufjs\models\node_modules\brace-expansion
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@tufjs\models\node_modules\brace-expansion\LICENSE
+│  ├─ path: D:\workspace\ng-terminal\node_modules\cacache\node_modules\brace-expansion
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\cacache\node_modules\brace-expansion\LICENSE
 ├─ braces@3.0.3
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/micromatch/braces
@@ -2379,8 +2379,8 @@
 │  ├─ repository: https://github.com/visionmedia/debug
 │  ├─ publisher: TJ Holowaychuk
 │  ├─ email: tj@vision-media.ca
-│  ├─ path: D:\workspace\ng-terminal\node_modules\connect\node_modules\debug
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\connect\node_modules\debug\LICENSE
+│  ├─ path: D:\workspace\ng-terminal\node_modules\body-parser\node_modules\debug
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\body-parser\node_modules\debug\LICENSE
 ├─ debug@3.2.7
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/visionmedia/debug
@@ -4105,8 +4105,8 @@
 │  ├─ publisher: Isaac Z. Schlueter
 │  ├─ email: i@izs.me
 │  ├─ url: http://blog.izs.me
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@tufjs\models\node_modules\minimatch
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@tufjs\models\node_modules\minimatch\LICENSE
+│  ├─ path: D:\workspace\ng-terminal\node_modules\cacache\node_modules\minimatch
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\cacache\node_modules\minimatch\LICENSE
 ├─ minimist@1.2.8
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/minimistjs/minimist
@@ -4190,8 +4190,8 @@
 │  ├─ publisher: James Halliday
 │  ├─ email: mail@substack.net
 │  ├─ url: http://substack.net
-│  ├─ path: D:\workspace\ng-terminal\node_modules\license-checker\node_modules\mkdirp
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\license-checker\node_modules\mkdirp\LICENSE
+│  ├─ path: D:\workspace\ng-terminal\node_modules\karma\node_modules\mkdirp
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\karma\node_modules\mkdirp\LICENSE
 ├─ mkdirp@1.0.4
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/isaacs/node-mkdirp
@@ -4208,8 +4208,8 @@
 ├─ ms@2.0.0
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/zeit/ms
-│  ├─ path: D:\workspace\ng-terminal\node_modules\connect\node_modules\ms
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\connect\node_modules\ms\license.md
+│  ├─ path: D:\workspace\ng-terminal\node_modules\body-parser\node_modules\ms
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\body-parser\node_modules\ms\license.md
 ├─ ms@2.1.2
 │  ├─ licenses: MIT
 │  ├─ repository: https://github.com/zeit/ms
@@ -5292,8 +5292,8 @@
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/npm/node-semver
 │  ├─ publisher: GitHub Inc.
-│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\helper-create-regexp-features-plugin\node_modules\semver
-│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\helper-create-regexp-features-plugin\node_modules\semver\LICENSE
+│  ├─ path: D:\workspace\ng-terminal\node_modules\@babel\helper-create-class-features-plugin\node_modules\semver
+│  └─ licenseFile: D:\workspace\ng-terminal\node_modules\@babel\helper-create-class-features-plugin\node_modules\semver\LICENSE
 ├─ semver@7.6.3
 │  ├─ licenses: ISC
 │  ├─ repository: https://github.com/npm/node-semver

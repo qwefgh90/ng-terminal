@@ -12,7 +12,7 @@
     "test": "npm run lib:test",
     "watch": "npm run lib:watch",
     "publish": "cd dist/ng-terminal && npm publish",
-    "page": "ng build demo --configuration production --output-path docs --base-href /ng-terminal/",
+    "page": "ng build demo --configuration production --base-href /ng-terminal/",
     "local": "cd dist/ng-terminal && npm pack",
     "lib:build": "copyfiles --flat 'node_modules/@xterm/xterm/css/xterm.css' projects/ng-terminal/src/lib/global-style && ng build ng-terminal",
     "lib:test": "ng test ng-terminal",

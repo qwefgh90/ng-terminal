@@ -59,7 +59,8 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": {
-              "base": "dist/demo"
+              "base": "dist/demo",
+              "browser": ""
             },
             "index": "projects/demo/src/index.html",
             "polyfills": [
@@ -97,6 +98,10 @@
                   "with": "projects/demo/src/environments/environment.prod.ts"
                 }
               ],
+              "outputPath": {
+                "base": "docs",
+                "browser": ""
+              },
               "outputHashing": "all"
             },
             "development": {
