@@ -1,7 +1,7 @@
 {
   "name": "ng-terminal",
-  "version": "6.6.0",
-  "description": "NgTerminal is a terminal component on Angular 17 or higher.",
+  "version": "6.7.0",
+  "description": "NgTerminal is a terminal component on Angular 18 or higher.",
   "license": "MIT",
   "peerDependencies": {
     "@angular/common": "^22.0.0 || ^21.0.0 || ^20.0.0 || ^19.0.0 || ^18.0.0",
